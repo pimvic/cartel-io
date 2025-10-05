@@ -63,7 +63,7 @@ export const KnowledgeBase = () => {
     };
 
     try {
-      const response = await fetch("https://webhook2.n8n.flashcards", {
+      const response = await fetch("https://n8n.aigentics.site/webhook-test/flashcards-mcqs-generation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -86,7 +86,7 @@ export const KnowledgeBase = () => {
     };
 
     try {
-      const response = await fetch("https://webhook1.n8n.quiz", {
+      const response = await fetch("https://n8n.aigentics.site/webhook-test/flashcards-mcqs-generation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
