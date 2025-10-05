@@ -5,6 +5,8 @@ import { Overview } from "@/components/dashboard/Overview";
 import { KnowledgeBase } from "@/components/dashboard/KnowledgeBase";
 import { Calendar } from "@/components/dashboard/Calendar";
 import { GroupDiscussion } from "@/components/dashboard/GroupDiscussion";
+import Flashcards from "@/pages/Flashcards";
+import QCM from "@/pages/QCM";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("vue-ensemble");
@@ -16,6 +18,10 @@ const Dashboard = () => {
         return <Overview />;
       case "base-connaissances":
         return <KnowledgeBase />;
+      case "flashcards":
+        return <Flashcards />;
+      case "qcm":
+        return <QCM />;
       case "calendrier":
         return <Calendar />;
       case "discussion":

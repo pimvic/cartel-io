@@ -50,7 +50,7 @@ export const DashboardHeader = () => {
     <header className="fixed top-0 w-full h-16 bg-background border-b border-border z-50">
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+          <h1 className="text-xl font-bold text-black dark:text-white">
             Cartel · Démo
           </h1>
           <div className="flex items-center gap-2">

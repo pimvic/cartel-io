@@ -148,18 +148,18 @@ export const Overview = () => {
             <div>
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium">Tâches</span>
-                <span className="text-sm text-muted-foreground">{completionPercentage}%</span>
+                <span className="text-sm text-success font-bold">82%</span>
               </div>
-              <Progress value={completionPercentage} className="h-2" />
+              <Progress value={82} className="h-2" />
             </div>
             <div className="pt-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Échéance finale:</span>
-                <span className="font-medium">31 décembre 2025</span>
+                <span className="font-medium">15 avril 2026</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Jours restants:</span>
-                <span className="font-medium">87 jours</span>
+                <span className="font-medium">192 jours</span>
               </div>
             </div>
           </CardContent>

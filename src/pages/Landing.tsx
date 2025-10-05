@@ -51,11 +51,9 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Apprenez plus vite et plus loin
-            </span>{" "}
-            <span className="text-foreground">en petits groupes!</span>
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
+            Apprenez plus vite et plus loin{" "}
+            <span className="text-black dark:text-white">en petits groupes!</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             Travaillez ensemble, partagez vos connaissances, aidez-vous mutuellement et progressez en équipe
@@ -163,28 +161,28 @@ const Landing = () => {
               </ul>
               <Button variant="outline" className="w-full">Commencer</Button>
             </div>
-            <div className="p-8 rounded-2xl bg-gradient-primary text-white shadow-elegant relative overflow-hidden">
+            <div className="p-8 rounded-2xl bg-gradient-primary shadow-elegant relative overflow-hidden">
               <div className="absolute top-4 right-4">
-                <Star className="w-6 h-6 fill-white" />
+                <Star className="w-6 h-6 fill-accent" />
               </div>
-              <h4 className="text-2xl font-bold mb-4">Pro</h4>
-              <p className="text-4xl font-bold mb-6">20€<span className="text-lg opacity-90">/mois</span></p>
-              <ul className="space-y-3 mb-8">
+              <h4 className="text-2xl font-bold mb-4 text-foreground">Pro</h4>
+              <p className="text-4xl font-bold mb-6 text-foreground">20€<span className="text-lg text-muted-foreground">/mois</span></p>
+              <ul className="space-y-3 mb-8 text-foreground">
                 <li className="flex items-start gap-2">
                   <span className="mt-1">✓</span>
-                  <span>Cartels illimités</span>
+                  <span className="text-black dark:text-white">Cartels illimités</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1">✓</span>
-                  <span>Base de connaissances illimitée</span>
+                  <span className="text-black dark:text-white">Base de connaissances illimitée</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1">✓</span>
-                  <span>IA avancée pour flashcards et quiz</span>
+                  <span className="text-black dark:text-white">IA avancée pour flashcards et quiz</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-1">✓</span>
-                  <span>Statistiques détaillées</span>
+                  <span className="text-black dark:text-white">Statistiques détaillées</span>
                 </li>
               </ul>
               <Button variant="secondary" className="w-full bg-white text-accent hover:bg-white/90">
