@@ -52,10 +52,10 @@ const Landing = () => {
       <section className="relative pt-32 pb-20 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Apprenez plus vite et plus loin{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              en petits groupes!
-            </span>
+              Apprenez plus vite et plus loin
+            </span>{" "}
+            <span className="text-foreground">en petits groupes!</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             Travaillez ensemble, partagez vos connaissances, aidez-vous mutuellement et progressez en équipe
@@ -141,10 +141,10 @@ const Landing = () => {
 
       {/* Tarifs */}
       <section id="tarifs" className="py-20 px-6 bg-background/50 backdrop-blur">
-        <div className="container mx-auto max-w-5xl">
+        <div className="container mx-auto max-w-6xl">
           <h3 className="text-4xl font-bold text-center mb-12">Tarifs</h3>
-          <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <div className="p-8 rounded-2xl bg-card border border-border">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
               <h4 className="text-2xl font-bold mb-4">Gratuit</h4>
               <p className="text-4xl font-bold mb-6">0€<span className="text-lg text-muted-foreground">/mois</span></p>
               <ul className="space-y-3 mb-8">
@@ -190,6 +190,29 @@ const Landing = () => {
               <Button variant="secondary" className="w-full bg-white text-accent hover:bg-white/90">
                 Essayer Pro
               </Button>
+            </div>
+            <div className="p-8 rounded-2xl bg-card border border-accent hover-lift">
+              <h4 className="text-2xl font-bold mb-4">Sur mesure</h4>
+              <p className="text-4xl font-bold mb-6">Contactez-nous</p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Membres illimités</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Fonctionnalités personnalisées</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Intégrations sur mesure</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Support dédié</span>
+                </li>
+              </ul>
+              <Button variant="outline" className="w-full">Nous contacter</Button>
             </div>
           </div>
         </div>

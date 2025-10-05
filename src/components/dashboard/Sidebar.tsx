@@ -21,7 +21,7 @@ interface SidebarProps {
 
 const menuItems = [
   { id: "vue-ensemble", label: "Vue d'ensemble", icon: LayoutDashboard },
-  { id: "outil-pedagogique", label: "Outil pédagogique", icon: BookOpen },
+  { id: "outils-pedagogiques", label: "Outils pédagogiques", icon: BookOpen },
   { id: "base-connaissances", label: "Base de connaissances", icon: BookOpen },
   { id: "flashcards", label: "Flashcards", icon: CreditCard },
   { id: "qcm", label: "QCM", icon: CheckSquare },

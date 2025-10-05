@@ -4,6 +4,7 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Overview } from "@/components/dashboard/Overview";
 import { KnowledgeBase } from "@/components/dashboard/KnowledgeBase";
 import { Calendar } from "@/components/dashboard/Calendar";
+import { GroupDiscussion } from "@/components/dashboard/GroupDiscussion";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("vue-ensemble");
@@ -17,6 +18,8 @@ const Dashboard = () => {
         return <KnowledgeBase />;
       case "calendrier":
         return <Calendar />;
+      case "discussion":
+        return <GroupDiscussion />;
       default:
         return (
           <div className="flex items-center justify-center h-96">

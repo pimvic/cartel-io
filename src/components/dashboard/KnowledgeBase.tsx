@@ -93,19 +93,23 @@ export const KnowledgeBase = () => {
     }
   };
 
+  const handleUploadClick = () => {
+    window.open('https://drive.google.com/drive/my-drive', '_blank');
+  };
+
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4">
         <div>
           <h2 className="text-3xl font-bold mb-2">Base de connaissances</h2>
           <p className="text-muted-foreground">Gérez vos documents et générez du contenu pédagogique</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Dialog open={flashcardDialogOpen} onOpenChange={setFlashcardDialogOpen}>
             <DialogTrigger asChild>
               <Button className="bg-success hover:bg-success/90 text-success-foreground">
                 <Sparkles className="w-4 h-4 mr-2" />
-                Créer Flashcards
+                Créer des Flashcards
               </Button>
             </DialogTrigger>
             <DialogContent>
@@ -138,7 +142,7 @@ export const KnowledgeBase = () => {
             <DialogTrigger asChild>
               <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Brain className="w-4 h-4 mr-2" />
-                Créer Quiz
+                Créer des QCM
               </Button>
             </DialogTrigger>
             <DialogContent>
@@ -167,7 +171,7 @@ export const KnowledgeBase = () => {
             </DialogContent>
           </Dialog>
 
-          <Button variant="outline">
+          <Button variant="outline" onClick={handleUploadClick}>
             <Upload className="w-4 h-4 mr-2" />
             Téléverser
           </Button>
