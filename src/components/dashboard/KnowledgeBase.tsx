@@ -16,9 +16,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import useDrivePicker from "react-google-drive-picker";
 
-const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID";
-const GOOGLE_DEVELOPER_KEY = "YOUR_GOOGLE_DEVELOPER_KEY";
-const GOOGLE_DRIVE_FOLDER_ID = "YOUR_FOLDER_ID"; // Optionnel
+const GOOGLE_CLIENT_ID = "n8n-qdrant-rag@gen-lang-client-0168505460.iam.gserviceaccount.com";
+const GOOGLE_DEVELOPER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.3OQWpXwRrkhH3WCKzVtDkPjWPn0lMILcNwykxIfjToQ";
+const GOOGLE_DRIVE_FOLDER_ID = "1xEMe4CimH_3DQ1JM6vzvo1xQsuNMnRoS"; // Optionnel
 
 interface KBFile {
   id: string;
