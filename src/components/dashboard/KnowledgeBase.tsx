@@ -14,6 +14,11 @@ import {
 import { FileText, Upload, Sparkles, Brain } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import useDrivePicker from "react-google-drive-picker";
+
+const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_CLIENT_ID";
+const GOOGLE_DEVELOPER_KEY = "YOUR_GOOGLE_DEVELOPER_KEY";
+const GOOGLE_DRIVE_FOLDER_ID = "YOUR_FOLDER_ID"; // Optionnel
 
 interface KBFile {
   id: string;
@@ -29,6 +34,7 @@ export const KnowledgeBase = () => {
   const [quizCount, setQuizCount] = useState(5);
   const [flashcardDialogOpen, setFlashcardDialogOpen] = useState(false);
   const [quizDialogOpen, setQuizDialogOpen] = useState(false);
+  const [openPicker] = useDrivePicker();
 
   useEffect(() => {
     fetchFiles();
@@ -94,7 +100,44 @@ export const KnowledgeBase = () => {
   };
 
   const handleUploadClick = () => {
-    window.open('https://drive.google.com/drive/my-drive', '_blank');
+    openPicker({
+      clientId: GOOGLE_CLIENT_ID,
+      developerKey: GOOGLE_DEVELOPER_KEY,
+      viewId: "DOCS",
+      showUploadView: true,
+      showUploadFolders: true,
+      supportDrives: true,
+      multiselect: true,
+      customScopes: ['https://www.googleapis.com/auth/drive.file'],
+      callbackFunction: async (data) => {
+        if (data.action === 'picked') {
+          const uploadedFiles = data.docs;
+          
+          try {
+            // Enregistrer chaque fichier dans Supabase
+            const insertPromises = uploadedFiles.map((file: any) => 
+              supabase
+                .from('knowledge_base')
+                .insert({
+                  cartel_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
+                  title: file.name,
+                  file_url: file.url || `https://drive.google.com/file/d/${file.id}/view`,
+                })
+            );
+
+            await Promise.all(insertPromises);
+            
+            toast.success(`${uploadedFiles.length} fichier(s) téléversé(s) avec succès !`);
+            
+            // Rafraîchir la liste des fichiers
+            fetchFiles();
+          } catch (error) {
+            toast.error("Erreur lors de l'enregistrement des fichiers");
+            console.error(error);
+          }
+        }
+      },
+    });
   };
 
   return (
@@ -201,7 +244,11 @@ export const KnowledgeBase = () => {
                       Ajouté le {new Date(file.uploaded_at).toLocaleDateString("fr-FR")}
                     </p>
                   </div>
-                  <Button variant="ghost" size="sm">
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => window.open(file.file_url, '_blank')}
+                  >
                     Ouvrir
                   </Button>
                 </div>
