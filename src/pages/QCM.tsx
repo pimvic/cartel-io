@@ -80,7 +80,7 @@ const QCM = () => {
     };
 
     try {
-      const response = await fetch("https://n8n.aigentics.site/webhook-test/flashcards-mcqs-generation", {
+      const response = await fetch("https://n8n.aigentics.site/webhook/flashcards-mcqs-generation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
