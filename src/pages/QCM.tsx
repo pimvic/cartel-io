@@ -14,6 +14,38 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "sonner";
 
+// Types for n8n webhook response
+interface QuizItem {
+  qtype: "mcq" | "multi_select" | "short_answer" | "numeric" | "true_false" | "cloze";
+  prompt: string;
+  choices?: string[];
+  answer: string | number | boolean | string[];
+  explanation?: string | null;
+  tags: string[];
+  sources: string[];
+  extras?: {
+    latex?: string | null;
+    units?: string | null;
+    answer_range?: {
+      min: number;
+      max: number;
+    } | null;
+    cloze_text?: string | null;
+  };
+}
+
+interface WebhookResponse {
+  mode: "flashcards" | "quiz";
+  doc: {
+    title: string;
+    course: string;
+    unit: string;
+    chapter: string;
+  };
+  count: number;
+  items: QuizItem[];
+}
+
 interface Question {
   id: string;
   question: string;
@@ -48,29 +80,61 @@ const QCM = () => {
     };
 
     try {
-      await fetch("https://webhook1.n8n.quiz", {
+      const response = await fetch("https://n8n.aigentics.site/webhook-test/flashcards-mcqs-generation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      toast.success(`Génération de ${quantity} questions lancée !`);
+      if (!response.ok) {
+        throw new Error("Erreur lors de la requête");
+      }
+
+      const data: WebhookResponse = await response.json();
       
-      // Mock questions for demo
-      const mockQuestions: Question[] = Array.from({ length: parseInt(quantity) }, (_, i) => ({
-        id: `${i + 1}`,
-        question: `Question ${i + 1} sur ${subject}`,
-        options: ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
-        correctAnswer: "Réponse A",
-      }));
+      // Validate that we received quiz mode
+      if (data.mode !== "quiz") {
+        throw new Error("Mode incorrect reçu du webhook");
+      }
+
+      // Map webhook response to questions format
+      const generatedQuestions: Question[] = data.items.map((item, index) => {
+        // Convert answer to string for consistency
+        let correctAnswer = "";
+        if (typeof item.answer === "string") {
+          correctAnswer = item.answer;
+        } else if (typeof item.answer === "boolean") {
+          correctAnswer = item.answer ? "Vrai" : "Faux";
+        } else if (typeof item.answer === "number") {
+          correctAnswer = item.answer.toString();
+        } else if (Array.isArray(item.answer)) {
+          correctAnswer = item.answer[0] || "";
+        }
+
+        // Use provided choices or generate default ones for true/false
+        let options = item.choices || [];
+        if (item.qtype === "true_false" && options.length === 0) {
+          options = ["Vrai", "Faux"];
+        }
+
+        return {
+          id: `${index + 1}`,
+          question: item.prompt,
+          options: options,
+          correctAnswer: correctAnswer,
+        };
+      });
       
-      setQuestions(mockQuestions);
+      setQuestions(generatedQuestions);
       setCurrentIndex(0);
       setSelectedAnswer("");
       setShowResult(false);
       setScore(0);
+      
+      toast.success(`${data.count} questions générées avec succès !`);
     } catch (error) {
-      toast.error("Erreur lors de la génération");
+      console.error("Error generating quiz:", error);
+      toast.error("Erreur lors de la génération du quiz");
     } finally {
       setIsGenerating(false);
     }
