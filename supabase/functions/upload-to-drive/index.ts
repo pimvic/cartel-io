@@ -16,24 +16,75 @@ serve(async (req) => {
     const files = formData.getAll('files');
     const cartelId = formData.get('cartel_id') as string;
     
-    const GOOGLE_CLIENT_ID = Deno.env.get('GOOGLE_CLIENT_ID');
-    const GOOGLE_CLIENT_SECRET = Deno.env.get('GOOGLE_CLIENT_SECRET');
-    const GOOGLE_REFRESH_TOKEN = Deno.env.get('GOOGLE_REFRESH_TOKEN');
+    const serviceAccountJson = Deno.env.get('GOOGLE_SERVICE_ACCOUNT_JSON');
     const GOOGLE_DRIVE_FOLDER_ID = Deno.env.get('GOOGLE_DRIVE_FOLDER_ID');
 
-    // Get access token from refresh token
+    if (!serviceAccountJson) {
+      throw new Error('GOOGLE_SERVICE_ACCOUNT_JSON is not configured');
+    }
+
+    const serviceAccount = JSON.parse(serviceAccountJson);
+
+    // Create JWT for Service Account authentication
+    const header = {
+      alg: 'RS256',
+      typ: 'JWT',
+    };
+
+    const now = Math.floor(Date.now() / 1000);
+    const claim = {
+      iss: serviceAccount.client_email,
+      scope: 'https://www.googleapis.com/auth/drive.file',
+      aud: 'https://oauth2.googleapis.com/token',
+      exp: now + 3600,
+      iat: now,
+    };
+
+    // Encode JWT
+    const encodedHeader = btoa(JSON.stringify(header));
+    const encodedClaim = btoa(JSON.stringify(claim));
+    const unsignedToken = `${encodedHeader}.${encodedClaim}`;
+
+    // Import private key
+    const privateKey = await crypto.subtle.importKey(
+      'pkcs8',
+      Uint8Array.from(atob(serviceAccount.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n/g, '')), c => c.charCodeAt(0)),
+      {
+        name: 'RSASSA-PKCS1-v1_5',
+        hash: 'SHA-256',
+      },
+      false,
+      ['sign']
+    );
+
+    // Sign JWT
+    const signature = await crypto.subtle.sign(
+      'RSASSA-PKCS1-v1_5',
+      privateKey,
+      new TextEncoder().encode(unsignedToken)
+    );
+
+    const encodedSignature = btoa(String.fromCharCode(...new Uint8Array(signature)));
+    const jwt = `${unsignedToken}.${encodedSignature}`;
+
+    // Exchange JWT for access token
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
-        client_id: GOOGLE_CLIENT_ID!,
-        client_secret: GOOGLE_CLIENT_SECRET!,
-        refresh_token: GOOGLE_REFRESH_TOKEN!,
-        grant_type: 'refresh_token',
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwt,
       }),
     });
 
-    const { access_token } = await tokenResponse.json();
+    const tokenData = await tokenResponse.json();
+    
+    if (!tokenData.access_token) {
+      console.error('Token error:', tokenData);
+      throw new Error('Failed to get access token');
+    }
+
+    const access_token = tokenData.access_token;
 
     const uploadedFiles = [];
 
