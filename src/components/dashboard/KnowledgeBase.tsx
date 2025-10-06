@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,6 @@ import {
 import { FileText, Upload, Sparkles, Brain } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import useDrivePicker from "react-google-drive-picker";
-
-const GOOGLE_CLIENT_ID = "n8n-qdrant-rag@gen-lang-client-0168505460.iam.gserviceaccount.com";
-const GOOGLE_DEVELOPER_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.3OQWpXwRrkhH3WCKzVtDkPjWPn0lMILcNwykxIfjToQ";
-const GOOGLE_DRIVE_FOLDER_ID = "1xEMe4CimH_3DQ1JM6vzvo1xQsuNMnRoS"; // Optionnel
 
 interface KBFile {
   id: string;
@@ -34,7 +29,8 @@ export const KnowledgeBase = () => {
   const [quizCount, setQuizCount] = useState(5);
   const [flashcardDialogOpen, setFlashcardDialogOpen] = useState(false);
   const [quizDialogOpen, setQuizDialogOpen] = useState(false);
-  const [openPicker] = useDrivePicker();
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchFiles();
@@ -100,44 +96,53 @@ export const KnowledgeBase = () => {
   };
 
   const handleUploadClick = () => {
-    openPicker({
-      clientId: GOOGLE_CLIENT_ID,
-      developerKey: GOOGLE_DEVELOPER_KEY,
-      viewId: "DOCS",
-      showUploadView: true,
-      showUploadFolders: true,
-      supportDrives: true,
-      multiselect: true,
-      customScopes: ['https://www.googleapis.com/auth/drive.file'],
-      callbackFunction: async (data) => {
-        if (data.action === 'picked') {
-          const uploadedFiles = data.docs;
-          
-          try {
-            // Enregistrer chaque fichier dans Supabase
-            const insertPromises = uploadedFiles.map((file: any) => 
-              supabase
-                .from('knowledge_base')
-                .insert({
-                  cartel_id: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
-                  title: file.name,
-                  file_url: file.url || `https://drive.google.com/file/d/${file.id}/view`,
-                })
-            );
+    fileInputRef.current?.click();
+  };
 
-            await Promise.all(insertPromises);
-            
-            toast.success(`${uploadedFiles.length} fichier(s) téléversé(s) avec succès !`);
-            
-            // Rafraîchir la liste des fichiers
-            fetchFiles();
-          } catch (error) {
-            toast.error("Erreur lors de l'enregistrement des fichiers");
-            console.error(error);
-          }
-        }
-      },
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files;
+    if (!selectedFiles || selectedFiles.length === 0) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    
+    Array.from(selectedFiles).forEach(file => {
+      formData.append('files', file);
     });
+    
+    formData.append('cartel_id', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa');
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/upload-to-drive`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: formData,
+        }
+      );
+
+      const result = await response.json();
+
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      toast.success(`${selectedFiles.length} fichier(s) téléversé(s) avec succès !`);
+      fetchFiles();
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error("Erreur lors du téléversement des fichiers");
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   };
 
   return (
@@ -214,9 +219,20 @@ export const KnowledgeBase = () => {
             </DialogContent>
           </Dialog>
 
-          <Button variant="outline" onClick={handleUploadClick}>
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            onChange={handleFileChange}
+            className="hidden"
+          />
+          <Button 
+            variant="outline" 
+            onClick={handleUploadClick}
+            disabled={uploading}
+          >
             <Upload className="w-4 h-4 mr-2" />
-            Téléverser
+            {uploading ? "Téléversement..." : "Téléverser"}
           </Button>
         </div>
       </div>
