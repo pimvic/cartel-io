@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FileText, Upload, Sparkles, Brain } from "lucide-react";
+import { FileText, Upload, Sparkles, Brain, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -145,6 +145,27 @@ export const KnowledgeBase = () => {
     }
   };
 
+  const handleDeleteAll = async () => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer tous les documents ?")) {
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from("knowledge_base")
+        .delete()
+        .eq("cartel_id", "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+
+      if (error) throw error;
+
+      toast.success("Tous les documents ont été supprimés");
+      fetchFiles();
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error("Erreur lors de la suppression des documents");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
@@ -239,7 +260,19 @@ export const KnowledgeBase = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>Documents</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>Documents</CardTitle>
+            {files.length > 0 && (
+              <Button 
+                variant="destructive" 
+                size="sm"
+                onClick={handleDeleteAll}
+              >
+                <Trash2 className="w-4 h-4 mr-2" />
+                Tout supprimer
+              </Button>
+            )}
+          </div>
         </CardHeader>
         <CardContent>
           {loading ? (
