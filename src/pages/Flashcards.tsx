@@ -13,6 +13,41 @@ import {
 import { ChevronLeft, ChevronRight, RotateCw } from "lucide-react";
 import { toast } from "sonner";
 
+// Types for n8n webhook response
+interface FlashcardItem {
+  type: "definition" | "concept" | "event" | "process" | "formula" | "theorem" | 
+        "algorithm" | "compare" | "application" | "date" | "person" | "place";
+  question: string;
+  answer: string;
+  hint?: string | null;
+  tags: string[];
+  sources: string[];
+  extras?: {
+    latex?: string | null;
+    variables?: Array<{
+      symbol: string;
+      meaning: string;
+      units?: string | null;
+    }>;
+    steps?: string[];
+    date?: string | null;
+    significance?: string | null;
+    compare_with?: string | null;
+  };
+}
+
+interface WebhookResponse {
+  mode: "flashcards" | "quiz";
+  doc: {
+    title: string;
+    course: string;
+    unit: string;
+    chapter: string;
+  };
+  count: number;
+  items: FlashcardItem[];
+}
+
 interface Flashcard {
   id: string;
   question: string;
@@ -44,26 +79,38 @@ const Flashcards = () => {
     };
 
     try {
-      await fetch("https://webhook2.n8n.flashcards", {
+      const response = await fetch("https://n8n.aigentics.site/webhook-test/flashcards-mcqs-generation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      toast.success(`Génération de ${quantity} flashcards lancée !`);
+      if (!response.ok) {
+        throw new Error("Erreur lors de la requête");
+      }
+
+      const data: WebhookResponse = await response.json();
       
-      // Mock flashcards for demo
-      const mockFlashcards: Flashcard[] = Array.from({ length: parseInt(quantity) }, (_, i) => ({
-        id: `${i + 1}`,
-        question: `Question ${i + 1} sur ${subject}`,
-        answer: `Réponse ${i + 1} pour ${subject}`,
+      // Validate that we received flashcards mode
+      if (data.mode !== "flashcards") {
+        throw new Error("Mode incorrect reçu du webhook");
+      }
+
+      // Map webhook response to flashcards format
+      const generatedFlashcards: Flashcard[] = data.items.map((item, index) => ({
+        id: `${index + 1}`,
+        question: item.question,
+        answer: item.answer,
       }));
       
-      setFlashcards(mockFlashcards);
+      setFlashcards(generatedFlashcards);
       setCurrentIndex(0);
       setIsFlipped(false);
+      
+      toast.success(`${data.count} flashcards générées avec succès !`);
     } catch (error) {
-      toast.error("Erreur lors de la génération");
+      console.error("Error generating flashcards:", error);
+      toast.error("Erreur lors de la génération des flashcards");
     } finally {
       setIsGenerating(false);
     }
