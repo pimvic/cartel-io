@@ -5,6 +5,12 @@ import { Overview } from "@/components/dashboard/Overview";
 import { KnowledgeBase } from "@/components/dashboard/KnowledgeBase";
 import { Calendar } from "@/components/dashboard/Calendar";
 import { GroupDiscussion } from "@/components/dashboard/GroupDiscussion";
+import { NotesCommunes } from "@/components/dashboard/NotesCommunes";
+import { Rules } from "@/components/dashboard/Rules";
+import { KBChat } from "@/components/dashboard/KBChat";
+import { Settings } from "@/components/dashboard/Settings";
+import { PedagogicalTools } from "@/components/dashboard/PedagogicalTools";
+import { BugReport } from "@/components/dashboard/BugReport";
 import Flashcards from "@/pages/Flashcards";
 import QCM from "@/pages/QCM";
 
@@ -26,6 +32,16 @@ const Dashboard = () => {
         return <Calendar />;
       case "discussion":
         return <GroupDiscussion />;
+      case "notes-communes":
+        return <NotesCommunes />;
+      case "rules":
+        return <Rules />;
+      case "kb-chat":
+        return <KBChat />;
+      case "parametres":
+        return <Settings />;
+      case "outils-pedagogiques":
+        return <PedagogicalTools />;
       default:
         return (
           <div className="flex items-center justify-center h-96">
@@ -47,6 +63,7 @@ const Dashboard = () => {
         />
         <main className={`flex-1 p-6 transition-all ${sidebarCollapsed ? "ml-20" : "ml-64"}`}>
           {renderContent()}
+          <BugReport />
         </main>
       </div>
     </div>

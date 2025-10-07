@@ -51,8 +51,12 @@ export const DashboardHeader = () => {
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <h1 className="text-xl font-bold text-black dark:text-white">
-            Cartel · Démo
+            Kartel - Démo
           </h1>
+          <div className="ml-6">
+            <p className="font-bold text-lg">Formateur Professionnel d'Adultes (FPA)</p>
+            <p className="text-sm text-muted-foreground">Diplôme donnant lieu à un Titre Professionnel d'État</p>
+          </div>
           <div className="flex items-center gap-2">
             {members.map((member) => (
               <div key={member.id} className="relative group">

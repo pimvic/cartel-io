@@ -22,11 +22,14 @@ interface SidebarProps {
 const menuItems = [
   { id: "vue-ensemble", label: "Vue d'ensemble", icon: LayoutDashboard },
   { id: "outils-pedagogiques", label: "Outils pédagogiques", icon: BookOpen },
+  { id: "notes-communes", label: "Notes communes", icon: BookOpen },
+  { id: "kb-chat", label: "Tchat avec votre base de connaissances", icon: MessageSquare },
   { id: "base-connaissances", label: "Base de connaissances", icon: BookOpen },
   { id: "flashcards", label: "Flashcards", icon: CreditCard },
   { id: "qcm", label: "QCM", icon: CheckSquare },
   { id: "calendrier", label: "Calendrier", icon: CalendarDays },
-  { id: "discussion", label: "Discussion de groupe", icon: MessageSquare },
+  { id: "rules", label: "RULES", icon: BookOpen },
+  { id: "discussion", label: "Messagerie", icon: MessageSquare },
   { id: "parametres", label: "Paramètres", icon: Settings },
 ];
 

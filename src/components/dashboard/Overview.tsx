@@ -57,18 +57,31 @@ export const Overview = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Vue d'ensemble</h2>
-        <p className="text-muted-foreground">Bienvenue sur votre tableau de bord Cartel</p>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-4 flex-wrap">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon;
+            return (
+              <div key={index} className="flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-lg">
+                <Icon className={`w-4 h-4 ${stat.color}`} />
+                <div>
+                  <p className="text-sm font-bold">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Mes Tâches - Collapsible */}
-      <Card className={`${getRandomColor()} border-l-4 border-l-accent transition-smooth`}>
+      {/* Nos Tâches - Collapsible */}
+      <Card className={`${getRandomColor()} border-l-4 border-l-accent transition-smooth relative`}>
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader className="cursor-pointer" onClick={() => setTasksExpanded(!tasksExpanded)}>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
               <div className="w-2 h-6 bg-accent rounded-full" />
-              Mes Tâches
+              Nos tâches
             </CardTitle>
             <Button variant="ghost" size="sm">
               {tasksExpanded ? <ChevronUp /> : <ChevronDown />}
