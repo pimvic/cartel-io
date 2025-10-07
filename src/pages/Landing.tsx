@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, BookOpen, Trophy, Star, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -68,13 +70,34 @@ const Landing = () => {
 
           {/* Video Preview */}
           <div className="mt-16 relative group">
-            <div className="aspect-video bg-gradient-to-br from-accent/20 to-success/20 rounded-2xl overflow-hidden shadow-soft hover-lift">
-              <div className="w-full h-full flex items-center justify-center backdrop-blur-sm">
-                <div className="text-center">
-                  <Play className="w-20 h-20 text-accent mx-auto mb-4" />
-                  <p className="text-lg font-semibold">Découvrez Cartel en vidéo</p>
+            <div className="aspect-video rounded-2xl overflow-hidden shadow-soft hover-lift">
+              {!videoLoaded ? (
+                <div 
+                  className="relative w-full h-full cursor-pointer"
+                  onClick={() => setVideoLoaded(true)}
+                >
+                  <img 
+                    src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
+                    alt="Découvrez Cartel en vidéo"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
+                    <div className="bg-accent rounded-full p-6 shadow-elegant transition-transform group-hover:scale-110">
+                      <Play className="w-12 h-12 text-accent-foreground fill-current" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <iframe
+                  src="https://www.youtube.com/embed/M4NIu4aXsJ0?rel=0&modestbranding=1"
+                  loading="lazy"
+                  allowFullScreen
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  className="w-full h-full"
+                  title="Découvrez Cartel en vidéo"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -161,35 +184,35 @@ const Landing = () => {
               </ul>
               <Button variant="outline" className="w-full">Commencer</Button>
             </div>
-            <div className="p-8 rounded-2xl bg-gradient-primary shadow-elegant relative overflow-hidden">
+            <div className="p-8 rounded-2xl bg-card border border-border hover-lift relative">
               <div className="absolute top-4 right-4">
-                <Star className="w-6 h-6 fill-accent" />
+                <Star className="w-6 h-6 fill-accent text-accent" />
               </div>
-              <h4 className="text-2xl font-bold mb-4 text-foreground">Pro</h4>
-              <p className="text-4xl font-bold mb-6 text-foreground">20€<span className="text-lg text-muted-foreground">/mois</span></p>
-              <ul className="space-y-3 mb-8 text-foreground">
+              <h4 className="text-2xl font-bold mb-4">Pro</h4>
+              <p className="text-4xl font-bold mb-6">20€<span className="text-lg text-muted-foreground">/mois</span></p>
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
-                  <span className="mt-1">✓</span>
-                  <span className="text-black dark:text-white">Cartels illimités</span>
+                  <span className="text-success mt-1">✓</span>
+                  <span>Cartels illimités</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1">✓</span>
-                  <span className="text-black dark:text-white">Base de connaissances illimitée</span>
+                  <span className="text-success mt-1">✓</span>
+                  <span>Base de connaissances illimitée</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1">✓</span>
-                  <span className="text-black dark:text-white">IA avancée pour flashcards et quiz</span>
+                  <span className="text-success mt-1">✓</span>
+                  <span>IA avancée pour flashcards et quiz</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1">✓</span>
-                  <span className="text-black dark:text-white">Statistiques détaillées</span>
+                  <span className="text-success mt-1">✓</span>
+                  <span>Statistiques détaillées</span>
                 </li>
               </ul>
-              <Button variant="secondary" className="w-full bg-white text-accent hover:bg-white/90">
+              <Button variant="outline" className="w-full">
                 Essayer Pro
               </Button>
             </div>
-            <div className="p-8 rounded-2xl bg-card border border-accent hover-lift">
+            <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
               <h4 className="text-2xl font-bold mb-4">Sur mesure</h4>
               <p className="text-4xl font-bold mb-6">Contactez-nous</p>
               <ul className="space-y-3 mb-8">
