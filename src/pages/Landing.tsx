@@ -25,20 +25,23 @@ const Landing = () => {
       <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b border-border z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Cartel
+            Kartel.io
           </h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection("qui")} className="hover:text-accent transition-colors">
               Qui Sommes nous ?
             </button>
             <button onClick={() => scrollToSection("pourquoi")} className="hover:text-accent transition-colors">
-              Pourquoi Cartel ?
+              Kartel : la meilleure façon d'apprendre ?
             </button>
             <button onClick={() => scrollToSection("tarifs")} className="hover:text-accent transition-colors">
               Tarifs
             </button>
             <button onClick={() => scrollToSection("temoignages")} className="hover:text-accent transition-colors">
               Témoignages
+            </button>
+            <button onClick={() => scrollToSection("resultats")} className="hover:text-accent transition-colors">
+              Les Résultats sont là !
             </button>
             <button onClick={() => scrollToSection("apropos")} className="hover:text-accent transition-colors">
               À propos
@@ -58,14 +61,14 @@ const Landing = () => {
             <span className="text-black dark:text-white">en petits groupes!</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
-            Travaillez ensemble, partagez vos connaissances, aidez-vous mutuellement et progressez en équipe
+            Etudiez en petits groupes motivés et bienveillants, entraidez-vous et atteignez plus rapidement et efficacement vos objectifs pédagogiques
           </p>
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
             onClick={() => navigate("/login")}
           >
-            Lancez-vous! <ArrowRight className="ml-2" />
+            Lancez-vous maintenant ! <ArrowRight className="ml-2" />
           </Button>
 
           {/* Video Preview */}
@@ -78,7 +81,7 @@ const Landing = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
-                    alt="Découvrez Cartel en vidéo"
+                    alt="Découvrez Kartel.io en vidéo"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
@@ -95,7 +98,7 @@ const Landing = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   className="w-full h-full"
-                  title="Découvrez Cartel en vidéo"
+                  title="Découvrez Kartel.io en vidéo"
                 />
               )}
             </div>
@@ -106,54 +109,81 @@ const Landing = () => {
       {/* Qui Sommes nous */}
       <section id="qui" className="py-20 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">Qui Sommes nous ?</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">Etudiez ensemble en petits groupes motivés</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Users className="w-12 h-12 text-accent mb-4" />
               <h4 className="text-xl font-bold mb-3">Collaboration</h4>
               <p className="text-muted-foreground">
-                Des groupes de 3-4 apprenants qui travaillent ensemble pour atteindre leurs objectifs
+                Des groupes de 3-5 apprenants qui travaillent ensemble sur une même plateforme collaborative pour atteindre leurs objectifs pédagogiques.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-success/5 hover-lift">
               <BookOpen className="w-12 h-12 text-success mb-4" />
               <h4 className="text-xl font-bold mb-3">Connaissances</h4>
               <p className="text-muted-foreground">
-                Une base de connaissances partagée avec flashcards et quiz générés automatiquement
+                Des apprenants qui nourrissent et partagent une base de connaissances IA et l'exploitent avec des outils pédagogiques innovants.
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Trophy className="w-12 h-12 text-accent mb-4" />
               <h4 className="text-xl font-bold mb-3">Progression</h4>
               <p className="text-muted-foreground">
-                Suivez votre avancement et celui de votre groupe avec des outils de suivi
+                Progressez ensemble, partagez, échangez, discutez, entraidez-vous. Atteignez vos objectifs en groupes !
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Pourquoi Cartel */}
+      {/* Pourquoi Kartel */}
       <section id="pourquoi" className="py-20 px-6">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">Pourquoi Cartel ?</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">Kartel : la meilleure façon d'apprendre ?</h3>
           <div className="space-y-6">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🎯 Apprentissage actif</h4>
+              <h4 className="text-xl font-bold mb-2">🎯 Un apprentissage actif qui maintient l'engagement</h4>
               <p className="text-muted-foreground">
-                Apprenez en enseignant aux autres membres de votre cartel
+                RDV quotidiens en ligne, partage, échanges, messages de vos pairs, notes, échanges d'infos, de tips, de petits secrets d'apprentissages.
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🤝 Entraide</h4>
+              <h4 className="text-xl font-bold mb-2">🤝 Entraide active</h4>
               <p className="text-muted-foreground">
-                Bénéficiez du soutien de votre groupe pour surmonter les difficultés
+                Apprenez en équipe comme dans un véritable atelier collaboratif. Chaque membre du groupe apporte ses connaissances, ses questions et ses idées... L'objectif : comprendre, maîtriser et réussir ensemble.
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">⚡ Outils intelligents</h4>
+              <h4 className="text-xl font-bold mb-2">⚡ Outils intelligents communs pour progresser plus vite et mieux ensemble</h4>
               <p className="text-muted-foreground">
-                Génération automatique de flashcards et quiz à partir de vos documents
+                Kartel met à votre disposition une véritable boîte à outils IA... 🧠 Quiz adaptatifs, 📝 QCM collaboratifs, 🃏 Flashcards automatiques, 🗺 Mindmaps dynamiques, 🎭 Jeux de rôle en visioconférence, 📊 Tableaux de progression partagés, 💬 Chat IA pédagogique, 🎯 Défis collectifs, 📚 Synthèses automatiques, 🔁 Fiches de révisions...
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Les Résultats sont là */}
+      <section id="resultats" className="py-20 px-6 bg-background/50 backdrop-blur">
+        <div className="container mx-auto max-w-5xl">
+          <h3 className="text-4xl font-bold text-center mb-12">🚀 Les résultats sont là !</h3>
+          <div className="space-y-6">
+            <div className="p-6 rounded-xl bg-card border border-border hover-lift">
+              <h4 className="text-xl font-bold mb-2">🎯 Des progrès visibles et mesurables</h4>
+              <p className="text-muted-foreground">
+                Grâce à la dynamique de groupe et aux outils IA de Kartel... +45% de taux de réussite observé dans les parcours en petits groupes.
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-card border border-border hover-lift">
+              <h4 className="text-xl font-bold mb-2">🤝 Une motivation retrouvée, durable et partagée</h4>
+              <p className="text-muted-foreground">
+                L'apprentissage en petits groupes crée un engagement réel... 9 utilisateurs sur 10 se sentent plus motivés à poursuivre leur formation avec Kartel qu'avec un LMS traditionnel.
+              </p>
+            </div>
+            <div className="p-6 rounded-xl bg-card border border-border hover-lift">
+              <h4 className="text-xl font-bold mb-2">🧩 Des compétences maîtrisées et valorisées</h4>
+              <p className="text-muted-foreground">
+                Chaque groupe vise un objectif commun... Résultat : des apprenants plus compétents, autonomes et confiants dans leur avenir.
               </p>
             </div>
           </div>
@@ -282,13 +312,11 @@ const Landing = () => {
       </section>
 
       {/* À propos */}
-      <section id="apropos" className="py-20 px-6 bg-background/50 backdrop-blur">
+      <section id="apropos" className="py-20 px-6">
         <div className="container mx-auto max-w-3xl text-center">
-          <h3 className="text-4xl font-bold mb-6">À propos de Cartel</h3>
+          <h3 className="text-4xl font-bold mb-6">À propos de Kartel</h3>
           <p className="text-lg text-muted-foreground mb-8">
-            Cartel est né de la conviction que l'apprentissage en groupe est plus efficace et plus motivant. 
-            Notre plateforme facilite la création et la gestion de petits groupes d'apprentissage collaboratif, 
-            appelés "cartels", où chaque membre contribue à la réussite collective.
+            Kartel est né d'une conviction simple : on apprend mieux ensemble. Plutôt que d'affronter seul les difficultés de la formation en ligne, Kartel réunit de petits groupes d'apprenants motivés, appelés 'kartels', qui s'entraident pour atteindre leurs objectifs pédagogiques. Notre plateforme combine intelligence collective et intelligence artificielle pour créer des expériences d'apprentissage vivantes, interactives et profondément humaines. Chaque membre progresse à son rythme, soutient et est soutenu par les autres, partage ses ressources, échange ses idées, et bénéficie de la bienveillance mutuelle de tous. Kartel, c'est l'e-learning réinventé : humain, collaboratif et propulsé par l'IA.
           </p>
           <Button 
             size="lg" 
@@ -303,18 +331,21 @@ const Landing = () => {
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-border">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2025 Cartel. Tous droits réservés.</p>
+          <p>© 2025 Kartel.io. Tous droits réservés.</p>
         </div>
       </footer>
 
-      {/* Fixed Demo Button */}
-      <div className="fixed left-6 bottom-6 z-50">
+      {/* Fixed Chatbot Button */}
+      <div className="fixed right-6 bottom-6 z-50">
         <Button 
           size="lg"
-          className="bg-success hover:bg-success/90 text-success-foreground shadow-elegant"
-          onClick={() => navigate("/login")}
+          className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant"
+          onClick={() => {
+            // Chatbot functionality placeholder
+            alert("Chatbot à venir - Posez vos questions !");
+          }}
         >
-          Démo
+          💬
         </Button>
       </div>
     </div>
