@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
-  LayoutDashboard,
+  Home,
   BookOpen,
-  CreditCard,
-  CheckSquare,
-  CalendarDays,
+  FileText,
   MessageSquare,
-  Settings,
+  Wrench,
+  Calendar,
+  ScrollText,
+  Settings as SettingsIcon,
+  MessageCircle,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -20,17 +22,15 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: "vue-ensemble", label: "Vue d'ensemble", icon: LayoutDashboard },
-  { id: "outils-pedagogiques", label: "Outils pédagogiques", icon: BookOpen },
-  { id: "notes-communes", label: "Notes communes", icon: BookOpen },
-  { id: "kb-chat", label: "Tchat avec votre base de connaissances", icon: MessageSquare },
-  { id: "base-connaissances", label: "Base de connaissances", icon: BookOpen },
-  { id: "flashcards", label: "Flashcards", icon: CreditCard },
-  { id: "qcm", label: "QCM", icon: CheckSquare },
-  { id: "calendrier", label: "Calendrier", icon: CalendarDays },
-  { id: "rules", label: "RULES", icon: BookOpen },
-  { id: "discussion", label: "Messagerie", icon: MessageSquare },
-  { id: "parametres", label: "Paramètres", icon: Settings },
+  { id: "vue-ensemble", label: "Vue d'ensemble", icon: Home },
+  { id: "news-notes-taches", label: "News / Notes / Tâches", icon: FileText },
+  { id: "discussion", label: "Messagerie / Visio", icon: MessageSquare },
+  { id: "base-connaissances", label: "Base de Connaissance IA", icon: BookOpen },
+  { id: "outils-pedagogiques", label: "Outils Pédagogiques", icon: Wrench },
+  { id: "calendrier", label: "Calendrier / Objectifs", icon: Calendar },
+  { id: "rules", label: "Conseils / Aides / Règles", icon: ScrollText },
+  { id: "parametres", label: "Paramètres", icon: SettingsIcon },
+  { id: "feedback", label: "Feedback", icon: MessageCircle },
 ];
 
 export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCollapse }: SidebarProps) => {

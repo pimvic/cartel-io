@@ -11,6 +11,7 @@ import { KBChat } from "@/components/dashboard/KBChat";
 import { Settings } from "@/components/dashboard/Settings";
 import { PedagogicalTools } from "@/components/dashboard/PedagogicalTools";
 import { BugReport } from "@/components/dashboard/BugReport";
+import { NewsNotesTasks } from "@/components/dashboard/NewsNotesTasks";
 import Flashcards from "@/pages/Flashcards";
 import QCM from "@/pages/QCM";
 
@@ -22,6 +23,8 @@ const Dashboard = () => {
     switch (activeSection) {
       case "vue-ensemble":
         return <Overview />;
+      case "news-notes-taches":
+        return <NewsNotesTasks />;
       case "base-connaissances":
         return <KnowledgeBase />;
       case "flashcards":
@@ -42,6 +45,8 @@ const Dashboard = () => {
         return <Settings />;
       case "outils-pedagogiques":
         return <PedagogicalTools />;
+      case "feedback":
+        return <BugReport />;
       default:
         return (
           <div className="flex items-center justify-center h-96">

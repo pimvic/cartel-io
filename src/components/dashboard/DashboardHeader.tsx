@@ -50,13 +50,19 @@ export const DashboardHeader = () => {
     <header className="fixed top-0 w-full h-16 bg-background border-b border-border z-50">
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <h1 className="text-xl font-bold text-black dark:text-white">
-            Kartel - Démo
-          </h1>
+          <div className="flex flex-col">
+            <h1 className="text-xl font-bold text-black dark:text-white">
+              Kartel - Démo
+            </h1>
+            <p className="text-xs text-muted-foreground text-center">02 juin 2025</p>
+          </div>
           <div className="ml-6">
             <p className="font-bold text-lg">Formateur Professionnel d'Adultes (FPA)</p>
             <p className="text-sm text-muted-foreground">Diplôme donnant lieu à un Titre Professionnel d'État</p>
           </div>
+        </div>
+
+        <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             {members.map((member) => (
               <div key={member.id} className="relative group">
@@ -74,6 +80,7 @@ export const DashboardHeader = () => {
               </div>
             ))}
           </div>
+          <p className="text-sm text-muted-foreground whitespace-nowrap">15 Avril 2025, dans 87 jours</p>
         </div>
 
         <DropdownMenu>

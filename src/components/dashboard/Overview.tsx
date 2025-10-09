@@ -1,9 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ChevronDown, ChevronUp, Clock, CheckCircle2, Users, TrendingUp } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Users,
+  Clock,
+  CheckCircle2,
+  Target,
+  FileText,
+  StickyNote,
+  CheckSquare,
+  Info,
+  Brain,
+  Lightbulb,
+  CreditCard,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface Task {
   id: string;
@@ -13,17 +27,7 @@ interface Task {
   status: string;
 }
 
-const randomColors = [
-  "bg-accent/30",
-  "bg-success/30",
-  "bg-primary/10",
-  "bg-secondary/50",
-];
-
-const getRandomColor = () => randomColors[Math.floor(Math.random() * randomColors.length)];
-
 export const Overview = () => {
-  const [tasksExpanded, setTasksExpanded] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -48,162 +52,161 @@ export const Overview = () => {
   const totalTasks = tasks.length;
   const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
+  const members = [
+    { name: "Jean-Stéphane B.", avatar: "/placeholder.svg", activity: "ECF rendu", status: "En ligne" },
+    { name: "Thierry F.", avatar: "/placeholder.svg", activity: "Module 12 complété", status: "En ligne" },
+    { name: "Isabelle L.", avatar: "/placeholder.svg", activity: "Flashcards créées", status: "Absent" },
+    { name: "Elsa B.", avatar: "/placeholder.svg", activity: "QCM terminé", status: "En ligne" },
+  ];
+
   const stats = [
-    { label: "Heures de travail", value: "42h", icon: Clock, color: "text-accent" },
-    { label: "Tâches complétées", value: `${completedTasks}/${totalTasks}`, icon: CheckCircle2, color: "text-success" },
-    { label: "Membres actifs", value: "4", icon: Users, color: "text-primary" },
-    { label: "Progression", value: `${completionPercentage}%`, icon: TrendingUp, color: "text-accent" },
+    { label: "Membres actifs", value: "4", icon: Users, color: "text-accent" },
+    { label: "Heures d'étude", value: "127", icon: Clock, color: "text-success" },
+    { label: "Tâches terminées", value: completedTasks, icon: CheckCircle2, color: "text-primary" },
+    { label: "Progression", value: `${completionPercentage}%`, icon: Target, color: "text-warning" },
+  ];
+
+  const counters = [
+    { label: "Documents", value: "234", icon: FileText },
+    { label: "Notes", value: "45", icon: StickyNote },
+    { label: "Tâches", value: "56", icon: CheckSquare },
+    { label: "Infos", value: "65", icon: Info },
+    { label: "QCM", value: "56", icon: Brain },
+    { label: "QUIZZ", value: "3", icon: Lightbulb },
+    { label: "Flashcards", value: "4", icon: CreditCard },
   ];
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-4 flex-wrap">
-          {stats.map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <div key={index} className="flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-lg">
-                <Icon className={`w-4 h-4 ${stat.color}`} />
-                <div>
-                  <p className="text-sm font-bold">{stat.value}</p>
-                  <p className="text-xs text-muted-foreground">{stat.label}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+      <div>
+        <h2 className="text-3xl font-bold mb-2">Vue d'ensemble</h2>
+        <p className="text-muted-foreground">Suivez la progression de votre Kartel</p>
       </div>
 
-      {/* Nos Tâches - Collapsible */}
-      <Card className={`${getRandomColor()} border-l-4 border-l-accent transition-smooth relative`}>
+      {/* Single thin horizontal statistics line */}
+      <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-        <CardHeader className="cursor-pointer" onClick={() => setTasksExpanded(!tasksExpanded)}>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              <div className="w-2 h-6 bg-accent rounded-full" />
-              Nos tâches
-            </CardTitle>
-            <Button variant="ghost" size="sm">
-              {tasksExpanded ? <ChevronUp /> : <ChevronDown />}
-            </Button>
-          </div>
-        </CardHeader>
-        {tasksExpanded && (
-          <CardContent className="space-y-3">
-            {loading ? (
-              <p className="text-muted-foreground">Chargement...</p>
-            ) : tasks.length === 0 ? (
-              <p className="text-muted-foreground">Aucune tâche pour le moment</p>
-            ) : (
-              tasks.map((task) => (
-                <div key={task.id} className="p-3 bg-background rounded-lg border border-border">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h4 className="font-semibold">{task.title}</h4>
-                      {task.description && (
-                        <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
-                      )}
-                      {task.due_date && (
-                        <p className="text-xs text-muted-foreground mt-2">
-                          Échéance: {new Date(task.due_date).toLocaleDateString("fr-FR")}
-                        </p>
-                      )}
-                    </div>
-                    <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        task.status === "done"
-                          ? "bg-success/20 text-success"
-                          : task.status === "in_progress"
-                          ? "bg-accent/20 text-accent"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      {task.status === "done" ? "Terminé" : task.status === "in_progress" ? "En cours" : "À faire"}
-                    </span>
+        <CardContent className="py-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <Icon className={`w-5 h-5 ${stat.color}`} />
+                  <div>
+                    <p className="text-lg font-bold">{stat.value}</p>
+                    <p className="text-xs text-muted-foreground">{stat.label}</p>
                   </div>
                 </div>
-              ))
-            )}
-          </CardContent>
-        )}
+              );
+            })}
+          </div>
+        </CardContent>
       </Card>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <Card key={index} className={`${getRandomColor()} hover-lift`}>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <Icon className={`w-5 h-5 ${stat.color}`} />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+      {/* Members Carousel */}
+      <Card className="relative">
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+        <CardHeader>
+          <CardTitle>Membres du Kartel</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {members.map((member, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <Card>
+                    <CardContent className="flex flex-col items-center p-6">
+                      <Avatar className="w-24 h-24 mb-4">
+                        <AvatarImage src={member.avatar} />
+                        <AvatarFallback>{member.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                      </Avatar>
+                      <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-2">Dernière activité : {member.activity}</p>
+                      <Badge variant={member.status === "En ligne" ? "default" : "secondary"}>
+                        {member.status}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </CardContent>
+      </Card>
 
-      {/* Calendrier et Progression */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <Card className={`${getRandomColor()} hover-lift`}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <div className="w-2 h-6 bg-success rounded-full" />
-              Progression du Cartel
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium">Tâches</span>
-                <span className="text-sm text-success font-bold">82%</span>
-              </div>
-              <Progress value={82} className="h-2" />
-            </div>
-            <div className="pt-4 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Échéance finale:</span>
-                <span className="font-medium">15 avril 2026</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Jours restants:</span>
-                <span className="font-medium">192 jours</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className={`${getRandomColor()} hover-lift`}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <div className="w-2 h-6 bg-accent rounded-full" />
-              Activité des Membres
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[
-              { name: "Jean-Stéphane B.", hours: 12, questions: 8, connections: 24 },
-              { name: "Thierry F.", hours: 10, questions: 6, connections: 18 },
-              { name: "Isabelle L.", hours: 11, questions: 7, connections: 20 },
-              { name: "Elsa B.", hours: 9, questions: 5, connections: 15 },
-            ].map((member, i) => (
-              <div key={i} className="flex items-center justify-between p-2 bg-background rounded-lg">
-                <span className="font-medium text-sm">{member.name}</span>
-                <div className="flex gap-3 text-xs text-muted-foreground">
-                  <span>{member.hours}h</span>
-                  <span>{member.questions} Q</span>
-                  <span>{member.connections} conn.</span>
+      {/* Summary Stats Banner */}
+      <Card className="relative">
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+        <CardContent className="pt-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            {counters.map((counter, index) => {
+              const Icon = counter.icon;
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <Icon className="w-5 h-5 text-accent" />
+                  <span className="font-semibold">{counter.label}</span>
+                  <Badge variant="secondary">{counter.value}</Badge>
                 </div>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Progression du Kartel - Full Width */}
+      <Card className="relative">
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+        <CardHeader>
+          <CardTitle>Progression du Kartel</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div>
+            <div className="flex justify-between mb-2">
+              <span className="text-sm font-medium">Tâches</span>
+              <span className="text-sm text-success font-bold">{completionPercentage}%</span>
+            </div>
+            <Progress value={completionPercentage} className="h-2" />
+          </div>
+          <div className="pt-4 space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Échéance finale:</span>
+              <span className="font-medium">15 avril 2025</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Jours restants:</span>
+              <span className="font-medium">87 jours</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Activité des Membres - Full Width */}
+      <Card className="relative">
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+        <CardHeader>
+          <CardTitle>Activité des Membres</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {[
+            { name: "Jean-Stéphane B.", hours: 12, questions: 8, connections: 24 },
+            { name: "Thierry F.", hours: 10, questions: 6, connections: 18 },
+            { name: "Isabelle L.", hours: 11, questions: 7, connections: 20 },
+            { name: "Elsa B.", hours: 9, questions: 5, connections: 15 },
+          ].map((member, i) => (
+            <div key={i} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
+              <span className="font-medium text-sm">{member.name}</span>
+              <div className="flex gap-3 text-xs text-muted-foreground">
+                <span>{member.hours}h</span>
+                <span>{member.questions} Q</span>
+                <span>{member.connections} conn.</span>
               </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   );
 };

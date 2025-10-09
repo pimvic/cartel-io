@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FileText, Upload, Sparkles, Brain, Trash2 } from "lucide-react";
+import { FileText, Upload, Sparkles, Brain, Trash2, FileUp, Type, Link, Search, ArrowUpDown, Star, Archive, Edit, Tag } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -170,80 +170,19 @@ export const KnowledgeBase = () => {
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
         <div>
-          <h2 className="text-3xl font-bold mb-2">Base de connaissances</h2>
-          <p className="text-muted-foreground">Gérez vos documents et générez du contenu pédagogique</p>
+          <h2 className="text-3xl font-bold mb-2">Base de Connaissance IA</h2>
+          <p className="text-muted-foreground">
+            Nourrissez ici votre Base de Connaissances commune du meilleur contenu possible, l'IA de votre Kartel se chargera de vous faire tous progresser !
+          </p>
         </div>
+        
+        {/* Upload and Management Controls */}
         <div className="flex flex-wrap gap-3">
-          <Dialog open={flashcardDialogOpen} onOpenChange={setFlashcardDialogOpen}>
-            <DialogTrigger asChild>
-              <Button className="bg-success hover:bg-success/90 text-success-foreground">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Créer des Flashcards
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Créer des Flashcards</DialogTitle>
-                <DialogDescription>
-                  Générez automatiquement des flashcards à partir de vos documents
-                </DialogDescription>
-              </DialogHeader>
-              <div className="space-y-4 py-4">
-                <div className="space-y-2">
-                  <Label htmlFor="flashcard-count">Nombre de flashcards</Label>
-                  <Input
-                    id="flashcard-count"
-                    type="number"
-                    min="1"
-                    max="50"
-                    value={flashcardCount}
-                    onChange={(e) => setFlashcardCount(parseInt(e.target.value))}
-                  />
-                </div>
-                <Button onClick={handleCreateFlashcards} className="w-full">
-                  Générer
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={quizDialogOpen} onOpenChange={setQuizDialogOpen}>
-            <DialogTrigger asChild>
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                <Brain className="w-4 h-4 mr-2" />
-                Créer des QCM
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Créer un Quiz</DialogTitle>
-                <DialogDescription>
-                  Générez automatiquement un quiz à partir de vos documents
-                </DialogDescription>
-              </DialogHeader>
-              <div className="space-y-4 py-4">
-                <div className="space-y-2">
-                  <Label htmlFor="quiz-count">Nombre de questions</Label>
-                  <Input
-                    id="quiz-count"
-                    type="number"
-                    min="1"
-                    max="30"
-                    value={quizCount}
-                    onChange={(e) => setQuizCount(parseInt(e.target.value))}
-                  />
-                </div>
-                <Button onClick={handleCreateQuiz} className="w-full">
-                  Générer
-                </Button>
-              </div>
-            </DialogContent>
-          </Dialog>
-
           <input
             ref={fileInputRef}
             type="file"
             multiple
+            accept=".pdf"
             onChange={handleFileChange}
             className="hidden"
           />
@@ -252,8 +191,40 @@ export const KnowledgeBase = () => {
             onClick={handleUploadClick}
             disabled={uploading}
           >
-            <Upload className="w-4 h-4 mr-2" />
-            {uploading ? "Téléversement..." : "Téléverser"}
+            <FileUp className="w-4 h-4 mr-2" />
+            {uploading ? "Téléversement..." : "Importer des PDF"}
+          </Button>
+          <Button variant="outline">
+            <Type className="w-4 h-4 mr-2" />
+            Insérer du texte
+          </Button>
+          <Button variant="outline">
+            <Link className="w-4 h-4 mr-2" />
+            Url de page web
+          </Button>
+        </div>
+
+        {/* Search, Sort, and Management Tools */}
+        <div className="flex flex-wrap gap-3">
+          <Button variant="outline" size="sm">
+            <Search className="w-4 h-4 mr-2" />
+            Recherche
+          </Button>
+          <Button variant="outline" size="sm">
+            <ArrowUpDown className="w-4 h-4 mr-2" />
+            Trier
+          </Button>
+          <Button variant="outline" size="sm">
+            <Star className="w-4 h-4 mr-2" />
+            Favoris
+          </Button>
+          <Button variant="outline" size="sm">
+            <FileText className="w-4 h-4 mr-2" />
+            Épinglés
+          </Button>
+          <Button variant="outline" size="sm">
+            <Tag className="w-4 h-4 mr-2" />
+            Tags
           </Button>
         </div>
       </div>
@@ -293,13 +264,17 @@ export const KnowledgeBase = () => {
                       Ajouté le {new Date(file.uploaded_at).toLocaleDateString("fr-FR")}
                     </p>
                   </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => window.open(file.file_url, '_blank')}
-                  >
-                    Ouvrir
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button variant="ghost" size="sm">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm">
+                      <Archive className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => window.open(file.file_url, '_blank')}>
+                      Ouvrir
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

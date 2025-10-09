@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Send } from "lucide-react";
+import { Send, MessageSquare, Video } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Message {
@@ -71,9 +71,14 @@ export const GroupDiscussion = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Discussion de groupe</h2>
+        <h2 className="text-3xl font-bold mb-2 flex items-center gap-2">
+          <MessageSquare className="w-8 h-8 text-accent" />
+          Messagerie
+          <Video className="w-8 h-8 text-accent ml-4" />
+          Visio
+        </h2>
         <p className="text-muted-foreground">
-          Échangez avec les membres de votre cartel
+          Échangez avec les membres de votre Kartel
         </p>
       </div>
 
