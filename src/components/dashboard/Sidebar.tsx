@@ -22,13 +22,15 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { id: "vue-ensemble", label: "Vue d'ensemble", icon: Home },
-  { id: "news-notes-taches", label: "News / Notes / Tâches", icon: FileText },
-  { id: "discussion", label: "Messagerie / Visio", icon: MessageSquare },
-  { id: "base-connaissances", label: "Base de Connaissance IA", icon: BookOpen },
+  { id: "actu-kartel", label: "L'Actu du Kartel", icon: Home },
+  { id: "messagerie-news-events", label: "Messagerie / News / Évènements", icon: MessageSquare },
+  { id: "base-connaissances", label: "Base de Connaissances IA / Chat", icon: BookOpen },
   { id: "outils-pedagogiques", label: "Outils Pédagogiques", icon: Wrench },
-  { id: "calendrier", label: "Calendrier / Objectifs", icon: Calendar },
+  { id: "calendrier", label: "Calendrier / Objectifs / Échéances", icon: Calendar },
   { id: "rules", label: "Conseils / Aides / Règles", icon: ScrollText },
+  { id: "vue-ensemble", label: "Vue d'Ensemble / Stats", icon: Home },
+  { id: "notes", label: "Notes", icon: FileText },
+  { id: "visio", label: "Visio", icon: MessageCircle },
   { id: "parametres", label: "Paramètres", icon: SettingsIcon },
   { id: "feedback", label: "Feedback", icon: MessageCircle },
 ];

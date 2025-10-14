@@ -57,22 +57,15 @@ const Landing = () => {
       <section className="relative pt-32 pb-20 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
-            Apprenez plus vite et plus loin{" "}
+            Apprenez plus vite et mieux{" "}
             <span className="text-black dark:text-white">en petits groupes!</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             Etudiez en petits groupes motivés et bienveillants, entraidez-vous et atteignez plus rapidement et efficacement vos objectifs pédagogiques
           </p>
-          <Button 
-            size="lg" 
-            className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
-            onClick={() => navigate("/login")}
-          >
-            Lancez-vous maintenant ! <ArrowRight className="ml-2" />
-          </Button>
 
           {/* Video Preview */}
-          <div className="mt-16 relative group">
+          <div className="mt-12 relative group">
             <div className="aspect-video rounded-2xl overflow-hidden shadow-soft hover-lift">
               {!videoLoaded ? (
                 <div 
@@ -102,6 +95,27 @@ const Landing = () => {
                 />
               )}
             </div>
+          </div>
+
+          {/* CTA Buttons below video */}
+          <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
+              onClick={() => {
+                // Demo request functionality
+                alert("Demande de démo - À venir !");
+              }}
+            >
+              Demandez une démo
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
+              onClick={() => navigate("/login")}
+            >
+              Lancez-vous maintenant ! <ArrowRight className="ml-2" />
+            </Button>
           </div>
         </div>
       </section>
@@ -201,18 +215,26 @@ const Landing = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>1 cartel actif</span>
+                  <span>1 Compte perso</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Base de connaissances limitée</span>
+                  <span>1 accès Kartel possible</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Flashcards et Quiz basiques</span>
+                  <span>Base de connaissances (max 10Go)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>IA avancée</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>+4 outils pédagogiques (Flashcards, Quizz, QCM, Chat)</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full">Commencer</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">Commencer</Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift relative">
               <div className="absolute top-4 right-4">
@@ -223,32 +245,40 @@ const Landing = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Cartels illimités</span>
+                  <span>1 Compte perso</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Base de connaissances illimitée</span>
+                  <span>2 accès Kartels</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>IA avancée pour flashcards et quiz</span>
+                  <span>Base de connaissances (max 20Go)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Statistiques détaillées</span>
+                  <span>IA avancée</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>8 outils pédagogiques</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full">
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">
                 Essayer Pro
               </Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
-              <h4 className="text-2xl font-bold mb-4">Sur mesure</h4>
+              <h4 className="text-2xl font-bold mb-4">Sur Mesure</h4>
               <p className="text-4xl font-bold mb-6">Contactez-nous</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Membres illimités</span>
+                  <span>Comptes illimités possibles</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Kartels illimités possibles</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
@@ -256,14 +286,14 @@ const Landing = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Intégrations sur mesure</span>
+                  <span>Prix étudiés sur mesure</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Support dédié</span>
+                  <span>Support dédié 7/24h</span>
                 </li>
               </ul>
-              <Button variant="outline" className="w-full">Nous contacter</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">Nous contacter</Button>
             </div>
           </div>
         </div>
@@ -278,7 +308,7 @@ const Landing = () => {
               {
                 name: "Marie L.",
                 role: "Étudiante",
-                text: "Cartel m'a permis de progresser 2x plus vite grâce au soutien de mon groupe !",
+                text: "Kartel m'a permis de progresser 2x plus vite grâce au soutien de mon groupe !",
                 rating: 5
               },
               {
@@ -290,7 +320,7 @@ const Landing = () => {
               {
                 name: "Sophie M.",
                 role: "Professionnelle",
-                text: "J'ai enfin réussi ma certification grâce à l'entraide de mon cartel. Merci !",
+                text: "J'ai enfin réussi ma certification grâce à l'entraide de mon kartel. Merci !",
                 rating: 5
               }
             ].map((testimonial, i) => (
@@ -307,6 +337,26 @@ const Landing = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* CTA Buttons below testimonials */}
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
+              onClick={() => {
+                alert("Demande de démo - À venir !");
+              }}
+            >
+              Demandez une démo
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
+              onClick={() => navigate("/login")}
+            >
+              Lancez-vous maintenant ! <ArrowRight className="ml-2" />
+            </Button>
           </div>
         </div>
       </section>

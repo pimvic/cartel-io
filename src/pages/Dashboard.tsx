@@ -5,46 +5,41 @@ import { Overview } from "@/components/dashboard/Overview";
 import { KnowledgeBase } from "@/components/dashboard/KnowledgeBase";
 import { Calendar } from "@/components/dashboard/Calendar";
 import { GroupDiscussion } from "@/components/dashboard/GroupDiscussion";
-import { NotesCommunes } from "@/components/dashboard/NotesCommunes";
 import { Rules } from "@/components/dashboard/Rules";
-import { KBChat } from "@/components/dashboard/KBChat";
 import { Settings } from "@/components/dashboard/Settings";
 import { PedagogicalTools } from "@/components/dashboard/PedagogicalTools";
 import { BugReport } from "@/components/dashboard/BugReport";
-import { NewsNotesTasks } from "@/components/dashboard/NewsNotesTasks";
-import Flashcards from "@/pages/Flashcards";
-import QCM from "@/pages/QCM";
+import { ActuKartel } from "@/components/dashboard/ActuKartel";
+import { MessagerieNewsEvents } from "@/components/dashboard/MessagerieNewsEvents";
+import { Notes } from "@/components/dashboard/Notes";
+import { Visio } from "@/components/dashboard/Visio";
 
 const Dashboard = () => {
-  const [activeSection, setActiveSection] = useState("vue-ensemble");
+  const [activeSection, setActiveSection] = useState("actu-kartel");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const renderContent = () => {
     switch (activeSection) {
-      case "vue-ensemble":
-        return <Overview />;
-      case "news-notes-taches":
-        return <NewsNotesTasks />;
+      case "actu-kartel":
+        return <ActuKartel />;
+      case "messagerie-news-events":
+        return <MessagerieNewsEvents />;
       case "base-connaissances":
         return <KnowledgeBase />;
-      case "flashcards":
-        return <Flashcards />;
-      case "qcm":
-        return <QCM />;
-      case "calendrier":
-        return <Calendar />;
-      case "discussion":
-        return <GroupDiscussion />;
-      case "notes-communes":
-        return <NotesCommunes />;
-      case "rules":
-        return <Rules />;
-      case "kb-chat":
-        return <KBChat />;
-      case "parametres":
-        return <Settings />;
       case "outils-pedagogiques":
         return <PedagogicalTools />;
+      case "calendrier":
+        return <Calendar />;
+      case "rules":
+        return <Rules />;
+      case "vue-ensemble":
+        return <Overview />;
+      case "notes":
+        return <Notes />;
+      case "visio":
+        return <Visio />;
+      case "parametres":
+        return <Settings />;
       case "feedback":
         return <BugReport />;
       default:

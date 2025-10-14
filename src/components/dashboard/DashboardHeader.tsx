@@ -47,7 +47,7 @@ export const DashboardHeader = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full h-16 bg-background border-b border-border z-50">
+    <header className="fixed top-0 w-full h-16 bg-accent/30 backdrop-blur-sm border-b border-border z-50">
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <div className="flex flex-col">
@@ -66,7 +66,7 @@ export const DashboardHeader = () => {
           <div className="flex items-center gap-2">
             {members.map((member) => (
               <div key={member.id} className="relative group">
-                <Avatar className="w-9 h-9 border-2 border-background hover:border-accent transition-colors cursor-pointer">
+                <Avatar className="w-12 h-12 border-2 border-background hover:border-accent transition-colors cursor-pointer">
                   <AvatarImage src={member.avatar} alt={member.name} />
                   <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
                 </Avatar>

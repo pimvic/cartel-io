@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FileText, Upload, Sparkles, Brain, Trash2, FileUp, Type, Link, Search, ArrowUpDown, Star, Archive, Edit, Tag } from "lucide-react";
+import { FileText, Upload, Sparkles, Brain, Trash2, FileUp, Type, Link, Search, ArrowUpDown, Star, Archive, Edit, Tag, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -168,13 +169,21 @@ export const KnowledgeBase = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4">
-        <div>
-          <h2 className="text-3xl font-bold mb-2">Base de Connaissance IA</h2>
-          <p className="text-muted-foreground">
-            Nourrissez ici votre Base de Connaissances commune du meilleur contenu possible, l'IA de votre Kartel se chargera de vous faire tous progresser !
-          </p>
-        </div>
+      <div>
+        <h2 className="text-3xl font-bold mb-2">Base de Connaissances IA / Chat</h2>
+        <p className="text-muted-foreground">
+          Nourrissez ici votre Base de Connaissances commune du meilleur contenu possible, l'IA de votre Kartel se chargera de vous faire tous progresser !
+        </p>
+      </div>
+
+      <Tabs defaultValue="documents" className="w-full">
+        <TabsList>
+          <TabsTrigger value="documents">📚 Documents</TabsTrigger>
+          <TabsTrigger value="chat">💬 Chat IA</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="documents" className="space-y-6 mt-6">
+          <div className="flex flex-col gap-4">
         
         {/* Upload and Management Controls */}
         <div className="flex flex-wrap gap-3">
@@ -281,6 +290,38 @@ export const KnowledgeBase = () => {
           )}
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="chat" className="mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <MessageSquare className="w-5 h-5 text-accent" />
+                Discutez avec votre base de connaissance
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="h-96 bg-muted/30 rounded-lg p-4 overflow-y-auto space-y-3">
+                  <div className="bg-accent/10 p-3 rounded-lg max-w-[80%]">
+                    <p className="text-sm">Bonjour ! Je suis votre assistant IA. Posez-moi des questions sur vos documents.</p>
+                  </div>
+                  <div className="bg-background p-3 rounded-lg max-w-[80%] ml-auto">
+                    <p className="text-sm">Peux-tu me faire un résumé du module 12 ?</p>
+                  </div>
+                  <div className="bg-accent/10 p-3 rounded-lg max-w-[80%]">
+                    <p className="text-sm">Bien sûr ! Le module 12 couvre les méthodologies de formation pour adultes, incluant les principes de l'andragogie, les techniques d'animation, et l'évaluation des compétences.</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Input placeholder="Posez votre question..." />
+                  <Button>Envoyer</Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
