@@ -1,12 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper } from "lucide-react";
+import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const PedagogicalTools = () => {
+  const navigate = useNavigate();
+  
+  const mainTools = [
+    { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500", route: "/quiz" },
+    { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500", route: "/flashcards" },
+    { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500", route: "/mindmap" },
+  ];
+
   const tools = [
-    { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500" },
-    { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500" },
-    { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500" },
     { name: "Tableau de progression commun", description: "Suivez la progression de votre groupe", icon: BarChart3, color: "text-orange-500" },
     { name: "Jeu de rôle en visioconférence", description: "Pratiquez en situation réelle", icon: Video, color: "text-red-500" },
     { name: "Débriefing collectif guidé", description: "Analysez vos sessions ensemble", icon: MessageCircle, color: "text-cyan-500" },
@@ -42,11 +48,38 @@ export const PedagogicalTools = () => {
       <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader>
-          <CardTitle>Outils disponibles</CardTitle>
+          <CardTitle>Outils principaux</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            {tools.map((tool, index) => (
+          <div className="grid gap-4 md:grid-cols-3 mb-6">
+            {mainTools.map((tool, index) => (
+              <Card 
+                key={index} 
+                className="hover:shadow-lg transition-all cursor-pointer relative group"
+                onClick={() => navigate(tool.route)}
+              >
+                <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <tool.icon className={`w-5 h-5 ${tool.color}`} />
+                    {tool.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-3">{tool.description}</p>
+                  <Button variant="outline" size="sm" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    Accéder
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="border-t pt-6">
+            <h3 className="font-semibold mb-4">Autres outils</h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              {tools.map((tool, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow relative">
                 <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
                 <CardHeader>
@@ -60,6 +93,7 @@ export const PedagogicalTools = () => {
                 </CardContent>
               </Card>
             ))}
+            </div>
           </div>
         </CardContent>
       </Card>
