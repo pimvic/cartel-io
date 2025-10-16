@@ -15,8 +15,8 @@ export const Calendar = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Calendrier / Objectifs / Échéances</h2>
-        <p className="text-muted-foreground">Organisez vos sessions, objectifs et échéances</p>
+        <h2 className="text-3xl font-bold mb-2">Agenda</h2>
+        <p className="text-muted-foreground text-[110%]">Planifiez vos sessions Kartel, notez vos échéances et fixez vos objectifs finaux</p>
       </div>
 
       <Tabs defaultValue="calendar" className="w-full">

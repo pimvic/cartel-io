@@ -41,8 +41,8 @@ export const PedagogicalTools = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Outils pédagogiques</h2>
-        <p className="text-muted-foreground">Boîte à outils pour votre apprentissage</p>
+        <h2 className="text-3xl font-bold mb-2">Outils Pédagogiques</h2>
+        <p className="text-muted-foreground text-[110%]">Des outils pédagogiques pour vous tester, vous préparer, construire des fiches, résumer, ou jouer ensemble</p>
       </div>
 
       <Card className="relative">

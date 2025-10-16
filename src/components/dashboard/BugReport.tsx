@@ -43,7 +43,7 @@ export const BugReport = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Signaler un bug ou une idée</DialogTitle>
+          <DialogTitle>Feedback</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <Input

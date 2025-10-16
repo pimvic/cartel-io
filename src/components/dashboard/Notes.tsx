@@ -9,7 +9,7 @@ export const Notes = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold mb-2">Notes</h2>
-          <p className="text-muted-foreground">Gérez vos notes personnelles et partagées</p>
+          <p className="text-muted-foreground text-[110%]">Vos notes personnelles ou de groupe, ici pour ne rien oublier !</p>
         </div>
         <Button className="gap-2">
           <Plus className="w-4 h-4" />

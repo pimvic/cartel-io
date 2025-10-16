@@ -11,6 +11,7 @@ import {
   MessageCircle,
   ChevronLeft,
   ChevronRight,
+  Brain,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,12 +24,12 @@ interface SidebarProps {
 
 const menuItems = [
   { id: "actu-kartel", label: "L'Actu du Kartel", icon: Home },
-  { id: "messagerie-news-events", label: "Messagerie / News / Évènements", icon: MessageSquare },
-  { id: "base-connaissances", label: "Base de Connaissances IA / Chat", icon: BookOpen },
+  { id: "messagerie-news-events", label: "Communications", icon: MessageSquare },
+  { id: "base-connaissances", label: "Base de Connaissances AI", icon: Brain },
   { id: "outils-pedagogiques", label: "Outils Pédagogiques", icon: Wrench },
-  { id: "calendrier", label: "Calendrier / Objectifs / Échéances", icon: Calendar },
-  { id: "rules", label: "Conseils / Aides / Règles", icon: ScrollText },
-  { id: "vue-ensemble", label: "Vue d'Ensemble / Stats", icon: Home },
+  { id: "calendrier", label: "Agenda", icon: Calendar },
+  { id: "rules", label: "L'Esprit du Kartel", icon: ScrollText },
+  { id: "vue-ensemble", label: "Statistiques", icon: Home },
   { id: "notes", label: "Notes", icon: FileText },
   { id: "visio", label: "Visio", icon: MessageCircle },
   { id: "parametres", label: "Paramètres", icon: SettingsIcon },

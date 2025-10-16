@@ -8,8 +8,8 @@ export const MessagerieNewsEvents = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Messagerie / News / Évènements</h2>
-        <p className="text-muted-foreground">Communication et coordination de votre Kartel</p>
+        <h2 className="text-3xl font-bold mb-2">Communications</h2>
+        <p className="text-muted-foreground text-[110%]">Gérez vos messages, consultez les news et évènements, tenez-vous à jour</p>
       </div>
 
       <Tabs defaultValue="messagerie" className="w-full">

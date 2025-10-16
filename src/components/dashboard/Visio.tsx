@@ -6,8 +6,8 @@ export const Visio = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Visioconférence</h2>
-        <p className="text-muted-foreground">Organisez et rejoignez des sessions vidéo</p>
+        <h2 className="text-3xl font-bold mb-2">Visio</h2>
+        <p className="text-muted-foreground text-[110%]">Planifiez vos sessions de groupe, partagez vos écrans, débloquez-vous ensemble !</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">

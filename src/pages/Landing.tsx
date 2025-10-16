@@ -22,7 +22,7 @@ const Landing = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b border-border z-50">
+      <nav className="fixed top-0 w-full bg-accent backdrop-blur-lg border-b border-border z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
             Kartel.io
@@ -54,7 +54,7 @@ const Landing = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6">
+      <section className="relative pt-32 pb-12 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
             Apprenez plus vite et mieux{" "}
@@ -121,7 +121,7 @@ const Landing = () => {
       </section>
 
       {/* Qui Sommes nous */}
-      <section id="qui" className="py-20 px-6 bg-background/50 backdrop-blur">
+      <section id="qui" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl">
           <h3 className="text-4xl font-bold text-center mb-12">Etudiez ensemble en petits groupes motivés</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -151,10 +151,10 @@ const Landing = () => {
       </section>
 
       {/* Pourquoi Kartel */}
-      <section id="pourquoi" className="py-20 px-6">
-        <div className="container mx-auto max-w-5xl">
+      <section id="pourquoi" className="py-12 px-6">
+        <div className="container mx-auto max-w-5xl text-center">
           <h3 className="text-4xl font-bold text-center mb-12">Kartel : la meilleure façon d'apprendre ?</h3>
-          <div className="space-y-6">
+          <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
               <h4 className="text-xl font-bold mb-2">🎯 Un apprentissage actif qui maintient l'engagement</h4>
               <p className="text-muted-foreground">
@@ -178,10 +178,10 @@ const Landing = () => {
       </section>
 
       {/* Les Résultats sont là */}
-      <section id="resultats" className="py-20 px-6 bg-background/50 backdrop-blur">
-        <div className="container mx-auto max-w-5xl">
+      <section id="resultats" className="py-12 px-6 bg-background/50 backdrop-blur">
+        <div className="container mx-auto max-w-5xl text-center">
           <h3 className="text-4xl font-bold text-center mb-12">🚀 Les résultats sont là !</h3>
-          <div className="space-y-6">
+          <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
               <h4 className="text-xl font-bold mb-2">🎯 Des progrès visibles et mesurables</h4>
               <p className="text-muted-foreground">
@@ -205,7 +205,7 @@ const Landing = () => {
       </section>
 
       {/* Tarifs */}
-      <section id="tarifs" className="py-20 px-6 bg-background/50 backdrop-blur">
+      <section id="tarifs" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-6xl">
           <h3 className="text-4xl font-bold text-center mb-12">Tarifs</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -300,7 +300,7 @@ const Landing = () => {
       </section>
 
       {/* Témoignages */}
-      <section id="temoignages" className="py-20 px-6">
+      <section id="temoignages" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl">
           <h3 className="text-4xl font-bold text-center mb-12">Témoignages</h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -362,7 +362,7 @@ const Landing = () => {
       </section>
 
       {/* À propos */}
-      <section id="apropos" className="py-20 px-6">
+      <section id="apropos" className="py-12 px-6">
         <div className="container mx-auto max-w-3xl text-center">
           <h3 className="text-4xl font-bold mb-6">À propos de Kartel</h3>
           <p className="text-lg text-muted-foreground mb-8">

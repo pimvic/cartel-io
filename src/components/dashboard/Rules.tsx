@@ -4,8 +4,8 @@ export const Rules = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Conseils / Aides / Règles</h2>
-        <p className="text-muted-foreground">Guide pour bien vivre votre Kartel</p>
+        <h2 className="text-3xl font-bold mb-2">L'Esprit du Kartel</h2>
+        <p className="text-muted-foreground text-[110%]">L'Esprit-Kartel s'apprend : bienveillance, entraide, partage et soutien</p>
       </div>
 
       <Card className="relative">

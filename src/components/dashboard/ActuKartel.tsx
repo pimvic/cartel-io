@@ -6,7 +6,7 @@ export const ActuKartel = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold mb-2">L'Actu du Kartel</h2>
-        <p className="text-muted-foreground">Les dernières activités et actualités de votre groupe</p>
+        <p className="text-muted-foreground text-[110%]">La vie de votre Kartel, votre dynamisme de groupe, votre engagement</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
