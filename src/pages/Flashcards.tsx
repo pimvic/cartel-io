@@ -79,8 +79,7 @@ export default function Flashcards() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Flashcards automatiques</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground">Mémorisez efficacement avec des cartes interactives</p>
       </div>
 

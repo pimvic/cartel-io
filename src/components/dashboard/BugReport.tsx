@@ -43,7 +43,10 @@ export const BugReport = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Feedback</DialogTitle>
+          <DialogTitle className="sr-only">Feedback</DialogTitle>
+          <p className="text-muted-foreground text-[110%] pt-2">
+            Partagez vos impressions, vos idées, vos retours pour améliorer Kartel.
+          </p>
         </DialogHeader>
         <div className="space-y-4">
           <Input

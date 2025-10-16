@@ -1,15 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
-export const PedagogicalTools = () => {
-  const navigate = useNavigate();
+interface PedagogicalToolsProps {
+  onNavigate?: (section: string) => void;
+}
+
+export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
   
   const mainTools = [
-    { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500", route: "/quiz" },
-    { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500", route: "/flashcards" },
-    { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500", route: "/mindmap" },
+    { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500", section: "quiz" },
+    { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500", section: "flashcards" },
+    { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500", section: "mindmap" },
   ];
 
   const tools = [
@@ -40,8 +42,7 @@ export const PedagogicalTools = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Outils Pédagogiques</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">Des outils pédagogiques pour vous tester, vous préparer, construire des fiches, résumer, ou jouer ensemble</p>
       </div>
 
@@ -56,7 +57,7 @@ export const PedagogicalTools = () => {
               <Card 
                 key={index} 
                 className="hover:shadow-lg transition-all cursor-pointer relative group"
-                onClick={() => navigate(tool.route)}
+                onClick={() => onNavigate?.(tool.section)}
               >
                 <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
                 <CardHeader>

@@ -78,8 +78,7 @@ export const Overview = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Statistiques</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">Votre Kartel en chiffres : suivez vos progrès et soyez fiers de votre groupe !</p>
       </div>
 

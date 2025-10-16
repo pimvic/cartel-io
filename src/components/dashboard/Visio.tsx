@@ -5,8 +5,7 @@ import { Video, Calendar, Users, Clock } from "lucide-react";
 export const Visio = () => {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Visio</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">Planifiez vos sessions de groupe, partagez vos écrans, débloquez-vous ensemble !</p>
       </div>
 

@@ -13,6 +13,9 @@ import { ActuKartel } from "@/components/dashboard/ActuKartel";
 import { MessagerieNewsEvents } from "@/components/dashboard/MessagerieNewsEvents";
 import { Notes } from "@/components/dashboard/Notes";
 import { Visio } from "@/components/dashboard/Visio";
+import Quiz from "@/pages/Quiz";
+import Flashcards from "@/pages/Flashcards";
+import Mindmap from "@/pages/Mindmap";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("actu-kartel");
@@ -27,7 +30,7 @@ const Dashboard = () => {
       case "base-connaissances":
         return <KnowledgeBase />;
       case "outils-pedagogiques":
-        return <PedagogicalTools />;
+        return <PedagogicalTools onNavigate={setActiveSection} />;
       case "calendrier":
         return <Calendar />;
       case "rules":
@@ -42,6 +45,12 @@ const Dashboard = () => {
         return <Settings />;
       case "feedback":
         return <BugReport />;
+      case "quiz":
+        return <Quiz />;
+      case "flashcards":
+        return <Flashcards />;
+      case "mindmap":
+        return <Mindmap />;
       default:
         return (
           <div className="flex items-center justify-center h-96">

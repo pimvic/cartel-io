@@ -65,8 +65,7 @@ export default function Quiz() {
   if (quizCompleted) {
     return (
       <div className="space-y-6">
-        <div>
-          <h2 className="text-3xl font-bold mb-2">Quiz adaptatif IA</h2>
+        <div className="pt-2">
           <p className="text-muted-foreground">Testez vos connaissances</p>
         </div>
 
@@ -100,8 +99,7 @@ export default function Quiz() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Quiz adaptatif IA</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground">Testez vos connaissances</p>
       </div>
 

@@ -4,8 +4,7 @@ import { MessageSquare, FileText, Calendar as CalendarIcon, Upload } from "lucid
 export const ActuKartel = () => {
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">L'Actu du Kartel</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">La vie de votre Kartel, votre dynamisme de groupe, votre engagement</p>
       </div>
 

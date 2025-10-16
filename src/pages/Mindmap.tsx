@@ -129,8 +129,7 @@ export default function Mindmap() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Mindmap collective</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground">Explorez et organisez vos idées visuellement</p>
       </div>
 

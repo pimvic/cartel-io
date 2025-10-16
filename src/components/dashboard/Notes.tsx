@@ -6,9 +6,8 @@ import { Plus, Search, Edit, Trash2 } from "lucide-react";
 export const Notes = () => {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pt-2">
         <div>
-          <h2 className="text-3xl font-bold mb-2">Notes</h2>
           <p className="text-muted-foreground text-[110%]">Vos notes personnelles ou de groupe, ici pour ne rien oublier !</p>
         </div>
         <Button className="gap-2">

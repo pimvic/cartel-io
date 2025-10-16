@@ -17,8 +17,7 @@ export const Settings = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Paramètres</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">Configurez les éléments clés de votre Kartel : vérifiez-les régulièrement.</p>
       </div>
 

@@ -169,8 +169,7 @@ export const KnowledgeBase = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-3xl font-bold mb-2">Base de Connaissances AI</h2>
+      <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">
           Nourrissez votre base commune, discutez avec l'IA de votre Kartel au sujet de vos documents, échéances et objectifs
         </p>
