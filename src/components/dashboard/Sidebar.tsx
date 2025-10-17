@@ -29,7 +29,7 @@ const menuItems = [
   { id: "base-connaissances", label: "Base de Connaissances AI", icon: Brain },
   { id: "outils-pedagogiques", label: "Outils Pédagogiques", icon: Wrench },
   { id: "calendrier", label: "Agenda", icon: Calendar },
-  { id: "votre-plus-un", label: "Votre +1", icon: Users },
+  { id: "votre-plus-un", label: "Votre « +1 »", icon: Users },
   { id: "rules", label: "L'Esprit du Kartel", icon: ScrollText },
   { id: "vue-ensemble", label: "Statistiques", icon: Home },
   { id: "notes", label: "Notes", icon: FileText },
