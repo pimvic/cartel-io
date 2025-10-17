@@ -73,7 +73,7 @@ const Dashboard = () => {
           collapsed={sidebarCollapsed}
           onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
-        <main className={`flex-1 p-6 transition-all ${sidebarCollapsed ? "ml-20" : "ml-64"}`}>
+        <main className={`flex-1 p-6 pt-20 transition-all ${sidebarCollapsed ? "ml-20" : "ml-64"}`}>
           {renderContent()}
           <BugReport />
         </main>
