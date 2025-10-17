@@ -24,17 +24,21 @@ export const Calendar = () => {
             <CalendarIcon className="w-4 h-4" />
             Calendrier
           </TabsTrigger>
-          <TabsTrigger value="goals" className="flex items-center gap-2">
-            <Target className="w-4 h-4" />
-            Objectifs
-          </TabsTrigger>
           <TabsTrigger value="deadlines" className="flex items-center gap-2">
             <Clock className="w-4 h-4" />
             Échéances
           </TabsTrigger>
+          <TabsTrigger value="goals" className="flex items-center gap-2">
+            <Target className="w-4 h-4" />
+            Objectifs
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="calendar" className="mt-6">
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Vue d'ensemble</h3>
+            <Button size="sm">Ajouter un évènement</Button>
+          </div>
 
       <div className="grid md:grid-cols-3 gap-4">
         <Card className="bg-accent/10 hover-lift">
@@ -105,6 +109,13 @@ export const Calendar = () => {
         </TabsContent>
 
         <TabsContent value="goals" className="mt-6">
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Gérer les objectifs</h3>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline">Archiver</Button>
+              <Button size="sm">Créer un objectif</Button>
+            </div>
+          </div>
           <Card>
             <CardHeader>
               <CardTitle>Objectifs du groupe</CardTitle>
@@ -142,6 +153,13 @@ export const Calendar = () => {
         </TabsContent>
 
         <TabsContent value="deadlines" className="mt-6">
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Gérer les échéances</h3>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline">Archiver</Button>
+              <Button size="sm">Créer une échéance</Button>
+            </div>
+          </div>
           <Card>
             <CardHeader>
               <CardTitle>Échéances importantes</CardTitle>

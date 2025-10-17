@@ -6,6 +6,7 @@ import { KnowledgeBase } from "@/components/dashboard/KnowledgeBase";
 import { Calendar } from "@/components/dashboard/Calendar";
 import { GroupDiscussion } from "@/components/dashboard/GroupDiscussion";
 import { Rules } from "@/components/dashboard/Rules";
+import { VotrePlusUn } from "@/components/dashboard/VotrePlusUn";
 import { Settings } from "@/components/dashboard/Settings";
 import { PedagogicalTools } from "@/components/dashboard/PedagogicalTools";
 import { BugReport } from "@/components/dashboard/BugReport";
@@ -33,6 +34,8 @@ const Dashboard = () => {
         return <PedagogicalTools onNavigate={setActiveSection} />;
       case "calendrier":
         return <Calendar />;
+      case "votre-plus-un":
+        return <VotrePlusUn />;
       case "rules":
         return <Rules />;
       case "vue-ensemble":

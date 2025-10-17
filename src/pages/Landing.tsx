@@ -219,10 +219,6 @@ const Landing = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>1 accès Kartel possible</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-success mt-1">✓</span>
                   <span>Base de connaissances (max 10Go)</span>
                 </li>
                 <li className="flex items-start gap-2">
@@ -249,7 +245,7 @@ const Landing = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>2 accès Kartels</span>
+                  <span>2 accès Kartel</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
@@ -274,23 +270,31 @@ const Landing = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Comptes illimités possibles</span>
+                  <span>Comptes et Kartels illimités possibles</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Kartels illimités possibles</span>
+                  <span>Gestion multi-comptes / multi-Kartels</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Fonctionnalités personnalisées</span>
+                  <span>Offres Entreprises</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Prix étudiés sur mesure</span>
+                  <span>Offres Écoles de Commerce</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Support dédié 7/24h</span>
+                  <span>Offres Universités</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Formateur dédié, accompagnement</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-success mt-1">✓</span>
+                  <span>Support technique dédié 7/24h</span>
                 </li>
               </ul>
               <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">Nous contacter</Button>

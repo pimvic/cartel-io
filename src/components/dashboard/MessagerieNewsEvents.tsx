@@ -56,9 +56,16 @@ export const MessagerieNewsEvents = () => {
         </TabsContent>
 
         <TabsContent value="news" className="mt-6">
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Actualités du Kartel</h3>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline">Archiver</Button>
+              <Button size="sm">Créer une news</Button>
+            </div>
+          </div>
           <Card>
             <CardHeader>
-              <CardTitle>Actualités du Kartel</CardTitle>
+              <CardTitle>Actualités récentes</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -82,9 +89,16 @@ export const MessagerieNewsEvents = () => {
         </TabsContent>
 
         <TabsContent value="events" className="mt-6">
+          <div className="mb-4 flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Évènements à venir</h3>
+            <div className="flex gap-2">
+              <Button size="sm" variant="outline">Archiver</Button>
+              <Button size="sm">Créer un évènement</Button>
+            </div>
+          </div>
           <Card>
             <CardHeader>
-              <CardTitle>Évènements à venir</CardTitle>
+              <CardTitle>Prochains évènements</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
