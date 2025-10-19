@@ -2,6 +2,114 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, BookOpen, Trophy, Star, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    nom: "",
+    prenom: "",
+    mobile: "",
+    email: "",
+    commentaire: ""
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Create mailto link with form data
+    const subject = encodeURIComponent("Contact depuis Kartel.io");
+    const body = encodeURIComponent(
+      `Nom: ${formData.nom}\n` +
+      `Prénom: ${formData.prenom}\n` +
+      `Mobile: ${formData.mobile}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.commentaire}`
+    );
+    
+    window.location.href = `mailto:contacts@sevenheads.ai?subject=${subject}&body=${body}`;
+    
+    // Show confirmation and clear form
+    setSubmitted(true);
+    setFormData({
+      nom: "",
+      prenom: "",
+      mobile: "",
+      email: "",
+      commentaire: ""
+    });
+    
+    // Reset submitted state after 3 seconds
+    setTimeout(() => setSubmitted(false), 3000);
+  };
+
+  return (
+    <div className="space-y-4">
+      {submitted && (
+        <div className="text-center text-success font-semibold text-lg mb-4">
+          Message envoyé, Merci!
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="nom">Nom *</Label>
+            <Input
+              id="nom"
+              required
+              value={formData.nom}
+              onChange={(e) => setFormData({...formData, nom: e.target.value})}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="prenom">Prénom *</Label>
+            <Input
+              id="prenom"
+              required
+              value={formData.prenom}
+              onChange={(e) => setFormData({...formData, prenom: e.target.value})}
+            />
+          </div>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="mobile">N° de mobile *</Label>
+          <Input
+            id="mobile"
+            type="tel"
+            required
+            value={formData.mobile}
+            onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="email">Email *</Label>
+          <Input
+            id="email"
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="commentaire">Commentaire</Label>
+          <Textarea
+            id="commentaire"
+            rows={4}
+            value={formData.commentaire}
+            onChange={(e) => setFormData({...formData, commentaire: e.target.value})}
+          />
+        </div>
+        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+          Envoyer
+        </Button>
+      </form>
+    </div>
+  );
+};
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -382,10 +490,12 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer with Contact Form */}
       <footer className="py-12 px-6 border-t border-border">
-        <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2025 Kartel.io. Tous droits réservés.</p>
+        <div className="container mx-auto max-w-2xl">
+          <h3 className="text-2xl font-bold text-center mb-8">Contacts</h3>
+          <ContactForm />
+          <p className="text-center text-muted-foreground mt-8">© 2025 Kartel.io. Tous droits réservés.</p>
         </div>
       </footer>
 

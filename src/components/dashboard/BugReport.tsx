@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
@@ -10,24 +9,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Bug } from "lucide-react";
-import { toast } from "sonner";
 
 export const BugReport = () => {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [comment, setComment] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    if (!title || !description) {
-      toast.error("Veuillez remplir tous les champs");
+    if (!comment.trim()) {
       return;
     }
     
-    console.log("Bug report:", { title, description });
-    toast.success("Rapport de bug envoyé à l'équipe");
-    setTitle("");
-    setDescription("");
-    setOpen(false);
+    setSubmitted(true);
+    setComment("");
+    
+    // Reset submitted state after 3 seconds
+    setTimeout(() => {
+      setSubmitted(false);
+      setOpen(false);
+    }, 3000);
   };
 
   return (
@@ -44,26 +44,24 @@ export const BugReport = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="sr-only">Feedback</DialogTitle>
-          <p className="text-muted-foreground text-[110%] pt-2">
-            Partagez vos impressions, vos idées, vos retours pour améliorer Kartel.
-          </p>
         </DialogHeader>
-        <div className="space-y-4">
-          <Input
-            placeholder="Titre"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <Textarea
-            placeholder="Description détaillée"
-            rows={6}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <Button onClick={handleSubmit} className="w-full">
-            Envoyer
-          </Button>
-        </div>
+        {submitted ? (
+          <div className="text-center text-success font-semibold text-lg py-8">
+            Merci pour votre feedback !
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <Textarea
+              placeholder="Votre commentaire..."
+              rows={6}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <Button onClick={handleSubmit} className="w-full">
+              ENTRER
+            </Button>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

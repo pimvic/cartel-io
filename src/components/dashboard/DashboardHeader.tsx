@@ -51,7 +51,10 @@ export const DashboardHeader = () => {
       <div className="h-full px-6 flex items-center justify-between">
         <div className="flex items-center gap-6">
           <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-black dark:text-white">
+            <h1 
+              className="text-xl font-bold text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => navigate("/")}
+            >
               Kartel - Démo
             </h1>
             <p className="text-xs text-muted-foreground text-center">02 juin 2025</p>

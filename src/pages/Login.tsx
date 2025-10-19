@@ -32,9 +32,9 @@ const Login = () => {
               <BookOpen className="w-8 h-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Connexion à Cartel</CardTitle>
+          <CardTitle className="text-2xl">Connexion</CardTitle>
           <CardDescription>
-            Entrez vos identifiants pour accéder à votre cartel
+            Vos identifiants
           </CardDescription>
         </CardHeader>
         <CardContent>
