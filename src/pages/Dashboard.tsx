@@ -14,6 +14,7 @@ import { ActuKartel } from "@/components/dashboard/ActuKartel";
 import { MessagerieNewsEvents } from "@/components/dashboard/MessagerieNewsEvents";
 import { Notes } from "@/components/dashboard/Notes";
 import { Visio } from "@/components/dashboard/Visio";
+import { Feedback } from "@/components/dashboard/Feedback";
 import Quiz from "@/pages/Quiz";
 import Flashcards from "@/pages/Flashcards";
 import Mindmap from "@/pages/Mindmap";
@@ -47,7 +48,7 @@ const Dashboard = () => {
       case "parametres":
         return <Settings />;
       case "feedback":
-        return <BugReport />;
+        return <Feedback />;
       case "quiz":
         return <Quiz />;
       case "flashcards":
