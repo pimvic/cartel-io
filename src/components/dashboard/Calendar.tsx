@@ -174,7 +174,7 @@ export const Calendar = () => {
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
                   <p className="text-sm font-medium">📚 ECF Final</p>
                   <p className="text-sm text-muted-foreground mt-2">Examen de certification</p>
-                  <p className="text-xs text-muted-foreground mt-1">15 avril 2025 (dans 87 jours)</p>
+                  <p className="text-xs text-muted-foreground mt-1">15 avril 2026 (dans 170 jours)</p>
                 </div>
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
                   <p className="text-sm font-medium">📋 Révisions collectives</p>

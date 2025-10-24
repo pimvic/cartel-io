@@ -172,11 +172,11 @@ export const Overview = () => {
           <div className="pt-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Échéance finale:</span>
-              <span className="font-medium">15 avril 2025</span>
+              <span className="font-medium">15 avril 2026</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Jours restants:</span>
-              <span className="font-medium">87 jours</span>
+              <span className="font-medium">170 jours</span>
             </div>
           </div>
         </CardContent>

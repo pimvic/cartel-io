@@ -83,7 +83,7 @@ export const DashboardHeader = () => {
               </div>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground whitespace-nowrap">15 Avril 2025, dans 87 jours</p>
+          <p className="text-sm text-muted-foreground whitespace-nowrap">15 Avril 2026, dans 170 jours</p>
         </div>
 
         <DropdownMenu>

@@ -21,7 +21,7 @@ const ContactForm = () => {
     e.preventDefault();
     
     // Create mailto link with form data
-    const subject = encodeURIComponent("Contact depuis Kartel.io");
+    const subject = encodeURIComponent("Contact depuis Kartels.io");
     const body = encodeURIComponent(
       `Nom: ${formData.nom}\n` +
       `Prénom: ${formData.prenom}\n` +
@@ -133,7 +133,7 @@ const Landing = () => {
       <nav className="fixed top-0 w-full bg-accent backdrop-blur-lg border-b border-border z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Kartel.io
+            Kartels.io
           </h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection("qui")} className="hover:text-accent transition-colors">
@@ -182,7 +182,7 @@ const Landing = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
-                    alt="Découvrez Kartel.io en vidéo"
+                    alt="Découvrez Kartels.io en vidéo"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
@@ -199,7 +199,7 @@ const Landing = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   className="w-full h-full"
-                  title="Découvrez Kartel.io en vidéo"
+                  title="Découvrez Kartels.io en vidéo"
                 />
               )}
             </div>
@@ -495,7 +495,7 @@ const Landing = () => {
         <div className="container mx-auto max-w-2xl">
           <h3 className="text-2xl font-bold text-center mb-8">Contacts</h3>
           <ContactForm />
-          <p className="text-center text-muted-foreground mt-8">© 2025 Kartel.io. Tous droits réservés.</p>
+          <p className="text-center text-muted-foreground mt-8">© 2025 Kartels.io. Tous droits réservés.</p>
         </div>
       </footer>
 
