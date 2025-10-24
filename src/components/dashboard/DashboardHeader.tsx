@@ -57,7 +57,7 @@ export const DashboardHeader = () => {
             >
               Kartel - Démo
             </h1>
-            <p className="text-xs text-muted-foreground text-center">02 juin 2025</p>
+            <p className="text-xs text-muted-foreground text-center">27 octobre 2025</p>
           </div>
           <div className="ml-6">
             <p className="font-bold text-lg">Formateur Professionnel d'Adultes (FPA)</p>
