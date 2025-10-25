@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight } from "lucide-react";
+import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight, Book } from "lucide-react";
 
 interface PedagogicalToolsProps {
   onNavigate?: (section: string) => void;
@@ -12,6 +12,7 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
     { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500", section: "quiz" },
     { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500", section: "flashcards" },
     { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500", section: "mindmap" },
+    { name: "Glossaire / Dictionnaire", description: "Consultez les termes clés de l'apprentissage", icon: Book, color: "text-indigo-500", section: "glossaire" },
   ];
 
   const tools = [

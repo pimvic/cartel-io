@@ -18,6 +18,7 @@ import { Feedback } from "@/components/dashboard/Feedback";
 import Quiz from "@/pages/Quiz";
 import Flashcards from "@/pages/Flashcards";
 import Mindmap from "@/pages/Mindmap";
+import Glossaire from "@/pages/Glossaire";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("actu-kartel");
@@ -55,6 +56,8 @@ const Dashboard = () => {
         return <Flashcards />;
       case "mindmap":
         return <Mindmap />;
+      case "glossaire":
+        return <Glossaire />;
       default:
         return (
           <div className="flex items-center justify-center h-96">

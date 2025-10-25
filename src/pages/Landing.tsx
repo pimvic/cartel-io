@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { Footer } from "@/components/Footer";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ const ContactForm = () => {
       `Message:\n${formData.commentaire}`
     );
     
-    window.location.href = `mailto:contacts@sevenheads.ai?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:superteam@kartels.io?subject=${subject}&body=${body}`;
     
     // Show confirmation and clear form
     setSubmitted(true);
@@ -490,14 +491,16 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer with Contact Form */}
-      <footer className="py-12 px-6 border-t border-border">
+      {/* Contact Form Section */}
+      <section className="py-12 px-6 border-t border-border">
         <div className="container mx-auto max-w-2xl">
           <h3 className="text-2xl font-bold text-center mb-8">Contacts</h3>
           <ContactForm />
-          <p className="text-center text-muted-foreground mt-8">© 2025 Kartels.io. Tous droits réservés.</p>
         </div>
-      </footer>
+      </section>
+
+      {/* Footer */}
+      <Footer />
 
       {/* Fixed Chatbot Button */}
       <div className="fixed right-6 bottom-6 z-50">
