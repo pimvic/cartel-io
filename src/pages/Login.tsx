@@ -32,7 +32,7 @@ const Login = () => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate(`/${lang}/dashboard`);
+        navigate(`/${lang || 'fr'}/dashboard`);
       }
     };
     checkSession();
@@ -40,7 +40,7 @@ const Login = () => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        navigate(`/${lang}/dashboard`);
+        navigate(`/${lang || 'fr'}/dashboard`);
       }
     });
 
@@ -57,7 +57,7 @@ const Login = () => {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
+            emailRedirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
           },
         });
 
@@ -98,7 +98,7 @@ const Login = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
+          redirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
         },
       });
 

@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Globe } from 'lucide-react';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -24,22 +23,21 @@ const LanguageSwitcher = () => {
     navigate(newPath);
   };
 
-  const currentLanguage = i18n.language === 'fr' ? 'FR 🇫🇷' : 'EN 🇬🇧';
+  const currentLanguage = i18n.language === 'fr' ? 'FR' : 'EN';
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
-          <Globe className="h-4 w-4" />
+        <Button variant="outline" size="sm" className="h-8 px-2 text-xs min-w-[50px]">
           {currentLanguage}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => changeLanguage('fr')}>
-          🇫🇷 Français
+          Français
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => changeLanguage('en')}>
-          🇬🇧 English
+          English
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
