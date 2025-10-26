@@ -1,0 +1,197 @@
+{
+  "nav": {
+    "features": "Features",
+    "benefits": "Benefits",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Learn faster and further in small groups!",
+      "subtitle": "Kartels: The collaborative platform for succeeding together",
+      "cta": "Get Started!",
+      "videoAlt": "Discover Kartels.io in video"
+    },
+    "features": {
+      "title": "Features",
+      "subtitle": "Everything you need to succeed together",
+      "feature1": {
+        "title": "Real-time collaboration",
+        "description": "Work together on your projects with advanced collaboration tools"
+      },
+      "feature2": {
+        "title": "Learning tools",
+        "description": "Access a complete suite of tools to facilitate learning"
+      },
+      "feature3": {
+        "title": "Progress tracking",
+        "description": "Track your progress and your team's progress in real-time"
+      },
+      "feature4": {
+        "title": "Knowledge base",
+        "description": "Centralize and share your learning resources"
+      },
+      "feature5": {
+        "title": "Integrated communication",
+        "description": "Built-in messaging, video calls, and group discussions"
+      },
+      "feature6": {
+        "title": "Project management",
+        "description": "Organize your tasks and deadlines efficiently"
+      }
+    },
+    "benefits": {
+      "title": "Why choose Kartels?",
+      "subtitle": "The advantages that make the difference",
+      "benefit1": {
+        "title": "Collaborative learning",
+        "description": "Learn better in groups with modern collaboration tools"
+      },
+      "benefit2": {
+        "title": "Time saving",
+        "description": "Centralize all your tools in one place"
+      },
+      "benefit3": {
+        "title": "Personalized tracking",
+        "description": "Adapt your path according to your needs"
+      }
+    },
+    "testimonials": {
+      "title": "What our users say",
+      "subtitle": "Discover feedback from our community",
+      "testimonial1": {
+        "text": "Kartels has transformed the way we work in groups. It's an essential tool!",
+        "author": "Marie Dubois",
+        "role": "Medical student"
+      },
+      "testimonial2": {
+        "text": "The platform is intuitive and comprehensive. Perfect for our collaborative projects.",
+        "author": "Thomas Martin",
+        "role": "Teacher"
+      },
+      "testimonial3": {
+        "text": "A huge time saver with all tools gathered in one place.",
+        "author": "Sophie Bernard",
+        "role": "Educational coordinator"
+      }
+    },
+    "contact": {
+      "title": "Contact us",
+      "subtitle": "Have a question? Feel free to contact us",
+      "form": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "mobile": "Mobile number",
+        "email": "Email",
+        "comment": "Comment",
+        "send": "Send",
+        "success": "Message sent, Thank you!"
+      }
+    }
+  },
+  "footer": {
+    "solutions": "Solutions",
+    "enterprise": "Enterprise",
+    "resources": "Resources",
+    "partners": "Partners",
+    "newsletter": {
+      "title": "Newsletter",
+      "placeholder": "Your email",
+      "send": "Send"
+    },
+    "links": {
+      "presentation": "About",
+      "mission": "Mission",
+      "team": "Team",
+      "philosophy": "Philosophy",
+      "opportunities": "Opportunities",
+      "contacts": "Contacts",
+      "investors": "Investors"
+    },
+    "legal": {
+      "copyright": "© 2025 – KARTELS S.A. All rights reserved.",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "gdpr": "GDPR"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "Sign in to your Kartels account",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "withGoogle": "Continue with Google",
+    "newAccount": "Don't have an account yet?",
+    "hasAccount": "Already have an account?",
+    "createAccount": "Create account",
+    "login": "Sign in",
+    "creating": "Creating...",
+    "loggingIn": "Signing in...",
+    "error": "An error occurred"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Kartel - Demo",
+      "course": "Kartel Organization - Educational demo",
+      "deadline": "April 15, 2026, in 170 days",
+      "members": "Team members",
+      "coordinator": "Coordinator"
+    },
+    "menu": {
+      "actuKartel": "Kartel News",
+      "messagerie": "Messaging, News & Events",
+      "knowledgeBase": "Knowledge Base",
+      "tools": "Learning Tools",
+      "calendar": "Calendar",
+      "plusOne": "Your +1",
+      "rules": "Rules",
+      "overview": "Overview",
+      "notes": "Notes",
+      "visio": "Video",
+      "settings": "Settings",
+      "feedback": "Feedback"
+    },
+    "profile": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "tools": {
+      "title": "Learning Tools",
+      "subtitle": "Choose a tool to get started",
+      "quiz": {
+        "title": "Quiz",
+        "description": "Test your knowledge with interactive quizzes"
+      },
+      "flashcards": {
+        "title": "Flashcards",
+        "description": "Memorize with review cards"
+      },
+      "mindmap": {
+        "title": "Mindmap",
+        "description": "Organize your ideas visually"
+      },
+      "glossary": {
+        "title": "Glossary / Dictionary",
+        "description": "Browse definitions of key terms"
+      }
+    },
+    "glossary": {
+      "title": "Glossary / Dictionary",
+      "subtitle": "Definitions of key terms for your learning",
+      "search": "Search for a term..."
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  }
+}

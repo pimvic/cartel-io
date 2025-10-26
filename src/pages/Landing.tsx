@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, BookOpen, Trophy, Star, Play } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Footer } from "@/components/Footer";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -51,13 +54,13 @@ const ContactForm = () => {
     <div className="space-y-4">
       {submitted && (
         <div className="text-center text-success font-semibold text-lg mb-4">
-          Message envoyé, Merci!
+          {t('home.contact.form.success')}
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="nom">Nom *</Label>
+            <Label htmlFor="nom">{t('home.contact.form.lastName')} *</Label>
             <Input
               id="nom"
               required
@@ -66,7 +69,7 @@ const ContactForm = () => {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="prenom">Prénom *</Label>
+            <Label htmlFor="prenom">{t('home.contact.form.firstName')} *</Label>
             <Input
               id="prenom"
               required
@@ -76,7 +79,7 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="mobile">N° de mobile *</Label>
+          <Label htmlFor="mobile">{t('home.contact.form.mobile')} *</Label>
           <Input
             id="mobile"
             type="tel"
@@ -86,7 +89,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">Email *</Label>
+          <Label htmlFor="email">{t('home.contact.form.email')} *</Label>
           <Input
             id="email"
             type="email"
@@ -96,7 +99,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="commentaire">Commentaire</Label>
+          <Label htmlFor="commentaire">{t('home.contact.form.comment')}</Label>
           <Textarea
             id="commentaire"
             rows={4}
@@ -105,7 +108,7 @@ const ContactForm = () => {
           />
         </div>
         <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-          Envoyer
+          {t('home.contact.form.send')}
         </Button>
       </form>
     </div>
@@ -113,8 +116,16 @@ const ContactForm = () => {
 };
 
 const Landing = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { lang } = useParams();
   const [videoLoaded, setVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    if (lang && (lang === 'en' || lang === 'fr')) {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang, i18n]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -156,9 +167,12 @@ const Landing = () => {
               À propos
             </button>
           </div>
-          <Button onClick={() => navigate("/login")} variant="outline">
-            Se connecter
-          </Button>
+          <div className="flex gap-2">
+            <LanguageSwitcher />
+            <Button onClick={() => navigate(`/${lang}/login`)} variant="outline">
+              {t('login.signIn')}
+            </Button>
+          </div>
         </div>
       </nav>
 

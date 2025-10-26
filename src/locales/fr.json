@@ -1,0 +1,197 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "benefits": "Avantages",
+    "testimonials": "Témoignages",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Apprenez plus vite et plus loin en petits groupes!",
+      "subtitle": "Kartels : La plateforme collaborative pour réussir ensemble",
+      "cta": "Lancez-vous!",
+      "videoAlt": "Découvrez Kartels.io en vidéo"
+    },
+    "features": {
+      "title": "Fonctionnalités",
+      "subtitle": "Tout ce dont vous avez besoin pour réussir ensemble",
+      "feature1": {
+        "title": "Collaboration en temps réel",
+        "description": "Travaillez ensemble sur vos projets avec des outils de collaboration avancés"
+      },
+      "feature2": {
+        "title": "Outils pédagogiques",
+        "description": "Accédez à une suite complète d'outils pour faciliter l'apprentissage"
+      },
+      "feature3": {
+        "title": "Suivi de progression",
+        "description": "Suivez vos progrès et ceux de votre équipe en temps réel"
+      },
+      "feature4": {
+        "title": "Base de connaissances",
+        "description": "Centralisez et partagez vos ressources pédagogiques"
+      },
+      "feature5": {
+        "title": "Communication intégrée",
+        "description": "Messagerie, visio et discussion de groupe intégrées"
+      },
+      "feature6": {
+        "title": "Gestion de projet",
+        "description": "Organisez vos tâches et deadlines efficacement"
+      }
+    },
+    "benefits": {
+      "title": "Pourquoi choisir Kartels?",
+      "subtitle": "Les avantages qui font la différence",
+      "benefit1": {
+        "title": "Apprentissage collaboratif",
+        "description": "Apprenez mieux en groupe avec des outils de collaboration modernes"
+      },
+      "benefit2": {
+        "title": "Gain de temps",
+        "description": "Centralisez tous vos outils au même endroit"
+      },
+      "benefit3": {
+        "title": "Suivi personnalisé",
+        "description": "Adaptez votre parcours selon vos besoins"
+      }
+    },
+    "testimonials": {
+      "title": "Ce que disent nos utilisateurs",
+      "subtitle": "Découvrez les retours de notre communauté",
+      "testimonial1": {
+        "text": "Kartels a transformé notre façon de travailler en groupe. C'est un outil indispensable!",
+        "author": "Marie Dubois",
+        "role": "Étudiante en médecine"
+      },
+      "testimonial2": {
+        "text": "La plateforme est intuitive et complète. Parfait pour nos projets collaboratifs.",
+        "author": "Thomas Martin",
+        "role": "Enseignant"
+      },
+      "testimonial3": {
+        "text": "Un gain de temps énorme avec tous les outils réunis en un seul endroit.",
+        "author": "Sophie Bernard",
+        "role": "Coordinatrice pédagogique"
+      }
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Une question? N'hésitez pas à nous contacter",
+      "form": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "mobile": "N° de mobile",
+        "email": "Email",
+        "comment": "Commentaire",
+        "send": "Envoyer",
+        "success": "Message envoyé, Merci!"
+      }
+    }
+  },
+  "footer": {
+    "solutions": "Solutions",
+    "enterprise": "Entreprise",
+    "resources": "Ressources",
+    "partners": "Partenaires",
+    "newsletter": {
+      "title": "Newsletter",
+      "placeholder": "Votre email",
+      "send": "Envoyer"
+    },
+    "links": {
+      "presentation": "Présentation",
+      "mission": "Mission",
+      "team": "Équipe",
+      "philosophy": "Philosophie",
+      "opportunities": "Opportunités",
+      "contacts": "Contacts",
+      "investors": "Investisseurs"
+    },
+    "legal": {
+      "copyright": "© 2025 – KARTELS S.A. Tous droits réservés.",
+      "terms": "Conditions Générales",
+      "privacy": "Politique de Confidentialité",
+      "gdpr": "RGPD"
+    }
+  },
+  "login": {
+    "title": "Connexion",
+    "subtitle": "Connectez-vous à votre compte Kartels",
+    "email": "Email",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signUp": "Créer un compte",
+    "withGoogle": "Continuer avec Google",
+    "newAccount": "Pas encore de compte?",
+    "hasAccount": "Déjà un compte?",
+    "createAccount": "Créer un compte",
+    "login": "Se connecter",
+    "creating": "Création en cours...",
+    "loggingIn": "Connexion en cours...",
+    "error": "Une erreur s'est produite"
+  },
+  "dashboard": {
+    "header": {
+      "title": "Kartel - Démo",
+      "course": "Organisation de la Kartel - Démo pédagogique",
+      "deadline": "15 Avril 2026, dans 170 jours",
+      "members": "Membres de l'équipe",
+      "coordinator": "Coordinateur"
+    },
+    "menu": {
+      "actuKartel": "Actu Kartel",
+      "messagerie": "Messagerie, News & Events",
+      "knowledgeBase": "Base de connaissances",
+      "tools": "Outils pédagogiques",
+      "calendar": "Calendrier",
+      "plusOne": "Votre +1",
+      "rules": "Règlement",
+      "overview": "Vue d'ensemble",
+      "notes": "Notes",
+      "visio": "Visio",
+      "settings": "Paramètres",
+      "feedback": "Feedback"
+    },
+    "profile": {
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "logout": "Déconnexion"
+    },
+    "tools": {
+      "title": "Outils Pédagogiques",
+      "subtitle": "Choisissez un outil pour commencer",
+      "quiz": {
+        "title": "Quiz",
+        "description": "Testez vos connaissances avec des quiz interactifs"
+      },
+      "flashcards": {
+        "title": "Flashcards",
+        "description": "Mémorisez avec des cartes de révision"
+      },
+      "mindmap": {
+        "title": "Mindmap",
+        "description": "Organisez vos idées visuellement"
+      },
+      "glossary": {
+        "title": "Glossaire / Dictionnaire",
+        "description": "Consultez les définitions des termes clés"
+      }
+    },
+    "glossary": {
+      "title": "Glossaire / Dictionnaire",
+      "subtitle": "Définitions des termes clés pour votre apprentissage",
+      "search": "Rechercher un terme..."
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer"
+  }
+}

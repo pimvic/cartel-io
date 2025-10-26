@@ -1,18 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Brain, Map, CreditCard, BarChart3, Video, MessageCircle, Lightbulb, Users, FileText, BookOpen, UserCheck, Film, Target, Puzzle, Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight, Book } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PedagogicalToolsProps {
   onNavigate?: (section: string) => void;
 }
 
 export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
+  const { t } = useTranslation();
   
   const mainTools = [
-    { name: "Quiz adaptatif IA", description: "L'IA ajuste les questions selon le niveau du groupe et explique les erreurs en temps réel.", icon: Brain, color: "text-blue-500", section: "quiz" },
-    { name: "Flashcards automatiques", description: "Générez des flashcards depuis vos documents", icon: CreditCard, color: "text-green-500", section: "flashcards" },
-    { name: "Mindmap collective", description: "Créez des cartes mentales collaboratives", icon: Map, color: "text-purple-500", section: "mindmap" },
-    { name: "Glossaire / Dictionnaire", description: "Consultez les termes clés de l'apprentissage", icon: Book, color: "text-indigo-500", section: "glossaire" },
+    { name: t('dashboard.tools.quiz.title'), description: t('dashboard.tools.quiz.description'), icon: Brain, color: "text-blue-500", section: "quiz" },
+    { name: t('dashboard.tools.flashcards.title'), description: t('dashboard.tools.flashcards.description'), icon: CreditCard, color: "text-green-500", section: "flashcards" },
+    { name: t('dashboard.tools.mindmap.title'), description: t('dashboard.tools.mindmap.description'), icon: Map, color: "text-purple-500", section: "mindmap" },
+    { name: t('dashboard.tools.glossary.title'), description: t('dashboard.tools.glossary.description'), icon: Book, color: "text-indigo-500", section: "glossaire" },
   ];
 
   const tools = [
@@ -44,13 +46,13 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">Des outils pédagogiques pour vous tester, vous préparer, construire des fiches, résumer, ou jouer ensemble</p>
+        <p className="text-muted-foreground text-[110%]">{t('dashboard.tools.subtitle')}</p>
       </div>
 
       <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader>
-          <CardTitle>Outils principaux</CardTitle>
+          <CardTitle>{t('dashboard.tools.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-3 mb-6">

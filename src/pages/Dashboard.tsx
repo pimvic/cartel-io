@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Overview } from "@/components/dashboard/Overview";
@@ -21,8 +23,16 @@ import Mindmap from "@/pages/Mindmap";
 import Glossaire from "@/pages/Glossaire";
 
 const Dashboard = () => {
+  const { i18n } = useTranslation();
+  const { lang } = useParams();
   const [activeSection, setActiveSection] = useState("actu-kartel");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (lang && (lang === 'en' || lang === 'fr')) {
+      i18n.changeLanguage(lang);
+    }
+  }, [lang, i18n]);
 
   const renderContent = () => {
     switch (activeSection) {

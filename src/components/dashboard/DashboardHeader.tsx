@@ -9,7 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Star, User, Settings, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const members = [
   {
@@ -40,10 +42,12 @@ const members = [
 
 export const DashboardHeader = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { lang } = useParams();
   const currentUser = members[0]; // Jean-Stéphane B.
 
   const handleLogout = () => {
-    navigate("/");
+    navigate(`/${lang || 'fr'}`);
   };
 
   return (
@@ -53,19 +57,20 @@ export const DashboardHeader = () => {
           <div className="flex flex-col">
             <h1 
               className="text-xl font-bold text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity"
-              onClick={() => navigate("/")}
+              onClick={() => navigate(`/${lang || 'fr'}`)}
             >
-              Kartel - Démo
+              {t('dashboard.header.title')}
             </h1>
             <p className="text-xs text-muted-foreground text-center">27 octobre 2025</p>
           </div>
           <div className="ml-6">
-            <p className="font-bold text-lg">Formateur Professionnel d'Adultes (FPA)</p>
+            <p className="font-bold text-lg">{t('dashboard.header.course')}</p>
             <p className="text-sm text-muted-foreground">Diplôme donnant lieu à un Titre Professionnel d'État</p>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
+          <LanguageSwitcher />
           <div className="flex items-center gap-2">
             {members.map((member) => (
               <div key={member.id} className="relative group">
@@ -78,12 +83,12 @@ export const DashboardHeader = () => {
                 )}
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-popover text-popover-foreground px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
                   {member.name}
-                  {member.isCoordinator && " (Coordinateur)"}
+                  {member.isCoordinator && ` (${t('dashboard.header.coordinator')})`}
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground whitespace-nowrap">15 Avril 2026, dans 170 jours</p>
+          <p className="text-sm text-muted-foreground whitespace-nowrap">{t('dashboard.header.deadline')}</p>
         </div>
 
         <DropdownMenu>
@@ -100,23 +105,23 @@ export const DashboardHeader = () => {
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium">{currentUser.name}</p>
                 <p className="text-xs text-muted-foreground">
-                  {currentUser.isCoordinator ? "Coordinateur" : "Membre"}
+                  {currentUser.isCoordinator ? t('dashboard.header.coordinator') : t('dashboard.header.members')}
                 </p>
               </div>
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
-              <span>Profil</span>
+              <span>{t('dashboard.profile.profile')}</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              <span>Paramètres</span>
+              <span>{t('dashboard.profile.settings')}</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Déconnexion</span>
+              <span>{t('dashboard.profile.logout')}</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

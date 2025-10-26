@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface SidebarProps {
   activeSection: string;
@@ -23,22 +24,24 @@ interface SidebarProps {
   onToggleCollapse: () => void;
 }
 
-const menuItems = [
-  { id: "actu-kartel", label: "L'Actu du Kartel", icon: Home },
-  { id: "messagerie-news-events", label: "Communications", icon: MessageSquare },
-  { id: "base-connaissances", label: "Base de Connaissances AI", icon: Brain },
-  { id: "outils-pedagogiques", label: "Outils Pédagogiques", icon: Wrench },
-  { id: "calendrier", label: "Agenda", icon: Calendar },
-  { id: "votre-plus-un", label: "Votre « +1 »", icon: Users },
-  { id: "rules", label: "L'Esprit du Kartel", icon: ScrollText },
-  { id: "vue-ensemble", label: "Statistiques", icon: Home },
-  { id: "notes", label: "Notes", icon: FileText },
-  { id: "visio", label: "Visio", icon: MessageCircle },
-  { id: "parametres", label: "Paramètres", icon: SettingsIcon },
-  { id: "feedback", label: "Feedback", icon: MessageCircle },
-];
-
 export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCollapse }: SidebarProps) => {
+  const { t } = useTranslation();
+  
+  const menuItems = [
+    { id: "actu-kartel", label: t('dashboard.menu.actuKartel'), icon: Home },
+    { id: "messagerie-news-events", label: t('dashboard.menu.messagerie'), icon: MessageSquare },
+    { id: "base-connaissances", label: t('dashboard.menu.knowledgeBase'), icon: Brain },
+    { id: "outils-pedagogiques", label: t('dashboard.menu.tools'), icon: Wrench },
+    { id: "calendrier", label: t('dashboard.menu.calendar'), icon: Calendar },
+    { id: "votre-plus-un", label: t('dashboard.menu.plusOne'), icon: Users },
+    { id: "rules", label: t('dashboard.menu.rules'), icon: ScrollText },
+    { id: "vue-ensemble", label: t('dashboard.menu.overview'), icon: Home },
+    { id: "notes", label: t('dashboard.menu.notes'), icon: FileText },
+    { id: "visio", label: t('dashboard.menu.visio'), icon: MessageCircle },
+    { id: "parametres", label: t('dashboard.menu.settings'), icon: SettingsIcon },
+    { id: "feedback", label: t('dashboard.menu.feedback'), icon: MessageCircle },
+  ];
+  
   return (
     <aside
       className={cn(
@@ -75,7 +78,7 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
             className="w-full"
           >
             {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            {!collapsed && <span className="ml-2">Réduire</span>}
+            {!collapsed && <span className="ml-2">{t('common.close')}</span>}
           </Button>
         </div>
       </div>

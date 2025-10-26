@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
 
@@ -19,7 +21,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Solutions */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Solutions</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footer.solutions')}</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Entreprises</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Formation</a></li>
@@ -30,7 +32,7 @@ export const Footer = () => {
 
           {/* Entreprise */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Entreprise</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footer.enterprise')}</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">À propos</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Carrières</a></li>
@@ -41,7 +43,7 @@ export const Footer = () => {
 
           {/* Ressources */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Ressources</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footer.resources')}</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Documentation</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Tutoriels</a></li>
@@ -52,7 +54,7 @@ export const Footer = () => {
 
           {/* Partenaires */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Partenaires</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footer.partners')}</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Devenir partenaire</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Réseau</a></li>
@@ -63,32 +65,32 @@ export const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Newsletter</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footer.newsletter.title')}</h3>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <Input
                 type="email"
-                placeholder="Votre email"
+                placeholder={t('footer.newsletter.placeholder')}
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 required
                 className="w-full"
               />
               <Button type="submit" className="w-full">
-                Envoyer
+                {t('footer.newsletter.send')}
               </Button>
               {newsletterSubmitted && (
-                <p className="text-xs text-green-600 dark:text-green-400">Inscription réussie!</p>
+                <p className="text-xs text-green-600 dark:text-green-400">{t('home.contact.form.success')}</p>
               )}
             </form>
             
             <div className="mt-6 space-y-1">
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Présentation</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Mission</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Équipe</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Philosophie</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Opportunités</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Contacts</a>
-              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">Investisseurs</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.presentation')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.mission')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.team')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.philosophy')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.opportunities')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.contacts')}</a>
+              <a href="#" className="block text-xs text-muted-foreground hover:text-primary transition-colors">{t('footer.links.investors')}</a>
             </div>
           </div>
         </div>
@@ -97,17 +99,17 @@ export const Footer = () => {
         <div className="border-t border-border pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 – KARTELS S.A. Tous droits réservés.
+              {t('footer.legal.copyright')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Conditions Générales
+                {t('footer.legal.terms')}
               </a>
               <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                Politique de Confidentialité
+                {t('footer.legal.privacy')}
               </a>
               <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                RGPD
+                {t('footer.legal.gdpr')}
               </a>
             </div>
           </div>
