@@ -3,13 +3,20 @@
     "features": "Features",
     "benefits": "Benefits",
     "testimonials": "Testimonials",
-    "contact": "Contact"
+    "contact": "Contact",
+    "whoWeAre": "Who Are We?",
+    "whyKartel": "Kartel: The Best Way to Learn?",
+    "pricing": "Pricing",
+    "results": "The Results Are Here!",
+    "about": "About"
   },
   "home": {
     "hero": {
-      "title": "Learn faster and further in small groups!",
-      "subtitle": "Collaborative learning platform that turns your study materials into mastered knowledge.",
-      "cta": "Get Started",
+      "title": "Learn faster and better",
+      "titleHighlight": "in small groups!",
+      "subtitle": "Study in small, motivated, and supportive groups, help each other and achieve your learning goals more quickly and effectively",
+      "cta": "Get Started Now!",
+      "demoRequest": "Request a Demo",
       "videoAlt": "Discover Kartels.io in video"
     },
     "whoWeAre": {
@@ -105,19 +112,19 @@
       "title": "What our users say",
       "subtitle": "Discover feedback from our community",
       "testimonial1": {
-        "text": "Kartels has transformed the way we work in groups. It's an essential tool!",
-        "author": "Marie Dubois",
-        "role": "Medical student"
+        "text": "Kartel helped me progress 2x faster thanks to my group's support!",
+        "author": "Marie L.",
+        "role": "Student"
       },
       "testimonial2": {
-        "text": "The platform is intuitive and comprehensive. Perfect for our collaborative projects.",
-        "author": "Thomas Martin",
-        "role": "Teacher"
+        "text": "A perfect tool for organizing collaborative learning. The auto-generated flashcards are incredible.",
+        "author": "Thomas B.",
+        "role": "Trainer"
       },
       "testimonial3": {
-        "text": "A huge time saver with all tools gathered in one place.",
-        "author": "Sophie Bernard",
-        "role": "Educational coordinator"
+        "text": "I finally passed my certification thanks to my kartel's mutual support. Thank you!",
+        "author": "Sophie M.",
+        "role": "Professional"
       }
     },
     "contact": {
@@ -132,6 +139,60 @@
         "send": "Send",
         "success": "Message sent, thank you!"
       }
+    },
+    "pricing": {
+      "title": "Pricing",
+      "free": {
+        "title": "Free",
+        "price": "0€",
+        "perMonth": "/month",
+        "features": {
+          "account": "1 Personal account",
+          "storage": "Knowledge base (max 10GB)",
+          "ai": "Advanced AI",
+          "tools": "+4 educational tools (Flashcards, Quizzes, MCQs, Chat)"
+        },
+        "cta": "Get Started"
+      },
+      "pro": {
+        "title": "Pro",
+        "price": "20€",
+        "perMonth": "/month",
+        "features": {
+          "account": "1 Personal account",
+          "kartels": "2 Kartel access",
+          "storage": "Knowledge base (max 20GB)",
+          "ai": "Advanced AI",
+          "tools": "8 educational tools"
+        },
+        "cta": "Try Pro"
+      },
+      "team": {
+        "title": "Custom",
+        "price": "Contact us",
+        "perMonth": "",
+        "features": {
+          "unlimitedAccounts": "Unlimited accounts & Kartels",
+          "multiManagement": "Multi-account / Multi-Kartel management",
+          "corporate": "Corporate offers",
+          "businessSchools": "Business school offers",
+          "universities": "University offers",
+          "dedicatedTrainer": "Dedicated trainer & support",
+          "support": "24/7 technical support"
+        },
+        "cta": "Contact Us"
+      }
+    },
+    "about": {
+      "title": "About Kartel",
+      "description": "Kartel was born from a simple conviction: we learn better together. Rather than facing the challenges of online training alone, Kartel brings together small groups of motivated learners, called 'kartels', who help each other achieve their educational goals. Our platform combines collective intelligence and artificial intelligence to create lively, interactive, and deeply human learning experiences. Each member progresses at their own pace, supports and is supported by others, shares resources, exchanges ideas, and benefits from mutual benevolence. Kartel is e-learning reinvented: human, collaborative, and AI-powered.",
+      "cta": "Join Us"
+    },
+    "contactSection": {
+      "title": "Contact"
+    },
+    "chatbot": {
+      "alert": "Chatbot coming soon - Ask your questions!"
     }
   },
   "footer": {

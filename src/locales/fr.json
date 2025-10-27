@@ -3,13 +3,20 @@
     "features": "Fonctionnalités",
     "benefits": "Avantages",
     "testimonials": "Témoignages",
-    "contact": "Contact"
+    "contact": "Contact",
+    "whoWeAre": "Qui Sommes nous ?",
+    "whyKartel": "Kartel : la meilleure façon d'apprendre ?",
+    "pricing": "Tarifs",
+    "results": "Les Résultats sont là !",
+    "about": "À propos"
   },
   "home": {
     "hero": {
-      "title": "Apprenez plus vite et plus loin en petits groupes!",
-      "subtitle": "Kartels : La plateforme collaborative pour réussir ensemble",
-      "cta": "Lancez-vous!",
+      "title": "Apprenez plus vite et mieux",
+      "titleHighlight": "en petits groupes!",
+      "subtitle": "Etudiez en petits groupes motivés et bienveillants, entraidez-vous et atteignez plus rapidement et efficacement vos objectifs pédagogiques",
+      "cta": "Lancez-vous maintenant !",
+      "demoRequest": "Demandez une démo",
       "videoAlt": "Découvrez Kartels.io en vidéo"
     },
     "whoWeAre": {
@@ -102,36 +109,90 @@
       }
     },
     "testimonials": {
-      "title": "Ce que disent nos utilisateurs",
+      "title": "Témoignages",
       "subtitle": "Découvrez les retours de notre communauté",
       "testimonial1": {
-        "text": "Kartels a transformé notre façon de travailler en groupe. C'est un outil indispensable!",
-        "author": "Marie Dubois",
-        "role": "Étudiante en médecine"
+        "text": "Kartel m'a permis de progresser 2x plus vite grâce au soutien de mon groupe !",
+        "author": "Marie L.",
+        "role": "Étudiante"
       },
       "testimonial2": {
-        "text": "La plateforme est intuitive et complète. Parfait pour nos projets collaboratifs.",
-        "author": "Thomas Martin",
-        "role": "Enseignant"
+        "text": "Un outil parfait pour organiser l'apprentissage collaboratif. Les flashcards auto-générées sont incroyables.",
+        "author": "Thomas B.",
+        "role": "Formateur"
       },
       "testimonial3": {
-        "text": "Un gain de temps énorme avec tous les outils réunis en un seul endroit.",
-        "author": "Sophie Bernard",
-        "role": "Coordinatrice pédagogique"
+        "text": "J'ai enfin réussi ma certification grâce à l'entraide de mon kartel. Merci !",
+        "author": "Sophie M.",
+        "role": "Professionnelle"
       }
     },
     "contact": {
-      "title": "Contactez-nous",
+      "title": "Rejoignez nos bêta-testeurs !",
       "subtitle": "Une question? N'hésitez pas à nous contacter",
       "form": {
         "firstName": "Prénom",
         "lastName": "Nom",
-        "mobile": "N° de mobile",
+        "mobile": "Numéro de mobile",
         "email": "Email",
         "comment": "Commentaire",
         "send": "Envoyer",
-        "success": "Message envoyé, Merci!"
+        "success": "Message envoyé, merci !"
       }
+    },
+    "pricing": {
+      "title": "Tarifs",
+      "free": {
+        "title": "Gratuit",
+        "price": "0€",
+        "perMonth": "/mois",
+        "features": {
+          "account": "1 Compte perso",
+          "storage": "Base de connaissances (max 10Go)",
+          "ai": "IA avancée",
+          "tools": "+4 outils pédagogiques (Flashcards, Quizz, QCM, Chat)"
+        },
+        "cta": "Commencer"
+      },
+      "pro": {
+        "title": "Pro",
+        "price": "20€",
+        "perMonth": "/mois",
+        "features": {
+          "account": "1 Compte perso",
+          "kartels": "2 accès Kartel",
+          "storage": "Base de connaissances (max 20Go)",
+          "ai": "IA avancée",
+          "tools": "8 outils pédagogiques"
+        },
+        "cta": "Essayer Pro"
+      },
+      "team": {
+        "title": "Sur Mesure",
+        "price": "Contactez-nous",
+        "perMonth": "",
+        "features": {
+          "unlimitedAccounts": "Comptes et Kartels illimités possibles",
+          "multiManagement": "Gestion multi-comptes / multi-Kartels",
+          "corporate": "Offres Entreprises",
+          "businessSchools": "Offres Écoles de Commerce",
+          "universities": "Offres Universités",
+          "dedicatedTrainer": "Formateur dédié, accompagnement",
+          "support": "Support technique dédié 7/24h"
+        },
+        "cta": "Nous contacter"
+      }
+    },
+    "about": {
+      "title": "À propos de Kartel",
+      "description": "Kartel est né d'une conviction simple : on apprend mieux ensemble. Plutôt que d'affronter seul les difficultés de la formation en ligne, Kartel réunit de petits groupes d'apprenants motivés, appelés 'kartels', qui s'entraident pour atteindre leurs objectifs pédagogiques. Notre plateforme combine intelligence collective et intelligence artificielle pour créer des expériences d'apprentissage vivantes, interactives et profondément humaines. Chaque membre progresse à son rythme, soutient et est soutenu par les autres, partage ses ressources, échange ses idées, et bénéficie de la bienveillance mutuelle de tous. Kartel, c'est l'e-learning réinventé : humain, collaboratif et propulsé par l'IA.",
+      "cta": "Rejoignez-nous"
+    },
+    "contactSection": {
+      "title": "Contacts"
+    },
+    "chatbot": {
+      "alert": "Chatbot à venir - Posez vos questions !"
     }
   },
   "footer": {

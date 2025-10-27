@@ -149,22 +149,22 @@ const Landing = () => {
           </h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection("qui")} className="hover:text-accent transition-colors">
-              Qui Sommes nous ?
+              {t('nav.whoWeAre')}
             </button>
             <button onClick={() => scrollToSection("pourquoi")} className="hover:text-accent transition-colors">
-              Kartel : la meilleure façon d'apprendre ?
+              {t('nav.whyKartel')}
             </button>
             <button onClick={() => scrollToSection("tarifs")} className="hover:text-accent transition-colors">
-              Tarifs
+              {t('nav.pricing')}
             </button>
             <button onClick={() => scrollToSection("temoignages")} className="hover:text-accent transition-colors">
-              Témoignages
+              {t('nav.testimonials')}
             </button>
             <button onClick={() => scrollToSection("resultats")} className="hover:text-accent transition-colors">
-              Les Résultats sont là !
+              {t('nav.results')}
             </button>
             <button onClick={() => scrollToSection("apropos")} className="hover:text-accent transition-colors">
-              À propos
+              {t('nav.about')}
             </button>
           </div>
           <div className="flex gap-2">
@@ -180,11 +180,11 @@ const Landing = () => {
       <section className="relative pt-32 pb-12 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
-            Apprenez plus vite et mieux{" "}
-            <span className="text-black dark:text-white">en petits groupes!</span>
+            {t('home.hero.title')}{" "}
+            <span className="text-black dark:text-white">{t('home.hero.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
-            Etudiez en petits groupes motivés et bienveillants, entraidez-vous et atteignez plus rapidement et efficacement vos objectifs pédagogiques
+            {t('home.hero.subtitle')}
           </p>
 
           {/* Video Preview */}
@@ -197,7 +197,7 @@ const Landing = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
-                    alt="Découvrez Kartels.io en vidéo"
+                    alt={t('home.hero.videoAlt')}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
@@ -214,7 +214,7 @@ const Landing = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   className="w-full h-full"
-                  title="Découvrez Kartels.io en vidéo"
+                  title={t('home.hero.videoAlt')}
                 />
               )}
             </div>
@@ -226,18 +226,17 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                // Demo request functionality
-                alert("Demande de démo - À venir !");
+                alert(t('home.chatbot.alert'));
               }}
             >
-              Demandez une démo
+              {t('home.hero.demoRequest')}
             </Button>
             <Button 
               size="lg" 
               className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate(`/${lang}/login`)}
             >
-              Lancez-vous maintenant ! <ArrowRight className="ml-2" />
+              {t('home.hero.cta')} <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -246,27 +245,27 @@ const Landing = () => {
       {/* Qui Sommes nous */}
       <section id="qui" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">Etudiez ensemble en petits groupes motivés</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">{t('home.whoWeAre.title')}</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Users className="w-12 h-12 text-accent mb-4" />
-              <h4 className="text-xl font-bold mb-3">Collaboration</h4>
+              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.collaboration.title')}</h4>
               <p className="text-muted-foreground">
-                Des groupes de 3-5 apprenants qui travaillent ensemble sur une même plateforme collaborative pour atteindre leurs objectifs pédagogiques.
+                {t('home.whoWeAre.collaboration.description')}
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-success/5 hover-lift">
               <BookOpen className="w-12 h-12 text-success mb-4" />
-              <h4 className="text-xl font-bold mb-3">Connaissances</h4>
+              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.knowledge.title')}</h4>
               <p className="text-muted-foreground">
-                Des apprenants qui nourrissent et partagent une base de connaissances IA et l'exploitent avec des outils pédagogiques innovants.
+                {t('home.whoWeAre.knowledge.description')}
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Trophy className="w-12 h-12 text-accent mb-4" />
-              <h4 className="text-xl font-bold mb-3">Progression</h4>
+              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.progress.title')}</h4>
               <p className="text-muted-foreground">
-                Progressez ensemble, partagez, échangez, discutez, entraidez-vous. Atteignez vos objectifs en groupes !
+                {t('home.whoWeAre.progress.description')}
               </p>
             </div>
           </div>
@@ -276,24 +275,24 @@ const Landing = () => {
       {/* Pourquoi Kartel */}
       <section id="pourquoi" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl text-center">
-          <h3 className="text-4xl font-bold text-center mb-12">Kartel : la meilleure façon d'apprendre ?</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">{t('home.whyKartel.title')}</h3>
           <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🎯 Un apprentissage actif qui maintient l'engagement</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point1.title')}</h4>
               <p className="text-muted-foreground">
-                RDV quotidiens en ligne, partage, échanges, messages de vos pairs, notes, échanges d'infos, de tips, de petits secrets d'apprentissages.
+                {t('home.whyKartel.point1.description')}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🤝 Entraide active</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point2.title')}</h4>
               <p className="text-muted-foreground">
-                Apprenez en équipe comme dans un véritable atelier collaboratif. Chaque membre du groupe apporte ses connaissances, ses questions et ses idées... L'objectif : comprendre, maîtriser et réussir ensemble.
+                {t('home.whyKartel.point2.description')}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">⚡ Outils intelligents communs pour progresser plus vite et mieux ensemble</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point3.title')}</h4>
               <p className="text-muted-foreground">
-                Kartel met à votre disposition une véritable boîte à outils IA... 🧠 Quiz adaptatifs, 📝 QCM collaboratifs, 🃏 Flashcards automatiques, 🗺 Mindmaps dynamiques, 🎭 Jeux de rôle en visioconférence, 📊 Tableaux de progression partagés, 💬 Chat IA pédagogique, 🎯 Défis collectifs, 📚 Synthèses automatiques, 🔁 Fiches de révisions...
+                {t('home.whyKartel.point3.description')}
               </p>
             </div>
           </div>
@@ -303,24 +302,24 @@ const Landing = () => {
       {/* Les Résultats sont là */}
       <section id="resultats" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl text-center">
-          <h3 className="text-4xl font-bold text-center mb-12">🚀 Les résultats sont là !</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">{t('home.results.title')}</h3>
           <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🎯 Des progrès visibles et mesurables</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.results.point1.title')}</h4>
               <p className="text-muted-foreground">
-                Grâce à la dynamique de groupe et aux outils IA de Kartel... +45% de taux de réussite observé dans les parcours en petits groupes.
+                {t('home.results.point1.description')}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🤝 Une motivation retrouvée, durable et partagée</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.results.point2.title')}</h4>
               <p className="text-muted-foreground">
-                L'apprentissage en petits groupes crée un engagement réel... 9 utilisateurs sur 10 se sentent plus motivés à poursuivre leur formation avec Kartel qu'avec un LMS traditionnel.
+                {t('home.results.point2.description')}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">🧩 Des compétences maîtrisées et valorisées</h4>
+              <h4 className="text-xl font-bold mb-2">{t('home.results.point3.title')}</h4>
               <p className="text-muted-foreground">
-                Chaque groupe vise un objectif commun... Résultat : des apprenants plus compétents, autonomes et confiants dans leur avenir.
+                {t('home.results.point3.description')}
               </p>
             </div>
           </div>
@@ -330,97 +329,97 @@ const Landing = () => {
       {/* Tarifs */}
       <section id="tarifs" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-6xl">
-          <h3 className="text-4xl font-bold text-center mb-12">Tarifs</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">{t('home.pricing.title')}</h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
-              <h4 className="text-2xl font-bold mb-4">Gratuit</h4>
-              <p className="text-4xl font-bold mb-6">0€<span className="text-lg text-muted-foreground">/mois</span></p>
+              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.free.title')}</h4>
+              <p className="text-4xl font-bold mb-6">{t('home.pricing.free.price')}<span className="text-lg text-muted-foreground">{t('home.pricing.free.perMonth')}</span></p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>1 Compte perso</span>
+                  <span>{t('home.pricing.free.features.account')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Base de connaissances (max 10Go)</span>
+                  <span>{t('home.pricing.free.features.storage')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>IA avancée</span>
+                  <span>{t('home.pricing.free.features.ai')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>+4 outils pédagogiques (Flashcards, Quizz, QCM, Chat)</span>
+                  <span>{t('home.pricing.free.features.tools')}</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">Commencer</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">{t('home.pricing.free.cta')}</Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift relative">
               <div className="absolute top-4 right-4">
                 <Star className="w-6 h-6 fill-accent text-accent" />
               </div>
-              <h4 className="text-2xl font-bold mb-4">Pro</h4>
-              <p className="text-4xl font-bold mb-6">20€<span className="text-lg text-muted-foreground">/mois</span></p>
+              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.pro.title')}</h4>
+              <p className="text-4xl font-bold mb-6">{t('home.pricing.pro.price')}<span className="text-lg text-muted-foreground">{t('home.pricing.pro.perMonth')}</span></p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>1 Compte perso</span>
+                  <span>{t('home.pricing.pro.features.account')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>2 accès Kartel</span>
+                  <span>{t('home.pricing.pro.features.kartels')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Base de connaissances (max 20Go)</span>
+                  <span>{t('home.pricing.pro.features.storage')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>IA avancée</span>
+                  <span>{t('home.pricing.pro.features.ai')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>8 outils pédagogiques</span>
+                  <span>{t('home.pricing.pro.features.tools')}</span>
                 </li>
               </ul>
               <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">
-                Essayer Pro
+                {t('home.pricing.pro.cta')}
               </Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
-              <h4 className="text-2xl font-bold mb-4">Sur Mesure</h4>
-              <p className="text-4xl font-bold mb-6">Contactez-nous</p>
+              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.team.title')}</h4>
+              <p className="text-4xl font-bold mb-6">{t('home.pricing.team.price')}</p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Comptes et Kartels illimités possibles</span>
+                  <span>{t('home.pricing.team.features.unlimitedAccounts')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Gestion multi-comptes / multi-Kartels</span>
+                  <span>{t('home.pricing.team.features.multiManagement')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Offres Entreprises</span>
+                  <span>{t('home.pricing.team.features.corporate')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Offres Écoles de Commerce</span>
+                  <span>{t('home.pricing.team.features.businessSchools')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Offres Universités</span>
+                  <span>{t('home.pricing.team.features.universities')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Formateur dédié, accompagnement</span>
+                  <span>{t('home.pricing.team.features.dedicatedTrainer')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>Support technique dédié 7/24h</span>
+                  <span>{t('home.pricing.team.features.support')}</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">Nous contacter</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">{t('home.pricing.team.cta')}</Button>
             </div>
           </div>
         </div>
@@ -429,25 +428,25 @@ const Landing = () => {
       {/* Témoignages */}
       <section id="temoignages" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">Témoignages</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">{t('home.testimonials.title')}</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                name: "Marie L.",
-                role: "Étudiante",
-                text: "Kartel m'a permis de progresser 2x plus vite grâce au soutien de mon groupe !",
+                name: t('home.testimonials.testimonial1.author'),
+                role: t('home.testimonials.testimonial1.role'),
+                text: t('home.testimonials.testimonial1.text'),
                 rating: 5
               },
               {
-                name: "Thomas B.",
-                role: "Formateur",
-                text: "Un outil parfait pour organiser l'apprentissage collaboratif. Les flashcards auto-générées sont incroyables.",
+                name: t('home.testimonials.testimonial2.author'),
+                role: t('home.testimonials.testimonial2.role'),
+                text: t('home.testimonials.testimonial2.text'),
                 rating: 5
               },
               {
-                name: "Sophie M.",
-                role: "Professionnelle",
-                text: "J'ai enfin réussi ma certification grâce à l'entraide de mon kartel. Merci !",
+                name: t('home.testimonials.testimonial3.author'),
+                role: t('home.testimonials.testimonial3.role'),
+                text: t('home.testimonials.testimonial3.text'),
                 rating: 5
               }
             ].map((testimonial, i) => (
@@ -472,17 +471,17 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                alert("Demande de démo - À venir !");
+                alert(t('home.chatbot.alert'));
               }}
             >
-              Demandez une démo
+              {t('home.hero.demoRequest')}
             </Button>
             <Button 
               size="lg" 
               className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate(`/${lang}/login`)}
             >
-              Lancez-vous maintenant ! <ArrowRight className="ml-2" />
+              {t('home.hero.cta')} <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -491,16 +490,16 @@ const Landing = () => {
       {/* À propos */}
       <section id="apropos" className="py-12 px-6">
         <div className="container mx-auto max-w-3xl text-center">
-          <h3 className="text-4xl font-bold mb-6">À propos de Kartel</h3>
+          <h3 className="text-4xl font-bold mb-6">{t('home.about.title')}</h3>
           <p className="text-lg text-muted-foreground mb-8">
-            Kartel est né d'une conviction simple : on apprend mieux ensemble. Plutôt que d'affronter seul les difficultés de la formation en ligne, Kartel réunit de petits groupes d'apprenants motivés, appelés 'kartels', qui s'entraident pour atteindre leurs objectifs pédagogiques. Notre plateforme combine intelligence collective et intelligence artificielle pour créer des expériences d'apprentissage vivantes, interactives et profondément humaines. Chaque membre progresse à son rythme, soutient et est soutenu par les autres, partage ses ressources, échange ses idées, et bénéficie de la bienveillance mutuelle de tous. Kartel, c'est l'e-learning réinventé : humain, collaboratif et propulsé par l'IA.
+            {t('home.about.description')}
           </p>
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-accent-foreground"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate(`/${lang}/login`)}
           >
-            Rejoignez-nous
+            {t('home.about.cta')}
           </Button>
         </div>
       </section>
@@ -508,7 +507,7 @@ const Landing = () => {
       {/* Contact Form Section */}
       <section className="py-12 px-6 border-t border-border">
         <div className="container mx-auto max-w-2xl">
-          <h3 className="text-2xl font-bold text-center mb-8">Contacts</h3>
+          <h3 className="text-2xl font-bold text-center mb-8">{t('home.contactSection.title')}</h3>
           <ContactForm />
         </div>
       </section>
@@ -522,8 +521,7 @@ const Landing = () => {
           size="lg"
           className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant"
           onClick={() => {
-            // Chatbot functionality placeholder
-            alert("Chatbot à venir - Posez vos questions !");
+            alert(t('home.chatbot.alert'));
           }}
         >
           💬
