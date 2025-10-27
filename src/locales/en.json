@@ -259,7 +259,7 @@
     },
     "tools": {
       "title": "Learning Tools",
-      "subtitle": "Choose a tool to get started",
+      "subtitle": "Explore interactive tools to practice, collaborate, and progress as a group.",
       "quiz": {
         "title": "Quiz",
         "description": "Test your knowledge with interactive quizzes"
@@ -275,6 +275,84 @@
       "glossary": {
         "title": "Glossary / Dictionary",
         "description": "Browse definitions of key terms"
+      },
+      "access": "Access",
+      "otherTools": {
+        "title": "Other Tools",
+        "progressBoard": {
+          "name": "Shared Progress Board",
+          "description": "Track your group's progress"
+        },
+        "rolePlaying": {
+          "name": "Role-playing in Video Call",
+          "description": "Practice real-life scenarios"
+        },
+        "debriefing": {
+          "name": "Guided Group Debriefing",
+          "description": "Analyze your sessions together"
+        },
+        "brainstorming": {
+          "name": "Enhanced Brainstorming",
+          "description": "Collaborative idea generation assisted by AI"
+        },
+        "debate": {
+          "name": "Structured Mini-Debate",
+          "description": "Debate in an organized, constructive way"
+        },
+        "knowledgeSheet": {
+          "name": "Shared Knowledge Sheet",
+          "description": "Document what your group learns"
+        },
+        "learningJournal": {
+          "name": "Group Learning Journal",
+          "description": "Track your collective learning journey"
+        },
+        "peerEvaluation": {
+          "name": "Peer-to-Peer Evaluation",
+          "description": "Evaluate each other constructively"
+        },
+        "interactiveVideo": {
+          "name": "Interactive Learning Video",
+          "description": "Create engaging educational videos"
+        },
+        "groupMission": {
+          "name": "Group Mission",
+          "description": "Work together toward shared objectives"
+        },
+        "crossSkills": {
+          "name": "Cross-Skills Workshop",
+          "description": "Exchange and develop complementary skills"
+        },
+        "ideaWall": {
+          "name": "Live Idea Wall",
+          "description": "Share ideas in real time"
+        },
+        "motivationWheel": {
+          "name": "Motivation Wheel",
+          "description": "Stay motivated as a team"
+        },
+        "aiSummary": {
+          "name": "AI Summary Pod",
+          "description": "Automatic AI-generated summaries"
+        },
+        "challenge": {
+          "name": "Collaborative Challenge",
+          "description": "Take on group challenges"
+        },
+        "instantFeedback": {
+          "name": "Instant Feedback (AI + Group)",
+          "description": "Receive immediate insights from AI and peers"
+        },
+        "celebration": {
+          "name": "Milestone Celebration",
+          "description": "Celebrate your achievements together"
+        }
+      },
+      "externalServices": {
+        "title": "External Services",
+        "openai": "OpenAI Study & Learn",
+        "notebooklm": "Google NotebookLM",
+        "specializedGPTs": "Specialized GPTs"
       }
     },
     "glossary": {

@@ -259,7 +259,7 @@
     },
     "tools": {
       "title": "Outils Pédagogiques",
-      "subtitle": "Choisissez un outil pour commencer",
+      "subtitle": "Explorez les outils interactifs pour pratiquer, collaborer et progresser en groupe.",
       "quiz": {
         "title": "Quiz",
         "description": "Testez vos connaissances avec des quiz interactifs"
@@ -275,6 +275,84 @@
       "glossary": {
         "title": "Glossaire / Dictionnaire",
         "description": "Consultez les définitions des termes clés"
+      },
+      "access": "Accéder",
+      "otherTools": {
+        "title": "Autres outils",
+        "progressBoard": {
+          "name": "Tableau de progression commun",
+          "description": "Suivez la progression de votre groupe"
+        },
+        "rolePlaying": {
+          "name": "Jeu de rôle en visioconférence",
+          "description": "Pratiquez en situation réelle"
+        },
+        "debriefing": {
+          "name": "Débriefing collectif guidé",
+          "description": "Analysez vos sessions ensemble"
+        },
+        "brainstorming": {
+          "name": "Brainstorming augmenté",
+          "description": "Idées collaboratives assistées par IA"
+        },
+        "debate": {
+          "name": "Mini-débat structuré",
+          "description": "Débattez de manière organisée"
+        },
+        "knowledgeSheet": {
+          "name": "Fiche \"Savoir partagé\"",
+          "description": "Documentez vos connaissances"
+        },
+        "learningJournal": {
+          "name": "Journal d'apprentissage de groupe",
+          "description": "Suivez votre progression commune"
+        },
+        "peerEvaluation": {
+          "name": "Évaluation pair-à-pair",
+          "description": "Évaluez-vous mutuellement"
+        },
+        "interactiveVideo": {
+          "name": "Capsule vidéo interactive",
+          "description": "Créez des vidéos pédagogiques"
+        },
+        "groupMission": {
+          "name": "Mission collective",
+          "description": "Objectifs communs à atteindre"
+        },
+        "crossSkills": {
+          "name": "Atelier \"compétence croisée\"",
+          "description": "Partagez vos compétences"
+        },
+        "ideaWall": {
+          "name": "Mur d'idées en direct",
+          "description": "Partagez vos idées en temps réel"
+        },
+        "motivationWheel": {
+          "name": "Roue de remobilisation",
+          "description": "Restez motivés ensemble"
+        },
+        "aiSummary": {
+          "name": "Pod IA de synthèse",
+          "description": "Synthèses automatiques par IA"
+        },
+        "challenge": {
+          "name": "Challenge collaboratif",
+          "description": "Relevez des défis en équipe"
+        },
+        "instantFeedback": {
+          "name": "Feedback instantané IA + groupe",
+          "description": "Retours immédiats et collectifs"
+        },
+        "celebration": {
+          "name": "Célébration des étapes",
+          "description": "Fêtez vos réussites ensemble"
+        }
+      },
+      "externalServices": {
+        "title": "Services externes",
+        "openai": "OpenAI Study & Learn",
+        "notebooklm": "Google NotebookLM",
+        "specializedGPTs": "GPTs spécialisés"
       }
     },
     "glossary": {
