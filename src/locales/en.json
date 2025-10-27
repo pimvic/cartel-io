@@ -520,11 +520,10 @@
           "time": "In 5 days"
         }
       }
-    }
-  },
-  "plusOne": {
-    "title": "The '+1' facilitates group progress",
-    "sections": {
+    },
+    "plusOne": {
+      "title": "The '+1' facilitates group progress",
+      "sections": {
       "intro": {
         "title": "Our \"+1\"",
         "content": "The \"+1\" is neither a teacher nor a manager. It's a resource person who helps your small group turn ideas into concrete results. Their role is simple: keep the group on track, surface what truly matters, and suggest the next step when everyone hesitates. You remain in control of your work — the \"+1\" simply makes collective progress easier."
@@ -554,6 +553,7 @@
         "content": "Before each meeting, come with a specific question and a draft artifact, even if incomplete. During the session, focus on the essential, show your work, and accept that usefulness matters more than perfection. After the session, publish your deliverable, check off the corresponding task, and if something remains unclear, open a short follow-up request. This simple rhythm — read, produce, share, refine — supported by your \"+1,\" is what makes the difference on Kartel."
       }
     }
+  }
   },
   "common": {
     "loading": "Loading...",
