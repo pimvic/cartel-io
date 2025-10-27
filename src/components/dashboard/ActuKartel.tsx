@@ -18,20 +18,20 @@ export const ActuKartel = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="w-5 h-5 text-accent" />
-              <span>Derniers Messages</span>
+              <span>{t('dashboard.actuKartel.latestMessages.title')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Jean-Stéphane B.</p>
-                <p className="text-xs text-muted-foreground">J'ai terminé le module 12 !</p>
-                <p className="text-xs text-muted-foreground mt-1">Il y a 1 heure</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.latestMessages.message1.author')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.latestMessages.message1.text')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.latestMessages.message1.time')}</p>
               </div>
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Thierry F.</p>
-                <p className="text-xs text-muted-foreground">Quelqu'un pour une session de révision ?</p>
-                <p className="text-xs text-muted-foreground mt-1">Il y a 3 heures</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.latestMessages.message2.author')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.latestMessages.message2.text')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.latestMessages.message2.time')}</p>
               </div>
             </div>
           </CardContent>
@@ -43,18 +43,18 @@ export const ActuKartel = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CalendarIcon className="w-5 h-5 text-accent" />
-              <span>Événements à venir</span>
+              <span>{t('dashboard.actuKartel.upcomingEvents.title')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Session de groupe</p>
-                <p className="text-xs text-muted-foreground">Demain, 14h00</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.upcomingEvents.event1.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.upcomingEvents.event1.time')}</p>
               </div>
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Deadline Module 13</p>
-                <p className="text-xs text-muted-foreground">Dans 5 jours</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.upcomingEvents.event2.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.upcomingEvents.event2.time')}</p>
               </div>
             </div>
           </CardContent>
@@ -66,20 +66,20 @@ export const ActuKartel = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Upload className="w-5 h-5 text-accent" />
-              <span>Documents récents</span>
+              <span>{t('dashboard.actuKartel.recentDocuments.title')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Cours_Module_12.pdf</p>
-                <p className="text-xs text-muted-foreground">Ajouté par Isabelle L.</p>
-                <p className="text-xs text-muted-foreground mt-1">Il y a 2 heures</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.recentDocuments.doc1.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.recentDocuments.doc1.addedBy')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.recentDocuments.doc1.time')}</p>
               </div>
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Synthese_generale.docx</p>
-                <p className="text-xs text-muted-foreground">Ajouté par Jean-Stéphane B.</p>
-                <p className="text-xs text-muted-foreground mt-1">Hier</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.recentDocuments.doc2.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.recentDocuments.doc2.addedBy')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.recentDocuments.doc2.time')}</p>
               </div>
             </div>
           </CardContent>
@@ -91,20 +91,20 @@ export const ActuKartel = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5 text-accent" />
-              <span>Notes récentes</span>
+              <span>{t('dashboard.actuKartel.recentNotes.title')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Points clés Module 11</p>
-                <p className="text-xs text-muted-foreground">Par Elsa B.</p>
-                <p className="text-xs text-muted-foreground mt-1">Il y a 1 jour</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.recentNotes.note1.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.recentNotes.note1.author')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.recentNotes.note1.time')}</p>
               </div>
               <div className="p-3 bg-accent/5 rounded-lg">
-                <p className="text-sm font-medium">Questions ECF</p>
-                <p className="text-xs text-muted-foreground">Par Thierry F.</p>
-                <p className="text-xs text-muted-foreground mt-1">Il y a 2 jours</p>
+                <p className="text-sm font-medium">{t('dashboard.actuKartel.recentNotes.note2.name')}</p>
+                <p className="text-xs text-muted-foreground">{t('dashboard.actuKartel.recentNotes.note2.author')}</p>
+                <p className="text-xs text-muted-foreground mt-1">{t('dashboard.actuKartel.recentNotes.note2.time')}</p>
               </div>
             </div>
           </CardContent>

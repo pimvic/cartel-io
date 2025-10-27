@@ -199,7 +199,58 @@
       "feedback": "Feedback"
     },
     "actuKartel": {
-      "subtitle": "Your group's activity, collaboration, and engagement updates"
+      "title": "Kartel News",
+      "subtitle": "Your group's activity, collaboration, and engagement updates",
+      "latestMessages": {
+        "title": "Latest Messages",
+        "message1": {
+          "author": "Jean-Stéphane B.",
+          "text": "I've finished Module 12!",
+          "time": "1 hour ago"
+        },
+        "message2": {
+          "author": "Thierry F.",
+          "text": "Anyone up for a review session?",
+          "time": "3 hours ago"
+        }
+      },
+      "upcomingEvents": {
+        "title": "Upcoming Events",
+        "event1": {
+          "name": "Group session",
+          "time": "Tomorrow, 2:00 PM"
+        },
+        "event2": {
+          "name": "Module 13 Deadline",
+          "time": "In 5 days"
+        }
+      },
+      "recentDocuments": {
+        "title": "Recent Documents",
+        "doc1": {
+          "name": "Cours_Module_12.pdf",
+          "addedBy": "Added by Isabelle L.",
+          "time": "2 hours ago"
+        },
+        "doc2": {
+          "name": "Synthese_generale.docx",
+          "addedBy": "Added by Jean-Stéphane B.",
+          "time": "Yesterday"
+        }
+      },
+      "recentNotes": {
+        "title": "Recent Notes",
+        "note1": {
+          "name": "Key Points – Module 11",
+          "author": "By Elsa B.",
+          "time": "1 day ago"
+        },
+        "note2": {
+          "name": "ECF Questions",
+          "author": "By Thierry F.",
+          "time": "2 days ago"
+        }
+      }
     },
     "profile": {
       "profile": "Profile",

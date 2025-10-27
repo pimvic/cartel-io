@@ -185,7 +185,58 @@
       "coordinator": "Coordinateur"
     },
     "actuKartel": {
-      "subtitle": "La vie de votre Kartel, votre dynamisme de groupe, votre engagement"
+      "title": "Actu Kartel",
+      "subtitle": "La vie de votre Kartel, votre dynamisme de groupe, votre engagement",
+      "latestMessages": {
+        "title": "Derniers Messages",
+        "message1": {
+          "author": "Jean-Stéphane B.",
+          "text": "J'ai terminé le module 12 !",
+          "time": "Il y a 1 heure"
+        },
+        "message2": {
+          "author": "Thierry F.",
+          "text": "Quelqu'un pour une session de révision ?",
+          "time": "Il y a 3 heures"
+        }
+      },
+      "upcomingEvents": {
+        "title": "Événements à venir",
+        "event1": {
+          "name": "Session de groupe",
+          "time": "Demain, 14h00"
+        },
+        "event2": {
+          "name": "Deadline Module 13",
+          "time": "Dans 5 jours"
+        }
+      },
+      "recentDocuments": {
+        "title": "Documents récents",
+        "doc1": {
+          "name": "Cours_Module_12.pdf",
+          "addedBy": "Ajouté par Isabelle L.",
+          "time": "Il y a 2 heures"
+        },
+        "doc2": {
+          "name": "Synthese_generale.docx",
+          "addedBy": "Ajouté par Jean-Stéphane B.",
+          "time": "Hier"
+        }
+      },
+      "recentNotes": {
+        "title": "Notes récentes",
+        "note1": {
+          "name": "Points clés Module 11",
+          "author": "Par Elsa B.",
+          "time": "Il y a 1 jour"
+        },
+        "note2": {
+          "name": "Questions ECF",
+          "author": "Par Thierry F.",
+          "time": "Il y a 2 jours"
+        }
+      }
     },
     "menu": {
       "actuKartel": "Actu Kartel",
