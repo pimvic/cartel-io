@@ -458,6 +458,68 @@
         "deleteError": "Erreur lors de la suppression des documents",
         "deleteConfirm": "Êtes-vous sûr de vouloir supprimer tous les documents ?"
       }
+    },
+    "calendar": {
+      "title": "Agenda",
+      "subtitle": "Planifiez vos sessions Kartel, notez vos échéances et fixez vos objectifs finaux",
+      "tabs": {
+        "calendar": "Calendrier",
+        "deadlines": "Échéances",
+        "objectives": "Objectifs"
+      },
+      "overview": {
+        "title": "Vue d'ensemble",
+        "addEvent": "Ajouter un évènement",
+        "daysLeft": "jours",
+        "untilEnd": "Jusqu'à la fin",
+        "tasks": "tâches",
+        "thisWeek": "Cette semaine",
+        "progress": "Progression"
+      },
+      "milestones": {
+        "title": "Jalons et Échéances",
+        "upcoming": "À venir",
+        "important": "Important",
+        "events": {
+          "event1": "Finaliser le scénario pédagogique",
+          "event2": "Réviser les chapitres 1-3",
+          "event3": "Créer les flashcards du module 7",
+          "event4": "Examen intermédiaire",
+          "event5": "Échéance finale du cartel"
+        }
+      },
+      "goals": {
+        "title": "Gérer les objectifs",
+        "archive": "Archiver",
+        "create": "Créer un objectif",
+        "groupGoals": "Objectifs du groupe",
+        "goal1": "🎯 Terminer tous les modules",
+        "goal2": "📝 Réussir l'ECF",
+        "goal3": "💪 Améliorer les compétences",
+        "inProgress": "En cours",
+        "preparation": "Préparation en cours"
+      },
+      "deadlines": {
+        "title": "Gérer les échéances",
+        "archive": "Archiver",
+        "create": "Créer une échéance",
+        "important": "Échéances importantes",
+        "deadline1": {
+          "title": "⏰ Module 13 - Urgent",
+          "description": "Deadline de soumission",
+          "time": "Dans 2 jours (10 juin 2025)"
+        },
+        "deadline2": {
+          "title": "📚 ECF Final",
+          "description": "Examen de certification",
+          "time": "15 avril 2026 (dans 170 jours)"
+        },
+        "deadline3": {
+          "title": "📋 Révisions collectives",
+          "description": "Session de groupe planifiée",
+          "time": "Dans 5 jours"
+        }
+      }
     }
   },
   "common": {

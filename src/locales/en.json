@@ -458,6 +458,68 @@
         "deleteError": "Error deleting documents",
         "deleteConfirm": "Are you sure you want to delete all documents?"
       }
+    },
+    "calendar": {
+      "title": "Agenda",
+      "subtitle": "Plan your Kartel sessions, track your deadlines, and set your final goals.",
+      "tabs": {
+        "calendar": "Calendar",
+        "deadlines": "Deadlines",
+        "objectives": "Objectives"
+      },
+      "overview": {
+        "title": "Overview",
+        "addEvent": "Add Event",
+        "daysLeft": "days",
+        "untilEnd": "Until the end",
+        "tasks": "tasks",
+        "thisWeek": "This week",
+        "progress": "Progress"
+      },
+      "milestones": {
+        "title": "Milestones & Deadlines",
+        "upcoming": "Upcoming",
+        "important": "Important",
+        "events": {
+          "event1": "Finalize the training scenario",
+          "event2": "Review chapters 1–3",
+          "event3": "Create flashcards for module 7",
+          "event4": "Midterm Exam",
+          "event5": "Final Kartel deadline"
+        }
+      },
+      "goals": {
+        "title": "Manage objectives",
+        "archive": "Archive",
+        "create": "Create objective",
+        "groupGoals": "Group Objectives",
+        "goal1": "🎯 Complete all modules",
+        "goal2": "📝 Pass the certification exam",
+        "goal3": "💪 Improve skills",
+        "inProgress": "In progress",
+        "preparation": "Preparation in progress"
+      },
+      "deadlines": {
+        "title": "Manage deadlines",
+        "archive": "Archive",
+        "create": "Create deadline",
+        "important": "Important Deadlines",
+        "deadline1": {
+          "title": "⏰ Module 13 - Urgent",
+          "description": "Submission deadline",
+          "time": "In 2 days (June 10, 2025)"
+        },
+        "deadline2": {
+          "title": "📚 Final Certification Exam",
+          "description": "Certification exam",
+          "time": "April 15, 2026 (in 170 days)"
+        },
+        "deadline3": {
+          "title": "📋 Group review sessions",
+          "description": "Scheduled group session",
+          "time": "In 5 days"
+        }
+      }
     }
   },
   "common": {

@@ -2,71 +2,74 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDays, Clock, TrendingUp, Calendar as CalendarIcon, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export const Calendar = () => {
+  const { t, i18n } = useTranslation();
+  
   const milestones = [
-    { date: "2025-10-15", title: "Finaliser le scénario pédagogique", status: "upcoming" },
-    { date: "2025-10-18", title: "Réviser les chapitres 1-3", status: "upcoming" },
-    { date: "2025-10-20", title: "Créer les flashcards du module 7", status: "upcoming" },
-    { date: "2025-11-01", title: "Examen intermédiaire", status: "upcoming" },
-    { date: "2025-12-31", title: "Échéance finale du cartel", status: "important" },
+    { date: "2025-10-15", titleKey: "dashboard.calendar.milestones.events.event1", status: "upcoming" },
+    { date: "2025-10-18", titleKey: "dashboard.calendar.milestones.events.event2", status: "upcoming" },
+    { date: "2025-10-20", titleKey: "dashboard.calendar.milestones.events.event3", status: "upcoming" },
+    { date: "2025-11-01", titleKey: "dashboard.calendar.milestones.events.event4", status: "upcoming" },
+    { date: "2025-12-31", titleKey: "dashboard.calendar.milestones.events.event5", status: "important" },
   ];
 
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">Planifiez vos sessions Kartel, notez vos échéances et fixez vos objectifs finaux</p>
+        <p className="text-muted-foreground text-[110%]">{t('dashboard.calendar.subtitle')}</p>
       </div>
 
       <Tabs defaultValue="calendar" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="calendar" className="flex items-center gap-2">
             <CalendarIcon className="w-4 h-4" />
-            Calendrier
+            {t('dashboard.calendar.tabs.calendar')}
           </TabsTrigger>
           <TabsTrigger value="deadlines" className="flex items-center gap-2">
             <Clock className="w-4 h-4" />
-            Échéances
+            {t('dashboard.calendar.tabs.deadlines')}
           </TabsTrigger>
           <TabsTrigger value="goals" className="flex items-center gap-2">
             <Target className="w-4 h-4" />
-            Objectifs
+            {t('dashboard.calendar.tabs.objectives')}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="calendar" className="mt-6">
           <div className="mb-4 flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Vue d'ensemble</h3>
-            <Button size="sm">Ajouter un évènement</Button>
+            <h3 className="text-lg font-semibold">{t('dashboard.calendar.overview.title')}</h3>
+            <Button size="sm">{t('dashboard.calendar.overview.addEvent')}</Button>
           </div>
 
       <div className="grid md:grid-cols-3 gap-4">
         <Card className="bg-accent/10 hover-lift">
           <CardContent className="p-6">
             <CalendarDays className="w-8 h-8 text-accent mb-3" />
-            <p className="text-2xl font-bold">87 jours</p>
-            <p className="text-sm text-muted-foreground">Jusqu'à la fin</p>
+            <p className="text-2xl font-bold">87 {t('dashboard.calendar.overview.daysLeft')}</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.calendar.overview.untilEnd')}</p>
           </CardContent>
         </Card>
         <Card className="bg-success/10 hover-lift">
           <CardContent className="p-6">
             <Clock className="w-8 h-8 text-success mb-3" />
-            <p className="text-2xl font-bold">3 tâches</p>
-            <p className="text-sm text-muted-foreground">Cette semaine</p>
+            <p className="text-2xl font-bold">3 {t('dashboard.calendar.overview.tasks')}</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.calendar.overview.thisWeek')}</p>
           </CardContent>
         </Card>
         <Card className="bg-primary/10 hover-lift">
           <CardContent className="p-6">
             <TrendingUp className="w-8 h-8 text-primary mb-3" />
             <p className="text-2xl font-bold">68%</p>
-            <p className="text-sm text-muted-foreground">Progression</p>
+            <p className="text-sm text-muted-foreground">{t('dashboard.calendar.overview.progress')}</p>
           </CardContent>
         </Card>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Jalons et Échéances</CardTitle>
+          <CardTitle>{t('dashboard.calendar.milestones.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
@@ -81,9 +84,9 @@ export const Calendar = () => {
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <p className="font-semibold">{milestone.title}</p>
+                    <p className="font-semibold">{t(milestone.titleKey)}</p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {new Date(milestone.date).toLocaleDateString("fr-FR", {
+                      {new Date(milestone.date).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US', {
                         weekday: "long",
                         year: "numeric",
                         month: "long",
@@ -98,7 +101,7 @@ export const Calendar = () => {
                         : "bg-muted text-muted-foreground"
                     }`}
                   >
-                    {milestone.status === "important" ? "Important" : "À venir"}
+                    {milestone.status === "important" ? t('dashboard.calendar.milestones.important') : t('dashboard.calendar.milestones.upcoming')}
                   </span>
                 </div>
               </div>
@@ -110,21 +113,21 @@ export const Calendar = () => {
 
         <TabsContent value="goals" className="mt-6">
           <div className="mb-4 flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Gérer les objectifs</h3>
+            <h3 className="text-lg font-semibold">{t('dashboard.calendar.goals.title')}</h3>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline">Archiver</Button>
-              <Button size="sm">Créer un objectif</Button>
+              <Button size="sm" variant="outline">{t('dashboard.calendar.goals.archive')}</Button>
+              <Button size="sm">{t('dashboard.calendar.goals.create')}</Button>
             </div>
           </div>
           <Card>
             <CardHeader>
-              <CardTitle>Objectifs du groupe</CardTitle>
+              <CardTitle>{t('dashboard.calendar.goals.groupGoals')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm font-medium">🎯 Terminer tous les modules</p>
+                    <p className="text-sm font-medium">{t('dashboard.calendar.goals.goal1')}</p>
                     <span className="text-sm text-accent">75%</span>
                   </div>
                   <div className="w-full bg-muted rounded-full h-2">
@@ -133,14 +136,14 @@ export const Calendar = () => {
                 </div>
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm font-medium">📝 Réussir l'ECF</p>
-                    <span className="text-sm text-accent">En cours</span>
+                    <p className="text-sm font-medium">{t('dashboard.calendar.goals.goal2')}</p>
+                    <span className="text-sm text-accent">{t('dashboard.calendar.goals.inProgress')}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground">Préparation en cours</p>
+                  <p className="text-xs text-muted-foreground">{t('dashboard.calendar.goals.preparation')}</p>
                 </div>
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm font-medium">💪 Améliorer les compétences</p>
+                    <p className="text-sm font-medium">{t('dashboard.calendar.goals.goal3')}</p>
                     <span className="text-sm text-accent">90%</span>
                   </div>
                   <div className="w-full bg-muted rounded-full h-2">
@@ -154,32 +157,32 @@ export const Calendar = () => {
 
         <TabsContent value="deadlines" className="mt-6">
           <div className="mb-4 flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Gérer les échéances</h3>
+            <h3 className="text-lg font-semibold">{t('dashboard.calendar.deadlines.title')}</h3>
             <div className="flex gap-2">
-              <Button size="sm" variant="outline">Archiver</Button>
-              <Button size="sm">Créer une échéance</Button>
+              <Button size="sm" variant="outline">{t('dashboard.calendar.deadlines.archive')}</Button>
+              <Button size="sm">{t('dashboard.calendar.deadlines.create')}</Button>
             </div>
           </div>
           <Card>
             <CardHeader>
-              <CardTitle>Échéances importantes</CardTitle>
+              <CardTitle>{t('dashboard.calendar.deadlines.important')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 <div className="p-4 bg-red-500/10 rounded-lg border border-red-500/20">
-                  <p className="text-sm font-medium text-red-600 dark:text-red-400">⏰ Module 13 - Urgent</p>
-                  <p className="text-sm text-muted-foreground mt-2">Deadline de soumission</p>
-                  <p className="text-xs text-muted-foreground mt-1">Dans 2 jours (10 juin 2025)</p>
+                  <p className="text-sm font-medium text-red-600 dark:text-red-400">{t('dashboard.calendar.deadlines.deadline1.title')}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{t('dashboard.calendar.deadlines.deadline1.description')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('dashboard.calendar.deadlines.deadline1.time')}</p>
                 </div>
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
-                  <p className="text-sm font-medium">📚 ECF Final</p>
-                  <p className="text-sm text-muted-foreground mt-2">Examen de certification</p>
-                  <p className="text-xs text-muted-foreground mt-1">15 avril 2026 (dans 170 jours)</p>
+                  <p className="text-sm font-medium">{t('dashboard.calendar.deadlines.deadline2.title')}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{t('dashboard.calendar.deadlines.deadline2.description')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('dashboard.calendar.deadlines.deadline2.time')}</p>
                 </div>
                 <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
-                  <p className="text-sm font-medium">📋 Révisions collectives</p>
-                  <p className="text-sm text-muted-foreground mt-2">Session de groupe planifiée</p>
-                  <p className="text-xs text-muted-foreground mt-1">Dans 5 jours</p>
+                  <p className="text-sm font-medium">{t('dashboard.calendar.deadlines.deadline3.title')}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{t('dashboard.calendar.deadlines.deadline3.description')}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{t('dashboard.calendar.deadlines.deadline3.time')}</p>
                 </div>
               </div>
             </CardContent>
