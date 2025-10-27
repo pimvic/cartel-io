@@ -15,6 +15,7 @@ import {
 import { FileText, Upload, Sparkles, Brain, Trash2, FileUp, Type, Link, Search, ArrowUpDown, Star, Archive, Edit, Tag, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 interface KBFile {
   id: string;
@@ -24,6 +25,7 @@ interface KBFile {
 }
 
 export const KnowledgeBase = () => {
+  const { t } = useTranslation();
   const [files, setFiles] = useState<KBFile[]>([]);
   const [loading, setLoading] = useState(true);
   const [flashcardCount, setFlashcardCount] = useState(10);
@@ -133,11 +135,11 @@ export const KnowledgeBase = () => {
         throw new Error(result.error);
       }
 
-      toast.success(`${selectedFiles.length} fichier(s) téléversé(s) avec succès !`);
+      toast.success(`${selectedFiles.length} ${t('dashboard.knowledgeBase.toasts.uploadSuccess')}`);
       fetchFiles();
     } catch (error) {
       console.error('Upload error:', error);
-      toast.error("Erreur lors du téléversement des fichiers");
+      toast.error(t('dashboard.knowledgeBase.toasts.uploadError'));
     } finally {
       setUploading(false);
       if (fileInputRef.current) {
@@ -147,7 +149,7 @@ export const KnowledgeBase = () => {
   };
 
   const handleDeleteAll = async () => {
-    if (!confirm("Êtes-vous sûr de vouloir supprimer tous les documents ?")) {
+    if (!confirm(t('dashboard.knowledgeBase.toasts.deleteConfirm'))) {
       return;
     }
 
@@ -159,11 +161,11 @@ export const KnowledgeBase = () => {
 
       if (error) throw error;
 
-      toast.success("Tous les documents ont été supprimés");
+      toast.success(t('dashboard.knowledgeBase.toasts.deleteSuccess'));
       fetchFiles();
     } catch (error) {
       console.error('Delete error:', error);
-      toast.error("Erreur lors de la suppression des documents");
+      toast.error(t('dashboard.knowledgeBase.toasts.deleteError'));
     }
   };
 
@@ -171,14 +173,14 @@ export const KnowledgeBase = () => {
     <div className="space-y-6">
       <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">
-          Nourrissez votre base commune, discutez avec l'IA de votre Kartel au sujet de vos documents, échéances et objectifs
+          {t('dashboard.knowledgeBase.subtitle')}
         </p>
       </div>
 
       <Tabs defaultValue="documents" className="w-full">
         <TabsList>
-          <TabsTrigger value="documents">📚 Documents</TabsTrigger>
-          <TabsTrigger value="chat">💬 Chat IA</TabsTrigger>
+          <TabsTrigger value="documents">{t('dashboard.knowledgeBase.tabs.documents')}</TabsTrigger>
+          <TabsTrigger value="chat">{t('dashboard.knowledgeBase.tabs.chat')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="documents" className="space-y-6 mt-6">
@@ -200,15 +202,15 @@ export const KnowledgeBase = () => {
             disabled={uploading}
           >
             <FileUp className="w-4 h-4 mr-2" />
-            {uploading ? "Téléversement..." : "Importer des PDF"}
+            {uploading ? t('dashboard.knowledgeBase.buttons.uploading') : t('dashboard.knowledgeBase.buttons.importPDF')}
           </Button>
           <Button variant="outline">
             <Type className="w-4 h-4 mr-2" />
-            Insérer du texte
+            {t('dashboard.knowledgeBase.buttons.insertText')}
           </Button>
           <Button variant="outline">
             <Link className="w-4 h-4 mr-2" />
-            Url de page web
+            {t('dashboard.knowledgeBase.buttons.webPageURL')}
           </Button>
         </div>
 
@@ -216,23 +218,23 @@ export const KnowledgeBase = () => {
         <div className="flex flex-wrap gap-3">
           <Button variant="outline" size="sm">
             <Search className="w-4 h-4 mr-2" />
-            Recherche
+            {t('dashboard.knowledgeBase.buttons.search')}
           </Button>
           <Button variant="outline" size="sm">
             <ArrowUpDown className="w-4 h-4 mr-2" />
-            Trier
+            {t('dashboard.knowledgeBase.buttons.sort')}
           </Button>
           <Button variant="outline" size="sm">
             <Star className="w-4 h-4 mr-2" />
-            Favoris
+            {t('dashboard.knowledgeBase.buttons.favorites')}
           </Button>
           <Button variant="outline" size="sm">
             <FileText className="w-4 h-4 mr-2" />
-            Épinglés
+            {t('dashboard.knowledgeBase.buttons.pinned')}
           </Button>
           <Button variant="outline" size="sm">
             <Tag className="w-4 h-4 mr-2" />
-            Tags
+            {t('dashboard.knowledgeBase.buttons.tags')}
           </Button>
         </div>
       </div>
@@ -240,7 +242,7 @@ export const KnowledgeBase = () => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>Documents</CardTitle>
+            <CardTitle>{t('dashboard.knowledgeBase.documents.title')}</CardTitle>
             {files.length > 0 && (
               <Button 
                 variant="destructive" 
@@ -248,16 +250,16 @@ export const KnowledgeBase = () => {
                 onClick={handleDeleteAll}
               >
                 <Trash2 className="w-4 h-4 mr-2" />
-                Tout supprimer
+                {t('dashboard.knowledgeBase.buttons.deleteAll')}
               </Button>
             )}
           </div>
         </CardHeader>
         <CardContent>
           {loading ? (
-            <p className="text-muted-foreground">Chargement...</p>
+            <p className="text-muted-foreground">{t('dashboard.knowledgeBase.documents.loading')}</p>
           ) : files.length === 0 ? (
-            <p className="text-muted-foreground">Aucun document pour le moment</p>
+            <p className="text-muted-foreground">{t('dashboard.knowledgeBase.documents.noDocuments')}</p>
           ) : (
             <div className="space-y-2">
               {files.map((file) => (
@@ -269,7 +271,7 @@ export const KnowledgeBase = () => {
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate">{file.title}</p>
                     <p className="text-xs text-muted-foreground">
-                      Ajouté le {new Date(file.uploaded_at).toLocaleDateString("fr-FR")}
+                      {t('dashboard.knowledgeBase.documents.addedOn')} {new Date(file.uploaded_at).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -280,7 +282,7 @@ export const KnowledgeBase = () => {
                       <Archive className="w-4 h-4" />
                     </Button>
                     <Button variant="ghost" size="sm" onClick={() => window.open(file.file_url, '_blank')}>
-                      Ouvrir
+                      {t('dashboard.knowledgeBase.buttons.open')}
                     </Button>
                   </div>
                 </div>
@@ -296,25 +298,25 @@ export const KnowledgeBase = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MessageSquare className="w-5 h-5 text-accent" />
-                Discutez avec votre base de connaissance
+                {t('dashboard.knowledgeBase.chat.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div className="h-96 bg-muted/30 rounded-lg p-4 overflow-y-auto space-y-3">
                   <div className="bg-accent/10 p-3 rounded-lg max-w-[80%]">
-                    <p className="text-sm">Bonjour ! Je suis votre assistant IA. Posez-moi des questions sur vos documents.</p>
+                    <p className="text-sm">{t('dashboard.knowledgeBase.chat.welcome')}</p>
                   </div>
                   <div className="bg-background p-3 rounded-lg max-w-[80%] ml-auto">
-                    <p className="text-sm">Peux-tu me faire un résumé du module 12 ?</p>
+                    <p className="text-sm">{t('dashboard.knowledgeBase.chat.sampleQuestion')}</p>
                   </div>
                   <div className="bg-accent/10 p-3 rounded-lg max-w-[80%]">
-                    <p className="text-sm">Bien sûr ! Le module 12 couvre les méthodologies de formation pour adultes, incluant les principes de l'andragogie, les techniques d'animation, et l'évaluation des compétences.</p>
+                    <p className="text-sm">{t('dashboard.knowledgeBase.chat.sampleAnswer')}</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Input placeholder="Posez votre question..." />
-                  <Button>Envoyer</Button>
+                  <Input placeholder={t('dashboard.knowledgeBase.chat.placeholder')} />
+                  <Button>{t('dashboard.knowledgeBase.chat.send')}</Button>
                 </div>
               </div>
             </CardContent>

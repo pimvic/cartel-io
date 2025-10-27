@@ -338,6 +338,48 @@
           "time": "In 5 days (June 10, 2025)"
         }
       }
+    },
+    "knowledgeBase": {
+      "title": "AI Knowledge Base",
+      "subtitle": "Feed your shared knowledge base and chat with your Kartel AI about your documents, deadlines, and goals.",
+      "tabs": {
+        "documents": "📚 Documents",
+        "chat": "💬 AI Chat"
+      },
+      "buttons": {
+        "importPDF": "Import PDFs",
+        "insertText": "Insert text",
+        "webPageURL": "Web page URL",
+        "search": "Search",
+        "sort": "Sort",
+        "favorites": "Favorites",
+        "pinned": "Pinned",
+        "tags": "Tags",
+        "deleteAll": "Delete all",
+        "open": "Open",
+        "uploading": "Uploading..."
+      },
+      "documents": {
+        "title": "Documents",
+        "loading": "Loading...",
+        "noDocuments": "No documents yet",
+        "addedOn": "Added on"
+      },
+      "chat": {
+        "title": "Chat with your knowledge base",
+        "placeholder": "Ask your question...",
+        "send": "Send",
+        "welcome": "Hello! I'm your AI assistant. Ask me questions about your documents.",
+        "sampleQuestion": "Can you give me a summary of Module 12?",
+        "sampleAnswer": "Of course! Module 12 covers adult learning methodologies, including andragogy principles, facilitation techniques, and competency assessment."
+      },
+      "toasts": {
+        "uploadSuccess": "file(s) uploaded successfully!",
+        "uploadError": "Error uploading files",
+        "deleteSuccess": "All documents have been deleted",
+        "deleteError": "Error deleting documents",
+        "deleteConfirm": "Are you sure you want to delete all documents?"
+      }
     }
   },
   "common": {

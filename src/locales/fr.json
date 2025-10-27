@@ -338,6 +338,48 @@
           "time": "Dans 5 jours (10 juin 2025)"
         }
       }
+    },
+    "knowledgeBase": {
+      "title": "Base de connaissances IA",
+      "subtitle": "Nourrissez votre base commune, discutez avec l'IA de votre Kartel au sujet de vos documents, échéances et objectifs",
+      "tabs": {
+        "documents": "📚 Documents",
+        "chat": "💬 Chat IA"
+      },
+      "buttons": {
+        "importPDF": "Importer des PDF",
+        "insertText": "Insérer du texte",
+        "webPageURL": "Url de page web",
+        "search": "Recherche",
+        "sort": "Trier",
+        "favorites": "Favoris",
+        "pinned": "Épinglés",
+        "tags": "Tags",
+        "deleteAll": "Tout supprimer",
+        "open": "Ouvrir",
+        "uploading": "Téléversement..."
+      },
+      "documents": {
+        "title": "Documents",
+        "loading": "Chargement...",
+        "noDocuments": "Aucun document pour le moment",
+        "addedOn": "Ajouté le"
+      },
+      "chat": {
+        "title": "Discutez avec votre base de connaissance",
+        "placeholder": "Posez votre question...",
+        "send": "Envoyer",
+        "welcome": "Bonjour ! Je suis votre assistant IA. Posez-moi des questions sur vos documents.",
+        "sampleQuestion": "Peux-tu me faire un résumé du module 12 ?",
+        "sampleAnswer": "Bien sûr ! Le module 12 couvre les méthodologies de formation pour adultes, incluant les principes de l'andragogie, les techniques d'animation, et l'évaluation des compétences."
+      },
+      "toasts": {
+        "uploadSuccess": "fichier(s) téléversé(s) avec succès !",
+        "uploadError": "Erreur lors du téléversement des fichiers",
+        "deleteSuccess": "Tous les documents ont été supprimés",
+        "deleteError": "Erreur lors de la suppression des documents",
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer tous les documents ?"
+      }
     }
   },
   "common": {
