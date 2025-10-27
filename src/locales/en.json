@@ -281,6 +281,63 @@
       "title": "Glossary / Dictionary",
       "subtitle": "Definitions of key terms for your learning",
       "search": "Search for a term..."
+    },
+    "messagerie": {
+      "title": "Communications",
+      "subtitle": "Manage your messages, check news and events, and stay up to date.",
+      "tabs": {
+        "messages": "Messages",
+        "news": "News",
+        "events": "Events"
+      },
+      "groupChat": {
+        "title": "Group Chat",
+        "message1": {
+          "author": "Jean-Stéphane B.",
+          "text": "Hello everyone! Ready for today's session?",
+          "time": "10:30"
+        },
+        "message2": {
+          "author": "Thierry F.",
+          "text": "Yes! I've prepared a few questions about Module 12.",
+          "time": "10:35"
+        },
+        "inputPlaceholder": "Write your message...",
+        "sendButton": "Send"
+      },
+      "news": {
+        "title": "Kartel News",
+        "recentNews": "Recent News",
+        "archive": "Archive",
+        "create": "Create News",
+        "news1": {
+          "title": "📢 New resource available",
+          "text": "The Module 12 summary document has been added to the knowledge base.",
+          "time": "2 hours ago"
+        },
+        "news2": {
+          "title": "🎯 Goal achieved",
+          "text": "Congratulations! The group has completed 75% of the scheduled modules.",
+          "time": "Yesterday"
+        }
+      },
+      "events": {
+        "title": "Upcoming Events",
+        "upcoming": "Next Events",
+        "archive": "Archive",
+        "create": "Create Event",
+        "event1": {
+          "title": "📅 Group session",
+          "description": "Collective review of Module 12",
+          "time": "Tomorrow, 2:00 PM - 4:00 PM",
+          "join": "Join"
+        },
+        "event2": {
+          "title": "⏰ Module 13 Deadline",
+          "description": "Submission deadline for assignments",
+          "time": "In 5 days (June 10, 2025)"
+        }
+      }
     }
   },
   "common": {

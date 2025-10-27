@@ -281,6 +281,63 @@
       "title": "Glossaire / Dictionnaire",
       "subtitle": "Définitions des termes clés pour votre apprentissage",
       "search": "Rechercher un terme..."
+    },
+    "messagerie": {
+      "title": "Communications",
+      "subtitle": "Gérez vos messages, consultez les news et évènements, tenez-vous à jour",
+      "tabs": {
+        "messages": "Messagerie",
+        "news": "News",
+        "events": "Évènements"
+      },
+      "groupChat": {
+        "title": "Messagerie du groupe",
+        "message1": {
+          "author": "Jean-Stéphane B.",
+          "text": "Bonjour à tous ! Prêts pour la session d'aujourd'hui ?",
+          "time": "10:30"
+        },
+        "message2": {
+          "author": "Thierry F.",
+          "text": "Oui ! J'ai préparé quelques questions sur le module 12.",
+          "time": "10:35"
+        },
+        "inputPlaceholder": "Écrivez votre message...",
+        "sendButton": "Envoyer"
+      },
+      "news": {
+        "title": "Actualités du Kartel",
+        "recentNews": "Actualités récentes",
+        "archive": "Archiver",
+        "create": "Créer une news",
+        "news1": {
+          "title": "📢 Nouvelle ressource disponible",
+          "text": "Le document de synthèse du module 12 a été ajouté à la base de connaissances.",
+          "time": "Il y a 2 heures"
+        },
+        "news2": {
+          "title": "🎯 Objectif atteint",
+          "text": "Félicitations ! Le groupe a terminé 75% des modules prévus.",
+          "time": "Hier"
+        }
+      },
+      "events": {
+        "title": "Évènements à venir",
+        "upcoming": "Prochains évènements",
+        "archive": "Archiver",
+        "create": "Créer un évènement",
+        "event1": {
+          "title": "📅 Session de groupe",
+          "description": "Révision collective du module 12",
+          "time": "Demain, 14h00 - 16h00",
+          "join": "Rejoindre"
+        },
+        "event2": {
+          "title": "⏰ Deadline Module 13",
+          "description": "Date limite de soumission des travaux",
+          "time": "Dans 5 jours (10 juin 2025)"
+        }
+      }
     }
   },
   "common": {
