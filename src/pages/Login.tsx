@@ -49,68 +49,22 @@ const Login = () => {
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
-          },
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Compte créé !",
-          description: "Vous pouvez maintenant vous connecter.",
-        });
-        setIsSignUp(false);
-      } else {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Connexion réussie !",
-          description: "Bienvenue sur Kartels.io",
-        });
-      }
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: error.message || "Une erreur est survenue",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    
+    // Demo mode: bypass authentication
+    toast({
+      title: t('common.success'),
+      description: isSignUp ? "Compte créé avec succès" : "Connexion réussie",
+    });
+    navigate(`/${lang || 'fr'}/dashboard`);
   };
 
   const handleGoogleAuth = async () => {
-    setIsLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
-        },
-      });
-
-      if (error) throw error;
-    } catch (error: any) {
-      toast({
-        title: "Erreur",
-        description: error.message || "Impossible de se connecter avec Google",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-    }
+    // Demo mode: bypass Google authentication
+    toast({
+      title: t('common.success'),
+      description: "Connexion avec Google réussie",
+    });
+    navigate(`/${lang || 'fr'}/dashboard`);
   };
 
   return (

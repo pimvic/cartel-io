@@ -8,9 +8,54 @@
   "home": {
     "hero": {
       "title": "Learn faster and further in small groups!",
-      "subtitle": "Kartels: The collaborative platform for succeeding together",
-      "cta": "Get Started!",
+      "subtitle": "Collaborative learning platform that turns your study materials into mastered knowledge.",
+      "cta": "Get Started",
       "videoAlt": "Discover Kartels.io in video"
+    },
+    "whoWeAre": {
+      "title": "Study together in small, motivated groups",
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "Groups of 3-5 learners collaborate on a shared platform to reach their learning goals."
+      },
+      "knowledge": {
+        "title": "Knowledge",
+        "description": "Learners feed and share an AI-powered knowledge base using innovative educational tools."
+      },
+      "progress": {
+        "title": "Progress",
+        "description": "Advance together, share ideas, exchange feedback, and reach your objectives as a team."
+      }
+    },
+    "whyKartel": {
+      "title": "Kartel: the best way to learn?",
+      "point1": {
+        "title": "🎯 Active learning keeps engagement high",
+        "description": "Daily online sessions, group chats, peer messages, shared notes, and learning tips."
+      },
+      "point2": {
+        "title": "🤝 Collaborative support",
+        "description": "Learn as a team in a true collaborative workshop. Every member brings knowledge, questions, and ideas... The goal: understand, master, and succeed together."
+      },
+      "point3": {
+        "title": "⚡ Smart tools for better learning together",
+        "description": "Kartel provides a complete AI toolbox... 🧠 Adaptive quizzes, 📝 Collaborative MCQs, 🃏 Automatic flashcards, 🗺 Dynamic mindmaps, 🎭 Video role-playing, 📊 Shared progress dashboards, 💬 Educational AI chat, 🎯 Team challenges, 📚 Automatic summaries, 🔁 Review sheets..."
+      }
+    },
+    "results": {
+      "title": "🚀 The Results Speak for Themselves",
+      "point1": {
+        "title": "🎯 Visible, measurable progress",
+        "description": "Thanks to group dynamics and Kartel's AI tools... +45% higher success rate in small group courses."
+      },
+      "point2": {
+        "title": "🤝 Motivation that lasts",
+        "description": "Small group learning creates real engagement... 9 out of 10 users feel more motivated with Kartel than with traditional LMS."
+      },
+      "point3": {
+        "title": "🧩 Stronger, validated skills",
+        "description": "Every group aims for a common goal... Result: learners who are more competent, autonomous, and confident in their future."
+      }
     },
     "features": {
       "title": "Features",
@@ -76,7 +121,7 @@
       }
     },
     "contact": {
-      "title": "Contact us",
+      "title": "Join our beta testers!",
       "subtitle": "Have a question? Feel free to contact us",
       "form": {
         "firstName": "First name",
@@ -85,7 +130,7 @@
         "email": "Email",
         "comment": "Comment",
         "send": "Send",
-        "success": "Message sent, Thank you!"
+        "success": "Message sent, thank you!"
       }
     }
   },
@@ -120,38 +165,41 @@
     "subtitle": "Sign in to your Kartels account",
     "email": "Email",
     "password": "Password",
-    "signIn": "Sign in",
+    "signIn": "Login",
     "signUp": "Create account",
-    "withGoogle": "Continue with Google",
+    "withGoogle": "Sign in with Google",
     "newAccount": "Don't have an account yet?",
     "hasAccount": "Already have an account?",
     "createAccount": "Create account",
-    "login": "Sign in",
+    "login": "Login",
     "creating": "Creating...",
     "loggingIn": "Signing in...",
     "error": "An error occurred"
   },
   "dashboard": {
     "header": {
-      "title": "Kartel - Demo",
-      "course": "Kartel Organization - Educational demo",
+      "title": "Kartels - Demo",
+      "course": "Kartels Organization - Educational demo",
       "deadline": "April 15, 2026, in 170 days",
       "members": "Team members",
       "coordinator": "Coordinator"
     },
     "menu": {
       "actuKartel": "Kartel News",
-      "messagerie": "Messaging, News & Events",
-      "knowledgeBase": "Knowledge Base",
+      "messagerie": "Communications",
+      "knowledgeBase": "AI Knowledge Base",
       "tools": "Learning Tools",
-      "calendar": "Calendar",
+      "calendar": "Agenda",
       "plusOne": "Your +1",
-      "rules": "Rules",
+      "rules": "The Kartel Spirit",
       "overview": "Overview",
       "notes": "Notes",
       "visio": "Video",
       "settings": "Settings",
       "feedback": "Feedback"
+    },
+    "actuKartel": {
+      "subtitle": "Your group's activity, collaboration, and engagement updates"
     },
     "profile": {
       "profile": "Profile",

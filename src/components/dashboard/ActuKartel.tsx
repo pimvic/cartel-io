@@ -1,11 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageSquare, FileText, Calendar as CalendarIcon, Upload } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const ActuKartel = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">La vie de votre Kartel, votre dynamisme de groupe, votre engagement</p>
+        <p className="text-muted-foreground text-[110%]">{t('dashboard.actuKartel.subtitle')}</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">

@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Brain,
   Users,
+  Video,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
@@ -37,7 +38,7 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
     { id: "rules", label: t('dashboard.menu.rules'), icon: ScrollText },
     { id: "vue-ensemble", label: t('dashboard.menu.overview'), icon: Home },
     { id: "notes", label: t('dashboard.menu.notes'), icon: FileText },
-    { id: "visio", label: t('dashboard.menu.visio'), icon: MessageCircle },
+    { id: "visio", label: t('dashboard.menu.visio'), icon: Video },
     { id: "parametres", label: t('dashboard.menu.settings'), icon: SettingsIcon },
     { id: "feedback", label: t('dashboard.menu.feedback'), icon: MessageCircle },
   ];
