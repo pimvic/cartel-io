@@ -726,6 +726,50 @@
         },
         "closing": "🌻 Apprendre ensemble, c'est apprendre à prendre soin de soi, des autres, et du savoir."
       }
+    },
+    "overview": {
+      "subtitle": "Votre Kartel en chiffres : suivez vos progrès et soyez fiers de votre groupe !",
+      "stats": {
+        "activeMembers": "Membres actifs",
+        "studyHours": "Heures d'étude",
+        "completedTasks": "Tâches terminées",
+        "progress": "Progression"
+      },
+      "members": {
+        "title": "Membres du Kartel",
+        "lastActivity": "Dernière activité :",
+        "online": "En ligne",
+        "offline": "Absent",
+        "activities": {
+          "ecfSubmitted": "ECF rendu",
+          "module12": "Module 12 complété",
+          "flashcardsCreated": "Flashcards créées",
+          "quizCompleted": "QCM terminé"
+        }
+      },
+      "counters": {
+        "documents": "Documents",
+        "notes": "Notes",
+        "tasks": "Tâches",
+        "info": "Infos",
+        "mcqs": "QCM",
+        "quizzes": "QUIZZ",
+        "flashcards": "Flashcards"
+      },
+      "kartelProgress": {
+        "title": "Progression du Kartel",
+        "tasksLabel": "Tâches",
+        "finalDeadline": "Échéance finale:",
+        "daysRemaining": "Jours restants:",
+        "april15": "15 avril 2026",
+        "days": "jours"
+      },
+      "memberActivity": {
+        "title": "Activité des Membres",
+        "hours": "h",
+        "quizzes": "Q",
+        "logins": "conn."
+      }
     }
   },
   "common": {

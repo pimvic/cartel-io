@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useTranslation } from "react-i18next";
 
 interface Task {
   id: string;
@@ -28,6 +29,7 @@ interface Task {
 }
 
 export const Overview = () => {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -53,33 +55,33 @@ export const Overview = () => {
   const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
   const members = [
-    { name: "Jean-Stéphane B.", avatar: "/placeholder.svg", activity: "ECF rendu", status: "En ligne" },
-    { name: "Thierry F.", avatar: "/placeholder.svg", activity: "Module 12 complété", status: "En ligne" },
-    { name: "Isabelle L.", avatar: "/placeholder.svg", activity: "Flashcards créées", status: "Absent" },
-    { name: "Elsa B.", avatar: "/placeholder.svg", activity: "QCM terminé", status: "En ligne" },
+    { name: "Jean-Stéphane B.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.ecfSubmitted'), status: t('dashboard.overview.members.online') },
+    { name: "Thierry F.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.module12'), status: t('dashboard.overview.members.online') },
+    { name: "Isabelle L.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.flashcardsCreated'), status: t('dashboard.overview.members.offline') },
+    { name: "Elsa B.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.quizCompleted'), status: t('dashboard.overview.members.online') },
   ];
 
   const stats = [
-    { label: "Membres actifs", value: "4", icon: Users, color: "text-accent" },
-    { label: "Heures d'étude", value: "127", icon: Clock, color: "text-success" },
-    { label: "Tâches terminées", value: completedTasks, icon: CheckCircle2, color: "text-primary" },
-    { label: "Progression", value: `${completionPercentage}%`, icon: Target, color: "text-warning" },
+    { label: t('dashboard.overview.stats.activeMembers'), value: "4", icon: Users, color: "text-accent" },
+    { label: t('dashboard.overview.stats.studyHours'), value: "127", icon: Clock, color: "text-success" },
+    { label: t('dashboard.overview.stats.completedTasks'), value: completedTasks, icon: CheckCircle2, color: "text-primary" },
+    { label: t('dashboard.overview.stats.progress'), value: `${completionPercentage}%`, icon: Target, color: "text-warning" },
   ];
 
   const counters = [
-    { label: "Documents", value: "234", icon: FileText },
-    { label: "Notes", value: "45", icon: StickyNote },
-    { label: "Tâches", value: "56", icon: CheckSquare },
-    { label: "Infos", value: "65", icon: Info },
-    { label: "QCM", value: "56", icon: Brain },
-    { label: "QUIZZ", value: "3", icon: Lightbulb },
-    { label: "Flashcards", value: "4", icon: CreditCard },
+    { label: t('dashboard.overview.counters.documents'), value: "234", icon: FileText },
+    { label: t('dashboard.overview.counters.notes'), value: "45", icon: StickyNote },
+    { label: t('dashboard.overview.counters.tasks'), value: "56", icon: CheckSquare },
+    { label: t('dashboard.overview.counters.info'), value: "65", icon: Info },
+    { label: t('dashboard.overview.counters.mcqs'), value: "56", icon: Brain },
+    { label: t('dashboard.overview.counters.quizzes'), value: "3", icon: Lightbulb },
+    { label: t('dashboard.overview.counters.flashcards'), value: "4", icon: CreditCard },
   ];
 
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">Votre Kartel en chiffres : suivez vos progrès et soyez fiers de votre groupe !</p>
+        <p className="text-muted-foreground text-[110%]">{t('dashboard.overview.subtitle')}</p>
       </div>
 
       {/* Single thin horizontal statistics line */}
@@ -107,7 +109,7 @@ export const Overview = () => {
       <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader>
-          <CardTitle>Membres du Kartel</CardTitle>
+          <CardTitle>{t('dashboard.overview.members.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <Carousel className="w-full">
@@ -121,8 +123,8 @@ export const Overview = () => {
                         <AvatarFallback>{member.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
                       </Avatar>
                       <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">Dernière activité : {member.activity}</p>
-                      <Badge variant={member.status === "En ligne" ? "default" : "secondary"}>
+                      <p className="text-sm text-muted-foreground mb-2">{t('dashboard.overview.members.lastActivity')} {member.activity}</p>
+                      <Badge variant={member.status === t('dashboard.overview.members.online') ? "default" : "secondary"}>
                         {member.status}
                       </Badge>
                     </CardContent>
@@ -159,24 +161,24 @@ export const Overview = () => {
       <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader>
-          <CardTitle>Progression du Kartel</CardTitle>
+          <CardTitle>{t('dashboard.overview.kartelProgress.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
             <div className="flex justify-between mb-2">
-              <span className="text-sm font-medium">Tâches</span>
+              <span className="text-sm font-medium">{t('dashboard.overview.kartelProgress.tasksLabel')}</span>
               <span className="text-sm text-success font-bold">{completionPercentage}%</span>
             </div>
             <Progress value={completionPercentage} className="h-2" />
           </div>
           <div className="pt-4 space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Échéance finale:</span>
-              <span className="font-medium">15 avril 2026</span>
+              <span className="text-muted-foreground">{t('dashboard.overview.kartelProgress.finalDeadline')}</span>
+              <span className="font-medium">{t('dashboard.overview.kartelProgress.april15')}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-muted-foreground">Jours restants:</span>
-              <span className="font-medium">170 jours</span>
+              <span className="text-muted-foreground">{t('dashboard.overview.kartelProgress.daysRemaining')}</span>
+              <span className="font-medium">170 {t('dashboard.overview.kartelProgress.days')}</span>
             </div>
           </div>
         </CardContent>
@@ -186,7 +188,7 @@ export const Overview = () => {
       <Card className="relative">
         <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
         <CardHeader>
-          <CardTitle>Activité des Membres</CardTitle>
+          <CardTitle>{t('dashboard.overview.memberActivity.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           {[
@@ -198,9 +200,9 @@ export const Overview = () => {
             <div key={i} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
               <span className="font-medium text-sm">{member.name}</span>
               <div className="flex gap-3 text-xs text-muted-foreground">
-                <span>{member.hours}h</span>
-                <span>{member.questions} Q</span>
-                <span>{member.connections} conn.</span>
+                <span>{member.hours}{t('dashboard.overview.memberActivity.hours')}</span>
+                <span>{member.questions} {t('dashboard.overview.memberActivity.quizzes')}</span>
+                <span>{member.connections} {t('dashboard.overview.memberActivity.logins')}</span>
               </div>
             </div>
           ))}

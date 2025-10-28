@@ -726,6 +726,50 @@
         },
         "closing": "🌻 Learning together means learning to care — for yourself, for others, and for knowledge itself."
       }
+    },
+    "overview": {
+      "subtitle": "Your Kartel in numbers: track your progress and be proud of your team!",
+      "stats": {
+        "activeMembers": "Active members",
+        "studyHours": "Study hours",
+        "completedTasks": "Tasks completed",
+        "progress": "Progress"
+      },
+      "members": {
+        "title": "Kartel Members",
+        "lastActivity": "Last activity:",
+        "online": "Online",
+        "offline": "Offline",
+        "activities": {
+          "ecfSubmitted": "ECF submitted",
+          "module12": "Module 12 completed",
+          "flashcardsCreated": "Flashcards created",
+          "quizCompleted": "Quiz completed"
+        }
+      },
+      "counters": {
+        "documents": "Documents",
+        "notes": "Notes",
+        "tasks": "Tasks",
+        "info": "Info",
+        "mcqs": "MCQs",
+        "quizzes": "Quizzes",
+        "flashcards": "Flashcards"
+      },
+      "kartelProgress": {
+        "title": "Kartel Progress",
+        "tasksLabel": "Tasks",
+        "finalDeadline": "Final deadline:",
+        "daysRemaining": "Days remaining:",
+        "april15": "April 15, 2026",
+        "days": "days"
+      },
+      "memberActivity": {
+        "title": "Member Activity",
+        "hours": "h study time",
+        "quizzes": "quizzes",
+        "logins": "logins"
+      }
     }
   },
   "common": {
