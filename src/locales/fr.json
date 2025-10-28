@@ -857,6 +857,47 @@
           "date": "Il y a 1 semaine"
         }
       }
+    },
+    "visio": {
+      "subtitle": "Planifiez vos sessions de groupe, partagez vos écrans, débloquez-vous ensemble !",
+      "startSession": {
+        "title": "Démarrer une session",
+        "description": "Créez une nouvelle session de visioconférence avec votre groupe",
+        "button": "Créer une session"
+      },
+      "scheduledSessions": {
+        "title": "Sessions programmées",
+        "sample": {
+          "title": "Révision Module 12",
+          "time": "Demain, 14h00",
+          "participants": "4 participants"
+        },
+        "join": "Rejoindre"
+      },
+      "history": {
+        "title": "Historique des sessions",
+        "sessions": {
+          "session1": {
+            "title": "Session de groupe",
+            "date": "28 mai 2025",
+            "duration": "1h30",
+            "participants": "4 participants"
+          },
+          "session2": {
+            "title": "Révision Module 11",
+            "date": "25 mai 2025",
+            "duration": "2h00",
+            "participants": "3 participants"
+          },
+          "session3": {
+            "title": "Questions/Réponses",
+            "date": "22 mai 2025",
+            "duration": "1h15",
+            "participants": "4 participants"
+          }
+        },
+        "details": "Détails"
+      }
     }
   },
   "common": {

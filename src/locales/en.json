@@ -857,6 +857,47 @@
           "date": "1 week ago"
         }
       }
+    },
+    "visio": {
+      "subtitle": "Plan your group sessions, share your screens, and make progress together!",
+      "startSession": {
+        "title": "Start a session",
+        "description": "Create a new video session with your group",
+        "button": "Create Session"
+      },
+      "scheduledSessions": {
+        "title": "Scheduled Sessions",
+        "sample": {
+          "title": "Module 12 Review",
+          "time": "Tomorrow, 2:00 PM",
+          "participants": "4 participants"
+        },
+        "join": "Join"
+      },
+      "history": {
+        "title": "Session History",
+        "sessions": {
+          "session1": {
+            "title": "Group Session",
+            "date": "May 28, 2025",
+            "duration": "1h30",
+            "participants": "4 participants"
+          },
+          "session2": {
+            "title": "Module 11 Review",
+            "date": "May 25, 2025",
+            "duration": "2h00",
+            "participants": "3 participants"
+          },
+          "session3": {
+            "title": "Q&A Session",
+            "date": "May 22, 2025",
+            "duration": "1h15",
+            "participants": "4 participants"
+          }
+        },
+        "details": "Details"
+      }
     }
   },
   "common": {
