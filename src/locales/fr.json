@@ -770,6 +770,93 @@
         "quizzes": "Q",
         "logins": "conn."
       }
+    },
+    "notes": {
+      "subtitle": "Vos notes personnelles ou de groupe, ici pour ne rien oublier !",
+      "tabs": {
+        "personal": "Notes Personnelles",
+        "kartel": "Notes Kartel",
+        "glossary": "Glossaire"
+      },
+      "search": {
+        "personal": "Rechercher dans mes notes...",
+        "kartel": "Rechercher dans les notes du Kartel...",
+        "glossary": "Rechercher un terme..."
+      },
+      "buttons": {
+        "filter": "Filtrer",
+        "newNote": "Nouvelle note",
+        "newSharedNote": "Nouvelle note partagée",
+        "byCategory": "Par catégorie",
+        "addTerm": "Ajouter un terme",
+        "favorite": "Favori",
+        "edit": "Modifier",
+        "archive": "Archiver",
+        "delete": "Supprimer"
+      },
+      "shared": "Partagée",
+      "by": "Par",
+      "addedBy": "Ajouté par",
+      "personalNotes": {
+        "note1": {
+          "title": "Synthèse Module 10",
+          "content": "Points clés : méthodologie de formation, outils pédagogiques, évaluation...",
+          "date": "Il y a 1 jour"
+        },
+        "note2": {
+          "title": "Questions ECF",
+          "content": "Liste des questions importantes pour l'examen final...",
+          "date": "Il y a 2 jours"
+        },
+        "note3": {
+          "title": "Ressources utiles",
+          "content": "Collection de liens et documents pour approfondir...",
+          "date": "Il y a 3 jours"
+        },
+        "note4": {
+          "title": "Notes de réunion",
+          "content": "Compte-rendu de la session du 28 mai...",
+          "date": "Il y a 5 jours"
+        }
+      },
+      "kartelNotes": {
+        "note1": {
+          "title": "Stratégie de révision collective",
+          "content": "Plan de révision pour l'examen final...",
+          "date": "Il y a 1 jour",
+          "author": "Marie L."
+        },
+        "note2": {
+          "title": "Ressources ECF partagées",
+          "content": "Collection de ressources validées par le groupe...",
+          "date": "Il y a 3 jours",
+          "author": "Thomas B."
+        }
+      },
+      "glossary": {
+        "title": "Glossaire partagé du Kartel",
+        "term1": {
+          "term": "Scénario pédagogique",
+          "definition": "Ensemble structuré d'activités d'apprentissage visant des objectifs précis.",
+          "category": "Pédagogie",
+          "author": "Marie L.",
+          "date": "Il y a 2 jours"
+        },
+        "term2": {
+          "term": "ECF",
+          "definition": "Évaluation en Cours de Formation - modalité d'évaluation continue.",
+          "category": "Certification",
+          "author": "Thomas B.",
+          "date": "Il y a 5 jours"
+        },
+        "term3": {
+          "term": "Kartel",
+          "definition": "Petit groupe d'apprenants (3-5 personnes) travaillant ensemble sur une plateforme collaborative.",
+          "category": "Méthodologie",
+          "author": "Sophie M.",
+          "date": "Il y a 1 semaine"
+        }
+      }
     }
   },
   "common": {

@@ -770,6 +770,93 @@
         "quizzes": "quizzes",
         "logins": "logins"
       }
+    },
+    "notes": {
+      "subtitle": "Your personal or group notes — all in one place so you never forget anything!",
+      "tabs": {
+        "personal": "Personal Notes",
+        "kartel": "Kartel Notes",
+        "glossary": "Glossary"
+      },
+      "search": {
+        "personal": "Search in my notes...",
+        "kartel": "Search in Kartel notes...",
+        "glossary": "Search for a term..."
+      },
+      "buttons": {
+        "filter": "Filter",
+        "newNote": "New note",
+        "newSharedNote": "New shared note",
+        "byCategory": "By category",
+        "addTerm": "Add term",
+        "favorite": "Favorite",
+        "edit": "Edit",
+        "archive": "Archive",
+        "delete": "Delete"
+      },
+      "shared": "Shared",
+      "by": "By",
+      "addedBy": "Added by",
+      "personalNotes": {
+        "note1": {
+          "title": "Module 10 Summary",
+          "content": "Key points: training methodology, teaching tools, evaluation...",
+          "date": "1 day ago"
+        },
+        "note2": {
+          "title": "ECF Questions",
+          "content": "List of key questions for the final exam...",
+          "date": "2 days ago"
+        },
+        "note3": {
+          "title": "Useful Resources",
+          "content": "Collection of links and documents for deeper learning...",
+          "date": "3 days ago"
+        },
+        "note4": {
+          "title": "Meeting Notes",
+          "content": "Summary of the May 28 session...",
+          "date": "5 days ago"
+        }
+      },
+      "kartelNotes": {
+        "note1": {
+          "title": "Collective Review Strategy",
+          "content": "Review plan for the final exam...",
+          "date": "1 day ago",
+          "author": "Marie L."
+        },
+        "note2": {
+          "title": "Shared ECF Resources",
+          "content": "Collection of resources validated by the group...",
+          "date": "3 days ago",
+          "author": "Thomas B."
+        }
+      },
+      "glossary": {
+        "title": "Shared Kartel Glossary",
+        "term1": {
+          "term": "Pedagogical Scenario",
+          "definition": "Structured set of learning activities aimed at specific objectives.",
+          "category": "Pedagogy",
+          "author": "Marie L.",
+          "date": "2 days ago"
+        },
+        "term2": {
+          "term": "ECF",
+          "definition": "Continuous Training Evaluation - continuous assessment method.",
+          "category": "Certification",
+          "author": "Thomas B.",
+          "date": "5 days ago"
+        },
+        "term3": {
+          "term": "Kartel",
+          "definition": "Small group of learners (3-5 people) working together on a collaborative platform.",
+          "category": "Methodology",
+          "author": "Sophie M.",
+          "date": "1 week ago"
+        }
+      }
     }
   },
   "common": {
