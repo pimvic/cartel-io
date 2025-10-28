@@ -585,36 +585,148 @@
     "plusOne": {
       "title": "The '+1' facilitates group progress",
       "sections": {
+        "intro": {
+          "title": "Our \"+1\"",
+          "text": "The \"+1\" is neither a teacher nor a manager. It's a resource person who helps your small group turn ideas into concrete results. Their role is simple: keep the group on track, surface what truly matters, and suggest the next step when everyone hesitates. You remain in control of your work — the \"+1\" simply makes collective progress easier."
+        },
+        "who": {
+          "title": "Who is your \"+1\"?",
+          "text": "Your \"+1\" is a peer facilitator chosen by the group for a short, renewable period. They know your objective, read your work, and highlight what deserves to move forward. The \"+1\" stays equally distant from everyone — they don't judge, impose, or evaluate. They ensure rhythm, clarity in decisions, and smooth communication. On this page, their profile shows their role, availability, and direct contact access."
+        },
+        "latestActions": {
+          "title": "Latest actions from the \"+1\"",
+          "text": "This section displays the living record of support. You'll see selected artifacts with brief explanations, session summaries, and targeted reminders. The goal isn't control but visibility — making small decisions that move the group forward. If no recent actions appear, it's usually a good time to submit a request or propose a quick work session."
+        },
+        "requests": {
+          "title": "Your requests to the \"+1\"",
+          "text": "When you need a specific boost, send a request to your \"+1.\" Briefly describe what you need, attach documents, and propose a realistic deadline. The \"+1\" acknowledges receipt, reformulates if needed, and provides a concrete deliverable: a usable summary, a practice quiz, an action plan for the next session, or guidance between two options. Each request follows a clear cycle: open, in progress, resolved — with a short explanation of the chosen action."
+        },
+        "what": {
+          "title": "What is a \"+1\"?",
+          "text": "The \"+1\" comes from a simple idea: a small group moves faster when one person maintains the working dynamic. The \"+1\" stands slightly apart from the group, which allows them to ask the right question at the right moment, avoid tunnel vision, and refocus energy on useful outputs. They replace no one — they simply add just enough to help the group produce value faster."
+        },
+        "role": {
+          "title": "The role of the \"+1\"",
+          "text": "The \"+1\" catalyzes without directing. They turn vague questions into achievable goals, suggest output formats, and set reasonable deadlines. During sessions, they facilitate discussion, manage time, and clarify decisions. Between sessions, they select which information should circulate first and explain why. Their mission is to make the next step obvious — not to define an absolute truth."
+        },
+        "workingWith": {
+          "title": "Working effectively with your \"+1\"",
+          "text": "Before each meeting, come with a specific question and a draft artifact, even if incomplete. During the session, focus on the essential, show your work, and accept that usefulness matters more than perfection. After the session, publish your deliverable, check off the corresponding task, and if something remains unclear, open a short follow-up request. This simple rhythm — read, produce, share, refine — supported by your \"+1,\" is what makes the difference on Kartel."
+        }
+      }
+    },
+    "kartelSpirit": {
+      "title": "🤝 The Kartel Spirit",
       "intro": {
-        "title": "Our \"+1\"",
-        "content": "The \"+1\" is neither a teacher nor a manager. It's a resource person who helps your small group turn ideas into concrete results. Their role is simple: keep the group on track, surface what truly matters, and suggest the next step when everyone hesitates. You remain in control of your work — the \"+1\" simply makes collective progress easier."
+        "p1": "Learning in a Kartel means choosing to grow together — with trust and curiosity.",
+        "p2": "Each member brings their own perspective, experience, and energy.",
+        "p3": "Collective intelligence is born from dialogue, kindness, and the joy of learning together.",
+        "p4": "These guidelines are not obligations — they are signposts to help us grow together."
       },
-      "who": {
-        "title": "Who is your \"+1\"?",
-        "content": "Your \"+1\" is a peer facilitator chosen by the group for a short, renewable period. They know your objective, read your work, and highlight what deserves to move forward. The \"+1\" stays equally distant from everyone — they don't judge, impose, or evaluate. They ensure rhythm, clarity in decisions, and smooth communication. On this page, their profile shows their role, availability, and direct contact access."
+      "tips": {
+        "title": "🌿 Tips for a thriving Kartel",
+        "tip1": {
+          "title": "💬 Dare to speak and listen:",
+          "text": "Every voice matters. Speaking up or asking a question helps everyone learn."
+        },
+        "tip2": {
+          "title": "🕊️ Welcome without judgment:",
+          "text": "Mistakes are stepping stones — they show the path already taken and the road ahead."
+        },
+        "tip3": {
+          "title": "🌱 Share your discoveries:",
+          "text": "A resource, a tool, an idea — every contribution enriches the group's progress."
+        },
+        "tip4": {
+          "title": "🔄 Ask for help early:",
+          "text": "Expressing doubt in time prevents frustration and opens the door to meaningful exchange."
+        },
+        "tip5": {
+          "title": "🎧 Practice active listening:",
+          "text": "Rephrase, question, show interest — listening is already learning."
+        },
+        "tip6": {
+          "title": "🤗 Encourage others:",
+          "text": "A kind word strengthens motivation. One person's success benefits everyone."
+        },
+        "tip7": {
+          "title": "⏰ Keep your commitments:",
+          "text": "Consistency builds trust and allows the group to move forward smoothly."
+        },
+        "tip8": {
+          "title": "🪴 Take care of the atmosphere:",
+          "text": "Humor, kindness, and respect foster a positive learning environment."
+        },
+        "tip9": {
+          "title": "🧩 Value differences:",
+          "text": "Diverse backgrounds = diverse ideas. Each experience sheds light on a new facet of knowledge."
+        },
+        "tip10": {
+          "title": "🌞 Celebrate progress:",
+          "text": "Recognizing small victories makes effort joyful and fuels motivation."
+        }
       },
-      "latestActions": {
-        "title": "Latest actions from the \"+1\"",
-        "content": "This section displays the living record of support. You'll see selected artifacts with brief explanations, session summaries, and targeted reminders. The goal isn't control but visibility — making small decisions that move the group forward. If no recent actions appear, it's usually a good time to submit a request or propose a quick work session."
+      "rules": {
+        "title": "📜 The 10 Gentle Rules of a Successful Kartel",
+        "rule1": {
+          "title": "Respect people and ideas.",
+          "text": "Exchange and debate — always with kindness."
+        },
+        "rule2": {
+          "title": "Care for collective time.",
+          "text": "Be punctual, participate, and notify others if you're absent."
+        },
+        "rule3": {
+          "title": "Support rather than compare.",
+          "text": "A Kartel is not a competition — we move forward hand in hand."
+        },
+        "rule4": {
+          "title": "Express your needs clearly.",
+          "text": "The group isn't a mind reader — saying what you need helps others help you."
+        },
+        "rule5": {
+          "title": "Build trust.",
+          "text": "What's said in the Kartel stays in the Kartel."
+        },
+        "rule6": {
+          "title": "Cultivate curiosity.",
+          "text": "Ask questions, test, experiment — learning is exploration."
+        },
+        "rule7": {
+          "title": "Give constructive feedback.",
+          "text": "Say \"I liked when…\" or \"What if we tried…\" instead of judging."
+        },
+        "rule8": {
+          "title": "Use AI as support, not a substitute.",
+          "text": "It helps you understand — but meaning comes from collaboration."
+        },
+        "rule9": {
+          "title": "Reflect regularly.",
+          "text": "The Kartel adjusts its methods to stay flexible and effective."
+        },
+        "rule10": {
+          "title": "Celebrate together.",
+          "text": "Every milestone is a shared victory."
+        }
       },
-      "requests": {
-        "title": "Your requests to the \"+1\"",
-        "content": "When you need a specific boost, send a request to your \"+1.\" Briefly describe what you need, attach documents, and propose a realistic deadline. The \"+1\" acknowledges receipt, reformulates if needed, and provides a concrete deliverable: a usable summary, a practice quiz, an action plan for the next session, or guidance between two options. Each request follows a clear cycle: open, in progress, resolved — with a short explanation of the chosen action."
-      },
-      "what": {
-        "title": "What is a \"+1\"?",
-        "content": "The \"+1\" comes from a simple idea: a small group moves faster when one person maintains the working dynamic. The \"+1\" stands slightly apart from the group, which allows them to ask the right question at the right moment, avoid tunnel vision, and refocus energy on useful outputs. They replace no one — they simply add just enough to help the group produce value faster."
-      },
-      "role": {
-        "title": "The role of the \"+1\"",
-        "content": "The \"+1\" catalyzes without directing. They turn vague questions into achievable goals, suggest output formats, and set reasonable deadlines. During sessions, they facilitate discussion, manage time, and clarify decisions. Between sessions, they select which information should circulate first and explain why. Their mission is to make the next step obvious — not to define an absolute truth."
-      },
-      "workingWith": {
-        "title": "Working effectively with your \"+1\"",
-        "content": "Before each meeting, come with a specific question and a draft artifact, even if incomplete. During the session, focus on the essential, show your work, and accept that usefulness matters more than perfection. After the session, publish your deliverable, check off the corresponding task, and if something remains unclear, open a short follow-up request. This simple rhythm — read, produce, share, refine — supported by your \"+1,\" is what makes the difference on Kartel."
+      "summary": {
+        "title": "💡 Summary",
+        "intro": "A caring Kartel is built on three core strengths:",
+        "clarity": {
+          "title": "• Clarity:",
+          "text": "a simple framework and shared rules"
+        },
+        "warmth": {
+          "title": "• Warmth:",
+          "text": "sincere, respectful, and joyful human connection"
+        },
+        "discipline": {
+          "title": "• Gentle discipline:",
+          "text": "motivating, supportive, and truly meaningful learning"
+        },
+        "closing": "🌻 Learning together means learning to care — for yourself, for others, and for knowledge itself."
       }
     }
-  }
   },
   "common": {
     "loading": "Loading...",

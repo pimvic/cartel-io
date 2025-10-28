@@ -585,36 +585,148 @@
     "plusOne": {
       "title": "Le « +1 » facilite la progression commune",
       "sections": {
+        "intro": {
+          "title": "Notre « +1 »",
+          "text": "Le « +1 » n'est ni un enseignant, ni un manager. C'est une personne ressource qui aide votre petit groupe à transformer les idées en résultats concrets. Son rôle est simple : maintenir le groupe sur les rails, faire émerger ce qui compte vraiment, et suggérer la prochaine étape quand tout le monde hésite. Vous restez maître de votre travail — le « +1 » facilite simplement la progression collective."
+        },
+        "who": {
+          "title": "Qui est votre « +1 » ?",
+          "text": "Votre « +1 » est un pair animateur, choisi par le groupe pour une période courte et renouvelable. Il connaît votre objectif, lit vos travaux, et met en lumière ce qui mérite d'avancer. Le « +1 » garde une distance égale vis-à-vis de chacun — il ne juge pas, n'impose pas, n'évalue pas. Il assure le rythme, la clarté des décisions, et la fluidité de la communication. Sur cette page, son profil indique son rôle, ses disponibilités, et offre un accès direct pour le contacter."
+        },
+        "latestActions": {
+          "title": "Dernières actions du « +1 »",
+          "text": "Cette section affiche la trace vivante du soutien. Vous y voyez les livrables sélectionnés avec leur explication brève, les comptes rendus de séance, et les rappels ciblés. L'objectif n'est pas le contrôle, mais la visibilité : sortir les petites décisions qui font avancer le groupe. Si aucune action récente n'apparaît, c'est souvent le bon moment pour soumettre une demande ou proposer une session de travail rapide."
+        },
+        "requests": {
+          "title": "Vos requêtes au « +1 »",
+          "text": "Lorsque vous avez besoin d'un coup de pouce précis, adressez une requête à votre « +1 ». Décrivez brièvement ce dont vous avez besoin, joignez des documents, proposez une échéance réaliste. Le « +1 » accuse réception, reformule si nécessaire, puis délivre un livrable concret : une synthèse utilisable, un quizz d'entraînement, un plan d'action pour la prochaine séance, ou un arbitrage entre deux options. Chaque requête suit un cycle clair : ouverte, en cours, résolue — avec une explication courte de l'action choisie."
+        },
+        "what": {
+          "title": "Qu'est-ce qu'un « +1 » ?",
+          "text": "Le « +1 » part d'une idée simple : un petit groupe avance plus vite quand une personne maintient la dynamique de travail. Le « +1 » se tient légèrement à l'écart du groupe, ce qui lui permet de poser la bonne question au bon moment, d'éviter la vision tunnel, et de recentrer l'énergie sur des livrables utiles. Il ne remplace personne — il ajoute juste ce qu'il faut pour que le groupe produise de la valeur plus vite."
+        },
+        "role": {
+          "title": "Rôle du « +1 »",
+          "text": "Le « +1 » catalyse sans diriger. Il transforme une question vague en objectif atteignable, suggère le format de livrable, pose une échéance raisonnable. En séance, il facilite la discussion, gère le temps, clarifie les décisions. Entre deux séances, il sélectionne quelle information doit circuler en premier, et explique pourquoi. Sa mission : rendre la prochaine étape évidente — pas définir une vérité absolue."
+        },
+        "workingWith": {
+          "title": "Bien travailler avec votre « +1 »",
+          "text": "Avant chaque rencontre, venez avec une question précise et un livrablé ébauché, même incomplet. Pendant la session, ciblez l'essentiel, montrez votre travail, acceptez que l'utile prime sur le parfait. Après la séance, publiez votre livrable, cochez la tâche correspondante, et si quelque chose reste flou, ouvrez une courte relance. Ce rythme simple — lire, produire, partager, affiner —, soutenu par votre « +1 », fait toute la différence sur Kartel."
+        }
+      }
+    },
+    "kartelSpirit": {
+      "title": "🤝 L'esprit du Kartel",
       "intro": {
-        "title": "Notre « +1 »",
-        "content": "Le « +1 » n'est pas un professeur ni un chef. C'est une personne ressource qui aide votre mini-groupe à transformer ses idées en résultats concrets. Son rôle est simple : maintenir le cap, faire émerger l'essentiel et proposer le prochain pas quand tout le monde hésite. Vous gardez la main sur vos travaux. Le « +1 » facilite la progression commune."
+        "p1": "Apprendre en Kartel, c'est choisir de progresser ensemble, dans la confiance et la curiosité.",
+        "p2": "Chaque membre apporte un regard, une expérience, une énergie différente.",
+        "p3": "L'intelligence collective naît du dialogue, de la bienveillance et du plaisir d'apprendre à plusieurs.",
+        "p4": "Ces règles ne sont pas des obligations : elles sont des repères pour grandir ensemble."
       },
-      "who": {
-        "title": "Qui est votre « +1 » ?",
-        "content": "Votre « +1 » est un pair facilitateur choisi par le groupe pour une période courte et renouvelable. Il ou elle connaît votre objectif, lit vos productions, puis signale ce qui mérite d'avancer maintenant. Le « +1 » reste à égale distance de chacun : il ne juge pas, n'impose pas, n'évalue pas. Il veille au rythme, à la clarté des décisions et à la circulation des productions. Sur cette page, son profil affiche son mandat, ses disponibilités et un accès direct pour le contacter."
+      "tips": {
+        "title": "🌿 Conseils pour bien vivre son Kartel",
+        "tip1": {
+          "title": "💬 Oser parler et écouter:",
+          "text": "Chaque voix compte. Prendre la parole ou poser une question aide tout le monde à apprendre."
+        },
+        "tip2": {
+          "title": "🕊️ Accueillir sans juger:",
+          "text": "Les erreurs sont des tremplins. Elles montrent le chemin parcouru et celui qui reste à explorer."
+        },
+        "tip3": {
+          "title": "🌱 Partager ses trouvailles:",
+          "text": "Une ressource, un outil, une idée : tout partage nourrit la progression du groupe."
+        },
+        "tip4": {
+          "title": "🔄 Demander de l'aide tôt:",
+          "text": "Un doute exprimé à temps évite la frustration et ouvre des échanges riches."
+        },
+        "tip5": {
+          "title": "🎧 Pratiquer l'écoute active:",
+          "text": "Reformuler, questionner, s'intéresser : écouter, c'est déjà apprendre."
+        },
+        "tip6": {
+          "title": "🤗 Encourager les autres:",
+          "text": "Un mot gentil renforce la motivation. La réussite de l'un profite à tous."
+        },
+        "tip7": {
+          "title": "⏰ Tenir ses engagements:",
+          "text": "La régularité crée la confiance et permet au groupe d'avancer sereinement."
+        },
+        "tip8": {
+          "title": "🪴 Prendre soin du climat:",
+          "text": "L'humour, la bienveillance et le respect entretiennent une atmosphère propice à l'apprentissage."
+        },
+        "tip9": {
+          "title": "🧩 Valoriser les différences:",
+          "text": "Diversité de parcours = richesse d'idées. Chaque expérience éclaire une facette du savoir."
+        },
+        "tip10": {
+          "title": "🌞 Célébrer les progrès:",
+          "text": "Reconnaître les petites victoires rend l'effort plus joyeux et motive la suite."
+        }
       },
-      "latestActions": {
-        "title": "Dernières actions du « +1 »",
-        "content": "Cette section affiche la trace vivante de l'accompagnement. Vous y verrez les sélections d'artefacts avec une courte justification, les comptes rendus de vos séances, ainsi que les rappels ou relances ciblées. L'objectif n'est pas de contrôler, mais de rendre visibles les micro-décisions qui font progresser le groupe. Quand aucune action récente n'apparaît, c'est souvent le bon moment pour déposer une requête ou proposer une courte session de travail."
+      "rules": {
+        "title": "📜 Les 10 règles douces d'un Kartel réussi",
+        "rule1": {
+          "title": "Respecter les personnes et les idées.",
+          "text": "On échange, on débat, mais toujours avec bienveillance."
+        },
+        "rule2": {
+          "title": "Prendre soin du temps collectif.",
+          "text": "Être à l'heure, participer, prévenir en cas d'absence."
+        },
+        "rule3": {
+          "title": "Soutenir plutôt que comparer.",
+          "text": "Le Kartel n'est pas une compétition : on avance main dans la main."
+        },
+        "rule4": {
+          "title": "Exprimer ses besoins clairement.",
+          "text": "Le groupe n'est pas devin : dire ce dont on a besoin, c'est permettre d'être aidé."
+        },
+        "rule5": {
+          "title": "Faire confiance.",
+          "text": "Ce qui se dit dans le Kartel reste dans le Kartel."
+        },
+        "rule6": {
+          "title": "Cultiver la curiosité.",
+          "text": "Poser des questions, tester, expérimenter : l'apprentissage est une exploration."
+        },
+        "rule7": {
+          "title": "Donner du feedback constructif.",
+          "text": "Dire « j'ai aimé quand… » ou « et si on essayait… » plutôt que juger."
+        },
+        "rule8": {
+          "title": "Utiliser l'IA comme un soutien, pas un substitut.",
+          "text": "Elle aide à comprendre, mais le sens vient du collectif."
+        },
+        "rule9": {
+          "title": "Faire le point régulièrement.",
+          "text": "Le Kartel ajuste sa méthode pour rester fluide et efficace."
+        },
+        "rule10": {
+          "title": "Célébrer ensemble.",
+          "text": "Chaque étape franchie est une victoire commune."
+        }
       },
-      "requests": {
-        "title": "Vos requêtes au « +1 »",
-        "content": "Lorsque vous avez besoin d'un coup de pouce précis, vous envoyez une requête au « +1 ». Décrivez brièvement ce que vous attendez, joignez vos documents et proposez une échéance réaliste. Le « +1 » accuse réception, reformule si nécessaire, puis rend un livrable ciblé : une synthèse exploitable, un quiz d'entraînement, un plan d'action pour la séance suivante, ou une aide à la décision entre deux options. Chaque requête suit un cycle clair : ouverte, en cours, résolue, avec une justification courte pour comprendre la sélection opérée."
-      },
-      "what": {
-        "title": "Qu'est-ce qu'un « +1 » ?",
-        "content": "Le « +1 » est né d'une idée simple : un petit groupe avance mieux lorsqu'une personne dédiée garde la dynamique de travail. Le « +1 » se place légèrement en bord du groupe. Cette position lui permet de poser la bonne question au bon moment, d'éviter l'entre-soi et d'orienter l'énergie vers des livrables utiles. Il ne remplace personne, il ajoute juste ce qu'il faut pour que le groupe produise de la valeur rapidement."
-      },
-      "role": {
-        "title": "Rôle du « +1 »",
-        "content": "Le « +1 » catalyse sans diriger. Il transforme une question vague en un objectif atteignable, propose un format de sortie, et fixe une échéance raisonnable. Pendant vos séances, il distribue la parole, sécurise le temps et clarifie les décisions. Entre les séances, il sélectionne ce qui doit circuler d'abord et explique pourquoi. Son rôle est de rendre le prochain pas évident, pas de valider une vérité définitive."
-      },
-      "workingWith": {
-        "title": "Bien travailler avec votre « +1 »",
-        "content": "Avant chaque rencontre, arrivez avec une question précise et un artefact, même imparfait. Pendant la séance, allez droit au but, montrez ce que vous avez, et acceptez que l'utile du moment prime sur le parfait. Après la séance, publiez votre livrable, cochez la tâche correspondante et, si un point bloque encore, ouvrez une requête courte. En procédant ainsi, vous installez un rythme simple : lire, produire, partager, affiner. C'est ce rythme, soutenu par le « +1 », qui fait la différence sur Kartel."
+      "summary": {
+        "title": "💡 Résumé",
+        "intro": "Un Kartel bienveillant repose sur trois forces :",
+        "clarity": {
+          "title": "• Clarté :",
+          "text": "un cadre simple, des règles partagées."
+        },
+        "warmth": {
+          "title": "• Chaleur :",
+          "text": "un lien humain sincère, respectueux et joyeux."
+        },
+        "discipline": {
+          "title": "• Exigence douce :",
+          "text": "on se motive, on se soutient, on apprend pour de vrai."
+        },
+        "closing": "🌻 Apprendre ensemble, c'est apprendre à prendre soin de soi, des autres, et du savoir."
       }
     }
-  }
   },
   "common": {
     "loading": "Chargement...",
