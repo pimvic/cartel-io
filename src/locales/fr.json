@@ -301,12 +301,12 @@
     },
     "menu": {
       "actuKartel": "Actu Kartel",
-      "messagerie": "Messagerie, News & Events",
+      "messagerie": "Communications",
       "knowledgeBase": "Base de connaissances",
       "tools": "Outils pédagogiques",
       "calendar": "Calendrier",
       "plusOne": "Votre +1",
-      "rules": "Règlement",
+      "rules": "L'Esprit du Kartel",
       "overview": "Vue d'ensemble",
       "notes": "Notes",
       "visio": "Visio",
@@ -897,6 +897,39 @@
           }
         },
         "details": "Détails"
+      }
+    },
+    "plusOne": {
+      "title": "Votre +1 : une personne ressource externe et bienveillante qui soutient votre Kartel",
+      "sections": {
+        "intro": {
+          "title": "Qu'est-ce que le +1 ?",
+          "content": "Le +1 est une personne ressource extérieure au Kartel qui accompagne, soutient et facilite votre parcours d'apprentissage collectif. Son rôle est d'être à l'écoute, de vous encourager et de vous aider à surmonter les obstacles, sans jamais se substituer à votre autonomie."
+        },
+        "who": {
+          "title": "Qui est votre +1 ?",
+          "content": "Votre +1 peut être un formateur, un mentor, un coordinateur pédagogique, ou toute personne ayant une expertise dans votre domaine d'apprentissage. C'est quelqu'un qui connaît vos objectifs et qui est là pour vous accompagner avec bienveillance."
+        },
+        "latestActions": {
+          "title": "Dernières actions du +1",
+          "content": "Ici apparaîtront les dernières interventions, conseils et ressources partagés par votre +1 pour soutenir votre progression collective."
+        },
+        "requests": {
+          "title": "Demandes au +1",
+          "content": "Vous pouvez solliciter votre +1 pour des clarifications, des conseils méthodologiques, ou pour débloquer des situations complexes. N'hésitez pas à le contacter quand vous en ressentez le besoin."
+        },
+        "what": {
+          "title": "Que fait votre +1 ?",
+          "content": "Le +1 observe votre progression, répond à vos questions, partage des ressources pertinentes, encourage la dynamique de groupe et vous aide à maintenir votre motivation. Il intervient de manière ponctuelle et ciblée, toujours dans une posture de facilitation."
+        },
+        "role": {
+          "title": "Son rôle précis",
+          "content": "Faciliter l'apprentissage collectif, encourager l'autonomie du groupe, apporter un regard extérieur constructif, proposer des ressources complémentaires, et célébrer vos réussites collectives."
+        },
+        "workingWith": {
+          "title": "Comment travailler avec votre +1 ?",
+          "content": "Communiquez régulièrement avec votre +1, partagez vos avancées et vos difficultés, sollicitez-le quand vous en avez besoin, et profitez de son expertise pour enrichir votre parcours. Le +1 est là pour vous, alors n'hésitez pas à faire appel à lui !"
+        }
       }
     }
   },

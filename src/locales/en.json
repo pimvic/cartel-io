@@ -898,6 +898,39 @@
         },
         "details": "Details"
       }
+    },
+    "plusOne": {
+      "title": "Your +1: an external mentor who supports your Kartel with care",
+      "sections": {
+        "intro": {
+          "title": "What is the +1?",
+          "content": "The +1 is an external resource person who supports, guides, and facilitates your collective learning journey. Their role is to listen, encourage, and help you overcome obstacles, without ever replacing your autonomy."
+        },
+        "who": {
+          "title": "Who is your +1?",
+          "content": "Your +1 can be a trainer, mentor, educational coordinator, or anyone with expertise in your learning domain. They are someone who understands your goals and is there to support you with kindness."
+        },
+        "latestActions": {
+          "title": "Latest +1 Actions",
+          "content": "Here you will see the latest interventions, advice, and resources shared by your +1 to support your collective progress."
+        },
+        "requests": {
+          "title": "Requests to +1",
+          "content": "You can reach out to your +1 for clarifications, methodological advice, or to unblock complex situations. Don't hesitate to contact them when you feel the need."
+        },
+        "what": {
+          "title": "What does your +1 do?",
+          "content": "The +1 observes your progress, answers your questions, shares relevant resources, encourages group dynamics, and helps maintain your motivation. They intervene occasionally and specifically, always in a facilitating role."
+        },
+        "role": {
+          "title": "Their specific role",
+          "content": "Facilitate collective learning, encourage group autonomy, provide constructive external perspective, suggest additional resources, and celebrate your collective successes."
+        },
+        "workingWith": {
+          "title": "How to work with your +1?",
+          "content": "Communicate regularly with your +1, share your progress and challenges, reach out when you need help, and benefit from their expertise to enrich your journey. The +1 is here for you, so don't hesitate to call on them!"
+        }
+      }
     }
   },
   "common": {
