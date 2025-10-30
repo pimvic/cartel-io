@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 export const Feedback = () => {
+  const { t } = useTranslation();
   const [comment, setComment] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -27,12 +29,12 @@ export const Feedback = () => {
         <CardContent className="p-8 space-y-6">
           {submitted ? (
             <div className="text-center text-success font-semibold text-xl py-12">
-              Merci pour votre feedback !
+              {t('dashboard.feedback.success')}
             </div>
           ) : (
             <>
               <Textarea
-                placeholder="Votre message…"
+                placeholder={t('dashboard.feedback.placeholder')}
                 rows={8}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -42,7 +44,7 @@ export const Feedback = () => {
                 onClick={handleSubmit} 
                 className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
               >
-                ENTRER
+                {t('dashboard.feedback.submit')}
               </Button>
             </>
           )}

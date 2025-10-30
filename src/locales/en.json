@@ -949,6 +949,11 @@
         "saveButton": "Save changes"
       },
       "comingSoon": "Feature coming soon"
+    },
+    "feedback": {
+      "placeholder": "Your message...",
+      "submit": "SUBMIT",
+      "success": "Thank you for your feedback!"
     }
   },
   "common": {
