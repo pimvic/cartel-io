@@ -931,6 +931,24 @@
           "content": "Communiquez régulièrement avec votre +1, partagez vos avancées et vos difficultés, sollicitez-le quand vous en avez besoin, et profitez de son expertise pour enrichir votre parcours. Le +1 est là pour vous, alors n'hésitez pas à faire appel à lui !"
         }
       }
+    },
+    "settings": {
+      "subtitle": "Configurez les éléments clés de votre Kartel : vérifiez-les régulièrement.",
+      "tabs": {
+        "general": "Général",
+        "members": "Membres",
+        "display": "Affichage"
+      },
+      "kartelInfo": {
+        "title": "Informations du Kartel",
+        "kartelName": "Nom du Kartel",
+        "kartelNameValue": "Formateur Professionnel d'Adultes (FPA)",
+        "coordinator": "Coordinateur",
+        "coordinatorValue": "Jean-Stéphane B.",
+        "deadline": "Date limite",
+        "saveButton": "Enregistrer les modifications"
+      },
+      "comingSoon": "Fonctionnalité à venir"
     }
   },
   "common": {

@@ -931,6 +931,24 @@
           "content": "Communicate regularly with your +1, share your progress and challenges, reach out when you need help, and benefit from their expertise to enrich your journey. The +1 is here for you, so don't hesitate to call on them!"
         }
       }
+    },
+    "settings": {
+      "subtitle": "Configure the key elements of your Kartel — check them regularly.",
+      "tabs": {
+        "general": "General",
+        "members": "Members",
+        "display": "Display"
+      },
+      "kartelInfo": {
+        "title": "Kartel Information",
+        "kartelName": "Kartel Name",
+        "kartelNameValue": "Adult Vocational Trainer (FPA)",
+        "coordinator": "Coordinator",
+        "coordinatorValue": "Jean-Stéphane B.",
+        "deadline": "Deadline",
+        "saveButton": "Save changes"
+      },
+      "comingSoon": "Feature coming soon"
     }
   },
   "common": {
