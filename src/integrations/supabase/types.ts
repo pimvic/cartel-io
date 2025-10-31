@@ -184,6 +184,44 @@ export type Database = {
           },
         ]
       }
+      sessions: {
+        Row: {
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          ip_address: string | null
+          token: string
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: string | null
+          token: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: string | null
+          token?: string
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           assigned_to: string | null
@@ -234,27 +272,48 @@ export type Database = {
       }
       users: {
         Row: {
+          auth_user_id: string | null
           avatar_url: string | null
           created_at: string | null
           email: string
+          first_name: string | null
           id: string
+          is_demo: boolean | null
+          last_login_at: string | null
+          last_name: string | null
           name: string
+          preferred_locale: string | null
+          provider: string | null
           role: string
         }
         Insert: {
+          auth_user_id?: string | null
           avatar_url?: string | null
           created_at?: string | null
           email: string
+          first_name?: string | null
           id?: string
+          is_demo?: boolean | null
+          last_login_at?: string | null
+          last_name?: string | null
           name: string
+          preferred_locale?: string | null
+          provider?: string | null
           role: string
         }
         Update: {
+          auth_user_id?: string | null
           avatar_url?: string | null
           created_at?: string | null
           email?: string
+          first_name?: string | null
           id?: string
+          is_demo?: boolean | null
+          last_login_at?: string | null
+          last_name?: string | null
           name?: string
+          preferred_locale?: string | null
+          provider?: string | null
           role?: string
         }
         Relationships: []
