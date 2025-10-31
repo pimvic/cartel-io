@@ -956,6 +956,27 @@
       "success": "Merci pour votre feedback !"
     }
   },
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "createAccount": "Créer un compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "passwordOptional": "Mot de passe (optionnel - laisser vide pour connexion sans mot de passe)",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "firstNamePlaceholder": "Jean-Stéphane",
+    "lastNamePlaceholder": "B.",
+    "googleSignIn": "Se connecter avec Google",
+    "demoLogin": "Connexion démonstration",
+    "hasAccount": "Vous avez déjà un compte ? Connectez-vous",
+    "noAccount": "Pas encore de compte ? Créez-en un",
+    "loginSuccess": "Connexion réussie",
+    "signupSuccess": "Compte créé avec succès",
+    "loginError": "Échec de la connexion. Vérifiez vos identifiants.",
+    "signupError": "Échec de la création du compte. Veuillez réessayer.",
+    "googleError": "Échec de la connexion avec Google. Veuillez réessayer."
+  },
   "common": {
     "loading": "Chargement...",
     "error": "Erreur",

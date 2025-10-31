@@ -956,6 +956,27 @@
       "success": "Thank you for your feedback!"
     }
   },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "createAccount": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "passwordOptional": "Password (optional - leave empty for passwordless)",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "firstNamePlaceholder": "Jean-Stéphane",
+    "lastNamePlaceholder": "B.",
+    "googleSignIn": "Sign in with Google",
+    "demoLogin": "Demo Login",
+    "hasAccount": "Already have an account? Login",
+    "noAccount": "Don't have an account? Create one",
+    "loginSuccess": "Successfully logged in",
+    "signupSuccess": "Account created successfully",
+    "loginError": "Login failed. Please check your credentials.",
+    "signupError": "Signup failed. Please try again.",
+    "googleError": "Google sign-in failed. Please try again."
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",

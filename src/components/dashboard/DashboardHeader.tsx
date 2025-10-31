@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Star, User, Settings, LogOut } from "lucide-react";
+import { Star } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { UserMenu } from "@/components/UserMenu";
 
 const members = [
   {
@@ -44,11 +36,6 @@ export const DashboardHeader = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { lang } = useParams();
-  const currentUser = members[0]; // Jean-Stéphane B.
-
-  const handleLogout = () => {
-    navigate(`/${lang || 'fr'}`);
-  };
 
   return (
     <header className="fixed top-0 w-full h-16 bg-accent/30 backdrop-blur-sm border-b border-border z-50">
@@ -89,42 +76,8 @@ export const DashboardHeader = () => {
             ))}
           </div>
           <p className="text-sm text-muted-foreground whitespace-nowrap">{t('dashboard.header.deadline')}</p>
+          <UserMenu />
         </div>
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-              <Avatar className="h-10 w-10">
-                <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
-                <AvatarFallback>{currentUser.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-56">
-            <div className="flex items-center justify-start gap-2 p-2">
-              <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium">{currentUser.name}</p>
-                <p className="text-xs text-muted-foreground">
-                  {currentUser.isCoordinator ? t('dashboard.header.coordinator') : t('dashboard.header.members')}
-                </p>
-              </div>
-            </div>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>{t('dashboard.profile.profile')}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>{t('dashboard.profile.settings')}</span>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>{t('dashboard.profile.logout')}</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
     </header>
   );

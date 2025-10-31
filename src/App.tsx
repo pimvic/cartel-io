@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
@@ -33,18 +35,20 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navigate to={`/${preferredLang}`} replace />} />
-            <Route path="/:lang" element={<Landing />} />
-            <Route path="/:lang/login" element={<Login />} />
-            <Route path="/:lang/dashboard" element={<Dashboard />} />
-            <Route path="/:lang/quiz" element={<Quiz />} />
-            <Route path="/:lang/flashcards" element={<Flashcards />} />
-            <Route path="/:lang/mindmap" element={<Mindmap />} />
-            <Route path="/:lang/glossaire" element={<Glossaire />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Navigate to={`/${preferredLang}`} replace />} />
+              <Route path="/:lang" element={<Landing />} />
+              <Route path="/:lang/login" element={<Login />} />
+              <Route path="/:lang/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/:lang/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+              <Route path="/:lang/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
+              <Route path="/:lang/mindmap" element={<ProtectedRoute><Mindmap /></ProtectedRoute>} />
+              <Route path="/:lang/glossaire" element={<ProtectedRoute><Glossaire /></ProtectedRoute>} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

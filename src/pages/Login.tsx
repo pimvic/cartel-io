@@ -18,6 +18,8 @@ const Login = () => {
   const { lang } = useParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
 
@@ -49,22 +51,86 @@ const Login = () => {
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
-    // Demo mode: bypass authentication
-    toast({
-      title: t('common.success'),
-      description: isSignUp ? "Compte créé avec succès" : "Connexion réussie",
-    });
-    navigate(`/${lang || 'fr'}/dashboard`);
+    try {
+      if (isSignUp) {
+        // Sign up flow
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password: password || Math.random().toString(36), // Generate random password if not provided
+          options: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              provider: 'email',
+              preferred_locale: lang || 'fr',
+              is_demo: false,
+              role: 'member'
+            },
+            emailRedirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`
+          }
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: t('common.success'),
+          description: t('auth.signupSuccess'),
+        });
+        
+        // Auto login after signup
+        navigate(`/${lang || 'fr'}/dashboard`);
+      } else {
+        // Sign in flow
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password: password || 'demo-password',
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: t('common.success'),
+          description: t('auth.loginSuccess'),
+        });
+        
+        navigate(`/${lang || 'fr'}/dashboard`);
+      }
+    } catch (error: any) {
+      toast({
+        title: t('common.error'),
+        description: error.message || (isSignUp ? t('auth.signupError') : t('auth.loginError')),
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleAuth = async () => {
-    // Demo mode: bypass Google authentication
-    toast({
-      title: t('common.success'),
-      description: "Connexion avec Google réussie",
-    });
-    navigate(`/${lang || 'fr'}/dashboard`);
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
+        }
+      });
+
+      if (error) throw error;
+    } catch (error: any) {
+      toast({
+        title: t('common.error'),
+        description: error.message || t('auth.googleError'),
+        variant: "destructive"
+      });
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -92,12 +158,40 @@ const Login = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleEmailAuth} className="space-y-4">
+            {isSignUp && (
+              <>
+                <div className="space-y-2">
+                  <Label htmlFor="firstName">{t('auth.firstName')}</Label>
+                  <Input
+                    id="firstName"
+                    type="text"
+                    placeholder={t('auth.firstNamePlaceholder')}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="lastName">{t('auth.lastName')}</Label>
+                  <Input
+                    id="lastName"
+                    type="text"
+                    placeholder={t('auth.lastNamePlaceholder')}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+              </>
+            )}
             <div className="space-y-2">
-              <Label htmlFor="email">{t('login.email')}</Label>
+              <Label htmlFor="email">{t('auth.email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="jean@cartel.com"
+                placeholder="jean@kartels.io"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -105,16 +199,17 @@ const Login = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">{t('login.password')}</Label>
+              <Label htmlFor="password">{t('auth.password')}</Label>
               <Input
                 id="password"
                 type="password"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
                 disabled={isLoading}
+                minLength={6}
               />
+              <p className="text-xs text-muted-foreground">{t('auth.passwordOptional')}</p>
             </div>
             <Button 
               type="submit" 
@@ -123,7 +218,7 @@ const Login = () => {
             >
               {isLoading 
                 ? t('common.loading') 
-                : (isSignUp ? t('login.signUp') : t('login.signIn'))}
+                : (isSignUp ? t('auth.createAccount') : t('auth.login'))}
             </Button>
           </form>
 
@@ -153,7 +248,7 @@ const Login = () => {
               className="text-muted-foreground"
               disabled={isLoading}
             >
-              {isSignUp ? t('login.hasAccount') + ' ' + t('login.login') : t('login.newAccount') + ' ' + t('login.createAccount')}
+              {isSignUp ? t('auth.hasAccount') : t('auth.noAccount')}
             </Button>
             <br />
             <Button 
