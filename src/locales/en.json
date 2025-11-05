@@ -196,29 +196,38 @@
     }
   },
   "footer": {
-    "solutions": "Solutions",
-    "enterprise": "Enterprise",
-    "resources": "Resources",
-    "partners": "Partners",
-    "newsletter": {
-      "title": "Newsletter",
-      "placeholder": "Your email",
-      "send": "Send"
-    },
-    "links": {
-      "presentation": "About",
-      "mission": "Mission",
+    "solutions": "SOLUTIONS",
+    "enterprise": "COMPANY",
+    "resources": "RESOURCES",
+    "partners": "PARTNERS",
+    "items": {
+      "accounts": "Accounts",
+      "kartelEdu": "Kartel Edu",
+      "onboardingServices": "Onboarding Services",
+      "mentoring": "Mentoring",
+      "tutoring": "Tutoring",
+      "aboutMission": "About / Mission",
       "team": "Team",
       "philosophy": "Philosophy",
       "opportunities": "Opportunities",
-      "contacts": "Contacts",
-      "investors": "Investors"
+      "contact": "Contact",
+      "aboutKartels": "About Kartels",
+      "workInGroups": "How to Work Effectively in Groups",
+      "infographics": "Infographics",
+      "documentation": "Knowledge Documents",
+      "toolsDownloads": "Tools & Downloads",
+      "learnersCommunity": "Kartel Learners Community",
+      "trainersCommunity": "Trainers Community",
+      "plusOneCommunity": "\"+1\" Community",
+      "institutionalPartners": "Institutional Partners",
+      "businessPartners": "Business Partners"
     },
     "legal": {
-      "copyright": "© 2025 – KARTELS S.A. All rights reserved.",
+      "copyright": "© 2025 Kartels S.A. All rights reserved.",
       "terms": "Terms & Conditions",
       "privacy": "Privacy Policy",
-      "gdpr": "GDPR"
+      "gdpr": "GDPR",
+      "newsletter": "Newsletter"
     }
   },
   "login": {

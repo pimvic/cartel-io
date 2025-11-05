@@ -196,29 +196,38 @@
     }
   },
   "footer": {
-    "solutions": "Solutions",
-    "enterprise": "Entreprise",
-    "resources": "Ressources",
-    "partners": "Partenaires",
-    "newsletter": {
-      "title": "Newsletter",
-      "placeholder": "Votre email",
-      "send": "Envoyer"
-    },
-    "links": {
-      "presentation": "Présentation",
-      "mission": "Mission",
+    "solutions": "SOLUTIONS",
+    "enterprise": "ENTREPRISE",
+    "resources": "RESSOURCES",
+    "partners": "PARTENAIRES",
+    "items": {
+      "accounts": "Comptes",
+      "kartelEdu": "Kartel Edu",
+      "onboardingServices": "Services de mise en route",
+      "mentoring": "Accompagnement",
+      "tutoring": "Tutorat",
+      "aboutMission": "Présentation / Mission",
       "team": "Équipe",
       "philosophy": "Philosophie",
       "opportunities": "Opportunités",
-      "contacts": "Contacts",
-      "investors": "Investisseurs"
+      "contact": "Contacts",
+      "aboutKartels": "Kartels en détails",
+      "workInGroups": "Comment bien travailler en groupes",
+      "infographics": "Infographies",
+      "documentation": "Documentations Goules",
+      "toolsDownloads": "Outils Téléchargements",
+      "learnersCommunity": "La communauté des Kartellisants",
+      "trainersCommunity": "La communauté des Formateurs en Kartels",
+      "plusOneCommunity": "Communauté des « +1 »",
+      "institutionalPartners": "Partenaires institutionnels",
+      "businessPartners": "Partenaires commerciaux"
     },
     "legal": {
-      "copyright": "© 2025 – KARTELS S.A. Tous droits réservés.",
+      "copyright": "© 2025 Kartels S.A. Tous droits réservés.",
       "terms": "Conditions Générales",
       "privacy": "Politique de Confidentialité",
-      "gdpr": "RGPD"
+      "gdpr": "RGPD",
+      "newsletter": "Newsletter"
     }
   },
   "login": {
