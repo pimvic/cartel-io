@@ -951,9 +951,34 @@
       "comingSoon": "Fonctionnalité à venir"
     },
     "feedback": {
-      "placeholder": "Votre message…",
-      "submit": "ENTRER",
-      "success": "Merci pour votre feedback !"
+      "title": "Donnez votre avis ou signalez un problème",
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre.email@exemple.fr",
+      "type": "Type",
+      "typePlaceholder": "Sélectionnez le type",
+      "typeBug": "Bug",
+      "typeIdea": "Idée",
+      "typeHelp": "Aide",
+      "typeOther": "Autre",
+      "message": "Message",
+      "messagePlaceholder": "Décrivez votre commentaire ou problème en détail...",
+      "attachment": "Pièce jointe (optionnel)",
+      "submit": "Envoyer le feedback",
+      "success": "Succès !",
+      "successDescription": "Merci pour votre retour !",
+      "thankYou": "Merci pour votre retour !",
+      "error": "Erreur",
+      "errorDescription": "Veuillez remplir tous les champs requis",
+      "loginRequired": "Vous devez être connecté pour soumettre un feedback",
+      "adminTitle": "Tous les Feedbacks Soumis",
+      "noFeedback": "Aucun feedback soumis pour le moment",
+      "tableDate": "Date",
+      "tableName": "Nom",
+      "tableType": "Type",
+      "tableMessage": "Message",
+      "tableAttachment": "Pièce jointe"
     }
   },
   "auth": {

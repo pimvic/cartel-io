@@ -951,9 +951,34 @@
       "comingSoon": "Feature coming soon"
     },
     "feedback": {
-      "placeholder": "Your message...",
-      "submit": "SUBMIT",
-      "success": "Thank you for your feedback!"
+      "title": "Share your feedback or report an issue",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "type": "Type",
+      "typePlaceholder": "Select feedback type",
+      "typeBug": "Bug",
+      "typeIdea": "Idea",
+      "typeHelp": "Help",
+      "typeOther": "Other",
+      "message": "Message",
+      "messagePlaceholder": "Describe your feedback or issue in detail...",
+      "attachment": "Attachment (optional)",
+      "submit": "Submit Feedback",
+      "success": "Success!",
+      "successDescription": "Thank you for your feedback!",
+      "thankYou": "Thank you for your feedback!",
+      "error": "Error",
+      "errorDescription": "Please fill in all required fields",
+      "loginRequired": "You must be logged in to submit feedback",
+      "adminTitle": "All Feedback Submissions",
+      "noFeedback": "No feedback submitted yet",
+      "tableDate": "Date",
+      "tableName": "Name",
+      "tableType": "Type",
+      "tableMessage": "Message",
+      "tableAttachment": "Attachment"
     }
   },
   "auth": {
