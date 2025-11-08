@@ -152,31 +152,122 @@ export type Database = {
           },
         ]
       }
-      knowledge_base: {
+      knowledge_base_favorites: {
         Row: {
-          cartel_id: string
-          file_url: string
+          created_at: string
           id: string
-          title: string
-          uploaded_at: string | null
+          resource_id: string
+          user_id: string
         }
         Insert: {
-          cartel_id: string
-          file_url: string
+          created_at?: string
           id?: string
-          title: string
-          uploaded_at?: string | null
+          resource_id: string
+          user_id: string
         }
         Update: {
-          cartel_id?: string
-          file_url?: string
+          created_at?: string
           id?: string
-          title?: string
-          uploaded_at?: string | null
+          resource_id?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "knowledge_base_cartel_id_fkey"
+            foreignKeyName: "knowledge_base_favorites_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_base_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_base_reports: {
+        Row: {
+          id: string
+          reason: string
+          reported_at: string
+          reported_by: string
+          resource_id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["report_status"]
+        }
+        Insert: {
+          id?: string
+          reason: string
+          reported_at?: string
+          reported_by: string
+          resource_id: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Update: {
+          id?: string
+          reason?: string
+          reported_at?: string
+          reported_by?: string
+          resource_id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_base_reports_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "knowledge_base_resources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      knowledge_base_resources: {
+        Row: {
+          cartel_id: string
+          category: Database["public"]["Enums"]["resource_category"]
+          description: string | null
+          file_size: number | null
+          id: string
+          resource_url: string
+          tags: string[] | null
+          title: string
+          type: Database["public"]["Enums"]["resource_type"]
+          updated_at: string
+          uploaded_at: string
+          uploaded_by: string
+        }
+        Insert: {
+          cartel_id: string
+          category: Database["public"]["Enums"]["resource_category"]
+          description?: string | null
+          file_size?: number | null
+          id?: string
+          resource_url: string
+          tags?: string[] | null
+          title: string
+          type: Database["public"]["Enums"]["resource_type"]
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by: string
+        }
+        Update: {
+          cartel_id?: string
+          category?: Database["public"]["Enums"]["resource_category"]
+          description?: string | null
+          file_size?: number | null
+          id?: string
+          resource_url?: string
+          tags?: string[] | null
+          title?: string
+          type?: Database["public"]["Enums"]["resource_type"]
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "knowledge_base_resources_cartel_id_fkey"
             columns: ["cartel_id"]
             isOneToOne: false
             referencedRelation: "cartels"
@@ -521,6 +612,14 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      report_status: "pending" | "reviewed" | "resolved" | "dismissed"
+      resource_category:
+        | "documents"
+        | "videos"
+        | "summaries"
+        | "tools"
+        | "other"
+      resource_type: "document" | "video" | "summary" | "tool" | "link"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -649,6 +748,9 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      report_status: ["pending", "reviewed", "resolved", "dismissed"],
+      resource_category: ["documents", "videos", "summaries", "tools", "other"],
+      resource_type: ["document", "video", "summary", "tool", "link"],
     },
   },
 } as const

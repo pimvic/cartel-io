@@ -104,14 +104,19 @@ export const ActuKartel = () => {
 
       // Fetch recent documents (5 most recent)
       const { data: documentsData, error: documentsError } = await supabase
-        .from('knowledge_base')
-        .select('id, title, file_url, uploaded_at')
+        .from('knowledge_base_resources')
+        .select('id, title, resource_url, uploaded_at')
         .eq('cartel_id', cartelId)
         .order('uploaded_at', { ascending: false })
         .limit(5);
 
       if (documentsError) throw documentsError;
-      setDocuments(documentsData || []);
+      setDocuments(documentsData?.map(d => ({
+        id: d.id,
+        title: d.title,
+        file_url: d.resource_url,
+        uploaded_at: d.uploaded_at
+      })) || []);
 
       // Fetch recent notes
       const { data: notesData, error: notesError } = await supabase
