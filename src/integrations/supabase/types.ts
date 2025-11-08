@@ -46,6 +46,47 @@ export type Database = {
           },
         ]
       }
+      events: {
+        Row: {
+          cartel_id: string
+          created_at: string
+          description: string | null
+          event_date: string
+          event_type: string
+          id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cartel_id: string
+          created_at?: string
+          description?: string | null
+          event_date: string
+          event_type: string
+          id?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          cartel_id?: string
+          created_at?: string
+          description?: string | null
+          event_date?: string
+          event_type?: string
+          id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       feedback: {
         Row: {
           attachment_url: string | null
@@ -175,6 +216,99 @@ export type Database = {
           },
           {
             foreignKeyName: "memberships_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          cartel_id: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cartel_id: string
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cartel_id?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notes: {
+        Row: {
+          cartel_id: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cartel_id: string
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cartel_id?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notes_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notes_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
