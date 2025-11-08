@@ -359,6 +359,117 @@ export type Database = {
           },
         ]
       }
+      milestone_reminders: {
+        Row: {
+          created_at: string
+          id: string
+          milestone_id: string
+          reminder_date: string
+          sent: boolean | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          milestone_id: string
+          reminder_date: string
+          sent?: boolean | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          milestone_id?: string
+          reminder_date?: string
+          sent?: boolean | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "milestone_reminders_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "milestone_reminders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      milestones: {
+        Row: {
+          assignees: string[] | null
+          attachments: Json | null
+          audit_log: Json | null
+          cartel_id: string
+          completed_at: string | null
+          created_at: string
+          created_by: string
+          description: string | null
+          due_date: string
+          id: string
+          importance: boolean
+          is_final: boolean | null
+          status: Database["public"]["Enums"]["milestone_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assignees?: string[] | null
+          attachments?: Json | null
+          audit_log?: Json | null
+          cartel_id: string
+          completed_at?: string | null
+          created_at?: string
+          created_by: string
+          description?: string | null
+          due_date: string
+          id?: string
+          importance?: boolean
+          is_final?: boolean | null
+          status?: Database["public"]["Enums"]["milestone_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assignees?: string[] | null
+          attachments?: Json | null
+          audit_log?: Json | null
+          cartel_id?: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          due_date?: string
+          id?: string
+          importance?: boolean
+          is_final?: boolean | null
+          status?: Database["public"]["Enums"]["milestone_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "milestones_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "milestones_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notes: {
         Row: {
           cartel_id: string
@@ -612,6 +723,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      milestone_status: "a_venir" | "en_cours" | "termine"
       report_status: "pending" | "reviewed" | "resolved" | "dismissed"
       resource_category:
         | "documents"
@@ -748,6 +860,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      milestone_status: ["a_venir", "en_cours", "termine"],
       report_status: ["pending", "reviewed", "resolved", "dismissed"],
       resource_category: ["documents", "videos", "summaries", "tools", "other"],
       resource_type: ["document", "video", "summary", "tool", "link"],

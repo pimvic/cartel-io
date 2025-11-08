@@ -496,65 +496,72 @@
       }
     },
     "calendar": {
-      "title": "Agenda",
-      "subtitle": "Planifiez vos sessions Kartel, notez vos échéances et fixez vos objectifs finaux",
-      "tabs": {
-        "calendar": "Calendrier",
-        "deadlines": "Échéances",
-        "objectives": "Objectifs"
+      "title": "Calendrier",
+      "subtitle": "Jalons et échéances de votre Kartel",
+      "searchPlaceholder": "Rechercher un jalon...",
+      "create": "Créer un jalon",
+      "edit": "Modifier",
+      "noResults": "Aucun jalon trouvé",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce jalon ?",
+      "status": {
+        "a_venir": "À venir",
+        "en_cours": "En cours",
+        "termine": "Terminé"
       },
-      "overview": {
-        "title": "Vue d'ensemble",
-        "addEvent": "Ajouter un évènement",
-        "daysLeft": "jours",
-        "untilEnd": "Jusqu'à la fin",
-        "tasks": "tâches",
-        "thisWeek": "Cette semaine",
-        "progress": "Progression"
+      "filters": {
+        "allStatus": "Tous les statuts",
+        "allImportance": "Tous",
+        "importantOnly": "Important uniquement"
       },
-      "milestones": {
-        "title": "Jalons et Échéances",
-        "upcoming": "À venir",
-        "important": "Important",
-        "events": {
-          "event1": "Finaliser le scénario pédagogique",
-          "event2": "Réviser les chapitres 1-3",
-          "event3": "Créer les flashcards du module 7",
-          "event4": "Examen intermédiaire",
-          "event5": "Échéance finale du cartel"
-        }
+      "actions": {
+        "complete": "Marquer terminé",
+        "reopen": "Réouvrir",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "setReminder": "Définir un rappel"
       },
-      "goals": {
-        "title": "Gérer les objectifs",
-        "archive": "Archiver",
-        "create": "Créer un objectif",
-        "groupGoals": "Objectifs du groupe",
-        "goal1": "🎯 Terminer tous les modules",
-        "goal2": "📝 Réussir l'ECF",
-        "goal3": "💪 Améliorer les compétences",
-        "inProgress": "En cours",
-        "preparation": "Préparation en cours"
+      "detail": {
+        "status": "Statut",
+        "description": "Description",
+        "completedAt": "Terminé le",
+        "auditLog": "Historique",
+        "by": "par"
       },
-      "deadlines": {
-        "title": "Gérer les échéances",
-        "archive": "Archiver",
-        "create": "Créer une échéance",
-        "important": "Échéances importantes",
-        "deadline1": {
-          "title": "⏰ Module 13 - Urgent",
-          "description": "Deadline de soumission",
-          "time": "Dans 2 jours (10 juin 2025)"
-        },
-        "deadline2": {
-          "title": "📚 ECF Final",
-          "description": "Examen de certification",
-          "time": "15 avril 2026 (dans 170 jours)"
-        },
-        "deadline3": {
-          "title": "📋 Révisions collectives",
-          "description": "Session de groupe planifiée",
-          "time": "Dans 5 jours"
-        }
+      "form": {
+        "title": "Titre",
+        "description": "Description",
+        "dueDate": "Date d'échéance",
+        "importance": "Marquer comme important",
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      },
+      "reminder": {
+        "title": "Définir un rappel",
+        "selectDate": "Sélectionner la date et l'heure",
+        "dayBefore": "jour avant",
+        "daysBefore": "jours avant",
+        "weekBefore": "semaine avant",
+        "set": "Définir le rappel"
+      },
+      "pagination": {
+        "previous": "Précédent",
+        "next": "Suivant",
+        "page": "Page {{current}} sur {{total}}"
+      },
+      "success": {
+        "created": "Jalon créé avec succès",
+        "updated": "Jalon mis à jour avec succès",
+        "deleted": "Jalon supprimé avec succès",
+        "completed": "Jalon marqué comme terminé",
+        "reopened": "Jalon réouvert",
+        "reminderSet": "Rappel défini avec succès"
+      },
+      "errors": {
+        "loadFailed": "Échec du chargement des jalons",
+        "createFailed": "Échec de la création du jalon",
+        "updateFailed": "Échec de la mise à jour du jalon",
+        "deleteFailed": "Échec de la suppression du jalon",
+        "reminderFailed": "Échec de la définition du rappel"
       }
     },
     "plusOne": {
