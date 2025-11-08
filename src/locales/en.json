@@ -495,8 +495,10 @@
         "deleteConfirm": "Are you sure you want to delete all documents?"
       }
     },
-    "calendar": {
-      "title": "Calendar",
+  "calendar": {
+    "title": "Calendar",
+    "noCartel": "No Cartel",
+    "noCartelDescription": "You must be a member of a cartel to access the calendar.",
       "subtitle": "Milestones and deadlines for your Kartel",
       "searchPlaceholder": "Search for a milestone...",
       "create": "Create Milestone",

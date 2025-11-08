@@ -126,19 +126,21 @@ export const Calendar = () => {
           .from("memberships")
           .select("role, cartel_id")
           .eq("user_id", userData.id)
-          .single();
+          .maybeSingle();
         
         setUserMembership(membershipData);
 
-        // Fetch milestones
-        const { data: milestonesData, error } = await supabase
-          .from("milestones")
-          .select("*")
-          .eq("cartel_id", membershipData?.cartel_id)
-          .order("due_date", { ascending: true });
+        // Only fetch milestones if user has a cartel
+        if (membershipData?.cartel_id) {
+          // Fetch milestones
+          const { data: milestonesData, error } = await supabase
+            .from("milestones")
+            .select("*")
+            .eq("cartel_id", membershipData.cartel_id)
+            .order("due_date", { ascending: true });
 
-        if (error) throw error;
-        setMilestones((milestonesData as Milestone[]) || []);
+          if (error) throw error;
+          setMilestones((milestonesData as Milestone[]) || []);
 
         // Fetch all users in cartel
         const { data: usersData } = await supabase
@@ -147,9 +149,10 @@ export const Calendar = () => {
           .in("id", (await supabase
             .from("memberships")
             .select("user_id")
-            .eq("cartel_id", membershipData?.cartel_id)).data?.map(m => m.user_id) || []);
+            .eq("cartel_id", membershipData.cartel_id)).data?.map(m => m.user_id) || []);
         
         setUsers(usersData || []);
+        }
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -448,6 +451,23 @@ export const Calendar = () => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
+  // Show message if user has no cartel membership
+  if (!userMembership) {
+    return (
+      <div className="space-y-6">
+        <div className="pt-2">
+          <p className="text-muted-foreground text-[110%]">{t("calendar.subtitle")}</p>
+        </div>
+        <Card>
+          <CardContent className="p-8 text-center">
+            <h3 className="text-lg font-semibold mb-2">{t("calendar.noCartel")}</h3>
+            <p className="text-muted-foreground">{t("calendar.noCartelDescription")}</p>
+          </CardContent>
+        </Card>
       </div>
     );
   }

@@ -495,8 +495,10 @@
         "deleteConfirm": "Êtes-vous sûr de vouloir supprimer tous les documents ?"
       }
     },
-    "calendar": {
-      "title": "Calendrier",
+  "calendar": {
+    "title": "Calendrier",
+    "noCartel": "Pas de cartel",
+    "noCartelDescription": "Vous devez être membre d'un cartel pour accéder au calendrier.",
       "subtitle": "Jalons et échéances de votre Kartel",
       "searchPlaceholder": "Rechercher un jalon...",
       "create": "Créer un jalon",
