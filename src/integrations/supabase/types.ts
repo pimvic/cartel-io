@@ -46,36 +46,147 @@ export type Database = {
           },
         ]
       }
+      chat_messages: {
+        Row: {
+          attachments: Json | null
+          body: string
+          created_at: string
+          deleted_at: string | null
+          edited_at: string | null
+          id: string
+          mentions: string[] | null
+          reactions: Json | null
+          sender_id: string
+          thread_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          attachments?: Json | null
+          body: string
+          created_at?: string
+          deleted_at?: string | null
+          edited_at?: string | null
+          id?: string
+          mentions?: string[] | null
+          reactions?: Json | null
+          sender_id: string
+          thread_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          attachments?: Json | null
+          body?: string
+          created_at?: string
+          deleted_at?: string | null
+          edited_at?: string | null
+          id?: string
+          mentions?: string[] | null
+          reactions?: Json | null
+          sender_id?: string
+          thread_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chat_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_attendees: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_attendees_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_attendees_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       events: {
         Row: {
+          attachments: Json | null
+          capacity: number | null
           cartel_id: string
           created_at: string
           description: string | null
           event_date: string
           event_type: string
           id: string
+          location: string | null
+          tags: string[] | null
           title: string
           updated_at: string
+          visio_link: string | null
         }
         Insert: {
+          attachments?: Json | null
+          capacity?: number | null
           cartel_id: string
           created_at?: string
           description?: string | null
           event_date: string
           event_type: string
           id?: string
+          location?: string | null
+          tags?: string[] | null
           title: string
           updated_at?: string
+          visio_link?: string | null
         }
         Update: {
+          attachments?: Json | null
+          capacity?: number | null
           cartel_id?: string
           created_at?: string
           description?: string | null
           event_date?: string
           event_type?: string
           id?: string
+          location?: string | null
+          tags?: string[] | null
           title?: string
           updated_at?: string
+          visio_link?: string | null
         }
         Relationships: [
           {
@@ -470,6 +581,105 @@ export type Database = {
           },
         ]
       }
+      news: {
+        Row: {
+          attachments: Json | null
+          author_id: string
+          body: string
+          cartel_id: string
+          created_at: string
+          id: string
+          pinned: boolean
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          attachments?: Json | null
+          author_id: string
+          body: string
+          cartel_id: string
+          created_at?: string
+          id?: string
+          pinned?: boolean
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          attachments?: Json | null
+          author_id?: string
+          body?: string
+          cartel_id?: string
+          created_at?: string
+          id?: string
+          pinned?: boolean
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "news_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "news_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      news_comments: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          deleted_at: string | null
+          id: string
+          news_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          news_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          news_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "news_comments_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "news_comments_news_id_fkey"
+            columns: ["news_id"]
+            isOneToOne: false
+            referencedRelation: "news"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notes: {
         Row: {
           cartel_id: string
@@ -512,6 +722,86 @@ export type Database = {
           {
             foreignKeyName: "notes_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          payload: Json
+          read_at: string | null
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pins: {
+        Row: {
+          cartel_id: string
+          display_order: number | null
+          id: string
+          item_id: string
+          item_type: string
+          pinned_at: string
+          pinned_by: string
+        }
+        Insert: {
+          cartel_id: string
+          display_order?: number | null
+          id?: string
+          item_id: string
+          item_type: string
+          pinned_at?: string
+          pinned_by: string
+        }
+        Update: {
+          cartel_id?: string
+          display_order?: number | null
+          id?: string
+          item_id?: string
+          item_type?: string
+          pinned_at?: string
+          pinned_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pins_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pins_pinned_by_fkey"
+            columns: ["pinned_by"]
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
@@ -632,6 +922,47 @@ export type Database = {
           },
           {
             foreignKeyName: "tasks_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      threads: {
+        Row: {
+          cartel_id: string
+          created_at: string
+          id: string
+          is_group: boolean
+          last_message_at: string | null
+          participants: string[]
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          cartel_id: string
+          created_at?: string
+          id?: string
+          is_group?: boolean
+          last_message_at?: string | null
+          participants?: string[]
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cartel_id?: string
+          created_at?: string
+          id?: string
+          is_group?: boolean
+          last_message_at?: string | null
+          participants?: string[]
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "threads_cartel_id_fkey"
             columns: ["cartel_id"]
             isOneToOne: false
             referencedRelation: "cartels"
