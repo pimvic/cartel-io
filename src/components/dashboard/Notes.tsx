@@ -1,243 +1,670 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Plus, Search, Edit, Trash2, Archive, Star, BookOpen, Tag } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { Plus, Search, Edit, Trash2, Archive, Star, BookOpen, Filter, Copy, Share2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { NoteEditor } from './notes/NoteEditor';
+import { FilterPanel } from './notes/FilterPanel';
+import { GlossaryEditor } from './notes/GlossaryEditor';
+import { formatDistanceToNow } from 'date-fns';
+import { fr, enUS } from 'date-fns/locale';
+
+interface Note {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  visibility: 'personal' | 'kartel';
+  tags: string[];
+  favorited_by: string[];
+  archived: boolean;
+  user_id: string;
+  cartel_id: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface GlossaryTerm {
+  id: string;
+  term: string;
+  definition: string;
+  category: string;
+  author_id: string;
+  created_at: string;
+  updated_at: string;
+}
 
 export const Notes = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { toast } = useToast();
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [glossaryTerms, setGlossaryTerms] = useState<GlossaryTerm[]>([]);
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentCartel, setCurrentCartel] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState('personal');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [glossaryEditorOpen, setGlossaryEditorOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [editingNote, setEditingNote] = useState<Note | undefined>();
+  const [editingTerm, setEditingTerm] = useState<GlossaryTerm | undefined>();
+  const [filters, setFilters] = useState({
+    favorites: false,
+    shared: false,
+    archived: false,
+    tags: [] as string[],
+  });
+
+  useEffect(() => {
+    fetchCurrentUser();
+    
+    // Remember last tab
+    const savedTab = localStorage.getItem('notes-active-tab');
+    if (savedTab) setActiveTab(savedTab);
+  }, []);
+
+  useEffect(() => {
+    if (currentUser && currentCartel) {
+      fetchNotes();
+      fetchGlossaryTerms();
+      subscribeToNotes();
+      subscribeToGlossary();
+    }
+  }, [currentUser, currentCartel]);
+
+  useEffect(() => {
+    localStorage.setItem('notes-active-tab', activeTab);
+  }, [activeTab]);
+
+  const fetchCurrentUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: userData } = await supabase
+        .from('users')
+        .select('*, memberships(cartel_id)')
+        .eq('auth_user_id', user.id)
+        .single();
+      
+      if (userData) {
+        setCurrentUser(userData);
+        if (userData.memberships?.[0]) {
+          setCurrentCartel(userData.memberships[0].cartel_id);
+        }
+      }
+    }
+  };
+
+  const fetchNotes = async () => {
+    const { data, error } = await supabase
+      .from('notes')
+      .select('*')
+      .eq('cartel_id', currentCartel!)
+      .order('updated_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching notes:', error);
+      return;
+    }
+
+    setNotes((data || []) as Note[]);
+  };
+
+  const fetchGlossaryTerms = async () => {
+    const { data, error } = await supabase
+      .from('glossary_terms')
+      .select('*')
+      .eq('cartel_id', currentCartel!)
+      .order('term', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching glossary:', error);
+      return;
+    }
+
+    setGlossaryTerms(data || []);
+  };
+
+  const subscribeToNotes = () => {
+    const channel = supabase
+      .channel('notes-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'notes',
+          filter: `cartel_id=eq.${currentCartel}`,
+        },
+        () => fetchNotes()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  };
+
+  const subscribeToGlossary = () => {
+    const channel = supabase
+      .channel('glossary-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'glossary_terms',
+          filter: `cartel_id=eq.${currentCartel}`,
+        },
+        () => fetchGlossaryTerms()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  };
+
+  const handleSaveNote = async (noteData: {
+    title: string;
+    content: string;
+    visibility: 'personal' | 'kartel';
+    tags: string[];
+  }) => {
+    const excerpt = noteData.content.slice(0, 150);
+
+    if (editingNote) {
+      const { error } = await supabase
+        .from('notes')
+        .update({
+          ...noteData,
+          excerpt,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', editingNote.id);
+
+      if (error) {
+        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        return;
+      }
+
+      toast({ title: t('notes.updated') });
+    } else {
+      const { error } = await supabase
+        .from('notes')
+        .insert({
+          ...noteData,
+          excerpt,
+          user_id: currentUser.id,
+          cartel_id: currentCartel!,
+        });
+
+      if (error) {
+        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        return;
+      }
+
+      toast({ title: t('notes.created') });
+    }
+
+    setEditorOpen(false);
+    setEditingNote(undefined);
+    fetchNotes();
+  };
+
+  const handleDeleteNote = async (id: string) => {
+    if (!confirm(t('notes.confirmDelete'))) return;
+
+    const { error } = await supabase.from('notes').delete().eq('id', id);
+
+    if (error) {
+      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    toast({ title: t('notes.deleted') });
+    fetchNotes();
+  };
+
+  const handleToggleFavorite = async (note: Note) => {
+    const isFavorited = note.favorited_by.includes(currentUser.id);
+    const newFavorites = isFavorited
+      ? note.favorited_by.filter(id => id !== currentUser.id)
+      : [...note.favorited_by, currentUser.id];
+
+    const { error } = await supabase
+      .from('notes')
+      .update({ favorited_by: newFavorites })
+      .eq('id', note.id);
+
+    if (error) {
+      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    fetchNotes();
+  };
+
+  const handleArchiveNote = async (note: Note) => {
+    const { error } = await supabase
+      .from('notes')
+      .update({ archived: !note.archived })
+      .eq('id', note.id);
+
+    if (error) {
+      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    toast({ title: note.archived ? t('notes.unarchived') : t('notes.archived') });
+    fetchNotes();
+  };
+
+  const handleDuplicateNote = async (note: Note) => {
+    const { error } = await supabase.from('notes').insert({
+      title: `${note.title} (copie)`,
+      content: note.content,
+      excerpt: note.excerpt,
+      visibility: 'personal',
+      tags: note.tags,
+      user_id: currentUser.id,
+      cartel_id: currentCartel!,
+    });
+
+    if (error) {
+      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    toast({ title: t('notes.duplicated') });
+    fetchNotes();
+  };
+
+  const handleSaveGlossaryTerm = async (termData: {
+    term: string;
+    definition: string;
+    category: string;
+  }) => {
+    if (editingTerm) {
+      const { error } = await supabase
+        .from('glossary_terms')
+        .update(termData)
+        .eq('id', editingTerm.id);
+
+      if (error) {
+        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        return;
+      }
+
+      toast({ title: t('notes.glossary.updated') });
+    } else {
+      const { error } = await supabase
+        .from('glossary_terms')
+        .insert({
+          ...termData,
+          author_id: currentUser.id,
+          cartel_id: currentCartel!,
+        });
+
+      if (error) {
+        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        return;
+      }
+
+      toast({ title: t('notes.glossary.created') });
+    }
+
+    setGlossaryEditorOpen(false);
+    setEditingTerm(undefined);
+    fetchGlossaryTerms();
+  };
+
+  const handleDeleteGlossaryTerm = async (id: string) => {
+    if (!confirm(t('notes.glossary.confirmDelete'))) return;
+
+    const { error } = await supabase.from('glossary_terms').delete().eq('id', id);
+
+    if (error) {
+      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      return;
+    }
+
+    toast({ title: t('notes.glossary.deleted') });
+    fetchGlossaryTerms();
+  };
+
+  const filterNotes = (notesList: Note[], visibility: 'personal' | 'kartel') => {
+    return notesList.filter((note) => {
+      if (note.visibility !== visibility) return false;
+      if (!filters.archived && note.archived) return false;
+      if (filters.archived && !note.archived) return false;
+      if (filters.favorites && !note.favorited_by.includes(currentUser?.id)) return false;
+      if (filters.shared && visibility !== 'kartel') return false;
+      if (filters.tags.length > 0 && !filters.tags.some(tag => note.tags.includes(tag))) return false;
+      
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return (
+          note.title.toLowerCase().includes(query) ||
+          note.content.toLowerCase().includes(query) ||
+          note.tags.some(tag => tag.toLowerCase().includes(query))
+        );
+      }
+      
+      return true;
+    });
+  };
+
+  const filterGlossary = (terms: GlossaryTerm[]) => {
+    if (!searchQuery) return terms;
+    
+    const query = searchQuery.toLowerCase();
+    return terms.filter(
+      (term) =>
+        term.term.toLowerCase().includes(query) ||
+        term.definition.toLowerCase().includes(query) ||
+        term.category.toLowerCase().includes(query)
+    );
+  };
+
+  const getAllTags = () => {
+    const tags = new Set<string>();
+    notes.forEach(note => note.tags.forEach(tag => tags.add(tag)));
+    return Array.from(tags);
+  };
+
+  const formatDate = (date: string) => {
+    const locale = i18n.language === 'fr' ? fr : enUS;
+    return formatDistanceToNow(new Date(date), { addSuffix: true, locale });
+  };
+
+  const renderNoteCard = (note: Note) => {
+    const isFavorited = note.favorited_by.includes(currentUser?.id);
+    
+    return (
+      <Card key={note.id} className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <CardTitle className="text-lg flex items-start justify-between gap-2">
+            <span className="flex-1">{note.title}</span>
+            <div className="flex gap-1 flex-wrap">
+              {note.visibility === 'kartel' && (
+                <Badge variant="secondary">{t('notes.badges.shared')}</Badge>
+              )}
+              {isFavorited && (
+                <Badge variant="default">{t('notes.badges.favorite')}</Badge>
+              )}
+              {note.archived && (
+                <Badge variant="outline">{t('notes.badges.archived')}</Badge>
+              )}
+            </div>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground mb-2 line-clamp-3">{note.excerpt}</p>
+          
+          {note.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 mb-3">
+              {note.tags.map(tag => (
+                <Badge key={tag} variant="outline" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+          
+          <div className="flex items-center justify-between">
+            <p className="text-xs text-muted-foreground">{formatDate(note.updated_at)}</p>
+            <div className="flex gap-1">
+              <Button
+                size="sm"
+                variant={isFavorited ? 'default' : 'ghost'}
+                title={t('notes.actions.favorite')}
+                onClick={() => handleToggleFavorite(note)}
+              >
+                <Star className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                title={t('notes.actions.duplicate')}
+                onClick={() => handleDuplicateNote(note)}
+              >
+                <Copy className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                title={t('notes.actions.edit')}
+                onClick={() => {
+                  setEditingNote(note);
+                  setEditorOpen(true);
+                }}
+              >
+                <Edit className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                title={note.archived ? t('notes.actions.unarchive') : t('notes.actions.archive')}
+                onClick={() => handleArchiveNote(note)}
+              >
+                <Archive className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                variant="ghost"
+                title={t('notes.actions.delete')}
+                onClick={() => handleDeleteNote(note.id)}
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
+  const personalNotes = filterNotes(notes, 'personal');
+  const kartelNotes = filterNotes(notes, 'kartel');
+  const filteredGlossary = filterGlossary(glossaryTerms);
+
   return (
     <div className="space-y-6">
       <div className="pt-2">
         <p className="text-muted-foreground text-[110%]">{t('dashboard.notes.subtitle')}</p>
       </div>
 
-      <Tabs defaultValue="personal" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="personal">{t('dashboard.notes.tabs.personal')}</TabsTrigger>
-          <TabsTrigger value="kartel">{t('dashboard.notes.tabs.kartel')}</TabsTrigger>
+          <TabsTrigger value="personal">
+            {t('notes.tabs.personal')} ({personalNotes.length})
+          </TabsTrigger>
+          <TabsTrigger value="kartel">
+            {t('notes.tabs.kartel')} ({kartelNotes.length})
+          </TabsTrigger>
           <TabsTrigger value="glossary">
             <BookOpen className="w-4 h-4 mr-2" />
-            {t('dashboard.notes.tabs.glossary')}
+            {t('notes.tabs.glossary')}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="personal" className="space-y-6 mt-6">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex gap-4 flex-1">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder={t('dashboard.notes.search.personal')} className="pl-10" />
+                <Input
+                  placeholder={t('notes.search.placeholder')}
+                  className="pl-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
               </div>
-              <Button variant="outline">{t('dashboard.notes.buttons.filter')}</Button>
+              <Button variant="outline" onClick={() => setFilterOpen(true)}>
+                <Filter className="w-4 h-4 mr-2" />
+                {t('notes.filter.button')}
+              </Button>
             </div>
-            <Button className="gap-2 ml-4">
+            <Button
+              className="gap-2"
+              onClick={() => {
+                setEditingNote(undefined);
+                setEditorOpen(true);
+              }}
+            >
               <Plus className="w-4 h-4" />
-              {t('dashboard.notes.buttons.newNote')}
+              {t('notes.actions.new')}
             </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[
-          {
-            title: t('dashboard.notes.personalNotes.note1.title'),
-            content: t('dashboard.notes.personalNotes.note1.content'),
-            date: t('dashboard.notes.personalNotes.note1.date'),
-            shared: false
-          },
-          {
-            title: t('dashboard.notes.personalNotes.note2.title'),
-            content: t('dashboard.notes.personalNotes.note2.content'),
-            date: t('dashboard.notes.personalNotes.note2.date'),
-            shared: true
-          },
-          {
-            title: t('dashboard.notes.personalNotes.note3.title'),
-            content: t('dashboard.notes.personalNotes.note3.content'),
-            date: t('dashboard.notes.personalNotes.note3.date'),
-            shared: false
-          },
-          {
-            title: t('dashboard.notes.personalNotes.note4.title'),
-            content: t('dashboard.notes.personalNotes.note4.content'),
-            date: t('dashboard.notes.personalNotes.note4.date'),
-            shared: true
-          }
-        ].map((note, i) => (
-          <Card key={i} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <CardTitle className="text-lg flex items-start justify-between">
-                <span>{note.title}</span>
-                {note.shared && (
-                  <span className="text-xs bg-accent/20 text-accent px-2 py-1 rounded">{t('dashboard.notes.shared')}</span>
-                )}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{note.content}</p>
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-muted-foreground">{note.date}</p>
-                <div className="flex gap-1">
-                  <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.favorite')}>
-                    <Star className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.edit')}>
-                    <Edit className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.archive')}>
-                    <Archive className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.delete')}>
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
+            {personalNotes.length === 0 ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground">{t('notes.empty.personal')}</p>
               </div>
-            </CardContent>
-          </Card>
-        ))}
+            ) : (
+              personalNotes.map(renderNoteCard)
+            )}
           </div>
         </TabsContent>
 
         <TabsContent value="kartel" className="space-y-6 mt-6">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex gap-4 flex-1">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder={t('dashboard.notes.search.kartel')} className="pl-10" />
+                <Input
+                  placeholder={t('notes.search.placeholder')}
+                  className="pl-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
               </div>
-              <Button variant="outline">{t('dashboard.notes.buttons.filter')}</Button>
+              <Button variant="outline" onClick={() => setFilterOpen(true)}>
+                <Filter className="w-4 h-4 mr-2" />
+                {t('notes.filter.button')}
+              </Button>
             </div>
-            <Button className="gap-2 ml-4">
+            <Button
+              className="gap-2"
+              onClick={() => {
+                setEditingNote(undefined);
+                setEditorOpen(true);
+              }}
+            >
               <Plus className="w-4 h-4" />
-              {t('dashboard.notes.buttons.newSharedNote')}
+              {t('notes.actions.newShared')}
             </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                title: t('dashboard.notes.kartelNotes.note1.title'),
-                content: t('dashboard.notes.kartelNotes.note1.content'),
-                date: t('dashboard.notes.kartelNotes.note1.date'),
-                author: t('dashboard.notes.kartelNotes.note1.author'),
-                shared: true
-              },
-              {
-                title: t('dashboard.notes.kartelNotes.note2.title'),
-                content: t('dashboard.notes.kartelNotes.note2.content'),
-                date: t('dashboard.notes.kartelNotes.note2.date'),
-                author: t('dashboard.notes.kartelNotes.note2.author'),
-                shared: true
-              }
-            ].map((note, i) => (
-              <Card key={i} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-start justify-between">
-                    <span>{note.title}</span>
-                    <span className="text-xs bg-accent/20 text-accent px-2 py-1 rounded">{t('dashboard.notes.shared')}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{note.content}</p>
-                  <p className="text-xs text-muted-foreground mb-3">{t('dashboard.notes.by')} {note.author}</p>
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs text-muted-foreground">{note.date}</p>
-                    <div className="flex gap-1">
-                      <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.favorite')}>
-                        <Star className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.edit')}>
-                        <Edit className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.archive')}>
-                        <Archive className="w-4 h-4" />
-                      </Button>
-                      <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.delete')}>
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {kartelNotes.length === 0 ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-muted-foreground">{t('notes.empty.kartel')}</p>
+              </div>
+            ) : (
+              kartelNotes.map(renderNoteCard)
+            )}
           </div>
         </TabsContent>
 
         <TabsContent value="glossary" className="space-y-6 mt-6">
-          <div className="flex items-center justify-between">
-            <div className="flex gap-4 flex-1">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input placeholder={t('dashboard.notes.search.glossary')} className="pl-10" />
-              </div>
-              <Button variant="outline">
-                <Tag className="w-4 h-4 mr-2" />
-                {t('dashboard.notes.buttons.byCategory')}
-              </Button>
+          <div className="flex items-center justify-between gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                placeholder={t('notes.glossary.searchPlaceholder')}
+                className="pl-10"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-            <Button className="gap-2 ml-4">
+            <Button
+              className="gap-2"
+              onClick={() => {
+                setEditingTerm(undefined);
+                setGlossaryEditorOpen(true);
+              }}
+            >
               <Plus className="w-4 h-4" />
-              {t('dashboard.notes.buttons.addTerm')}
+              {t('notes.glossary.addNew')}
             </Button>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('dashboard.notes.glossary.title')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {[
-                  {
-                    term: t('dashboard.notes.glossary.term1.term'),
-                    definition: t('dashboard.notes.glossary.term1.definition'),
-                    category: t('dashboard.notes.glossary.term1.category'),
-                    author: t('dashboard.notes.glossary.term1.author'),
-                    date: t('dashboard.notes.glossary.term1.date')
-                  },
-                  {
-                    term: t('dashboard.notes.glossary.term2.term'),
-                    definition: t('dashboard.notes.glossary.term2.definition'),
-                    category: t('dashboard.notes.glossary.term2.category'),
-                    author: t('dashboard.notes.glossary.term2.author'),
-                    date: t('dashboard.notes.glossary.term2.date')
-                  },
-                  {
-                    term: t('dashboard.notes.glossary.term3.term'),
-                    definition: t('dashboard.notes.glossary.term3.definition'),
-                    category: t('dashboard.notes.glossary.term3.category'),
-                    author: t('dashboard.notes.glossary.term3.author'),
-                    date: t('dashboard.notes.glossary.term3.date')
-                  }
-                ].map((entry, i) => (
-                  <div key={i} className="p-4 bg-accent/5 rounded-lg border border-accent/20">
-                    <div className="flex items-start justify-between mb-2">
+          <div className="space-y-4">
+            {filteredGlossary.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">{t('notes.glossary.empty')}</p>
+              </div>
+            ) : (
+              filteredGlossary.map((term) => (
+                <Card key={term.id}>
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-semibold text-lg">{entry.term}</h4>
-                        <span className="text-xs bg-accent/20 text-accent px-2 py-1 rounded">{entry.category}</span>
+                        <CardTitle className="text-xl mb-2">{term.term}</CardTitle>
+                        <Badge variant="secondary">{term.category}</Badge>
                       </div>
                       <div className="flex gap-1">
-                        <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.edit')}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          title={t('notes.actions.edit')}
+                          onClick={() => {
+                            setEditingTerm(term);
+                            setGlossaryEditorOpen(true);
+                          }}
+                        >
                           <Edit className="w-4 h-4" />
                         </Button>
-                        <Button size="sm" variant="ghost" title={t('dashboard.notes.buttons.delete')}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          title={t('notes.actions.delete')}
+                          onClick={() => handleDeleteGlossaryTerm(term.id)}
+                        >
                           <Trash2 className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-2">{entry.definition}</p>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>{t('dashboard.notes.addedBy')} {entry.author}</span>
-                      <span>{entry.date}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-3">{term.definition}</p>
+                    <p className="text-xs text-muted-foreground">{formatDate(term.created_at)}</p>
+                  </CardContent>
+                </Card>
+              ))
+            )}
+          </div>
         </TabsContent>
       </Tabs>
+
+      <NoteEditor
+        open={editorOpen}
+        onOpenChange={setEditorOpen}
+        note={editingNote}
+        onSave={handleSaveNote}
+      />
+
+      <FilterPanel
+        open={filterOpen}
+        onOpenChange={setFilterOpen}
+        filters={filters}
+        availableTags={getAllTags()}
+        onFiltersChange={setFilters}
+      />
+
+      <GlossaryEditor
+        open={glossaryEditorOpen}
+        onOpenChange={setGlossaryEditorOpen}
+        term={editingTerm}
+        onSave={handleSaveGlossaryTerm}
+      />
     </div>
   );
 };

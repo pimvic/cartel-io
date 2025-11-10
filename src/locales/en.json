@@ -883,7 +883,75 @@
           "category": "Methodology",
           "author": "Sophie M.",
           "date": "1 week ago"
-        }
+        },
+        "addNew": "Add term",
+        "addTerm": "Add term",
+        "editTerm": "Edit term",
+        "termLabel": "Term",
+        "termPlaceholder": "E.g.: Transversality",
+        "categoryLabel": "Category",
+        "categoryPlaceholder": "Select a category",
+        "definitionLabel": "Definition",
+        "definitionPlaceholder": "Enter the term definition...",
+        "searchPlaceholder": "Search in glossary...",
+        "confirmDelete": "Are you sure you want to delete this term?",
+        "created": "Term added successfully",
+        "updated": "Term updated successfully",
+        "deleted": "Term deleted successfully",
+        "empty": "No terms in the glossary"
+      },
+      "editor": {
+        "newTitle": "New Note",
+        "editTitle": "Edit Note",
+        "titleLabel": "Title",
+        "titlePlaceholder": "Note title",
+        "contentLabel": "Content",
+        "contentPlaceholder": "Write your note here...",
+        "visibilityLabel": "Visibility",
+        "visibilityPersonal": "Personal",
+        "visibilityKartel": "Kartel (shared)",
+        "tagsLabel": "Tags",
+        "tagsPlaceholder": "Add a tag",
+        "tagsLimit": "{{count}}/{{max}} tags"
+      },
+      "filter": {
+        "title": "Filter Notes",
+        "button": "Filter",
+        "options": "Options",
+        "favorites": "Favorites only",
+        "shared": "Shared only",
+        "archived": "Archived only",
+        "tags": "Tags",
+        "reset": "Reset"
+      },
+      "actions": {
+        "new": "New note",
+        "newShared": "New shared note",
+        "favorite": "Favorite",
+        "duplicate": "Duplicate",
+        "edit": "Edit",
+        "archive": "Archive",
+        "unarchive": "Unarchive",
+        "delete": "Delete"
+      },
+      "badges": {
+        "shared": "Shared",
+        "favorite": "Favorite",
+        "archived": "Archived"
+      },
+      "search": {
+        "placeholder": "Search in notes..."
+      },
+      "confirmDelete": "Are you sure you want to delete this note?",
+      "created": "Note created successfully",
+      "updated": "Note updated successfully",
+      "deleted": "Note deleted successfully",
+      "duplicated": "Note duplicated successfully",
+      "archived": "Note archived",
+      "unarchived": "Note restored",
+      "empty": {
+        "personal": "No personal notes. Create your first note!",
+        "kartel": "No shared notes in the Kartel."
       }
     },
     "visio": {
@@ -1036,6 +1104,7 @@
     "success": "Success",
     "cancel": "Cancel",
     "save": "Save",
+    "saving": "Saving...",
     "delete": "Delete",
     "edit": "Edit",
     "create": "Create",

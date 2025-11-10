@@ -883,7 +883,75 @@
           "category": "Méthodologie",
           "author": "Sophie M.",
           "date": "Il y a 1 semaine"
-        }
+        },
+        "addNew": "Ajouter un terme",
+        "addTerm": "Ajouter un terme",
+        "editTerm": "Modifier le terme",
+        "termLabel": "Terme",
+        "termPlaceholder": "Ex: Transversalité",
+        "categoryLabel": "Catégorie",
+        "categoryPlaceholder": "Sélectionnez une catégorie",
+        "definitionLabel": "Définition",
+        "definitionPlaceholder": "Entrez la définition du terme...",
+        "searchPlaceholder": "Rechercher dans le glossaire...",
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce terme ?",
+        "created": "Terme ajouté avec succès",
+        "updated": "Terme modifié avec succès",
+        "deleted": "Terme supprimé avec succès",
+        "empty": "Aucun terme dans le glossaire"
+      },
+      "editor": {
+        "newTitle": "Nouvelle note",
+        "editTitle": "Modifier la note",
+        "titleLabel": "Titre",
+        "titlePlaceholder": "Titre de la note",
+        "contentLabel": "Contenu",
+        "contentPlaceholder": "Écrivez votre note ici...",
+        "visibilityLabel": "Visibilité",
+        "visibilityPersonal": "Personnel",
+        "visibilityKartel": "Kartel (partagé)",
+        "tagsLabel": "Étiquettes",
+        "tagsPlaceholder": "Ajouter une étiquette",
+        "tagsLimit": "{{count}}/{{max}} étiquettes"
+      },
+      "filter": {
+        "title": "Filtrer les notes",
+        "button": "Filtrer",
+        "options": "Options",
+        "favorites": "Favoris uniquement",
+        "shared": "Partagées uniquement",
+        "archived": "Archivées uniquement",
+        "tags": "Étiquettes",
+        "reset": "Réinitialiser"
+      },
+      "actions": {
+        "new": "Nouvelle note",
+        "newShared": "Nouvelle note partagée",
+        "favorite": "Favori",
+        "duplicate": "Dupliquer",
+        "edit": "Modifier",
+        "archive": "Archiver",
+        "unarchive": "Désarchiver",
+        "delete": "Supprimer"
+      },
+      "badges": {
+        "shared": "Partagée",
+        "favorite": "Favori",
+        "archived": "Archivée"
+      },
+      "search": {
+        "placeholder": "Rechercher dans les notes..."
+      },
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette note ?",
+      "created": "Note créée avec succès",
+      "updated": "Note modifiée avec succès",
+      "deleted": "Note supprimée avec succès",
+      "duplicated": "Note dupliquée avec succès",
+      "archived": "Note archivée",
+      "unarchived": "Note restaurée",
+      "empty": {
+        "personal": "Aucune note personnelle. Créez votre première note !",
+        "kartel": "Aucune note partagée dans le Kartel."
       }
     },
     "visio": {
@@ -1036,6 +1104,7 @@
     "success": "Succès",
     "cancel": "Annuler",
     "save": "Enregistrer",
+    "saving": "Enregistrement...",
     "delete": "Supprimer",
     "edit": "Modifier",
     "create": "Créer",

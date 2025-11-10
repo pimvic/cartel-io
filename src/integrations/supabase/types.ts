@@ -263,6 +263,54 @@ export type Database = {
           },
         ]
       }
+      glossary_terms: {
+        Row: {
+          author_id: string
+          cartel_id: string
+          category: string
+          created_at: string | null
+          definition: string
+          id: string
+          term: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id: string
+          cartel_id: string
+          category: string
+          created_at?: string | null
+          definition: string
+          id?: string
+          term: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string
+          cartel_id?: string
+          category?: string
+          created_at?: string | null
+          definition?: string
+          id?: string
+          term?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "glossary_terms_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "glossary_terms_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       knowledge_base_favorites: {
         Row: {
           created_at: string
@@ -682,34 +730,52 @@ export type Database = {
       }
       notes: {
         Row: {
+          archived: boolean | null
           cartel_id: string
           content: string
           created_at: string
           excerpt: string | null
+          favorited_by: string[] | null
           id: string
+          pinned: boolean | null
+          tags: string[] | null
           title: string
           updated_at: string
           user_id: string
+          version_history: Json | null
+          visibility: string | null
         }
         Insert: {
+          archived?: boolean | null
           cartel_id: string
           content: string
           created_at?: string
           excerpt?: string | null
+          favorited_by?: string[] | null
           id?: string
+          pinned?: boolean | null
+          tags?: string[] | null
           title: string
           updated_at?: string
           user_id: string
+          version_history?: Json | null
+          visibility?: string | null
         }
         Update: {
+          archived?: boolean | null
           cartel_id?: string
           content?: string
           created_at?: string
           excerpt?: string | null
+          favorited_by?: string[] | null
           id?: string
+          pinned?: boolean | null
+          tags?: string[] | null
           title?: string
           updated_at?: string
           user_id?: string
+          version_history?: Json | null
+          visibility?: string | null
         }
         Relationships: [
           {
