@@ -399,31 +399,35 @@
     "messagerie": {
       "title": "Communications",
       "subtitle": "Manage your messages, check news and events, and stay up to date.",
+      "noCartel": "No Cartel",
+      "noCartelDescription": "You must be a member of a cartel to access communications.",
       "tabs": {
         "messages": "Messages",
         "news": "News",
         "events": "Events"
       },
-      "groupChat": {
-        "title": "Group Chat",
-        "message1": {
-          "author": "Jean-Stéphane B.",
-          "text": "Hello everyone! Ready for today's session?",
-          "time": "10:30"
-        },
-        "message2": {
-          "author": "Thierry F.",
-          "text": "Yes! I've prepared a few questions about Module 12.",
-          "time": "10:35"
-        },
-        "inputPlaceholder": "Write your message...",
-        "sendButton": "Send"
+      "threads": {
+        "title": "Conversations",
+        "untitled": "Untitled"
+      },
+      "chat": {
+        "selectThread": "Select a conversation",
+        "noThread": "Select a conversation to start",
+        "placeholder": "Write your message..."
+      },
+      "messages": {
+        "sent": "Message sent"
       },
       "news": {
         "title": "Kartel News",
         "recentNews": "Recent News",
         "archive": "Archive",
         "create": "Create News",
+        "createTitle": "New Article",
+        "titlePlaceholder": "Article title",
+        "bodyPlaceholder": "Article content",
+        "tagPlaceholder": "Select a tag",
+        "created": "News created successfully",
         "news1": {
           "title": "📢 New resource available",
           "text": "The Module 12 summary document has been added to the knowledge base.",
@@ -440,6 +444,19 @@
         "upcoming": "Next Events",
         "archive": "Archive",
         "create": "Create Event",
+        "createTitle": "New Event",
+        "titlePlaceholder": "Event title",
+        "descPlaceholder": "Event description",
+        "locationPlaceholder": "Location (optional)",
+        "visioPlaceholder": "Video link (optional)",
+        "capacityPlaceholder": "Capacity (optional)",
+        "created": "Event created successfully",
+        "register": "Register",
+        "unregister": "Unregister",
+        "registered": "Registration confirmed",
+        "unregistered": "Unregistration confirmed",
+        "capacity": "Capacity",
+        "joinVisio": "Join video call",
         "event1": {
           "title": "📅 Group session",
           "description": "Collective review of Module 12",
@@ -451,6 +468,20 @@
           "description": "Submission deadline for assignments",
           "time": "In 5 days (June 10, 2025)"
         }
+      },
+      "pinned": {
+        "title": "Highlights",
+        "added": "Item pinned",
+        "typeNews": "Pinned news",
+        "typeEvent": "Pinned event",
+        "typeMessage": "Pinned message"
+      },
+      "errors": {
+        "loadFailed": "Error loading data",
+        "sendFailed": "Error sending message",
+        "createFailed": "Error creating item",
+        "rsvpFailed": "Error with registration/unregistration",
+        "pinFailed": "Error pinning item"
       }
     },
     "knowledgeBase": {
@@ -1007,6 +1038,7 @@
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
+    "create": "Create",
     "close": "Close"
   }
 }

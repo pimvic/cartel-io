@@ -399,31 +399,35 @@
     "messagerie": {
       "title": "Communications",
       "subtitle": "Gérez vos messages, consultez les news et évènements, tenez-vous à jour",
+      "noCartel": "Pas de cartel",
+      "noCartelDescription": "Vous devez être membre d'un cartel pour accéder aux communications.",
       "tabs": {
         "messages": "Messagerie",
         "news": "News",
         "events": "Évènements"
       },
-      "groupChat": {
-        "title": "Messagerie du groupe",
-        "message1": {
-          "author": "Jean-Stéphane B.",
-          "text": "Bonjour à tous ! Prêts pour la session d'aujourd'hui ?",
-          "time": "10:30"
-        },
-        "message2": {
-          "author": "Thierry F.",
-          "text": "Oui ! J'ai préparé quelques questions sur le module 12.",
-          "time": "10:35"
-        },
-        "inputPlaceholder": "Écrivez votre message...",
-        "sendButton": "Envoyer"
+      "threads": {
+        "title": "Conversations",
+        "untitled": "Sans titre"
+      },
+      "chat": {
+        "selectThread": "Sélectionnez une conversation",
+        "noThread": "Sélectionnez une conversation pour commencer",
+        "placeholder": "Écrivez votre message..."
+      },
+      "messages": {
+        "sent": "Message envoyé"
       },
       "news": {
         "title": "Actualités du Kartel",
         "recentNews": "Actualités récentes",
         "archive": "Archiver",
         "create": "Créer une news",
+        "createTitle": "Nouvelle actualité",
+        "titlePlaceholder": "Titre de l'actualité",
+        "bodyPlaceholder": "Contenu de l'actualité",
+        "tagPlaceholder": "Sélectionner un tag",
+        "created": "Actualité créée avec succès",
         "news1": {
           "title": "📢 Nouvelle ressource disponible",
           "text": "Le document de synthèse du module 12 a été ajouté à la base de connaissances.",
@@ -440,6 +444,19 @@
         "upcoming": "Prochains évènements",
         "archive": "Archiver",
         "create": "Créer un évènement",
+        "createTitle": "Nouvel évènement",
+        "titlePlaceholder": "Titre de l'évènement",
+        "descPlaceholder": "Description de l'évènement",
+        "locationPlaceholder": "Lieu (optionnel)",
+        "visioPlaceholder": "Lien visio (optionnel)",
+        "capacityPlaceholder": "Capacité (optionnel)",
+        "created": "Évènement créé avec succès",
+        "register": "S'inscrire",
+        "unregister": "Se désinscrire",
+        "registered": "Inscription confirmée",
+        "unregistered": "Désinscription confirmée",
+        "capacity": "Capacité",
+        "joinVisio": "Rejoindre la visio",
         "event1": {
           "title": "📅 Session de groupe",
           "description": "Révision collective du module 12",
@@ -451,6 +468,20 @@
           "description": "Date limite de soumission des travaux",
           "time": "Dans 5 jours (10 juin 2025)"
         }
+      },
+      "pinned": {
+        "title": "À la une",
+        "added": "Élément épinglé",
+        "typeNews": "Actualité épinglée",
+        "typeEvent": "Évènement épinglé",
+        "typeMessage": "Message épinglé"
+      },
+      "errors": {
+        "loadFailed": "Erreur lors du chargement des données",
+        "sendFailed": "Erreur lors de l'envoi du message",
+        "createFailed": "Erreur lors de la création",
+        "rsvpFailed": "Erreur lors de l'inscription/désinscription",
+        "pinFailed": "Erreur lors de l'épinglage"
       }
     },
     "knowledgeBase": {
@@ -1007,6 +1038,7 @@
     "save": "Enregistrer",
     "delete": "Supprimer",
     "edit": "Modifier",
+    "create": "Créer",
     "close": "Fermer"
   }
 }
