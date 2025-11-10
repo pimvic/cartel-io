@@ -295,7 +295,93 @@
     },
     "tools": {
       "title": "Outils Pédagogiques",
-      "subtitle": "Explorez les outils interactifs pour pratiquer, collaborer et progresser en groupe.",
+      "subtitle": "Centralisez l'accès à tous les outils, modules et supports pédagogiques pour votre Kartel.",
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "tools": "Outils pédagogiques"
+      },
+      "searchPlaceholder": "Rechercher un outil...",
+      "noResults": "Aucun outil ne correspond à votre recherche.",
+      "categories": {
+        "modules": "Modules principaux",
+        "guides": "Guides méthodologiques",
+        "activities": "Activités collaboratives",
+        "resources": "Ressources pédagogiques",
+        "templates": "Modèles et templates",
+        "external": "Services externes"
+      },
+      "externalDescription": "Accédez à des outils externes pour enrichir votre apprentissage",
+      "status": {
+        "active": "Actif",
+        "new": "Nouveau",
+        "updated": "Mis à jour",
+        "comingSoon": "À venir"
+      },
+      "progress": "Progression",
+      "launch": "Lancer l'outil",
+      "comingSoonTitle": "Fonctionnalité en cours de développement",
+      "comingSoonDescription": "Cet outil sera bientôt disponible. Restez connecté pour les mises à jour !",
+      "modules": {
+        "quiz": "Quiz interactifs",
+        "flashcards": "Flashcards",
+        "mindmap": "Mindmap",
+        "glossary": "Glossaire / Dictionnaire"
+      },
+      "guides": {
+        "methodology": "Guide méthodologique",
+        "bestPractices": "Bonnes pratiques pédagogiques"
+      },
+      "activities": {
+        "progressBoard": "Tableau de progression commun",
+        "rolePlaying": "Jeu de rôle en visioconférence",
+        "debriefing": "Débriefing collectif guidé",
+        "brainstorming": "Brainstorming augmenté",
+        "debate": "Mini-débat structuré",
+        "groupMission": "Mission collective"
+      },
+      "resources": {
+        "knowledgeSheet": "Fiche \"Savoir partagé\"",
+        "learningJournal": "Journal d'apprentissage de groupe",
+        "interactiveVideo": "Capsule vidéo interactive",
+        "aiSummary": "Pod IA de synthèse"
+      },
+      "templates": {
+        "peerEvaluation": "Évaluation pair-à-pair",
+        "crossSkills": "Atelier \"compétence croisée\"",
+        "motivationWheel": "Roue de remobilisation",
+        "challenge": "Challenge collaboratif",
+        "instantFeedback": "Feedback instantané IA + groupe",
+        "celebration": "Célébration des étapes"
+      },
+      "descriptions": {
+        "quiz": "Testez vos connaissances avec des quiz interactifs et adaptatifs alimentés par l'IA.",
+        "flashcards": "Mémorisez efficacement avec des cartes de révision personnalisées et espacées.",
+        "mindmap": "Organisez vos idées visuellement et créez des cartes mentales collaboratives.",
+        "glossary": "Consultez et enrichissez le dictionnaire partagé des termes clés de votre formation.",
+        "methodology": "Découvrez les meilleures pratiques pour apprendre en groupe et progresser ensemble.",
+        "bestPractices": "Accédez à des guides pratiques pour optimiser votre expérience d'apprentissage.",
+        "progressBoard": "Suivez la progression collective de votre groupe sur un tableau partagé en temps réel.",
+        "rolePlaying": "Pratiquez en situation réelle avec des mises en scène guidées en visioconférence.",
+        "debriefing": "Analysez vos sessions d'apprentissage ensemble avec un cadre structuré.",
+        "brainstorming": "Générez des idées collaboratives assistées par l'IA pour résoudre des problèmes.",
+        "debate": "Débattez de manière organisée et constructive sur des sujets liés à votre formation.",
+        "groupMission": "Travaillez ensemble sur des objectifs communs avec des missions définies.",
+        "knowledgeSheet": "Documentez et partagez vos connaissances clés dans des fiches structurées.",
+        "learningJournal": "Suivez votre progression commune avec un journal d'apprentissage partagé.",
+        "interactiveVideo": "Créez et partagez des vidéos pédagogiques interactives avec votre groupe.",
+        "aiSummary": "Obtenez des synthèses automatiques de vos sessions et ressources par l'IA.",
+        "peerEvaluation": "Évaluez-vous mutuellement de manière constructive avec des grilles d'évaluation.",
+        "crossSkills": "Partagez et développez vos compétences complémentaires en ateliers.",
+        "motivationWheel": "Maintenez votre motivation collective avec des outils de remobilisation.",
+        "challenge": "Relevez des défis en équipe pour renforcer la cohésion et l'apprentissage.",
+        "instantFeedback": "Recevez des retours immédiats de l'IA et de vos pairs sur vos travaux.",
+        "celebration": "Fêtez vos réussites et étapes importantes ensemble pour renforcer la motivation."
+      },
+      "external": {
+        "openai": "OpenAI Study & Learn",
+        "notebooklm": "Google NotebookLM",
+        "specializedGPTs": "GPTs spécialisés"
+      },
       "quiz": {
         "title": "Quiz",
         "description": "Testez vos connaissances avec des quiz interactifs"
@@ -307,10 +393,6 @@
       "mindmap": {
         "title": "Mindmap",
         "description": "Organisez vos idées visuellement"
-      },
-      "glossary": {
-        "title": "Glossaire / Dictionnaire",
-        "description": "Consultez les définitions des termes clés"
       },
       "access": "Accéder",
       "otherTools": {

@@ -295,7 +295,93 @@
     },
     "tools": {
       "title": "Learning Tools",
-      "subtitle": "Explore interactive tools to practice, collaborate, and progress as a group.",
+      "subtitle": "Centralized access to all tools, modules, and learning resources for your Kartel.",
+      "breadcrumb": {
+        "dashboard": "Dashboard",
+        "tools": "Learning Tools"
+      },
+      "searchPlaceholder": "Search for a tool...",
+      "noResults": "No tools match your search.",
+      "categories": {
+        "modules": "Main Modules",
+        "guides": "Methodological Guides",
+        "activities": "Collaborative Activities",
+        "resources": "Learning Resources",
+        "templates": "Templates & Models",
+        "external": "External Services"
+      },
+      "externalDescription": "Access external tools to enrich your learning experience",
+      "status": {
+        "active": "Active",
+        "new": "New",
+        "updated": "Updated",
+        "comingSoon": "Coming Soon"
+      },
+      "progress": "Progress",
+      "launch": "Launch Tool",
+      "comingSoonTitle": "Feature Under Development",
+      "comingSoonDescription": "This tool will be available soon. Stay tuned for updates!",
+      "modules": {
+        "quiz": "Interactive Quizzes",
+        "flashcards": "Flashcards",
+        "mindmap": "Mindmap",
+        "glossary": "Glossary / Dictionary"
+      },
+      "guides": {
+        "methodology": "Methodological Guide",
+        "bestPractices": "Pedagogical Best Practices"
+      },
+      "activities": {
+        "progressBoard": "Shared Progress Board",
+        "rolePlaying": "Role-playing in Video Call",
+        "debriefing": "Guided Group Debriefing",
+        "brainstorming": "Enhanced Brainstorming",
+        "debate": "Structured Mini-Debate",
+        "groupMission": "Group Mission"
+      },
+      "resources": {
+        "knowledgeSheet": "Shared Knowledge Sheet",
+        "learningJournal": "Group Learning Journal",
+        "interactiveVideo": "Interactive Learning Video",
+        "aiSummary": "AI Summary Pod"
+      },
+      "templates": {
+        "peerEvaluation": "Peer-to-Peer Evaluation",
+        "crossSkills": "Cross-Skills Workshop",
+        "motivationWheel": "Motivation Wheel",
+        "challenge": "Collaborative Challenge",
+        "instantFeedback": "Instant Feedback (AI + Group)",
+        "celebration": "Milestone Celebration"
+      },
+      "descriptions": {
+        "quiz": "Test your knowledge with interactive and adaptive AI-powered quizzes.",
+        "flashcards": "Memorize effectively with personalized and spaced repetition review cards.",
+        "mindmap": "Organize your ideas visually and create collaborative mind maps.",
+        "glossary": "Browse and enrich the shared dictionary of key terms from your training.",
+        "methodology": "Discover best practices for learning in groups and progressing together.",
+        "bestPractices": "Access practical guides to optimize your learning experience.",
+        "progressBoard": "Track your group's collective progress on a real-time shared board.",
+        "rolePlaying": "Practice real-life scenarios with guided role-playing in video calls.",
+        "debriefing": "Analyze your learning sessions together with a structured framework.",
+        "brainstorming": "Generate collaborative ideas assisted by AI to solve problems.",
+        "debate": "Debate in an organized and constructive manner on topics related to your training.",
+        "groupMission": "Work together on shared objectives with defined missions.",
+        "knowledgeSheet": "Document and share your key knowledge in structured sheets.",
+        "learningJournal": "Track your collective progress with a shared learning journal.",
+        "interactiveVideo": "Create and share interactive educational videos with your group.",
+        "aiSummary": "Get automatic AI-generated summaries of your sessions and resources.",
+        "peerEvaluation": "Evaluate each other constructively using assessment grids.",
+        "crossSkills": "Share and develop your complementary skills in workshops.",
+        "motivationWheel": "Maintain your collective motivation with remobilization tools.",
+        "challenge": "Take on team challenges to strengthen cohesion and learning.",
+        "instantFeedback": "Receive immediate feedback from AI and peers on your work.",
+        "celebration": "Celebrate your successes and milestones together to boost motivation."
+      },
+      "external": {
+        "openai": "OpenAI Study & Learn",
+        "notebooklm": "Google NotebookLM",
+        "specializedGPTs": "Specialized GPTs"
+      },
       "quiz": {
         "title": "Quiz",
         "description": "Test your knowledge with interactive quizzes"
@@ -307,10 +393,6 @@
       "mindmap": {
         "title": "Mindmap",
         "description": "Organize your ideas visually"
-      },
-      "glossary": {
-        "title": "Glossary / Dictionary",
-        "description": "Browse definitions of key terms"
       },
       "access": "Access",
       "otherTools": {
