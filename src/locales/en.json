@@ -255,6 +255,7 @@
       "coordinator": "Coordinator"
     },
     "menu": {
+      "dashboard": "Dashboard",
       "actuKartel": "Kartel News",
       "messagerie": "Communications",
       "knowledgeBase": "AI Knowledge Base",
@@ -1288,6 +1289,95 @@
     "loginError": "Login failed. Please check your credentials.",
     "signupError": "Signup failed. Please try again.",
     "googleError": "Google sign-in failed. Please try again."
+  },
+  "plusOne": {
+    "title": "Your +1",
+    "subtitle": "Request help from your facilitator",
+    "tabs": {
+      "overview": "Overview",
+      "requests": "Requests",
+      "newRequest": "New Request"
+    },
+    "about": {
+      "title": "About the +1",
+      "whoTitle": "Who is the +1?",
+      "whoContent": "The +1 is your dedicated facilitator who supports your kartel's progress and resolves blockers.",
+      "roleTitle": "Role of the +1",
+      "roleContent": "The +1 answers questions, shares resources, helps with methodology, and facilitates collaboration.",
+      "whenTitle": "When to contact the +1?",
+      "whenContent": "Contact your +1 for methodological blocks, questions about resources, motivation or organization issues."
+    },
+    "feed": {
+      "title": "Dernières actions du +1",
+      "empty": "No recent actions",
+      "loadMore": "Load more",
+      "actionTypes": {
+        "message": "Message",
+        "resource": "Resource",
+        "note": "Note",
+        "lien": "Link",
+        "status_change": "Status change"
+      },
+      "targetTypes": {
+        "request": "Request",
+        "thread": "Discussion",
+        "document": "Document"
+      }
+    },
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "Briefly describe your request...",
+      "body": "Description",
+      "bodyPlaceholder": "Explain in detail your request, question or blocker...",
+      "tags": "Categories",
+      "dueDate": "Due date (optional)",
+      "selectDate": "Select a date",
+      "attachments": "Attachments",
+      "attachmentLimits": "Maximum 10 files, 25 MB per file",
+      "privateRequest": "Privé avec +1 (visible only by +1 and admins)",
+      "submit": "Send request",
+      "success": "Your request has been sent successfully",
+      "errors": {
+        "noTags": "Please select at least one category",
+        "fileTooLarge": "File {name} exceeds 25 MB",
+        "tooManyFiles": "Maximum 10 files allowed",
+        "submit": "Error sending request"
+      }
+    },
+    "tags": {
+      "methodo": "Methodology",
+      "ressource": "Resource",
+      "blocage": "Blocker",
+      "motivation": "Motivation",
+      "organisation": "Organization"
+    },
+    "status": {
+      "ouvert": "Open",
+      "en_cours": "In Progress",
+      "en_attente_infos": "Waiting for Info",
+      "resolu": "Resolved",
+      "ferme": "Closed"
+    },
+    "visibility": {
+      "private": "Privé avec +1",
+      "kartel": "Visible by kartel"
+    },
+    "requests": {
+      "search": "Search requests...",
+      "allStatus": "All statuses",
+      "empty": "No requests found"
+    },
+    "thread": {
+      "messages": "Responses",
+      "messagePlaceholder": "Write your message...",
+      "dueDate": "Due date",
+      "created": "Created on",
+      "statusUpdated": "Status updated",
+      "errors": {
+        "sendMessage": "Error sending message",
+        "updateStatus": "Error updating status"
+      }
+    }
   },
   "common": {
     "loading": "Loading...",

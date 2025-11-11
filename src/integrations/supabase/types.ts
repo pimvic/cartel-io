@@ -874,6 +874,302 @@ export type Database = {
           },
         ]
       }
+      plus_one_audit: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          diff: Json | null
+          id: string
+          ip_address: string | null
+          target_id: string
+          target_type: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          diff?: Json | null
+          id?: string
+          ip_address?: string | null
+          target_id: string
+          target_type: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          diff?: Json | null
+          id?: string
+          ip_address?: string | null
+          target_id?: string
+          target_type?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_audit_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plus_one_feed: {
+        Row: {
+          action_type: Database["public"]["Enums"]["plus_one_action_type"]
+          actor_id: string
+          cartel_id: string
+          created_at: string
+          id: string
+          metadata: Json | null
+          target_id: string
+          target_type: string
+        }
+        Insert: {
+          action_type: Database["public"]["Enums"]["plus_one_action_type"]
+          actor_id: string
+          cartel_id: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          target_id: string
+          target_type: string
+        }
+        Update: {
+          action_type?: Database["public"]["Enums"]["plus_one_action_type"]
+          actor_id?: string
+          cartel_id?: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          target_id?: string
+          target_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_feed_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plus_one_feed_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plus_one_messages: {
+        Row: {
+          attachments: Json | null
+          author_id: string
+          body: string
+          created_at: string
+          deleted_at: string | null
+          edited_at: string | null
+          id: string
+          request_id: string
+        }
+        Insert: {
+          attachments?: Json | null
+          author_id: string
+          body: string
+          created_at?: string
+          deleted_at?: string | null
+          edited_at?: string | null
+          id?: string
+          request_id: string
+        }
+        Update: {
+          attachments?: Json | null
+          author_id?: string
+          body?: string
+          created_at?: string
+          deleted_at?: string | null
+          edited_at?: string | null
+          id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_messages_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plus_one_messages_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "plus_one_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plus_one_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          expertise_tags: string[] | null
+          id: string
+          office_hours: Json | null
+          sla_hint: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          expertise_tags?: string[] | null
+          id?: string
+          office_hours?: Json | null
+          sla_hint?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          expertise_tags?: string[] | null
+          id?: string
+          office_hours?: Json | null
+          sla_hint?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plus_one_requests: {
+        Row: {
+          attachments: Json | null
+          body: string
+          cartel_id: string
+          created_at: string
+          due_date: string | null
+          id: string
+          linked_items: Json | null
+          requester_id: string
+          resolved_at: string | null
+          resolved_by: string | null
+          status: Database["public"]["Enums"]["plus_one_status"]
+          tags: string[]
+          title: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["plus_one_visibility"]
+        }
+        Insert: {
+          attachments?: Json | null
+          body: string
+          cartel_id: string
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          linked_items?: Json | null
+          requester_id: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["plus_one_status"]
+          tags?: string[]
+          title: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["plus_one_visibility"]
+        }
+        Update: {
+          attachments?: Json | null
+          body?: string
+          cartel_id?: string
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          linked_items?: Json | null
+          requester_id?: string
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["plus_one_status"]
+          tags?: string[]
+          title?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["plus_one_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_requests_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plus_one_requests_requester_id_fkey"
+            columns: ["requester_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plus_one_requests_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      plus_one_watchers: {
+        Row: {
+          created_at: string
+          id: string
+          request_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          request_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          request_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plus_one_watchers_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "plus_one_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "plus_one_watchers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       quizzes: {
         Row: {
           cartel_id: string
@@ -1121,6 +1417,19 @@ export type Database = {
     Enums: {
       app_role: "admin" | "moderator" | "user"
       milestone_status: "a_venir" | "en_cours" | "termine"
+      plus_one_action_type:
+        | "message"
+        | "resource"
+        | "note"
+        | "lien"
+        | "status_change"
+      plus_one_status:
+        | "ouvert"
+        | "en_cours"
+        | "en_attente_infos"
+        | "resolu"
+        | "ferme"
+      plus_one_visibility: "kartel" | "prive"
       report_status: "pending" | "reviewed" | "resolved" | "dismissed"
       resource_category:
         | "documents"
@@ -1258,6 +1567,21 @@ export const Constants = {
     Enums: {
       app_role: ["admin", "moderator", "user"],
       milestone_status: ["a_venir", "en_cours", "termine"],
+      plus_one_action_type: [
+        "message",
+        "resource",
+        "note",
+        "lien",
+        "status_change",
+      ],
+      plus_one_status: [
+        "ouvert",
+        "en_cours",
+        "en_attente_infos",
+        "resolu",
+        "ferme",
+      ],
+      plus_one_visibility: ["kartel", "prive"],
       report_status: ["pending", "reviewed", "resolved", "dismissed"],
       resource_category: ["documents", "videos", "summaries", "tools", "other"],
       resource_type: ["document", "video", "summary", "tool", "link"],

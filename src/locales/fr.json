@@ -275,6 +275,7 @@
       "errorLoading": "Erreur lors du chargement des données"
     },
     "menu": {
+      "dashboard": "Tableau de bord",
       "actuKartel": "Actu Kartel",
       "messagerie": "Communications",
       "knowledgeBase": "Base de connaissances",
@@ -1288,6 +1289,95 @@
     "loginError": "Échec de la connexion. Vérifiez vos identifiants.",
     "signupError": "Échec de la création du compte. Veuillez réessayer.",
     "googleError": "Échec de la connexion avec Google. Veuillez réessayer."
+  },
+  "plusOne": {
+    "title": "Votre +1",
+    "subtitle": "Demandez de l'aide à votre facilitateur",
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "requests": "Demandes",
+      "newRequest": "Nouvelle demande"
+    },
+    "about": {
+      "title": "À propos du +1",
+      "whoTitle": "Qui est le +1 ?",
+      "whoContent": "Le +1 est votre facilitateur dédié qui accompagne votre kartel dans sa progression et résout les blocages.",
+      "roleTitle": "Rôle du +1",
+      "roleContent": "Le +1 répond aux questions, partage des ressources, aide à la méthodologie et facilite la collaboration.",
+      "whenTitle": "Quand contacter le +1 ?",
+      "whenContent": "Contactez votre +1 pour des blocages méthodologiques, des questions sur les ressources, des problèmes de motivation ou d'organisation."
+    },
+    "feed": {
+      "title": "Dernières actions du +1",
+      "empty": "Aucune action récente",
+      "loadMore": "Charger plus",
+      "actionTypes": {
+        "message": "Message",
+        "resource": "Ressource",
+        "note": "Note",
+        "lien": "Lien",
+        "status_change": "Changement de statut"
+      },
+      "targetTypes": {
+        "request": "Demande",
+        "thread": "Discussion",
+        "document": "Document"
+      }
+    },
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Décrivez brièvement votre demande...",
+      "body": "Description",
+      "bodyPlaceholder": "Expliquez en détail votre demande, question ou blocage...",
+      "tags": "Catégories",
+      "dueDate": "Date d'échéance (optionnelle)",
+      "selectDate": "Sélectionner une date",
+      "attachments": "Pièces jointes",
+      "attachmentLimits": "Maximum 10 fichiers, 25 Mo par fichier",
+      "privateRequest": "Demande privée (visible uniquement par le +1 et les admins)",
+      "submit": "Envoyer la demande",
+      "success": "Votre demande a été envoyée avec succès",
+      "errors": {
+        "noTags": "Veuillez sélectionner au moins une catégorie",
+        "fileTooLarge": "Le fichier {name} dépasse 25 Mo",
+        "tooManyFiles": "Maximum 10 fichiers autorisés",
+        "submit": "Erreur lors de l'envoi de la demande"
+      }
+    },
+    "tags": {
+      "methodo": "Méthodologie",
+      "ressource": "Ressource",
+      "blocage": "Blocage",
+      "motivation": "Motivation",
+      "organisation": "Organisation"
+    },
+    "status": {
+      "ouvert": "Ouvert",
+      "en_cours": "En cours",
+      "en_attente_infos": "En attente d'infos",
+      "resolu": "Résolu",
+      "ferme": "Fermé"
+    },
+    "visibility": {
+      "private": "Privé avec +1",
+      "kartel": "Visible par le kartel"
+    },
+    "requests": {
+      "search": "Rechercher dans les demandes...",
+      "allStatus": "Tous les statuts",
+      "empty": "Aucune demande trouvée"
+    },
+    "thread": {
+      "messages": "Réponses",
+      "messagePlaceholder": "Écrivez votre message...",
+      "dueDate": "Échéance",
+      "created": "Créée le",
+      "statusUpdated": "Statut mis à jour",
+      "errors": {
+        "sendMessage": "Erreur lors de l'envoi du message",
+        "updateStatus": "Erreur lors de la mise à jour du statut"
+      }
+    }
   },
   "common": {
     "loading": "Chargement...",
