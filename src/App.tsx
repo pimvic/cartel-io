@@ -1,3 +1,12 @@
+/**
+ * Main Application Component
+ * 
+ * Root component that sets up routing, authentication, and global providers.
+ * Handles internationalization (i18n) with English and French support.
+ * 
+ * @module App
+ */
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,18 +23,37 @@ import Mindmap from "./pages/Mindmap";
 import Glossaire from "./pages/Glossaire";
 import NotFound from "./pages/NotFound";
 
+/**
+ * React Query client instance
+ * Handles server state management and caching
+ */
 const queryClient = new QueryClient();
 
-// Helper function to get preferred language
-const getPreferredLanguage = () => {
+/**
+ * Determines user's preferred language from localStorage or browser settings
+ * 
+ * @returns Language code ('en' or 'fr')
+ */
+const getPreferredLanguage = (): 'en' | 'fr' => {
   const savedLocale = localStorage.getItem('preferredLocale');
   if (savedLocale && (savedLocale === 'en' || savedLocale === 'fr')) {
-    return savedLocale;
+    return savedLocale as 'en' | 'fr';
   }
   const browserLang = navigator.language.split('-')[0];
   return browserLang === 'fr' ? 'fr' : 'en';
 };
 
+/**
+ * App Component
+ * 
+ * Main application component that configures:
+ * - React Query for server state
+ * - React Router for navigation
+ * - Authentication context
+ * - Toast notifications
+ * - Tooltip system
+ * - Protected routes
+ */
 const App = () => {
   const preferredLang = getPreferredLanguage();
   
