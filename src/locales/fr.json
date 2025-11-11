@@ -1111,22 +1111,131 @@
       }
     },
     "settings": {
-      "subtitle": "Configurez les éléments clés de votre Kartel : vérifiez-les régulièrement.",
+      "title": "Paramètres",
+      "subtitle": "Configurez votre Kartel et vos préférences personnelles",
+      "breadcrumb": {
+        "dashboard": "Tableau de bord",
+        "settings": "Paramètres"
+      },
+      "scope": {
+        "workspace": "Espace Kartel",
+        "personal": "Personnel"
+      },
+      "comingSoon": "Fonctionnalité en cours de développement",
       "tabs": {
         "general": "Général",
-        "members": "Membres",
-        "display": "Affichage"
+        "members": "Membres & rôles",
+        "display": "Affichage",
+        "notifications": "Notifications",
+        "integrations": "Intégrations",
+        "automations": "Automations",
+        "privacy": "Données & confidentialité",
+        "billing": "Facturation",
+        "advanced": "Avancé",
+        "danger": "Zone de danger",
+        "account": "Mon compte"
       },
-      "kartelInfo": {
-        "title": "Informations du Kartel",
+      "general": {
+        "title": "Informations générales",
+        "description": "Configurez les informations de base de votre Kartel",
         "kartelName": "Nom du Kartel",
-        "kartelNameValue": "Formateur Professionnel d'Adultes (FPA)",
-        "coordinator": "Coordinateur",
-        "coordinatorValue": "Jean-Stéphane B.",
+        "kartelNamePlaceholder": "Ex: Formation Psychanalyse 2025",
+        "objective": "Objectif",
+        "objectivePlaceholder": "Décrivez l'objectif principal de votre Kartel",
         "deadline": "Date limite",
-        "saveButton": "Enregistrer les modifications"
+        "timezone": "Fuseau horaire",
+        "defaultLanguage": "Langue par défaut",
+        "saved": "Modifications enregistrées",
+        "savedDescription": "Les paramètres ont été mis à jour avec succès"
       },
-      "comingSoon": "Fonctionnalité à venir"
+      "members": {
+        "title": "Membres & rôles",
+        "description": "Gérez les membres de votre Kartel et leurs permissions",
+        "invite": "Inviter un membre",
+        "columns": {
+          "member": "Membre",
+          "role": "Rôle",
+          "status": "Statut",
+          "lastSeen": "Dernière visite"
+        },
+        "roles": {
+          "member": "Membre",
+          "coordinator": "+1 (Coordinateur)",
+          "admin": "Administrateur"
+        },
+        "status": {
+          "active": "Actif",
+          "invited": "Invité",
+          "inactive": "Inactif"
+        },
+        "actions": {
+          "resendInvite": "Renvoyer l'invitation",
+          "changeRole": "Changer le rôle",
+          "remove": "Retirer du Kartel"
+        },
+        "inviteDialog": {
+          "title": "Inviter un nouveau membre",
+          "description": "Envoyez une invitation pour rejoindre votre Kartel",
+          "email": "Adresse email",
+          "role": "Rôle",
+          "send": "Envoyer l'invitation"
+        },
+        "inviteSent": "Invitation envoyée",
+        "inviteSentDescription": "Une invitation a été envoyée à {{email}}"
+      },
+      "display": {
+        "description": "Personnalisez l'apparence et l'expérience visuelle de votre Kartel"
+      },
+      "notifications": {
+        "description": "Configurez les préférences de notification pour votre Kartel"
+      },
+      "integrations": {
+        "description": "Connectez des services externes à votre Kartel"
+      },
+      "automations": {
+        "description": "Créez des automatisations pour simplifier la gestion de votre Kartel"
+      },
+      "privacy": {
+        "description": "Gérez les données et la confidentialité de votre Kartel"
+      },
+      "billing": {
+        "description": "Gérez la facturation et les abonnements de votre Kartel"
+      },
+      "advanced": {
+        "description": "Paramètres avancés et configuration système"
+      },
+      "account": {
+        "description": "Gérez vos informations personnelles et préférences"
+      },
+      "dangerZone": {
+        "title": "Zone de danger",
+        "description": "Actions irréversibles - procédez avec précaution",
+        "archive": {
+          "title": "Archiver le Kartel",
+          "description": "Désactivez temporairement le Kartel. Vous pourrez le restaurer ultérieurement.",
+          "button": "Archiver",
+          "confirmTitle": "Confirmer l'archivage",
+          "confirmDescription": "Êtes-vous sûr de vouloir archiver ce Kartel ? Les membres ne pourront plus y accéder temporairement.",
+          "confirm": "Archiver le Kartel"
+        },
+        "delete": {
+          "title": "Supprimer le Kartel",
+          "description": "Supprimez définitivement le Kartel et toutes ses données. Cette action est irréversible.",
+          "button": "Supprimer",
+          "consequence1": "Tous les membres perdront l'accès",
+          "consequence2": "Toutes les données seront définitivement supprimées",
+          "consequence3": "Les messages, notes et ressources seront perdus",
+          "consequence4": "Cette action ne peut pas être annulée",
+          "confirmTitle": "Supprimer définitivement le Kartel",
+          "confirmDescription": "Cette action est irréversible. Toutes les données seront définitivement supprimées.",
+          "confirmLabel": "Pour confirmer, tapez le nom exact du Kartel : {{name}}",
+          "confirm": "Supprimer définitivement"
+        },
+        "archived": "Kartel archivé",
+        "archivedDescription": "Le Kartel a été archivé avec succès",
+        "deleted": "Kartel supprimé",
+        "deletedDescription": "Le Kartel et toutes ses données ont été définitivement supprimés"
+      }
     },
     "feedback": {
       "title": "Donnez votre avis ou signalez un problème",
