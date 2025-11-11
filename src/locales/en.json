@@ -1379,6 +1379,62 @@
       }
     }
   },
+  "visio": {
+    "title": "Video",
+    "subtitle": "Start and schedule video sessions with your kartel",
+    "defaultTitle": "Group session",
+    "scheduledSession": "Scheduled session",
+    "unknownHost": "Unknown host",
+    "joinLink": "Join link",
+    "createSession": "Create Session",
+    "scheduleSession": "Schedule Session",
+    "startSession": "Start Session",
+    "startSessionDescription": "Launch an instant session or schedule a future meeting",
+    "createSessionDescription": "Create an instant video session for your kartel",
+    "scheduleSessionDescription": "Schedule a video session for a specific date and time",
+    "quickStart": "Quick Start",
+    "quickStartFeature1": "Instant 60-minute session",
+    "quickStartFeature2": "Link automatically copied",
+    "quickStartFeature3": "No external account required",
+    "sessionReady": "Session ready!",
+    "sessionCreated": "Session created successfully",
+    "sessionScheduled": "Session scheduled successfully",
+    "urlCopied": "Link has been copied to your clipboard",
+    "scheduledSessions": "Scheduled Sessions",
+    "sessionHistory": "Session History",
+    "noScheduledSessions": "No scheduled sessions",
+    "noHistory": "No session history",
+    "join": "Join",
+    "schedule": "Schedule",
+    "recorded": "Recorded",
+    "transcribed": "Transcribed",
+    "status": {
+      "scheduled": "Scheduled",
+      "active": "Active",
+      "ended": "Ended",
+      "cancelled": "Cancelled"
+    },
+    "form": {
+      "title": "Title",
+      "titlePlaceholder": "E.g., Weekly team meeting",
+      "description": "Description",
+      "descriptionPlaceholder": "Agenda and session objectives...",
+      "date": "Date",
+      "selectDate": "Select a date",
+      "time": "Time",
+      "duration": "Duration",
+      "minutes": "minutes",
+      "hour": "hour",
+      "hours": "hours",
+      "recording": "Enable recording",
+      "transcription": "Enable transcription"
+    },
+    "errors": {
+      "createSession": "Error creating session",
+      "scheduleSession": "Error scheduling session",
+      "selectDate": "Please select a date"
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",

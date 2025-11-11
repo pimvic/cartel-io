@@ -1379,6 +1379,62 @@
       }
     }
   },
+  "visio": {
+    "title": "Visio",
+    "subtitle": "Démarrez et planifiez des sessions vidéo avec votre kartel",
+    "defaultTitle": "Session de groupe",
+    "scheduledSession": "Session programmée",
+    "unknownHost": "Hôte inconnu",
+    "joinLink": "Lien de connexion",
+    "createSession": "Créer une session",
+    "scheduleSession": "Planifier une session",
+    "startSession": "Démarrer une session",
+    "startSessionDescription": "Lancez une session instantanée ou planifiez une réunion future",
+    "createSessionDescription": "Créez une session vidéo instantanée pour votre kartel",
+    "scheduleSessionDescription": "Planifiez une session vidéo pour une date et heure spécifiques",
+    "quickStart": "Démarrage rapide",
+    "quickStartFeature1": "Session instantanée de 60 minutes",
+    "quickStartFeature2": "Lien automatiquement copié",
+    "quickStartFeature3": "Aucun compte externe requis",
+    "sessionReady": "Session prête !",
+    "sessionCreated": "Session créée avec succès",
+    "sessionScheduled": "Session planifiée avec succès",
+    "urlCopied": "Le lien a été copié dans votre presse-papiers",
+    "scheduledSessions": "Sessions programmées",
+    "sessionHistory": "Historique des sessions",
+    "noScheduledSessions": "Aucune session programmée",
+    "noHistory": "Aucun historique de session",
+    "join": "Rejoindre",
+    "schedule": "Planifier",
+    "recorded": "Enregistrée",
+    "transcribed": "Transcrite",
+    "status": {
+      "scheduled": "Programmée",
+      "active": "En cours",
+      "ended": "Terminée",
+      "cancelled": "Annulée"
+    },
+    "form": {
+      "title": "Titre",
+      "titlePlaceholder": "Ex: Réunion d'équipe hebdomadaire",
+      "description": "Description",
+      "descriptionPlaceholder": "Ordre du jour et objectifs de la session...",
+      "date": "Date",
+      "selectDate": "Sélectionner une date",
+      "time": "Heure",
+      "duration": "Durée",
+      "minutes": "minutes",
+      "hour": "heure",
+      "hours": "heures",
+      "recording": "Activer l'enregistrement",
+      "transcription": "Activer la transcription"
+    },
+    "errors": {
+      "createSession": "Erreur lors de la création de la session",
+      "scheduleSession": "Erreur lors de la planification de la session",
+      "selectDate": "Veuillez sélectionner une date"
+    }
+  },
   "common": {
     "loading": "Chargement...",
     "error": "Erreur",

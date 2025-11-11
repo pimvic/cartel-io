@@ -1401,6 +1401,347 @@ export type Database = {
         }
         Relationships: []
       }
+      visio_attendance_logs: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          participant_id: string
+          session_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          participant_id: string
+          session_id: string
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          participant_id?: string
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_attendance_logs_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "visio_participants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visio_attendance_logs_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "visio_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      visio_participants: {
+        Row: {
+          consent_recording: boolean | null
+          consent_transcription: boolean | null
+          created_at: string
+          duration_seconds: number | null
+          guest_name: string | null
+          id: string
+          joined_at: string | null
+          left_at: string | null
+          role: Database["public"]["Enums"]["visio_participant_role"]
+          session_id: string
+          user_id: string | null
+        }
+        Insert: {
+          consent_recording?: boolean | null
+          consent_transcription?: boolean | null
+          created_at?: string
+          duration_seconds?: number | null
+          guest_name?: string | null
+          id?: string
+          joined_at?: string | null
+          left_at?: string | null
+          role?: Database["public"]["Enums"]["visio_participant_role"]
+          session_id: string
+          user_id?: string | null
+        }
+        Update: {
+          consent_recording?: boolean | null
+          consent_transcription?: boolean | null
+          created_at?: string
+          duration_seconds?: number | null
+          guest_name?: string | null
+          id?: string
+          joined_at?: string | null
+          left_at?: string | null
+          role?: Database["public"]["Enums"]["visio_participant_role"]
+          session_id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_participants_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "visio_sessions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visio_participants_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      visio_sessions: {
+        Row: {
+          cartel_id: string
+          created_at: string
+          description: string | null
+          duration_minutes: number
+          end_at: string
+          host_id: string
+          id: string
+          join_code: string
+          join_url: string
+          lobby_enabled: boolean | null
+          max_participants: number | null
+          metadata: Json | null
+          parent_event_id: string | null
+          privacy: Database["public"]["Enums"]["visio_session_privacy"]
+          provider: Database["public"]["Enums"]["visio_provider"]
+          recording_enabled: boolean | null
+          recording_url: string | null
+          room_locked: boolean | null
+          start_at: string
+          status: Database["public"]["Enums"]["visio_session_status"]
+          summary_note_id: string | null
+          title: string
+          transcript_id: string | null
+          transcription_enabled: boolean | null
+          updated_at: string
+        }
+        Insert: {
+          cartel_id: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number
+          end_at: string
+          host_id: string
+          id?: string
+          join_code: string
+          join_url: string
+          lobby_enabled?: boolean | null
+          max_participants?: number | null
+          metadata?: Json | null
+          parent_event_id?: string | null
+          privacy?: Database["public"]["Enums"]["visio_session_privacy"]
+          provider?: Database["public"]["Enums"]["visio_provider"]
+          recording_enabled?: boolean | null
+          recording_url?: string | null
+          room_locked?: boolean | null
+          start_at: string
+          status?: Database["public"]["Enums"]["visio_session_status"]
+          summary_note_id?: string | null
+          title: string
+          transcript_id?: string | null
+          transcription_enabled?: boolean | null
+          updated_at?: string
+        }
+        Update: {
+          cartel_id?: string
+          created_at?: string
+          description?: string | null
+          duration_minutes?: number
+          end_at?: string
+          host_id?: string
+          id?: string
+          join_code?: string
+          join_url?: string
+          lobby_enabled?: boolean | null
+          max_participants?: number | null
+          metadata?: Json | null
+          parent_event_id?: string | null
+          privacy?: Database["public"]["Enums"]["visio_session_privacy"]
+          provider?: Database["public"]["Enums"]["visio_provider"]
+          recording_enabled?: boolean | null
+          recording_url?: string | null
+          room_locked?: boolean | null
+          start_at?: string
+          status?: Database["public"]["Enums"]["visio_session_status"]
+          summary_note_id?: string | null
+          title?: string
+          transcript_id?: string | null
+          transcription_enabled?: boolean | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_sessions_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: false
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visio_sessions_host_id_fkey"
+            columns: ["host_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visio_sessions_parent_event_id_fkey"
+            columns: ["parent_event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      visio_stt_quota: {
+        Row: {
+          cartel_id: string
+          created_at: string
+          hard_cap_minutes: number | null
+          id: string
+          last_reset_at: string | null
+          soft_cap_minutes: number | null
+          updated_at: string
+          used_minutes: number | null
+        }
+        Insert: {
+          cartel_id: string
+          created_at?: string
+          hard_cap_minutes?: number | null
+          id?: string
+          last_reset_at?: string | null
+          soft_cap_minutes?: number | null
+          updated_at?: string
+          used_minutes?: number | null
+        }
+        Update: {
+          cartel_id?: string
+          created_at?: string
+          hard_cap_minutes?: number | null
+          id?: string
+          last_reset_at?: string | null
+          soft_cap_minutes?: number | null
+          updated_at?: string
+          used_minutes?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_stt_quota_cartel_id_fkey"
+            columns: ["cartel_id"]
+            isOneToOne: true
+            referencedRelation: "cartels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      visio_summaries: {
+        Row: {
+          actions: Json | null
+          created_at: string
+          decisions: string[] | null
+          highlights: string[] | null
+          id: string
+          next_steps: string[] | null
+          note_id: string | null
+          risks: string[] | null
+          session_id: string
+        }
+        Insert: {
+          actions?: Json | null
+          created_at?: string
+          decisions?: string[] | null
+          highlights?: string[] | null
+          id?: string
+          next_steps?: string[] | null
+          note_id?: string | null
+          risks?: string[] | null
+          session_id: string
+        }
+        Update: {
+          actions?: Json | null
+          created_at?: string
+          decisions?: string[] | null
+          highlights?: string[] | null
+          id?: string
+          next_steps?: string[] | null
+          note_id?: string | null
+          risks?: string[] | null
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_summaries_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visio_summaries_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "visio_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      visio_transcripts: {
+        Row: {
+          created_at: string
+          full_text: string | null
+          id: string
+          language_code: string
+          retention_until: string | null
+          segments: Json
+          session_id: string
+          updated_at: string
+          word_count: number | null
+        }
+        Insert: {
+          created_at?: string
+          full_text?: string | null
+          id?: string
+          language_code?: string
+          retention_until?: string | null
+          segments?: Json
+          session_id: string
+          updated_at?: string
+          word_count?: number | null
+        }
+        Update: {
+          created_at?: string
+          full_text?: string | null
+          id?: string
+          language_code?: string
+          retention_until?: string | null
+          segments?: Json
+          session_id?: string
+          updated_at?: string
+          word_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visio_transcripts_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "visio_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -1438,6 +1779,10 @@ export type Database = {
         | "tools"
         | "other"
       resource_type: "document" | "video" | "summary" | "tool" | "link"
+      visio_participant_role: "host" | "co_host" | "participant" | "guest"
+      visio_provider: "auto" | "jitsi" | "zoom" | "meet"
+      visio_session_privacy: "kartel" | "private"
+      visio_session_status: "scheduled" | "active" | "ended" | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1585,6 +1930,10 @@ export const Constants = {
       report_status: ["pending", "reviewed", "resolved", "dismissed"],
       resource_category: ["documents", "videos", "summaries", "tools", "other"],
       resource_type: ["document", "video", "summary", "tool", "link"],
+      visio_participant_role: ["host", "co_host", "participant", "guest"],
+      visio_provider: ["auto", "jitsi", "zoom", "meet"],
+      visio_session_privacy: ["kartel", "private"],
+      visio_session_status: ["scheduled", "active", "ended", "cancelled"],
     },
   },
 } as const

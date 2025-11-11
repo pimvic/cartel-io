@@ -1,106 +1,226 @@
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Video, Calendar, Users, Clock } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { CreateSessionModal } from "./visio/CreateSessionModal";
+import { ScheduleSessionModal } from "./visio/ScheduleSessionModal";
+import { SessionCard } from "./visio/SessionCard";
+import { ChevronRight, Plus, Calendar as CalendarIcon, History } from "lucide-react";
+import { toast } from "sonner";
 
 export const Visio = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const [cartelId, setCartelId] = useState<string>("");
+  const [currentUserId, setCurrentUserId] = useState<string>("");
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
+  const [scheduledSessions, setScheduledSessions] = useState<any[]>([]);
+  const [historySessions, setHistorySessions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadUserData();
+  }, [user]);
+
+  useEffect(() => {
+    if (cartelId) {
+      loadSessions();
+    }
+  }, [cartelId]);
+
+  const loadUserData = async () => {
+    if (!user) return;
+
+    try {
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('id')
+        .eq('auth_user_id', user.id)
+        .single();
+
+      if (userError) throw userError;
+      setCurrentUserId(userData.id);
+
+      const { data: membership, error: membershipError } = await supabase
+        .from('memberships')
+        .select('cartel_id')
+        .eq('user_id', userData.id)
+        .single();
+
+      if (membershipError) throw membershipError;
+      setCartelId(membership.cartel_id);
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
+  };
+
+  const loadSessions = async () => {
+    setLoading(true);
+    try {
+      const { data: scheduled, error: scheduledError } = await supabase
+        .from('visio_sessions')
+        .select('*, host:host_id(name)')
+        .eq('cartel_id', cartelId)
+        .in('status', ['scheduled', 'active'])
+        .order('start_at', { ascending: true });
+
+      if (scheduledError) throw scheduledError;
+
+      const { data: history, error: historyError } = await supabase
+        .from('visio_sessions')
+        .select('*, host:host_id(name)')
+        .eq('cartel_id', cartelId)
+        .eq('status', 'ended')
+        .order('start_at', { ascending: false })
+        .limit(10);
+
+      if (historyError) throw historyError;
+
+      setScheduledSessions((scheduled || []) as any);
+      setHistorySessions((history || []) as any);
+    } catch (error) {
+      console.error('Error loading sessions:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleJoinSession = (sessionId: string, joinCode: string) => {
+    window.open(`/visio/room/${joinCode}`, '_blank');
+  };
+
+  if (!cartelId || !currentUserId) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <p className="text-muted-foreground">{t('common.loading')}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
-      <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">{t('dashboard.visio.subtitle')}</p>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">{t('dashboard.menu.dashboard')}</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <ChevronRight className="h-4 w-4" />
+          </BreadcrumbSeparator>
+          <BreadcrumbItem>
+            <BreadcrumbPage>{t('dashboard.menu.visio')}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">{t('visio.title')}</h1>
+          <p className="text-muted-foreground mt-1">{t('visio.subtitle')}</p>
+        </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <Card className="relative">
-          <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Video className="w-5 h-5 text-accent" />
-              <span>{t('dashboard.visio.startSession.title')}</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              {t('dashboard.visio.startSession.description')}
-            </p>
-            <Button className="w-full" size="lg">
-              <Video className="w-4 h-4 mr-2" />
-              {t('dashboard.visio.startSession.button')}
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="relative">
-          <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-accent" />
-              <span>{t('dashboard.visio.scheduledSessions.title')}</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="p-3 bg-accent/5 rounded-lg border border-accent/20">
-                <p className="text-sm font-medium">{t('dashboard.visio.scheduledSessions.sample.title')}</p>
-                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {t('dashboard.visio.scheduledSessions.sample.time')}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3 h-3" />
-                    {t('dashboard.visio.scheduledSessions.sample.participants')}
-                  </span>
-                </div>
-                <Button size="sm" className="mt-3 w-full">{t('dashboard.visio.scheduledSessions.join')}</Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
+      <Card className="border-primary/20 bg-primary/5">
         <CardHeader>
-          <CardTitle>{t('dashboard.visio.history.title')}</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <Plus className="h-5 w-5" />
+            {t('visio.startSession')}
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {[
-              { 
-                title: t('dashboard.visio.history.sessions.session1.title'), 
-                date: t('dashboard.visio.history.sessions.session1.date'), 
-                duration: t('dashboard.visio.history.sessions.session1.duration'), 
-                participants: t('dashboard.visio.history.sessions.session1.participants')
-              },
-              { 
-                title: t('dashboard.visio.history.sessions.session2.title'), 
-                date: t('dashboard.visio.history.sessions.session2.date'), 
-                duration: t('dashboard.visio.history.sessions.session2.duration'), 
-                participants: t('dashboard.visio.history.sessions.session2.participants')
-              },
-              { 
-                title: t('dashboard.visio.history.sessions.session3.title'), 
-                date: t('dashboard.visio.history.sessions.session3.date'), 
-                duration: t('dashboard.visio.history.sessions.session3.duration'), 
-                participants: t('dashboard.visio.history.sessions.session3.participants')
-              }
-            ].map((session, i) => (
-              <div key={i} className="p-4 bg-muted/30 rounded-lg flex items-center justify-between">
-                <div>
-                  <p className="font-medium">{session.title}</p>
-                  <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                    <span>{session.date}</span>
-                    <span>{session.duration}</span>
-                    <span>{session.participants}</span>
-                  </div>
-                </div>
-                <Button size="sm" variant="outline">{t('dashboard.visio.history.details')}</Button>
-              </div>
-            ))}
+        <CardContent className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            {t('visio.startSessionDescription')}
+          </p>
+          <div className="flex gap-2">
+            <Button onClick={() => setCreateModalOpen(true)} size="lg" className="flex-1">
+              {t('visio.createSession')}
+            </Button>
+            <Button onClick={() => setScheduleModalOpen(true)} variant="outline" size="lg" className="flex-1">
+              <CalendarIcon className="mr-2 h-5 w-5" />
+              {t('visio.scheduleSession')}
+            </Button>
           </div>
         </CardContent>
       </Card>
+
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <CalendarIcon className="h-5 w-5" />
+          {t('visio.scheduledSessions')}
+        </h2>
+        
+        {loading ? (
+          <div className="text-center py-8 text-muted-foreground">
+            {t('common.loading')}
+          </div>
+        ) : scheduledSessions.length === 0 ? (
+          <Card>
+            <CardContent className="py-8 text-center text-muted-foreground">
+              {t('visio.noScheduledSessions')}
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {scheduledSessions.map((session) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                onJoin={handleJoinSession}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold flex items-center gap-2">
+          <History className="h-5 w-5" />
+          {t('visio.sessionHistory')}
+        </h2>
+        
+        {loading ? (
+          <div className="text-center py-8 text-muted-foreground">
+            {t('common.loading')}
+          </div>
+        ) : historySessions.length === 0 ? (
+          <Card>
+            <CardContent className="py-8 text-center text-muted-foreground">
+              {t('visio.noHistory')}
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {historySessions.map((session) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                onJoin={handleJoinSession}
+                showJoinButton={false}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <CreateSessionModal
+        open={createModalOpen}
+        onOpenChange={setCreateModalOpen}
+        cartelId={cartelId}
+        userId={currentUserId}
+        onSuccess={loadSessions}
+      />
+
+      <ScheduleSessionModal
+        open={scheduleModalOpen}
+        onOpenChange={setScheduleModalOpen}
+        cartelId={cartelId}
+        userId={currentUserId}
+        onSuccess={loadSessions}
+      />
     </div>
   );
 };
