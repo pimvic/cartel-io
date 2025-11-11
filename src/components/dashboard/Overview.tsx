@@ -1,211 +1,545 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Users,
   Clock,
-  CheckCircle2,
-  Target,
+  CheckCircle,
+  TrendingUp,
   FileText,
-  StickyNote,
-  CheckSquare,
+  Calendar,
+  GraduationCap,
+  BookOpen,
+  ClipboardList,
   Info,
   Brain,
-  Lightbulb,
+  HelpCircle,
   CreditCard,
+  ChevronLeft,
+  ChevronRight,
+  AlertTriangle,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useTranslation } from "react-i18next";
+import { useAuth } from "@/contexts/AuthContext";
 
-interface Task {
+type Period = "7" | "30" | "90" | "custom";
+
+interface KPI {
+  label: string;
+  value: string | number;
+  icon: any;
+  change?: string;
+  section: string;
+}
+
+interface Member {
   id: string;
-  title: string;
-  description: string | null;
-  due_date: string | null;
-  status: string;
+  name: string;
+  avatar_url?: string;
+  last_activity: string;
+  presence: "online" | "idle" | "away";
+  total_time?: number;
+  items_done?: number;
+  connections?: number;
 }
 
 export const Overview = () => {
   const { t } = useTranslation();
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const { user } = useAuth();
+  const [period, setPeriod] = useState<Period>("30");
   const [loading, setLoading] = useState(true);
+  const [cartelId, setCartelId] = useState<string | null>(null);
+  const [examDate, setExamDate] = useState<Date | null>(null);
+  const [daysToExam, setDaysToExam] = useState<number | null>(null);
+  const [showAtRiskBanner, setShowAtRiskBanner] = useState(false);
+  
+  // KPIs
+  const [activeMembers, setActiveMembers] = useState(0);
+  const [studyHours, setStudyHours] = useState(0);
+  const [tasksCompleted, setTasksCompleted] = useState(0);
+  const [progression, setProgression] = useState(0);
+  
+  // Members & Activity
+  const [members, setMembers] = useState<Member[]>([]);
+  const [memberScrollPos, setMemberScrollPos] = useState(0);
+  
+  // Resource counts
+  const [resourceCounts, setResourceCounts] = useState({
+    documents: 0,
+    notes: 0,
+    tasks: 0,
+    info: 0,
+    qcm: 0,
+    quiz: 0,
+    flashcards: 0,
+  });
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    fetchOverviewData();
+  }, [user, period]);
 
-  const fetchTasks = async () => {
-    const { data, error } = await supabase
-      .from("tasks")
-      .select("*")
-      .eq("cartel_id", "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
-      .order("created_at", { ascending: false });
+  const fetchOverviewData = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      // Get user's cartel
+      const { data: membership } = await supabase
+        .from("memberships")
+        .select("cartel_id, cartels(deadline)")
+        .eq("user_id", user.id)
+        .single();
 
-    if (data) {
-      setTasks(data);
+      if (membership) {
+        setCartelId(membership.cartel_id);
+        const deadline = membership.cartels?.deadline;
+        if (deadline) {
+          const examDateObj = new Date(deadline);
+          setExamDate(examDateObj);
+          const today = new Date();
+          const diffTime = examDateObj.getTime() - today.getTime();
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          setDaysToExam(diffDays);
+          
+          // Show at-risk banner if deadline ≤ 14 days
+          setShowAtRiskBanner(diffDays <= 14 && diffDays > 0);
+        }
+
+        // Fetch KPIs
+        await Promise.all([
+          fetchActiveMembers(membership.cartel_id),
+          fetchStudyHours(membership.cartel_id),
+          fetchTasksCompleted(membership.cartel_id),
+          fetchProgression(membership.cartel_id),
+          fetchMembers(membership.cartel_id),
+          fetchResourceCounts(membership.cartel_id),
+        ]);
+      }
+    } catch (error) {
+      console.error("Error fetching overview data:", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  const completedTasks = tasks.filter(t => t.status === "done").length;
-  const totalTasks = tasks.length;
-  const completionPercentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  const fetchActiveMembers = async (cartelId: string) => {
+    // Count distinct users with activity in period
+    const daysAgo = parseInt(period);
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - daysAgo);
 
-  const members = [
-    { name: "Jean-Stéphane B.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.ecfSubmitted'), status: t('dashboard.overview.members.online') },
-    { name: "Thierry F.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.module12'), status: t('dashboard.overview.members.online') },
-    { name: "Isabelle L.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.flashcardsCreated'), status: t('dashboard.overview.members.offline') },
-    { name: "Elsa B.", avatar: "/placeholder.svg", activity: t('dashboard.overview.members.activities.quizCompleted'), status: t('dashboard.overview.members.online') },
+    const { count } = await supabase
+      .from("users")
+      .select("id", { count: "exact", head: true })
+      .gte("last_login_at", cutoffDate.toISOString());
+
+    setActiveMembers(count || 0);
+  };
+
+  const fetchStudyHours = async (cartelId: string) => {
+    // Mock data - would calculate from session logs
+    setStudyHours(42);
+  };
+
+  const fetchTasksCompleted = async (cartelId: string) => {
+    const daysAgo = parseInt(period);
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - daysAgo);
+
+    const { count } = await supabase
+      .from("tasks")
+      .select("id", { count: "exact", head: true })
+      .eq("cartel_id", cartelId)
+      .eq("status", "done")
+      .gte("created_at", cutoffDate.toISOString());
+
+    setTasksCompleted(count || 0);
+  };
+
+  const fetchProgression = async (cartelId: string) => {
+    // Weighted formula: Tasks 40%, QCM 25%, Quiz 15%, Flashcards 20%
+    const { data: tasks } = await supabase
+      .from("tasks")
+      .select("status")
+      .eq("cartel_id", cartelId);
+
+    const totalTasks = tasks?.length || 1;
+    const doneTasks = tasks?.filter((t) => t.status === "done").length || 0;
+    const taskProgress = (doneTasks / totalTasks) * 100;
+
+    // Mock QCM, Quiz, Flashcards progress
+    const qcmProgress = 75;
+    const quizProgress = 80;
+    const flashcardsProgress = 65;
+
+    const weighted =
+      taskProgress * 0.4 +
+      qcmProgress * 0.25 +
+      quizProgress * 0.15 +
+      flashcardsProgress * 0.2;
+
+    setProgression(Math.round(weighted));
+  };
+
+  const fetchMembers = async (cartelId: string) => {
+    const { data: memberships } = await supabase
+      .from("memberships")
+      .select(`
+        user_id,
+        users (
+          id,
+          name,
+          avatar_url,
+          last_login_at
+        )
+      `)
+      .eq("cartel_id", cartelId);
+
+    if (memberships) {
+      const memberData: Member[] = memberships.map((m: any) => {
+        const lastLogin = m.users?.last_login_at
+          ? new Date(m.users.last_login_at)
+          : null;
+        const now = new Date();
+        const minutesAgo = lastLogin
+          ? (now.getTime() - lastLogin.getTime()) / 60000
+          : 99999;
+
+        let presence: "online" | "idle" | "away" = "away";
+        if (minutesAgo < 5) presence = "online";
+        else if (minutesAgo < 1440) presence = "idle";
+
+        return {
+          id: m.users?.id || "",
+          name: m.users?.name || "Unknown",
+          avatar_url: m.users?.avatar_url,
+          last_activity: lastLogin
+            ? lastLogin.toLocaleDateString()
+            : t("overview.noActivity"),
+          presence,
+          total_time: Math.floor(Math.random() * 20), // Mock
+          items_done: Math.floor(Math.random() * 15), // Mock
+          connections: Math.floor(Math.random() * 30), // Mock
+        };
+      });
+
+      setMembers(memberData);
+    }
+  };
+
+  const fetchResourceCounts = async (cartelId: string) => {
+    const [docs, notes, tasks, events, qcm, quiz, flashcards] = await Promise.all([
+      supabase.from("knowledge_base_resources").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("notes").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("tasks").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("events").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("quizzes").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("quizzes").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+      supabase.from("flashcards").select("id", { count: "exact", head: true }).eq("cartel_id", cartelId),
+    ]);
+
+    setResourceCounts({
+      documents: docs.count || 0,
+      notes: notes.count || 0,
+      tasks: tasks.count || 0,
+      info: events.count || 0,
+      qcm: qcm.count || 0,
+      quiz: quiz.count || 0,
+      flashcards: flashcards.count || 0,
+    });
+  };
+
+  const kpis: KPI[] = [
+    {
+      label: t("overview.kpi.activeMembers"),
+      value: activeMembers,
+      icon: Users,
+      section: "members",
+    },
+    {
+      label: t("overview.kpi.studyHours"),
+      value: studyHours,
+      icon: Clock,
+      section: "activity",
+    },
+    {
+      label: t("overview.kpi.tasksCompleted"),
+      value: tasksCompleted,
+      icon: CheckCircle,
+      section: "tasks",
+    },
+    {
+      label: t("overview.kpi.progression"),
+      value: `${progression}%`,
+      icon: TrendingUp,
+      section: "progress",
+    },
   ];
 
-  const stats = [
-    { label: t('dashboard.overview.stats.activeMembers'), value: "4", icon: Users, color: "text-accent" },
-    { label: t('dashboard.overview.stats.studyHours'), value: "127", icon: Clock, color: "text-success" },
-    { label: t('dashboard.overview.stats.completedTasks'), value: completedTasks, icon: CheckCircle2, color: "text-primary" },
-    { label: t('dashboard.overview.stats.progress'), value: `${completionPercentage}%`, icon: Target, color: "text-warning" },
+  const resourcePills = [
+    { label: t("overview.resources.documents"), count: resourceCounts.documents, icon: FileText, section: "base-connaissances" },
+    { label: t("overview.resources.notes"), count: resourceCounts.notes, icon: BookOpen, section: "notes" },
+    { label: t("overview.resources.tasks"), count: resourceCounts.tasks, icon: ClipboardList, section: "calendrier" },
+    { label: t("overview.resources.info"), count: resourceCounts.info, icon: Info, section: "messagerie-news-events" },
+    { label: t("overview.resources.qcm"), count: resourceCounts.qcm, icon: Brain, section: "outils-pedagogiques" },
+    { label: t("overview.resources.quiz"), count: resourceCounts.quiz, icon: HelpCircle, section: "quiz" },
+    { label: t("overview.resources.flashcards"), count: resourceCounts.flashcards, icon: CreditCard, section: "flashcards" },
   ];
 
-  const counters = [
-    { label: t('dashboard.overview.counters.documents'), value: "234", icon: FileText },
-    { label: t('dashboard.overview.counters.notes'), value: "45", icon: StickyNote },
-    { label: t('dashboard.overview.counters.tasks'), value: "56", icon: CheckSquare },
-    { label: t('dashboard.overview.counters.info'), value: "65", icon: Info },
-    { label: t('dashboard.overview.counters.mcqs'), value: "56", icon: Brain },
-    { label: t('dashboard.overview.counters.quizzes'), value: "3", icon: Lightbulb },
-    { label: t('dashboard.overview.counters.flashcards'), value: "4", icon: CreditCard },
-  ];
+  const scrollMembers = (direction: "left" | "right") => {
+    const container = document.getElementById("members-carousel");
+    if (container) {
+      const scrollAmount = 300;
+      container.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i} className="animate-pulse">
+              <CardContent className="p-6">
+                <div className="h-20 bg-muted rounded" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
-      <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">{t('dashboard.overview.subtitle')}</p>
+      {/* Header with Period Selector */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">
+            {t("overview.title")}
+          </h1>
+          {examDate && daysToExam !== null && (
+            <p className="text-sm text-muted-foreground mt-1">
+              {t("overview.examDate")}: {examDate.toLocaleDateString()} · {t("overview.daysRemaining", { count: daysToExam })}
+            </p>
+          )}
+        </div>
+        <Tabs value={period} onValueChange={(v) => setPeriod(v as Period)}>
+          <TabsList>
+            <TabsTrigger value="7">{t("overview.period.7days")}</TabsTrigger>
+            <TabsTrigger value="30">{t("overview.period.30days")}</TabsTrigger>
+            <TabsTrigger value="90">{t("overview.period.90days")}</TabsTrigger>
+          </TabsList>
+        </Tabs>
       </div>
 
-      {/* Single thin horizontal statistics line */}
-      <Card className="relative">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-        <CardContent className="py-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <Icon className={`w-5 h-5 ${stat.color}`} />
+      {/* At-Risk Banner */}
+      {showAtRiskBanner && (
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>
+            {t("overview.atRiskBanner")} - <strong>{daysToExam} {t("overview.daysRemaining", { count: daysToExam })}</strong>
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {/* KPI Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {kpis.map((kpi, index) => {
+          const Icon = kpi.icon;
+          return (
+            <Card
+              key={index}
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => {/* Navigate to section */}}
+            >
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
                   <div>
-                    <p className="text-lg font-bold">{stat.value}</p>
-                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {kpi.label}
+                    </p>
+                    <p className="text-3xl font-bold text-foreground">
+                      {kpi.value}
+                    </p>
                   </div>
+                  <Icon className="w-8 h-8 text-primary" />
                 </div>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
 
       {/* Members Carousel */}
-      <Card className="relative">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+      <Card>
         <CardHeader>
-          <CardTitle>{t('dashboard.overview.members.title')}</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>{t("overview.membersCarousel.title")}</CardTitle>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => scrollMembers("left")}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => scrollMembers("right")}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
-          <Carousel className="w-full">
-            <CarouselContent>
-              {members.map((member, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card>
-                    <CardContent className="flex flex-col items-center p-6">
-                      <Avatar className="w-24 h-24 mb-4">
-                        <AvatarImage src={member.avatar} />
-                        <AvatarFallback>{member.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
-                      </Avatar>
-                      <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">{t('dashboard.overview.members.lastActivity')} {member.activity}</p>
-                      <Badge variant={member.status === t('dashboard.overview.members.online') ? "default" : "secondary"}>
-                        {member.status}
-                      </Badge>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          <div
+            id="members-carousel"
+            className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide"
+          >
+            {members.map((member) => (
+              <Card
+                key={member.id}
+                className="min-w-[200px] flex-shrink-0"
+              >
+                <CardContent className="p-4">
+                  <div className="flex flex-col items-center text-center gap-2">
+                    <Avatar className="w-16 h-16">
+                      <AvatarImage src={member.avatar_url} />
+                      <AvatarFallback>
+                        {member.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-semibold text-sm">{member.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {member.last_activity}
+                      </p>
+                    </div>
+                    <Badge
+                      variant={
+                        member.presence === "online"
+                          ? "default"
+                          : member.presence === "idle"
+                          ? "secondary"
+                          : "outline"
+                      }
+                      className="text-xs"
+                    >
+                      {t(`overview.presence.${member.presence}`)}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </CardContent>
       </Card>
 
-      {/* Summary Stats Banner */}
-      <Card className="relative">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-        <CardContent className="pt-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {counters.map((counter, index) => {
-              const Icon = counter.icon;
-              return (
-                <div key={index} className="flex items-center gap-2">
-                  <Icon className="w-5 h-5 text-accent" />
-                  <span className="font-semibold">{counter.label}</span>
-                  <Badge variant="secondary">{counter.value}</Badge>
+      {/* Progress & Resources Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Progression Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("overview.progress.title")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">
+                  {t("overview.progress.overall")}
+                </span>
+                <span className="text-2xl font-bold text-primary">
+                  {progression}%
+                </span>
+              </div>
+              <Progress value={progression} className="h-3" />
+            </div>
+            {examDate && (
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">
+                  {t("overview.progress.deadline")}
+                </span>
+                <span className="font-medium">
+                  {examDate.toLocaleDateString()}
+                </span>
+              </div>
+            )}
+            <div className="pt-2 text-xs text-muted-foreground">
+              {t("overview.progress.formula")}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Member Activity */}
+        <Card>
+          <CardHeader>
+            <CardTitle>{t("overview.activity.title")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {members.slice(0, 5).map((member) => (
+                <div
+                  key={member.id}
+                  className="flex items-center justify-between py-2 border-b last:border-0"
+                >
+                  <div className="flex items-center gap-3">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage src={member.avatar_url} />
+                      <AvatarFallback>
+                        {member.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm font-medium">{member.name}</span>
+                  </div>
+                  <div className="flex gap-4 text-xs text-muted-foreground">
+                    <span>{member.total_time}h</span>
+                    <span>{member.items_done} {t("overview.activity.items")}</span>
+                    <span>{member.connections} {t("overview.activity.connections")}</span>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Resource Pills */}
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("overview.resources.title")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+            {resourcePills.map((pill, index) => {
+              const Icon = pill.icon;
+              return (
+                <Button
+                  key={index}
+                  variant="outline"
+                  className="h-auto flex-col items-center justify-center p-4 hover:bg-accent"
+                  onClick={() => {/* Navigate to section */}}
+                >
+                  <Icon className="w-6 h-6 mb-2 text-primary" />
+                  <span className="text-xs font-medium mb-1">{pill.label}</span>
+                  <Badge variant="secondary" className="text-xs">
+                    {pill.count}
+                  </Badge>
+                </Button>
               );
             })}
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Progression du Kartel - Full Width */}
-      <Card className="relative">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-        <CardHeader>
-          <CardTitle>{t('dashboard.overview.kartelProgress.title')}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <div className="flex justify-between mb-2">
-              <span className="text-sm font-medium">{t('dashboard.overview.kartelProgress.tasksLabel')}</span>
-              <span className="text-sm text-success font-bold">{completionPercentage}%</span>
-            </div>
-            <Progress value={completionPercentage} className="h-2" />
-          </div>
-          <div className="pt-4 space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">{t('dashboard.overview.kartelProgress.finalDeadline')}</span>
-              <span className="font-medium">{t('dashboard.overview.kartelProgress.april15')}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">{t('dashboard.overview.kartelProgress.daysRemaining')}</span>
-              <span className="font-medium">170 {t('dashboard.overview.kartelProgress.days')}</span>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Activité des Membres - Full Width */}
-      <Card className="relative">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
-        <CardHeader>
-          <CardTitle>{t('dashboard.overview.memberActivity.title')}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          {[
-            { name: "Jean-Stéphane B.", hours: 12, questions: 8, connections: 24 },
-            { name: "Thierry F.", hours: 10, questions: 6, connections: 18 },
-            { name: "Isabelle L.", hours: 11, questions: 7, connections: 20 },
-            { name: "Elsa B.", hours: 9, questions: 5, connections: 15 },
-          ].map((member, i) => (
-            <div key={i} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
-              <span className="font-medium text-sm">{member.name}</span>
-              <div className="flex gap-3 text-xs text-muted-foreground">
-                <span>{member.hours}{t('dashboard.overview.memberActivity.hours')}</span>
-                <span>{member.questions} {t('dashboard.overview.memberActivity.quizzes')}</span>
-                <span>{member.connections} {t('dashboard.overview.memberActivity.logins')}</span>
-              </div>
-            </div>
-          ))}
         </CardContent>
       </Card>
     </div>

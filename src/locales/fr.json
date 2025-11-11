@@ -294,6 +294,54 @@
       "settings": "Paramètres",
       "logout": "Déconnexion"
     },
+    "overview": {
+      "title": "Vue d'ensemble",
+      "examDate": "Échéance finale",
+      "daysRemaining": "{{count}} jour restant",
+      "daysRemaining_plural": "{{count}} jours restants",
+      "atRiskBanner": "Attention : l'échéance approche",
+      "noActivity": "Aucune activité",
+      "kpi": {
+        "activeMembers": "Membres actifs",
+        "studyHours": "Heures d'étude",
+        "tasksCompleted": "Tâches terminées",
+        "progression": "Progression"
+      },
+      "period": {
+        "7days": "7 jours",
+        "30days": "30 jours",
+        "90days": "90 jours"
+      },
+      "presence": {
+        "online": "En ligne",
+        "idle": "Inactif",
+        "away": "Absent"
+      },
+      "membersCarousel": {
+        "title": "Membres du Kartel"
+      },
+      "progress": {
+        "title": "Progression du Kartel",
+        "overall": "Progression globale",
+        "deadline": "Échéance finale",
+        "formula": "Formule : Tâches 40% + QCM 25% + Quiz 15% + Flashcards 20%"
+      },
+      "activity": {
+        "title": "Activité des Membres",
+        "items": "items",
+        "connections": "conn."
+      },
+      "resources": {
+        "title": "Accès rapide",
+        "documents": "Documents",
+        "notes": "Notes",
+        "tasks": "Tâches",
+        "info": "Infos",
+        "qcm": "QCM",
+        "quiz": "QUIZZ",
+        "flashcards": "Flashcards"
+      }
+    },
     "tools": {
       "title": "Outils Pédagogiques",
       "subtitle": "Centralisez l'accès à tous les outils, modules et supports pédagogiques pour votre Kartel.",
@@ -680,7 +728,55 @@
         "reminderFailed": "Échec de la définition du rappel"
       }
     },
-    "plusOne": {
+  "overview": {
+    "title": "Vue d'ensemble",
+    "examDate": "Échéance finale",
+    "daysRemaining": "{{count}} jour restant",
+    "daysRemaining_plural": "{{count}} jours restants",
+    "atRiskBanner": "Attention : l'échéance approche",
+    "noActivity": "Aucune activité",
+    "kpi": {
+      "activeMembers": "Membres actifs",
+      "studyHours": "Heures d'étude",
+      "tasksCompleted": "Tâches terminées",
+      "progression": "Progression"
+    },
+    "period": {
+      "7days": "7 jours",
+      "30days": "30 jours",
+      "90days": "90 jours"
+    },
+    "presence": {
+      "online": "En ligne",
+      "idle": "Inactif",
+      "away": "Absent"
+    },
+    "membersCarousel": {
+      "title": "Membres du Kartel"
+    },
+    "progress": {
+      "title": "Progression du Kartel",
+      "overall": "Progression globale",
+      "deadline": "Échéance finale",
+      "formula": "Formule : Tâches 40% + QCM 25% + Quiz 15% + Flashcards 20%"
+    },
+    "activity": {
+      "title": "Activité des Membres",
+      "items": "items",
+      "connections": "conn."
+    },
+    "resources": {
+      "title": "Accès rapide",
+      "documents": "Documents",
+      "notes": "Notes",
+      "tasks": "Tâches",
+      "info": "Infos",
+      "qcm": "QCM",
+      "quiz": "QUIZZ",
+      "flashcards": "Flashcards"
+    }
+  },
+  "plusOne": {
       "title": "Le « +1 » facilite la progression commune",
       "sections": {
         "intro": {

@@ -294,6 +294,54 @@
       "settings": "Settings",
       "logout": "Logout"
     },
+    "overview": {
+      "title": "Overview",
+      "examDate": "Final Deadline",
+      "daysRemaining": "{{count}} day remaining",
+      "daysRemaining_plural": "{{count}} days remaining",
+      "atRiskBanner": "Warning: deadline approaching",
+      "noActivity": "No activity",
+      "kpi": {
+        "activeMembers": "Active Members",
+        "studyHours": "Study Hours",
+        "tasksCompleted": "Tasks Completed",
+        "progression": "Progress"
+      },
+      "period": {
+        "7days": "7 days",
+        "30days": "30 days",
+        "90days": "90 days"
+      },
+      "presence": {
+        "online": "Online",
+        "idle": "Idle",
+        "away": "Away"
+      },
+      "membersCarousel": {
+        "title": "Kartel Members"
+      },
+      "progress": {
+        "title": "Kartel Progress",
+        "overall": "Overall Progress",
+        "deadline": "Final Deadline",
+        "formula": "Formula: Tasks 40% + QCM 25% + Quiz 15% + Flashcards 20%"
+      },
+      "activity": {
+        "title": "Member Activity",
+        "items": "items",
+        "connections": "conn."
+      },
+      "resources": {
+        "title": "Quick Access",
+        "documents": "Documents",
+        "notes": "Notes",
+        "tasks": "Tasks",
+        "info": "Info",
+        "qcm": "QCM",
+        "quiz": "QUIZ",
+        "flashcards": "Flashcards"
+      }
+    },
     "tools": {
       "title": "Learning Tools",
       "subtitle": "Centralized access to all tools, modules, and learning resources for your Kartel.",
@@ -680,7 +728,55 @@
         "reminderFailed": "Failed to set reminder"
       }
     },
-    "plusOne": {
+  "overview": {
+    "title": "Overview",
+    "examDate": "Final Deadline",
+    "daysRemaining": "{{count}} day remaining",
+    "daysRemaining_plural": "{{count}} days remaining",
+    "atRiskBanner": "Warning: deadline approaching",
+    "noActivity": "No activity",
+    "kpi": {
+      "activeMembers": "Active Members",
+      "studyHours": "Study Hours",
+      "tasksCompleted": "Tasks Completed",
+      "progression": "Progress"
+    },
+    "period": {
+      "7days": "7 days",
+      "30days": "30 days",
+      "90days": "90 days"
+    },
+    "presence": {
+      "online": "Online",
+      "idle": "Idle",
+      "away": "Away"
+    },
+    "membersCarousel": {
+      "title": "Kartel Members"
+    },
+    "progress": {
+      "title": "Kartel Progress",
+      "overall": "Overall Progress",
+      "deadline": "Final Deadline",
+      "formula": "Formula: Tasks 40% + QCM 25% + Quiz 15% + Flashcards 20%"
+    },
+    "activity": {
+      "title": "Member Activity",
+      "items": "items",
+      "connections": "conn."
+    },
+    "resources": {
+      "title": "Quick Access",
+      "documents": "Documents",
+      "notes": "Notes",
+      "tasks": "Tasks",
+      "info": "Info",
+      "qcm": "QCM",
+      "quiz": "QUIZ",
+      "flashcards": "Flashcards"
+    }
+  },
+  "plusOne": {
       "title": "The '+1' facilitates group progress",
       "sections": {
         "intro": {

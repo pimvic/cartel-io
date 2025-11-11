@@ -29,6 +29,7 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
   const { t } = useTranslation();
   
   const menuItems = [
+    { id: "vue-ensemble", label: t('dashboard.menu.overview'), icon: Home },
     { id: "actu-kartel", label: t('dashboard.menu.actuKartel'), icon: Home },
     { id: "messagerie-news-events", label: t('dashboard.menu.messagerie'), icon: MessageSquare },
     { id: "base-connaissances", label: t('dashboard.menu.knowledgeBase'), icon: Brain },
@@ -36,7 +37,6 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
     { id: "calendrier", label: t('dashboard.menu.calendar'), icon: Calendar },
     { id: "votre-plus-un", label: t('dashboard.menu.plusOne'), icon: Users },
     { id: "rules", label: t('dashboard.menu.rules'), icon: ScrollText },
-    { id: "vue-ensemble", label: t('dashboard.menu.overview'), icon: Home },
     { id: "notes", label: t('dashboard.menu.notes'), icon: FileText },
     { id: "visio", label: t('dashboard.menu.visio'), icon: Video },
     { id: "parametres", label: t('dashboard.menu.settings'), icon: SettingsIcon },
