@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { FileText, Plus, Trash2, Archive, Star, Search, Tag } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 interface Note {
   id: string;
@@ -26,6 +27,7 @@ interface Note {
 }
 
 export const NotesCommunes = () => {
+  const { t, i18n } = useTranslation();
   const [notes, setNotes] = useState<Note[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,7 +47,7 @@ export const NotesCommunes = () => {
     setNotes([note, ...notes]);
     setNewNote({ title: "", content: "", tags: "" });
     setDialogOpen(false);
-    toast.success("Note créée avec succès");
+    toast.success(t('dashboard.sharedNotes.noteCreated'));
   };
 
   const togglePin = (id: string) => {
@@ -58,12 +60,12 @@ export const NotesCommunes = () => {
 
   const archiveNote = (id: string) => {
     setNotes(notes.map(n => n.id === id ? { ...n, archived: true } : n));
-    toast.success("Note archivée");
+    toast.success(t('dashboard.sharedNotes.noteArchived'));
   };
 
   const deleteNote = (id: string) => {
     setNotes(notes.filter(n => n.id !== id));
-    toast.success("Note supprimée");
+    toast.success(t('dashboard.sharedNotes.noteDeleted'));
   };
 
   const filteredNotes = notes
@@ -82,39 +84,39 @@ export const NotesCommunes = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold mb-2">Notes communes</h2>
-          <p className="text-muted-foreground">Partagez vos notes avec les membres du Kartel</p>
+          <h2 className="text-3xl font-bold mb-2">{t('dashboard.sharedNotes.title')}</h2>
+          <p className="text-muted-foreground">{t('dashboard.sharedNotes.subtitle')}</p>
         </div>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-success hover:bg-success/90">
               <Plus className="w-4 h-4 mr-2" />
-              Nouvelle Note
+              {t('dashboard.sharedNotes.newNote')}
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Créer une note commune</DialogTitle>
+              <DialogTitle>{t('dashboard.sharedNotes.createNote')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <Input
-                placeholder="Titre de la note"
+                placeholder={t('dashboard.sharedNotes.titlePlaceholder')}
                 value={newNote.title}
                 onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
               />
               <Textarea
-                placeholder="Contenu de la note"
+                placeholder={t('dashboard.sharedNotes.contentPlaceholder')}
                 rows={6}
                 value={newNote.content}
                 onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
               />
               <Input
-                placeholder="Tags (séparés par des virgules)"
+                placeholder={t('dashboard.sharedNotes.tagsPlaceholder')}
                 value={newNote.tags}
                 onChange={(e) => setNewNote({ ...newNote, tags: e.target.value })}
               />
               <Button onClick={handleCreateNote} className="w-full">
-                Créer la note
+                {t('dashboard.sharedNotes.createNote')}
               </Button>
             </div>
           </DialogContent>
@@ -125,7 +127,7 @@ export const NotesCommunes = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
-            placeholder="Rechercher dans les notes..."
+            placeholder={t('dashboard.sharedNotes.searchPlaceholder')}
             className="pl-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -138,13 +140,13 @@ export const NotesCommunes = () => {
           <Card>
             <CardContent className="p-12 text-center">
               <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Aucune note pour le moment</p>
+              <p className="text-muted-foreground">{t('dashboard.sharedNotes.noNotes')}</p>
             </CardContent>
           </Card>
         ) : (
           filteredNotes.map((note) => (
             <Card key={note.id} className="relative">
-              <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+              <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title={t('dashboard.sharedNotes.draggable')} />
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -153,7 +155,7 @@ export const NotesCommunes = () => {
                       {note.title}
                     </CardTitle>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {new Date(note.created_at).toLocaleDateString("fr-FR")}
+                      {new Date(note.created_at).toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US')}
                     </p>
                   </div>
                   <div className="flex gap-2">

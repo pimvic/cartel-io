@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Send, MessageSquare, Video } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   id: string;
@@ -22,26 +23,27 @@ const members = [
 ];
 
 export const GroupDiscussion = () => {
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       user: "Jean-Stéphane B.",
       avatar: "/placeholder.svg",
-      content: "Bonjour à tous ! Prêts pour notre session d'aujourd'hui ?",
+      content: t('dashboard.groupDiscussion.sampleMessages.message1'),
       timestamp: new Date(Date.now() - 3600000),
     },
     {
       id: "2",
       user: "Thierry F.",
       avatar: "/placeholder.svg",
-      content: "Oui, j'ai terminé la lecture du module 10 !",
+      content: t('dashboard.groupDiscussion.sampleMessages.message2'),
       timestamp: new Date(Date.now() - 3000000),
     },
     {
       id: "3",
       user: "Isabelle L.",
       avatar: "/placeholder.svg",
-      content: "Quelqu'un peut m'aider avec la progression pédagogique ?",
+      content: t('dashboard.groupDiscussion.sampleMessages.message3'),
       timestamp: new Date(Date.now() - 1800000),
     },
   ]);
@@ -62,7 +64,8 @@ export const GroupDiscussion = () => {
   };
 
   const formatTime = (date: Date) => {
-    return new Intl.DateTimeFormat("fr-FR", {
+    const locale = i18n.language === 'fr' ? 'fr-FR' : 'en-US';
+    return new Intl.DateTimeFormat(locale, {
       hour: "2-digit",
       minute: "2-digit",
     }).format(date);
@@ -73,12 +76,12 @@ export const GroupDiscussion = () => {
       <div>
         <h2 className="text-3xl font-bold mb-2 flex items-center gap-2">
           <MessageSquare className="w-8 h-8 text-accent" />
-          Messagerie
+          {t('dashboard.groupDiscussion.title')}
           <Video className="w-8 h-8 text-accent ml-4" />
-          Visio
+          {t('dashboard.menu.visio')}
         </h2>
         <p className="text-muted-foreground">
-          Échangez avec les membres de votre Kartel
+          {t('dashboard.groupDiscussion.subtitle')}
         </p>
       </div>
 
@@ -93,7 +96,7 @@ export const GroupDiscussion = () => {
                 </Avatar>
               ))}
             </div>
-            <span>{members.length} membres actifs</span>
+            <span>{t('dashboard.groupDiscussion.activeMembers', { count: members.length })}</span>
           </CardTitle>
         </CardHeader>
         
@@ -127,7 +130,7 @@ export const GroupDiscussion = () => {
           <div className="p-4 border-t">
             <div className="flex gap-2">
               <Input
-                placeholder="Écrire un message..."
+                placeholder={t('dashboard.groupDiscussion.messagePlaceholder')}
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}

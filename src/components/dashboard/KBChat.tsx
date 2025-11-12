@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Message {
   id: string;
@@ -13,11 +14,12 @@ interface Message {
 }
 
 export const KBChat = () => {
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
       role: "assistant",
-      content: "Bonjour ! Je peux vous aider à rechercher des informations dans votre base de connaissances. Posez-moi une question !",
+      content: t('dashboard.kbChat.welcomeMessage'),
       timestamp: new Date(),
     },
   ]);
@@ -43,7 +45,7 @@ export const KBChat = () => {
       const aiMessage: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: "Je recherche dans votre base de connaissances... Cette fonctionnalité sera bientôt disponible avec l'intégration de l'IA.",
+        content: t('dashboard.kbChat.aiResponse'),
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
@@ -54,14 +56,14 @@ export const KBChat = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Tchat avec votre base de connaissances</h2>
-        <p className="text-muted-foreground">Posez des questions sur vos documents</p>
+        <h2 className="text-3xl font-bold mb-2">{t('dashboard.kbChat.title')}</h2>
+        <p className="text-muted-foreground">{t('dashboard.kbChat.subtitle')}</p>
       </div>
 
       <Card className="relative h-[600px] flex flex-col">
-        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title="Déplaçable" />
+        <div className="absolute top-2 left-2 w-3 h-3 bg-accent/20 rounded cursor-move" title={t('dashboard.kbChat.draggable')} />
         <CardHeader>
-          <CardTitle>Assistant IA</CardTitle>
+          <CardTitle>{t('dashboard.kbChat.aiAssistant')}</CardTitle>
         </CardHeader>
         <CardContent className="flex-1 flex flex-col p-0">
           <ScrollArea className="flex-1 p-6">
@@ -95,7 +97,7 @@ export const KBChat = () => {
                   >
                     <p className="text-sm">{message.content}</p>
                     <p className="text-xs opacity-70 mt-2">
-                      {message.timestamp.toLocaleTimeString("fr-FR", {
+                      {message.timestamp.toLocaleTimeString(i18n.language === 'fr' ? 'fr-FR' : 'en-US', {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
@@ -122,7 +124,7 @@ export const KBChat = () => {
           <div className="p-4 border-t">
             <div className="flex gap-2">
               <Input
-                placeholder="Posez votre question..."
+                placeholder={t('dashboard.kbChat.askQuestion')}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && handleSend()}

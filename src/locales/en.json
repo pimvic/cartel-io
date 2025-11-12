@@ -1363,6 +1363,45 @@
       "tableType": "Type",
       "tableMessage": "Message",
       "tableAttachment": "Attachment"
+    },
+    "groupDiscussion": {
+      "title": "Messaging",
+      "subtitle": "Exchange with members of your Kartel",
+      "activeMembers": "{{count}} active member",
+      "activeMembers_plural": "{{count}} active members",
+      "messagePlaceholder": "Write a message...",
+      "sampleMessages": {
+        "message1": "Hello everyone! Ready for today's session?",
+        "message2": "Yes, I finished reading module 10!",
+        "message3": "Can anyone help me with the learning progression?"
+      }
+    },
+    "sharedNotes": {
+      "title": "Shared Notes",
+      "subtitle": "Share your notes with Kartel members",
+      "newNote": "New Note",
+      "createNote": "Create shared note",
+      "noteCreated": "Note created successfully",
+      "noteArchived": "Note archived",
+      "noteDeleted": "Note deleted",
+      "titlePlaceholder": "Note title",
+      "contentPlaceholder": "Note content",
+      "tagsPlaceholder": "Tags (separated by commas)",
+      "searchPlaceholder": "Search in notes...",
+      "noNotes": "No notes yet",
+      "draggable": "Draggable"
+    },
+    "kbChat": {
+      "title": "Chat with your knowledge base",
+      "subtitle": "Ask questions about your documents",
+      "welcomeMessage": "Hello! I can help you search for information in your knowledge base. Ask me a question!",
+      "aiResponse": "Searching your knowledge base... This feature will be available soon with AI integration.",
+      "aiAssistant": "AI Assistant",
+      "askQuestion": "Ask your question...",
+      "draggable": "Draggable"
+    },
+    "settings": {
+      "comingSoonDescription": "This feature will be available soon. Stay tuned for updates!"
     }
   },
   "auth": {
@@ -1541,6 +1580,8 @@
     "delete": "Delete",
     "edit": "Edit",
     "create": "Create",
-    "close": "Close"
+    "close": "Close",
+    "notFound": "Oops! Page not found",
+    "returnHome": "Return to Home"
   }
 }

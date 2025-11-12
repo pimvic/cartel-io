@@ -1363,6 +1363,45 @@
       "tableType": "Type",
       "tableMessage": "Message",
       "tableAttachment": "Pièce jointe"
+    },
+    "groupDiscussion": {
+      "title": "Messagerie",
+      "subtitle": "Échangez avec les membres de votre Kartel",
+      "activeMembers": "{{count}} membre actif",
+      "activeMembers_plural": "{{count}} membres actifs",
+      "messagePlaceholder": "Écrire un message...",
+      "sampleMessages": {
+        "message1": "Bonjour à tous ! Prêts pour notre session d'aujourd'hui ?",
+        "message2": "Oui, j'ai terminé la lecture du module 10 !",
+        "message3": "Quelqu'un peut m'aider avec la progression pédagogique ?"
+      }
+    },
+    "sharedNotes": {
+      "title": "Notes communes",
+      "subtitle": "Partagez vos notes avec les membres du Kartel",
+      "newNote": "Nouvelle Note",
+      "createNote": "Créer une note commune",
+      "noteCreated": "Note créée avec succès",
+      "noteArchived": "Note archivée",
+      "noteDeleted": "Note supprimée",
+      "titlePlaceholder": "Titre de la note",
+      "contentPlaceholder": "Contenu de la note",
+      "tagsPlaceholder": "Tags (séparés par des virgules)",
+      "searchPlaceholder": "Rechercher dans les notes...",
+      "noNotes": "Aucune note pour le moment",
+      "draggable": "Déplaçable"
+    },
+    "kbChat": {
+      "title": "Tchat avec votre base de connaissances",
+      "subtitle": "Posez des questions sur vos documents",
+      "welcomeMessage": "Bonjour ! Je peux vous aider à rechercher des informations dans votre base de connaissances. Posez-moi une question !",
+      "aiResponse": "Je recherche dans votre base de connaissances... Cette fonctionnalité sera bientôt disponible avec l'intégration de l'IA.",
+      "aiAssistant": "Assistant IA",
+      "askQuestion": "Posez votre question...",
+      "draggable": "Déplaçable"
+    },
+    "settings": {
+      "comingSoonDescription": "Cette fonctionnalité sera bientôt disponible. Restez connecté pour les mises à jour !"
     }
   },
   "auth": {
@@ -1541,6 +1580,8 @@
     "delete": "Supprimer",
     "edit": "Modifier",
     "create": "Créer",
-    "close": "Fermer"
+    "close": "Fermer",
+    "notFound": "Oups ! Page introuvable",
+    "returnHome": "Retour à l'accueil"
   }
 }
