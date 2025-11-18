@@ -49,8 +49,12 @@ interface Member {
   connections?: number;
 }
 
-export const Overview = () => {
-  const { t } = useTranslation();
+interface OverviewProps {
+  onNavigate?: (section: string) => void;
+}
+
+export const Overview = ({ onNavigate }: OverviewProps) => {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const [period, setPeriod] = useState<Period>("30");
   const [loading, setLoading] = useState(true);
@@ -260,25 +264,25 @@ export const Overview = () => {
       label: t("overview.kpi.activeMembers"),
       value: activeMembers,
       icon: Users,
-      section: "members",
+      section: "votre-plus-un",
     },
     {
       label: t("overview.kpi.studyHours"),
       value: studyHours,
       icon: Clock,
-      section: "activity",
+      section: "calendrier",
     },
     {
       label: t("overview.kpi.tasksCompleted"),
       value: tasksCompleted,
       icon: CheckCircle,
-      section: "tasks",
+      section: "calendrier",
     },
     {
       label: t("overview.kpi.progression"),
       value: `${progression}%`,
       icon: TrendingUp,
-      section: "progress",
+      section: "vue-ensemble",
     },
   ];
 
@@ -327,9 +331,9 @@ export const Overview = () => {
           <h1 className="text-3xl font-bold text-foreground">
             {t("overview.title")}
           </h1>
-          {examDate && daysToExam !== null && (
+            {examDate && daysToExam !== null && (
             <p className="text-sm text-muted-foreground mt-1">
-              {t("overview.examDate")}: {examDate.toLocaleDateString()} · {t("overview.daysRemaining", { count: daysToExam })}
+              {t("overview.examDate")}: {examDate.toLocaleDateString(i18n.language)} · {t("overview.daysRemaining", { count: daysToExam })}
             </p>
           )}
         </div>
@@ -360,7 +364,16 @@ export const Overview = () => {
             <Card
               key={index}
               className="cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => {/* Navigate to section */}}
+              onClick={() => onNavigate?.(kpi.section)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onNavigate?.(kpi.section);
+                }
+              }}
+              aria-label={`${kpi.label}: ${kpi.value}`}
             >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
@@ -390,6 +403,7 @@ export const Overview = () => {
                 variant="outline"
                 size="icon"
                 onClick={() => scrollMembers("left")}
+                aria-label={t('common.previous', { defaultValue: 'Previous' })}
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
@@ -397,6 +411,7 @@ export const Overview = () => {
                 variant="outline"
                 size="icon"
                 onClick={() => scrollMembers("right")}
+                aria-label={t('common.next', { defaultValue: 'Next' })}
               >
                 <ChevronRight className="w-4 h-4" />
               </Button>
@@ -472,11 +487,11 @@ export const Overview = () => {
                   {t("overview.progress.deadline")}
                 </span>
                 <span className="font-medium">
-                  {examDate.toLocaleDateString()}
+                  {examDate.toLocaleDateString(i18n.language)}
                 </span>
               </div>
             )}
-            <div className="pt-2 text-xs text-muted-foreground">
+            <div className="pt-2 text-xs text-muted-foreground border-t border-border mt-2 pt-3">
               {t("overview.progress.formula")}
             </div>
           </CardContent>
@@ -521,15 +536,20 @@ export const Overview = () => {
           <CardTitle>{t("overview.resources.title")}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+          <div 
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4"
+            role="navigation"
+            aria-label={t("overview.resources.title")}
+          >
             {resourcePills.map((pill, index) => {
               const Icon = pill.icon;
               return (
                 <Button
                   key={index}
                   variant="outline"
-                  className="h-auto flex-col items-center justify-center p-4 hover:bg-accent"
-                  onClick={() => {/* Navigate to section */}}
+                  className="h-auto flex-col items-center justify-center p-4 hover:bg-accent transition-all"
+                  onClick={() => onNavigate?.(pill.section)}
+                  aria-label={`${pill.label}: ${pill.count}`}
                 >
                   <Icon className="w-6 h-6 mb-2 text-primary" />
                   <span className="text-xs font-medium mb-1">{pill.label}</span>

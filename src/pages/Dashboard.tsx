@@ -51,7 +51,7 @@ const Dashboard = () => {
       case "rules":
         return <Rules />;
       case "vue-ensemble":
-        return <Overview />;
+        return <Overview onNavigate={setActiveSection} />;
       case "notes":
         return <Notes />;
       case "visio":
