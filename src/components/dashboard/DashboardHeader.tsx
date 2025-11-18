@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { UserMenu } from "@/components/UserMenu";
 
@@ -34,8 +33,7 @@ const members = [
 
 export const DashboardHeader = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
-  const { lang } = useParams();
+  const { lang } = useParams<{ lang: string }>();
 
   return (
     <header className="fixed top-0 w-full h-16 bg-accent/30 backdrop-blur-sm border-b border-border z-50">
@@ -46,13 +44,17 @@ export const DashboardHeader = () => {
               className="text-xl font-bold text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => navigate(`/${lang || 'fr'}`)}
             >
-              {t('dashboard.header.title')}
+              Kartel
             </h1>
             <p className="text-xs text-muted-foreground text-center">27 octobre 2025</p>
           </div>
           <div className="ml-6">
-            <p className="font-bold text-lg">{t('dashboard.header.course')}</p>
-            <p className="text-sm text-muted-foreground">Diplôme donnant lieu à un Titre Professionnel d'État</p>
+            <p className="font-bold text-lg">{lang === 'fr' ? 'Votre Formation' : 'Your Training'}</p>
+            <p className="text-sm text-muted-foreground">
+              {lang === 'fr' 
+                ? 'Diplôme donnant lieu à un Titre Professionnel d\'État'
+                : 'State Professional Degree Program'}
+            </p>
           </div>
         </div>
 
@@ -70,12 +72,14 @@ export const DashboardHeader = () => {
                 )}
                 <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 bg-popover text-popover-foreground px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
                   {member.name}
-                  {member.isCoordinator && ` (${t('dashboard.header.coordinator')})`}
+                  {member.isCoordinator && ` (${lang === 'fr' ? 'Coordinateur' : 'Coordinator'})`}
                 </div>
               </div>
             ))}
           </div>
-          <p className="text-sm text-muted-foreground whitespace-nowrap">{t('dashboard.header.deadline')}</p>
+          <p className="text-sm text-muted-foreground whitespace-nowrap">
+            {lang === 'fr' ? 'Échéance : J-90' : 'Deadline: D-90'}
+          </p>
           <UserMenu />
         </div>
       </div>
