@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import { fr, enUS } from "date-fns/locale";
 
 type Period = "7" | "30" | "90" | "custom";
 
@@ -54,7 +55,7 @@ interface OverviewProps {
 }
 
 export const Overview = ({ onNavigate }: OverviewProps) => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { user } = useAuth();
   const [period, setPeriod] = useState<Period>("30");
   const [loading, setLoading] = useState(true);
@@ -221,11 +222,11 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
 
         return {
           id: m.users?.id || "",
-          name: m.users?.name || "Unknown",
+          name: m.users?.name || lang === 'fr' ? 'Inconnu' : 'Unknown',
           avatar_url: m.users?.avatar_url,
           last_activity: lastLogin
-            ? lastLogin.toLocaleDateString()
-            : t("overview.noActivity"),
+            ? lastLogin.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US')
+            : lang === 'fr' ? 'Aucune activité' : 'No activity',
           presence,
           total_time: Math.floor(Math.random() * 20), // Mock
           items_done: Math.floor(Math.random() * 15), // Mock
@@ -261,25 +262,25 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
 
   const kpis: KPI[] = [
     {
-      label: t("overview.kpi.activeMembers"),
+      label: lang === 'fr' ? 'Membres actifs' : 'Active members',
       value: activeMembers,
       icon: Users,
       section: "votre-plus-un",
     },
     {
-      label: t("overview.kpi.studyHours"),
+      label: lang === 'fr' ? 'Heures d\'étude' : 'Study hours',
       value: studyHours,
       icon: Clock,
       section: "calendrier",
     },
     {
-      label: t("overview.kpi.tasksCompleted"),
+      label: lang === 'fr' ? 'Tâches terminées' : 'Tasks completed',
       value: tasksCompleted,
       icon: CheckCircle,
       section: "calendrier",
     },
     {
-      label: t("overview.kpi.progression"),
+      label: lang === 'fr' ? 'Progression' : 'Progression',
       value: `${progression}%`,
       icon: TrendingUp,
       section: "vue-ensemble",
@@ -287,13 +288,13 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
   ];
 
   const resourcePills = [
-    { label: t("overview.resources.documents"), count: resourceCounts.documents, icon: FileText, section: "base-connaissances" },
-    { label: t("overview.resources.notes"), count: resourceCounts.notes, icon: BookOpen, section: "notes" },
-    { label: t("overview.resources.tasks"), count: resourceCounts.tasks, icon: ClipboardList, section: "calendrier" },
-    { label: t("overview.resources.info"), count: resourceCounts.info, icon: Info, section: "messagerie-news-events" },
-    { label: t("overview.resources.qcm"), count: resourceCounts.qcm, icon: Brain, section: "outils-pedagogiques" },
-    { label: t("overview.resources.quiz"), count: resourceCounts.quiz, icon: HelpCircle, section: "quiz" },
-    { label: t("overview.resources.flashcards"), count: resourceCounts.flashcards, icon: CreditCard, section: "flashcards" },
+    { label: lang === 'fr' ? 'Documents' : 'Documents', count: resourceCounts.documents, icon: FileText, section: "base-connaissances" },
+    { label: lang === 'fr' ? 'Notes' : 'Notes', count: resourceCounts.notes, icon: BookOpen, section: "notes" },
+    { label: lang === 'fr' ? 'Tâches' : 'Tasks', count: resourceCounts.tasks, icon: ClipboardList, section: "calendrier" },
+    { label: lang === 'fr' ? 'Infos' : 'News', count: resourceCounts.info, icon: Info, section: "messagerie-news-events" },
+    { label: 'QCM', count: resourceCounts.qcm, icon: Brain, section: "outils-pedagogiques" },
+    { label: 'Quiz', count: resourceCounts.quiz, icon: HelpCircle, section: "quiz" },
+    { label: 'Flashcards', count: resourceCounts.flashcards, icon: CreditCard, section: "flashcards" },
   ];
 
   const scrollMembers = (direction: "left" | "right") => {
@@ -329,19 +330,19 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-foreground">
-            {t("overview.title")}
+            {lang === 'fr' ? 'Vue d\'ensemble' : 'Overview'}
           </h1>
             {examDate && daysToExam !== null && (
             <p className="text-sm text-muted-foreground mt-1">
-              {t("overview.examDate")}: {examDate.toLocaleDateString(i18n.language)} · {t("overview.daysRemaining", { count: daysToExam })}
+              {lang === 'fr' ? 'Date d\'examen' : 'Exam date'}: {examDate.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US')} · {daysToExam} {lang === 'fr' ? 'jours restants' : 'days remaining'}
             </p>
           )}
         </div>
         <Tabs value={period} onValueChange={(v) => setPeriod(v as Period)}>
           <TabsList>
-            <TabsTrigger value="7">{t("overview.period.7days")}</TabsTrigger>
-            <TabsTrigger value="30">{t("overview.period.30days")}</TabsTrigger>
-            <TabsTrigger value="90">{t("overview.period.90days")}</TabsTrigger>
+            <TabsTrigger value="7">{lang === 'fr' ? '7 jours' : '7 days'}</TabsTrigger>
+            <TabsTrigger value="30">{lang === 'fr' ? '30 jours' : '30 days'}</TabsTrigger>
+            <TabsTrigger value="90">{lang === 'fr' ? '90 jours' : '90 days'}</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -351,7 +352,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
-            {t("overview.atRiskBanner")} - <strong>{daysToExam} {t("overview.daysRemaining", { count: daysToExam })}</strong>
+            {lang === 'fr' ? 'Attention : échéance proche' : 'Warning: deadline approaching'} - <strong>{daysToExam} {lang === 'fr' ? 'jours restants' : 'days remaining'}</strong>
           </AlertDescription>
         </Alert>
       )}
@@ -397,13 +398,13 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>{t("overview.membersCarousel.title")}</CardTitle>
+            <CardTitle>{lang === 'fr' ? 'Activité des membres' : 'Member activity'}</CardTitle>
             <div className="flex gap-2">
               <Button
                 variant="outline"
                 size="icon"
                 onClick={() => scrollMembers("left")}
-                aria-label={t('common.previous', { defaultValue: 'Previous' })}
+                aria-label={lang === 'fr' ? 'Précédent' : 'Previous'}
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
@@ -411,7 +412,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
                 variant="outline"
                 size="icon"
                 onClick={() => scrollMembers("right")}
-                aria-label={t('common.next', { defaultValue: 'Next' })}
+                aria-label={lang === 'fr' ? 'Suivant' : 'Next'}
               >
                 <ChevronRight className="w-4 h-4" />
               </Button>
@@ -452,7 +453,12 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
                       }
                       className="text-xs"
                     >
-                      {t(`overview.presence.${member.presence}`)}
+                      {member.presence === 'online' 
+                        ? (lang === 'fr' ? 'En ligne' : 'Online')
+                        : member.presence === 'idle'
+                        ? (lang === 'fr' ? 'Absent' : 'Away')
+                        : (lang === 'fr' ? 'Hors ligne' : 'Offline')
+                      }
                     </Badge>
                   </div>
                 </CardContent>
@@ -467,13 +473,13 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
         {/* Progression Card */}
         <Card>
           <CardHeader>
-            <CardTitle>{t("overview.progress.title")}</CardTitle>
+            <CardTitle>{lang === 'fr' ? 'Progression' : 'Progress'}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium">
-                  {t("overview.progress.overall")}
+                  {lang === 'fr' ? 'Progression globale' : 'Overall progress'}
                 </span>
                 <span className="text-2xl font-bold text-primary">
                   {progression}%
@@ -484,15 +490,17 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
             {examDate && (
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">
-                  {t("overview.progress.deadline")}
+                  {lang === 'fr' ? 'Échéance finale' : 'Final deadline'}
                 </span>
                 <span className="font-medium">
-                  {examDate.toLocaleDateString(i18n.language)}
+                  {examDate.toLocaleDateString(lang === 'fr' ? 'fr-FR' : 'en-US')}
                 </span>
               </div>
             )}
             <div className="pt-2 text-xs text-muted-foreground border-t border-border mt-2 pt-3">
-              {t("overview.progress.formula")}
+              {lang === 'fr' 
+                ? 'Formule : Tâches 40%, QCM 25%, Quiz 15%, Flashcards 20%'
+                : 'Formula: Tasks 40%, QCM 25%, Quiz 15%, Flashcards 20%'}
             </div>
           </CardContent>
         </Card>
@@ -500,7 +508,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
         {/* Member Activity */}
         <Card>
           <CardHeader>
-            <CardTitle>{t("overview.activity.title")}</CardTitle>
+            <CardTitle>{lang === 'fr' ? 'Activité récente' : 'Recent activity'}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -520,8 +528,8 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
                   </div>
                   <div className="flex gap-4 text-xs text-muted-foreground">
                     <span>{member.total_time}h</span>
-                    <span>{member.items_done} {t("overview.activity.items")}</span>
-                    <span>{member.connections} {t("overview.activity.connections")}</span>
+                    <span>{member.items_done} {lang === 'fr' ? 'items' : 'items'}</span>
+                    <span>{member.connections} {lang === 'fr' ? 'connexions' : 'logins'}</span>
                   </div>
                 </div>
               ))}
@@ -533,13 +541,13 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
       {/* Resource Pills */}
       <Card>
         <CardHeader>
-          <CardTitle>{t("overview.resources.title")}</CardTitle>
+          <CardTitle>{lang === 'fr' ? 'Ressources' : 'Resources'}</CardTitle>
         </CardHeader>
         <CardContent>
           <div 
             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4"
             role="navigation"
-            aria-label={t("overview.resources.title")}
+            aria-label={lang === 'fr' ? 'Ressources' : 'Resources'}
           >
             {resourcePills.map((pill, index) => {
               const Icon = pill.icon;
