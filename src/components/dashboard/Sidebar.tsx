@@ -16,7 +16,7 @@ import {
   Video,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 interface SidebarProps {
   activeSection: string;
@@ -26,21 +26,21 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCollapse }: SidebarProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   
   const menuItems = [
-    { id: "vue-ensemble", label: t('dashboard.menu.overview'), icon: Home },
-    { id: "actu-kartel", label: t('dashboard.menu.actuKartel'), icon: Home },
-    { id: "messagerie-news-events", label: t('dashboard.menu.messagerie'), icon: MessageSquare },
-    { id: "base-connaissances", label: t('dashboard.menu.knowledgeBase'), icon: Brain },
-    { id: "outils-pedagogiques", label: t('dashboard.menu.tools'), icon: Wrench },
-    { id: "calendrier", label: t('dashboard.menu.calendar'), icon: Calendar },
-    { id: "votre-plus-un", label: t('dashboard.menu.plusOne'), icon: Users },
-    { id: "rules", label: t('dashboard.menu.rules'), icon: ScrollText },
-    { id: "notes", label: t('dashboard.menu.notes'), icon: FileText },
-    { id: "visio", label: t('dashboard.menu.visio'), icon: Video },
-    { id: "parametres", label: t('dashboard.menu.settings'), icon: SettingsIcon },
-    { id: "feedback", label: t('dashboard.menu.feedback'), icon: MessageCircle },
+    { id: "vue-ensemble", label: lang === 'fr' ? 'Vue d\'ensemble' : 'Overview', icon: Home },
+    { id: "actu-kartel", label: lang === 'fr' ? 'Actu Kartel' : 'Kartel News', icon: Home },
+    { id: "messagerie-news-events", label: lang === 'fr' ? 'Messagerie' : 'Messaging', icon: MessageSquare },
+    { id: "base-connaissances", label: lang === 'fr' ? 'Base de connaissances' : 'Knowledge Base', icon: Brain },
+    { id: "outils-pedagogiques", label: lang === 'fr' ? 'Outils pédagogiques' : 'Pedagogical Tools', icon: Wrench },
+    { id: "calendrier", label: lang === 'fr' ? 'Calendrier' : 'Calendar', icon: Calendar },
+    { id: "votre-plus-un", label: lang === 'fr' ? 'Votre +1' : 'Your +1', icon: Users },
+    { id: "rules", label: lang === 'fr' ? 'L\'esprit du Kartel' : 'Kartel Spirit', icon: ScrollText },
+    { id: "notes", label: lang === 'fr' ? 'Notes' : 'Notes', icon: FileText },
+    { id: "visio", label: lang === 'fr' ? 'Visio' : 'Video', icon: Video },
+    { id: "parametres", label: lang === 'fr' ? 'Paramètres' : 'Settings', icon: SettingsIcon },
+    { id: "feedback", label: lang === 'fr' ? 'Feedback' : 'Feedback', icon: MessageCircle },
   ];
   
   return (
@@ -79,7 +79,7 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
             className="w-full"
           >
             {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-            {!collapsed && <span className="ml-2">{t('common.close')}</span>}
+            {!collapsed && <span className="ml-2">{lang === 'fr' ? 'Fermer' : 'Close'}</span>}
           </Button>
         </div>
       </div>

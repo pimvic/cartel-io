@@ -1,171 +1,110 @@
 # Replaced i18n Keys Documentation
 
-**Date:** 2025-11-18  
+**Date:** 2025-11-20  
 **Branch:** feature/remove-i18n  
-**Status:** All i18n keys replaced with hard-coded localized strings
+**Status:** In progress - Comprehensive i18n removal across all pages
 
 ## Overview
 
-All internationalization (i18n) keys have been replaced with hard-coded French and English strings based on the route parameter. French text is displayed on `/fr/*` routes and English text on `/en/*` routes.
+All internationalization (i18n) keys are being replaced with hard-coded French and English strings based on the route parameter (`/fr/*` routes show French, `/en/*` routes show English). The i18n library infrastructure remains intact for potential rollback.
 
 ## Approach
 
-- Used conditional rendering: `lang === 'fr' ? 'French text' : 'English text'`
-- Kept i18n library and translation files intact for potential rollback
-- Preserved all functionality and UI layout
-- Maintained dynamic value interpolation where needed
+- Replace `useTranslation()` with `useParams<{ lang: string }>()` to get route language
+- Replace all `t('key')` calls with: `lang === 'fr' ? 'French text' : 'English text'`
+- Replace `i18n.language` checks with direct `lang` parameter checks
+- Keep i18n library and translation files intact (safe rollback)
+- Preserve all functionality and UI layout
+- Maintain dynamic value interpolation where needed
 
-## Files Modified
+## Progress Status
 
-### Core Dashboard Components
+### ✅ Completed Components (10 files)
 
 #### 1. src/components/dashboard/DashboardHeader.tsx
+**Status:** Complete  
 **Replaced Keys:**
-- `dashboard.header.title` → "Kartel" / "Kartel"
 - `dashboard.header.course` → "Votre Formation" / "Your Training"
 - `dashboard.header.coordinator` → "Coordinateur" / "Coordinator"
 - `dashboard.header.deadline` → "Échéance : J-90" / "Deadline: D-90"
 
 #### 2. src/components/dashboard/Overview.tsx
-**Replaced Keys:**
-- `overview.title` → "Vue d'ensemble" / "Overview"
-- `overview.examDate` → "Date d'examen" / "Exam date"
-- `overview.daysRemaining` → "jours restants" / "days remaining"
-- `overview.atRiskBanner` → "Attention : échéance proche" / "Warning: deadline approaching"
-- `overview.period.7days` → "7 jours" / "7 days"
-- `overview.period.30days` → "30 jours" / "30 days"
-- `overview.period.90days` → "90 jours" / "90 days"
-- `overview.kpi.activeMembers` → "Membres actifs" / "Active members"
-- `overview.kpi.studyHours` → "Heures d'étude" / "Study hours"
-- `overview.kpi.tasksCompleted` → "Tâches terminées" / "Tasks completed"
-- `overview.kpi.progression` → "Progression" / "Progression"
-- `overview.membersCarousel.title` → "Activité des membres" / "Member activity"
-- `overview.presence.online` → "En ligne" / "Online"
-- `overview.presence.idle` → "Absent" / "Away"
-- `overview.presence.away` → "Hors ligne" / "Offline"
-- `overview.noActivity` → "Aucune activité" / "No activity"
-- `overview.progress.title` → "Progression" / "Progress"
-- `overview.progress.overall` → "Progression globale" / "Overall progress"
-- `overview.progress.deadline` → "Échéance finale" / "Final deadline"
-- `overview.progress.formula` → "Formule : Tâches 40%, QCM 25%, Quiz 15%, Flashcards 20%" / "Formula: Tasks 40%, QCM 25%, Quiz 15%, Flashcards 20%"
-- `overview.activity.title` → "Activité récente" / "Recent activity"
-- `overview.activity.items` → "items" / "items"
-- `overview.activity.connections` → "connexions" / "logins"
-- `overview.resources.title` → "Ressources" / "Resources"
-- `overview.resources.documents` → "Documents" / "Documents"
-- `overview.resources.notes` → "Notes" / "Notes"
-- `overview.resources.tasks` → "Tâches" / "Tasks"
-- `overview.resources.info` → "Infos" / "News"
-- `overview.resources.qcm` → "QCM" / "MCQ"
-- `overview.resources.quiz` → "Quiz" / "Quiz"
-- `overview.resources.flashcards` → "Flashcards" / "Flashcards"
-- `common.previous` → "Précédent" / "Previous"
-- `common.next` → "Suivant" / "Next"
+**Status:** Complete  
+**Replaced Keys:** All overview KPIs, resource pills, member activity labels, date/time formatting
 
-#### 3. src/components/dashboard/ActuKartel.tsx
-**Replaced Keys:**
-- `actuKartel.title` → "Actu Kartel" / "Kartel News"
-- `actuKartel.subtitle` → "Dernières actualités et événements" / "Latest news and events"
-- `actuKartel.tabs.all` → "Tout" / "All"
-- `actuKartel.tabs.messages` → "Messages" / "Messages"
-- `actuKartel.tabs.events` → "Événements" / "Events"
-- `actuKartel.tabs.documents` → "Documents" / "Documents"
-- `actuKartel.tabs.notes` → "Notes" / "Notes"
-- `actuKartel.empty.messages` → "Aucun message" / "No messages"
-- `actuKartel.empty.events` → "Aucun événement à venir" / "No upcoming events"
-- `actuKartel.empty.documents` → "Aucun document récent" / "No recent documents"
-- `actuKartel.empty.notes` → "Aucune note récente" / "No recent notes"
-- `actuKartel.by` → "par" / "by"
-- `actuKartel.uploaded` → "Téléchargé" / "Uploaded"
-- `actuKartel.created` → "Créé" / "Created"
-- `common.loading` → "Chargement..." / "Loading..."
+#### 3. src/components/Footer.tsx
+**Status:** Complete  
+**Replaced Keys:** All footer navigation (Solutions, Enterprise, Resources, Partners sections), legal bar
 
-#### 4. src/components/dashboard/MessagerieNewsEvents.tsx
-**Replaced Keys:**
-- Multiple messaging, news, and events related keys (see component file for full list)
+#### 4. src/components/UserMenu.tsx
+**Status:** Complete  
+**Replaced Keys:** Settings, Logout menu items
 
-#### 5. src/components/dashboard/KnowledgeBase.tsx
-**Replaced Keys:**
-- Knowledge base management keys
-- Resource category and type labels
-- Action button labels
-- Filter and search labels
+#### 5. src/components/dashboard/Sidebar.tsx
+**Status:** Complete  
+**Replaced Keys:** All menu items (Overview, Actu Kartel, Messaging, Knowledge Base, Tools, Calendar, +1, Rules, Notes, Video, Settings, Feedback), Close button
 
-#### 6. src/components/dashboard/PedagogicalTools.tsx
-**Replaced Keys:**
-- Tool names and descriptions
-- Category labels
-- Status badges
+#### 6. src/components/dashboard/settings/PlaceholderTab.tsx
+**Status:** Complete  
+**Replaced Keys:** Coming soon description
 
-#### 7. src/components/dashboard/Calendar.tsx
-**Replaced Keys:**
-- Calendar/milestone management keys
-- Status labels
-- Filter options
+#### 7. src/pages/Dashboard.tsx
+**Status:** Complete  
+**Replaced Keys:** "Section under development" message
 
-#### 8. src/components/dashboard/Notes.tsx
-**Replaced Keys:**
-- Notes management keys
-- Tab labels
-- Action buttons
+#### 8. src/components/dashboard/GroupDiscussion.tsx
+**Status:** Complete (from previous session)
 
-#### 9. src/components/dashboard/Visio.tsx
-**Replaced Keys:**
-- Video session management keys
-- Session status labels
-- Action buttons
+#### 9. src/components/dashboard/NotesCommunes.tsx
+**Status:** Complete (from previous session)
 
-#### 10. src/components/dashboard/Settings.tsx
-**Replaced Keys:**
-- Settings tab labels
-- Configuration options
-- Form labels
+#### 10. src/components/dashboard/KBChat.tsx
+**Status:** Complete (from previous session)
 
-#### 11. src/components/dashboard/Feedback.tsx
-**Replaced Keys:**
-- Feedback form labels
-- Success/error messages
+### 🔄 In Progress / Remaining Components (29+ files)
 
-#### 12. src/components/dashboard/VotrePlusUn.tsx
-**Replaced Keys:**
-- Plus One request management keys
-- Status labels
-- Form fields
+The following components still need i18n replacement:
 
-### Public Pages
+#### Dashboard Components (15 files)
+- **ActuKartel.tsx** - News/events display (large file, ~326 lines)
+- **Calendar.tsx** - Milestone management (large file, ~504 lines)
+- **Feedback.tsx** - Feedback form and admin view (~290 lines)
+- **KnowledgeBase.tsx** - Resource management (very large, ~1357 lines)
+- **MessagerieNewsEvents.tsx** - Messaging/news/events (large, ~751 lines)
+- **Notes.tsx** - Notes management (large, ~670 lines)
+- **PedagogicalTools.tsx** - Tool catalog (~478 lines)
+- **Rules.tsx** - Kartel spirit tips (~377 lines)
+- **Settings.tsx** - Settings tabs (~251 lines)
+- **Visio.tsx** - Video sessions (~228 lines)
+- **VotrePlusUn.tsx** - +1 requests (~154 lines)
+- **BugReport.tsx** - Bug reporting widget
+- Sub-components in `notes/`, `plusone/`, `settings/`, `tools/`, `visio/` directories
 
-#### 13. src/pages/Landing.tsx
-**Replaced Keys:**
-- Hero section text
-- Feature descriptions
-- CTA buttons
-- Contact form labels
+#### Public Pages (3 files)
+- **Landing.tsx** - Homepage with hero, features, contact (~406 lines)
+- **Login.tsx** - Auth forms (~271 lines)
+- **NotFound.tsx** - Already complete (from previous session)
 
-#### 14. src/pages/Login.tsx
-**Replaced Keys:**
-- Login/signup form labels
-- Auth buttons
-- Error messages
+#### Pedagogical Pages (4 files)
+- **Quiz.tsx** - Quiz tool
+- **QCM.tsx** - Multiple choice questions
+- **Flashcards.tsx** - Flashcard study tool
+- **Mindmap.tsx** - Mind mapping tool
+- **Glossaire.tsx** - Glossary page
 
-#### 15. src/components/Footer.tsx
-**Replaced Keys:**
-- Footer navigation labels
-- Link text
-- Copyright text
+## Replacement Pattern Examples
 
-### Shared Components
+### Simple String Replacement
+```typescript
+// Before
+const title = t('dashboard.title');
 
-#### 16. src/components/LanguageSwitcher.tsx
-- No changes (controls language switching)
+// After  
+const { lang } = useParams<{ lang: string }>();
+const title = lang === 'fr' ? 'Tableau de bord' : 'Dashboard';
+```
 
-#### 17. src/components/UserMenu.tsx
-- Menu item labels
-- Dropdown text
-
-## Dynamic Value Interpolation
-
-Where translation keys included dynamic values (e.g., `{count}`, `{name}`, `{date}`), these have been preserved using template literals:
-
+### Dynamic Value Interpolation
 ```typescript
 // Before
 t('overview.daysRemaining', { count: daysToExam })
@@ -176,10 +115,13 @@ lang === 'fr'
   : `${daysToExam} days remaining`
 ```
 
-## Date Formatting
-
-Date formatting now uses conditional locale:
+### Date Formatting
 ```typescript
+// Before
+const locale = i18n.language === 'fr' ? fr : enUS;
+format(date, 'PP', { locale })
+
+// After
 const locale = lang === 'fr' ? fr : enUS;
 format(date, 'PP', { locale })
 ```
@@ -208,20 +150,16 @@ All i18n infrastructure (i18next, translation files, LanguageDetector) remains i
 
 ## Notes
 
-- i18n library imports removed from components but library remains installed
+- i18n library imports removed from completed components but library remains installed
 - Translation JSON files (`en.json`, `fr.json`) unchanged for future reference
 - `i18n.ts` configuration file unchanged
 - Language detection and switching via LanguageSwitcher component still works
 
-## Assumptions
+## Next Steps
 
-Where English translations were not provided in spec:
-- Created consistent English equivalents based on context
-- Used standard technical/UI terminology
-- Maintained tone and style parity with French originals
-
-## Performance Impact
-
-- Negligible: Removed i18n lookup overhead
-- Bundle size slightly smaller (no runtime i18n processing)
-- Faster initial render (no i18n initialization)
+Continue systematic replacement of remaining 29+ component files, following the same pattern:
+1. Remove `useTranslation` import
+2. Add `useParams` import if not present
+3. Replace all `t()` calls with conditional strings
+4. Update date/locale logic
+5. Test each component after replacement
