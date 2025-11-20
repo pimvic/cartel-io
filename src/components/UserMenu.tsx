@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+
 import { useAuth } from '@/contexts/AuthContext';
 import {
   DropdownMenu,
@@ -15,7 +15,6 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 
 export const UserMenu = () => {
-  const { t } = useTranslation();
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { lang } = useParams();
@@ -64,12 +63,12 @@ export const UserMenu = () => {
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuItem onClick={() => navigate(`/${lang}/dashboard/settings`)}>
           <Settings className="mr-2 h-4 w-4" />
-          <span>{t('dashboard.settings.title')}</span>
+          <span>{lang === 'fr' ? 'Paramètres' : 'Settings'}</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={signOut} className="text-destructive">
           <LogOut className="mr-2 h-4 w-4" />
-          <span>{t('auth.logout')}</span>
+          <span>{lang === 'fr' ? 'Déconnexion' : 'Logout'}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
