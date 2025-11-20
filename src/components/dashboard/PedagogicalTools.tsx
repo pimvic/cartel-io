@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,6 @@ import {
   Layout, RotateCw, Bot, Trophy, ThumbsUp, PartyPopper, ArrowRight, Book,
   Search, BookMarked, GraduationCap, FolderOpen, FileStack, Sparkles, Home
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { ToolModal } from './tools/ToolModal';
 import {
   Breadcrumb,
@@ -32,21 +32,19 @@ interface Tool {
   section?: string;
   status?: 'new' | 'updated' | 'coming-soon' | 'active';
   progress?: number;
-  category: 'module' | 'activity' | 'guide' | 'resource' | 'template' | 'external';
+  category: 'module' | 'activity' | 'guide' | 'resource' | 'template';
 }
 
 export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Define all tools with their categories
   const allTools: Tool[] = [
-    // Main modules - Active tools
     {
-      name: t('tools.modules.quiz'),
-      description: t('tools.descriptions.quiz'),
+      name: lang === 'fr' ? 'Quiz' : 'Quiz',
+      description: lang === 'fr' ? 'Testez vos connaissances avec des quiz interactifs' : 'Test your knowledge with interactive quizzes',
       icon: Brain,
       color: 'text-blue-500',
       section: 'quiz',
@@ -55,8 +53,8 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
       category: 'module'
     },
     {
-      name: t('tools.modules.flashcards'),
-      description: t('tools.descriptions.flashcards'),
+      name: lang === 'fr' ? 'Flashcards' : 'Flashcards',
+      description: lang === 'fr' ? 'Mémorisez avec des cartes interactives' : 'Memorize with interactive cards',
       icon: CreditCard,
       color: 'text-green-500',
       section: 'flashcards',
@@ -65,8 +63,8 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
       category: 'module'
     },
     {
-      name: t('tools.modules.mindmap'),
-      description: t('tools.descriptions.mindmap'),
+      name: lang === 'fr' ? 'Carte Mentale' : 'Mind Map',
+      description: lang === 'fr' ? 'Visualisez vos idées de manière structurée' : 'Visualize your ideas in a structured way',
       icon: Map,
       color: 'text-purple-500',
       section: 'mindmap',
@@ -74,161 +72,153 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
       category: 'module'
     },
     {
-      name: t('tools.modules.glossary'),
-      description: t('tools.descriptions.glossary'),
+      name: lang === 'fr' ? 'Glossaire' : 'Glossary',
+      description: lang === 'fr' ? 'Dictionnaire des termes clés' : 'Dictionary of key terms',
       icon: Book,
       color: 'text-indigo-500',
       section: 'glossaire',
       status: 'updated',
       category: 'module'
     },
-
-    // Guides
     {
-      name: t('tools.guides.methodology'),
-      description: t('tools.descriptions.methodology'),
+      name: lang === 'fr' ? 'Méthodologie' : 'Methodology',
+      description: lang === 'fr' ? 'Guide complet des méthodes d\'apprentissage' : 'Complete guide to learning methods',
       icon: BookMarked,
       color: 'text-cyan-500',
       status: 'active',
       category: 'guide'
     },
     {
-      name: t('tools.guides.bestPractices'),
-      description: t('tools.descriptions.bestPractices'),
+      name: lang === 'fr' ? 'Bonnes pratiques' : 'Best Practices',
+      description: lang === 'fr' ? 'Conseils et astuces pour optimiser votre apprentissage' : 'Tips and tricks to optimize your learning',
       icon: Sparkles,
       color: 'text-amber-500',
       status: 'new',
       category: 'guide'
     },
-
-    // Collaborative activities
     {
-      name: t('tools.activities.progressBoard'),
-      description: t('tools.descriptions.progressBoard'),
+      name: lang === 'fr' ? 'Tableau de progression' : 'Progress Board',
+      description: lang === 'fr' ? 'Suivez la progression collective du groupe' : 'Track collective group progress',
       icon: BarChart3,
       color: 'text-orange-500',
       status: 'coming-soon',
       category: 'activity'
     },
     {
-      name: t('tools.activities.rolePlaying'),
-      description: t('tools.descriptions.rolePlaying'),
+      name: lang === 'fr' ? 'Jeu de rôle' : 'Role Playing',
+      description: lang === 'fr' ? 'Mettez en pratique vos compétences' : 'Practice your skills',
       icon: Video,
       color: 'text-red-500',
       status: 'coming-soon',
       category: 'activity'
     },
     {
-      name: t('tools.activities.debriefing'),
-      description: t('tools.descriptions.debriefing'),
+      name: lang === 'fr' ? 'Debriefing' : 'Debriefing',
+      description: lang === 'fr' ? 'Analysez et partagez vos apprentissages' : 'Analyze and share your learnings',
       icon: MessageCircle,
       color: 'text-cyan-500',
       status: 'coming-soon',
       category: 'activity'
     },
     {
-      name: t('tools.activities.brainstorming'),
-      description: t('tools.descriptions.brainstorming'),
+      name: lang === 'fr' ? 'Brainstorming' : 'Brainstorming',
+      description: lang === 'fr' ? 'Générez des idées en groupe' : 'Generate ideas as a group',
       icon: Lightbulb,
       color: 'text-yellow-500',
       status: 'coming-soon',
       category: 'activity'
     },
     {
-      name: t('tools.activities.debate'),
-      description: t('tools.descriptions.debate'),
+      name: lang === 'fr' ? 'Débat' : 'Debate',
+      description: lang === 'fr' ? 'Échangez et argumentez sur des sujets' : 'Exchange and argue on topics',
       icon: Users,
       color: 'text-pink-500',
       status: 'coming-soon',
       category: 'activity'
     },
     {
-      name: t('tools.activities.groupMission'),
-      description: t('tools.descriptions.groupMission'),
+      name: lang === 'fr' ? 'Mission de groupe' : 'Group Mission',
+      description: lang === 'fr' ? 'Collaborez pour atteindre un objectif commun' : 'Collaborate to achieve a common goal',
       icon: Target,
       color: 'text-rose-500',
       status: 'coming-soon',
       category: 'activity'
     },
-
-    // Resources
     {
-      name: t('tools.resources.knowledgeSheet'),
-      description: t('tools.descriptions.knowledgeSheet'),
+      name: lang === 'fr' ? 'Fiche de connaissance' : 'Knowledge Sheet',
+      description: lang === 'fr' ? 'Synthèses structurées des concepts clés' : 'Structured summaries of key concepts',
       icon: FileText,
       color: 'text-indigo-500',
       status: 'coming-soon',
       category: 'resource'
     },
     {
-      name: t('tools.resources.learningJournal'),
-      description: t('tools.descriptions.learningJournal'),
+      name: lang === 'fr' ? 'Journal d\'apprentissage' : 'Learning Journal',
+      description: lang === 'fr' ? 'Documentez votre parcours d\'apprentissage' : 'Document your learning journey',
       icon: BookOpen,
       color: 'text-teal-500',
       status: 'coming-soon',
       category: 'resource'
     },
     {
-      name: t('tools.resources.interactiveVideo'),
-      description: t('tools.descriptions.interactiveVideo'),
+      name: lang === 'fr' ? 'Vidéo interactive' : 'Interactive Video',
+      description: lang === 'fr' ? 'Vidéos avec questions et interactions' : 'Videos with questions and interactions',
       icon: Film,
       color: 'text-amber-500',
       status: 'coming-soon',
       category: 'resource'
     },
     {
-      name: t('tools.resources.aiSummary'),
-      description: t('tools.descriptions.aiSummary'),
+      name: lang === 'fr' ? 'Résumé IA' : 'AI Summary',
+      description: lang === 'fr' ? 'Résumés générés automatiquement par IA' : 'AI-generated automatic summaries',
       icon: Bot,
       color: 'text-fuchsia-500',
       status: 'new',
       category: 'resource'
     },
-
-    // Templates
     {
-      name: t('tools.templates.peerEvaluation'),
-      description: t('tools.descriptions.peerEvaluation'),
+      name: lang === 'fr' ? 'Évaluation par les pairs' : 'Peer Evaluation',
+      description: lang === 'fr' ? 'Évaluez et donnez du feedback à vos pairs' : 'Evaluate and give feedback to your peers',
       icon: UserCheck,
       color: 'text-lime-500',
       status: 'coming-soon',
       category: 'template'
     },
     {
-      name: t('tools.templates.crossSkills'),
-      description: t('tools.descriptions.crossSkills'),
+      name: lang === 'fr' ? 'Compétences transversales' : 'Cross Skills',
+      description: lang === 'fr' ? 'Développez vos soft skills' : 'Develop your soft skills',
       icon: Puzzle,
       color: 'text-violet-500',
       status: 'coming-soon',
       category: 'template'
     },
     {
-      name: t('tools.templates.motivationWheel'),
-      description: t('tools.descriptions.motivationWheel'),
+      name: lang === 'fr' ? 'Roue de la motivation' : 'Motivation Wheel',
+      description: lang === 'fr' ? 'Identifiez vos sources de motivation' : 'Identify your sources of motivation',
       icon: RotateCw,
       color: 'text-emerald-500',
       status: 'coming-soon',
       category: 'template'
     },
     {
-      name: t('tools.templates.challenge'),
-      description: t('tools.descriptions.challenge'),
+      name: lang === 'fr' ? 'Challenge' : 'Challenge',
+      description: lang === 'fr' ? 'Relevez des défis pour progresser' : 'Take on challenges to progress',
       icon: Trophy,
       color: 'text-yellow-600',
       status: 'coming-soon',
       category: 'template'
     },
     {
-      name: t('tools.templates.instantFeedback'),
-      description: t('tools.descriptions.instantFeedback'),
+      name: lang === 'fr' ? 'Feedback positif' : 'Positive Feedback',
+      description: lang === 'fr' ? 'Partagez des encouragements' : 'Share encouragement',
       icon: ThumbsUp,
-      color: 'text-blue-600',
+      color: 'text-green-600',
       status: 'coming-soon',
       category: 'template'
     },
     {
-      name: t('tools.templates.celebration'),
-      description: t('tools.descriptions.celebration'),
+      name: lang === 'fr' ? 'Célébration' : 'Celebration',
+      description: lang === 'fr' ? 'Célébrez les réussites ensemble' : 'Celebrate successes together',
       icon: PartyPopper,
       color: 'text-pink-600',
       status: 'coming-soon',
@@ -237,34 +227,26 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
   ];
 
   const externalServices = [
-    { name: t('tools.external.openai'), url: 'https://openai.com' },
-    { name: t('tools.external.notebooklm'), url: 'https://notebooklm.google.com' },
-    { name: t('tools.external.specializedGPTs'), url: 'https://chat.openai.com/gpts' },
+    { name: 'OpenAI', url: 'https://openai.com' },
+    { name: 'NotebookLM', url: 'https://notebooklm.google.com' },
+    { name: lang === 'fr' ? 'GPTs spécialisés' : 'Specialized GPTs', url: 'https://chat.openai.com/gpts' },
   ];
 
-  // Filter tools based on search
   const filteredTools = useMemo(() => {
-    if (!searchQuery.trim()) return allTools;
-    
-    const query = searchQuery.toLowerCase();
-    return allTools.filter(
-      tool =>
-        tool.name.toLowerCase().includes(query) ||
-        tool.description.toLowerCase().includes(query) ||
-        tool.category.toLowerCase().includes(query)
+    return allTools.filter(tool => 
+      tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery, allTools]);
 
-  // Group tools by category
   const toolsByCategory = useMemo(() => {
-    const grouped = {
+    return {
       module: filteredTools.filter(t => t.category === 'module'),
       guide: filteredTools.filter(t => t.category === 'guide'),
       activity: filteredTools.filter(t => t.category === 'activity'),
       resource: filteredTools.filter(t => t.category === 'resource'),
       template: filteredTools.filter(t => t.category === 'template'),
     };
-    return grouped;
   }, [filteredTools]);
 
   const handleToolClick = (tool: Tool) => {
@@ -276,6 +258,17 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
     }
   };
 
+  const getStatusLabel = (status?: 'new' | 'updated' | 'coming-soon' | 'active') => {
+    if (!status) return '';
+    const labels = {
+      new: lang === 'fr' ? 'Nouveau' : 'New',
+      updated: lang === 'fr' ? 'Mis à jour' : 'Updated',
+      'coming-soon': lang === 'fr' ? 'Bientôt' : 'Coming Soon',
+      active: lang === 'fr' ? 'Actif' : 'Active'
+    };
+    return labels[status];
+  };
+
   const renderToolCard = (tool: Tool) => (
     <Card
       key={tool.name}
@@ -284,188 +277,175 @@ export const PedagogicalTools = ({ onNavigate }: PedagogicalToolsProps) => {
     >
       <CardHeader>
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-muted">
-              <tool.icon className={`w-5 h-5 ${tool.color}`} />
-            </div>
-            <CardTitle className="text-base">{tool.name}</CardTitle>
-          </div>
+          <tool.icon className={`w-8 h-8 ${tool.color} group-hover:scale-110 transition-transform`} />
           {tool.status && (
-            <Badge
-              variant={
-                tool.status === 'new' ? 'default' :
-                tool.status === 'updated' ? 'secondary' :
-                tool.status === 'coming-soon' ? 'outline' :
-                'secondary'
-              }
-              className="text-xs"
-            >
-              {tool.status === 'new' && t('tools.status.new')}
-              {tool.status === 'updated' && t('tools.status.updated')}
-              {tool.status === 'coming-soon' && t('tools.status.comingSoon')}
-              {tool.status === 'active' && t('tools.status.active')}
+            <Badge variant={
+              tool.status === 'new' ? 'default' :
+              tool.status === 'updated' ? 'secondary' :
+              tool.status === 'coming-soon' ? 'outline' : 'default'
+            }>
+              {getStatusLabel(tool.status)}
             </Badge>
           )}
         </div>
+        <CardTitle className="text-lg mt-2">{tool.name}</CardTitle>
+        <CardDescription className="text-sm">{tool.description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <CardDescription className="text-sm mb-3">{tool.description}</CardDescription>
-        {tool.progress !== undefined && (
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs">
-              <span className="text-muted-foreground">{t('tools.progress')}</span>
+      {tool.progress !== undefined && (
+        <CardContent>
+          <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">{lang === 'fr' ? 'Progression' : 'Progress'}</span>
               <span className="font-medium">{tool.progress}%</span>
             </div>
-            <div className="w-full bg-secondary rounded-full h-1.5">
+            <div className="w-full bg-secondary h-2 rounded-full overflow-hidden">
               <div
-                className="bg-primary h-1.5 rounded-full transition-all"
+                className="bg-primary h-full transition-all"
                 style={{ width: `${tool.progress}%` }}
               />
             </div>
           </div>
-        )}
-      </CardContent>
+        </CardContent>
+      )}
     </Card>
   );
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink
-              onClick={() => onNavigate?.('overview')}
-              className="cursor-pointer flex items-center gap-1"
-            >
+            <BreadcrumbLink onClick={() => onNavigate?.('vue-ensemble')} className="cursor-pointer flex items-center gap-1">
               <Home className="w-4 h-4" />
-              {t('tools.breadcrumb.dashboard')}
+              {lang === 'fr' ? 'Tableau de bord' : 'Dashboard'}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{t('tools.breadcrumb.tools')}</BreadcrumbPage>
+            <BreadcrumbPage>{lang === 'fr' ? 'Outils Pédagogiques' : 'Learning Tools'}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold mb-2">{t('tools.title')}</h1>
-        <p className="text-muted-foreground text-lg">{t('tools.subtitle')}</p>
+        <h1 className="text-3xl font-bold flex items-center gap-2">
+          <GraduationCap className="w-8 h-8 text-primary" />
+          {lang === 'fr' ? 'Outils Pédagogiques' : 'Learning Tools'}
+        </h1>
+        <p className="text-muted-foreground mt-2">
+          {lang === 'fr' 
+            ? 'Découvrez nos outils pour optimiser votre apprentissage' 
+            : 'Discover our tools to optimize your learning'}
+        </p>
       </div>
 
-      {/* Search bar */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <Input
-          placeholder={t('tools.searchPlaceholder')}
-          className="pl-10"
+          type="text"
+          placeholder={lang === 'fr' ? 'Rechercher un outil...' : 'Search for a tool...'}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10"
         />
       </div>
 
-      {/* Modules Section */}
-      {toolsByCategory.module.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">{t('tools.categories.modules')}</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {toolsByCategory.module.map(renderToolCard)}
-          </div>
-        </div>
+      {filteredTools.length === 0 ? (
+        <Card>
+          <CardContent className="py-12 text-center">
+            <p className="text-muted-foreground">
+              {lang === 'fr' 
+                ? `Aucun outil trouvé pour "${searchQuery}"` 
+                : `No tools found for "${searchQuery}"`}
+            </p>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          {toolsByCategory.module.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <Layout className="w-6 h-6 text-primary" />
+                {lang === 'fr' ? 'Modules' : 'Modules'}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory.module.map(renderToolCard)}
+              </div>
+            </section>
+          )}
+
+          {toolsByCategory.guide.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <BookMarked className="w-6 h-6 text-primary" />
+                {lang === 'fr' ? 'Guides' : 'Guides'}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory.guide.map(renderToolCard)}
+              </div>
+            </section>
+          )}
+
+          {toolsByCategory.activity.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <Users className="w-6 h-6 text-primary" />
+                {lang === 'fr' ? 'Activités collaboratives' : 'Collaborative Activities'}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory.activity.map(renderToolCard)}
+              </div>
+            </section>
+          )}
+
+          {toolsByCategory.resource.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <FolderOpen className="w-6 h-6 text-primary" />
+                {lang === 'fr' ? 'Ressources' : 'Resources'}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory.resource.map(renderToolCard)}
+              </div>
+            </section>
+          )}
+
+          {toolsByCategory.template.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                <FileStack className="w-6 h-6 text-primary" />
+                {lang === 'fr' ? 'Modèles' : 'Templates'}
+              </h2>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {toolsByCategory.template.map(renderToolCard)}
+              </div>
+            </section>
+          )}
+        </>
       )}
 
-      {/* Guides Section */}
-      {toolsByCategory.guide.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <BookMarked className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">{t('tools.categories.guides')}</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {toolsByCategory.guide.map(renderToolCard)}
-          </div>
-        </div>
-      )}
-
-      {/* Collaborative Activities Section */}
-      {toolsByCategory.activity.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">{t('tools.categories.activities')}</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {toolsByCategory.activity.map(renderToolCard)}
-          </div>
-        </div>
-      )}
-
-      {/* Resources Section */}
-      {toolsByCategory.resource.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <FolderOpen className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">{t('tools.categories.resources')}</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {toolsByCategory.resource.map(renderToolCard)}
-          </div>
-        </div>
-      )}
-
-      {/* Templates Section */}
-      {toolsByCategory.template.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <FileStack className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">{t('tools.categories.templates')}</h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {toolsByCategory.template.map(renderToolCard)}
-          </div>
-        </div>
-      )}
-
-      {/* External Services */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center gap-2">
-            <ExternalLink className="w-5 h-5 text-primary" />
-            <CardTitle>{t('tools.categories.external')}</CardTitle>
-          </div>
-          <CardDescription>{t('tools.externalDescription')}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-3 md:grid-cols-3">
-            {externalServices.map((service, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                className="justify-between h-auto py-3"
-                onClick={() => window.open(service.url, '_blank')}
-              >
+      <section>
+        <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+          <ExternalLink className="w-6 h-6 text-primary" />
+          {lang === 'fr' ? 'Services externes' : 'External Services'}
+        </h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {externalServices.map((service) => (
+            <Button
+              key={service.name}
+              variant="outline"
+              className="h-auto py-4"
+              asChild
+            >
+              <a href={service.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between">
                 <span>{service.name}</span>
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Empty state */}
-      {filteredTools.length === 0 && (
-        <div className="text-center py-12">
-          <Search className="w-12 h-12 mx-auto mb-3 text-muted-foreground" />
-          <p className="text-muted-foreground">{t('tools.noResults')}</p>
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </a>
+            </Button>
+          ))}
         </div>
-      )}
+      </section>
 
-      {/* Tool Modal */}
       <ToolModal
         open={modalOpen}
         onOpenChange={setModalOpen}
