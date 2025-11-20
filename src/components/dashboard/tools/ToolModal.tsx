@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Clock } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 interface ToolModalProps {
   open: boolean;
@@ -18,7 +18,7 @@ interface ToolModalProps {
 }
 
 export const ToolModal = ({ open, onOpenChange, tool }: ToolModalProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
 
   if (!tool) return null;
 
@@ -43,10 +43,10 @@ export const ToolModal = ({ open, onOpenChange, tool }: ToolModalProps) => {
                   }
                   className="mt-1"
                 >
-                  {tool.status === 'new' && t('tools.status.new')}
-                  {tool.status === 'updated' && t('tools.status.updated')}
-                  {tool.status === 'coming-soon' && t('tools.status.comingSoon')}
-                  {tool.status === 'active' && t('tools.status.active')}
+                  {tool.status === 'new' && (lang === 'fr' ? 'Nouveau' : 'New')}
+                  {tool.status === 'updated' && (lang === 'fr' ? 'Mis à jour' : 'Updated')}
+                  {tool.status === 'coming-soon' && (lang === 'fr' ? 'Bientôt' : 'Coming Soon')}
+                  {tool.status === 'active' && (lang === 'fr' ? 'Actif' : 'Active')}
                 </Badge>
               )}
             </div>
@@ -60,9 +60,9 @@ export const ToolModal = ({ open, onOpenChange, tool }: ToolModalProps) => {
         {isComingSoon ? (
           <div className="mt-6 p-6 border border-dashed rounded-lg text-center">
             <Clock className="w-12 h-12 mx-auto mb-3 text-muted-foreground" />
-            <h3 className="font-semibold mb-2">{t('tools.comingSoonTitle')}</h3>
+            <h3 className="font-semibold mb-2">{lang === 'fr' ? 'Bientôt disponible' : 'Coming Soon'}</h3>
             <p className="text-sm text-muted-foreground">
-              {t('tools.comingSoonDescription')}
+              {lang === 'fr' ? 'Cet outil sera disponible prochainement.' : 'This tool will be available soon.'}
             </p>
           </div>
         ) : (
@@ -70,7 +70,7 @@ export const ToolModal = ({ open, onOpenChange, tool }: ToolModalProps) => {
             {tool.progress !== undefined && (
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{t('tools.progress')}</span>
+                  <span className="text-muted-foreground">{lang === 'fr' ? 'Progression' : 'Progress'}</span>
                   <span className="font-medium">{tool.progress}%</span>
                 </div>
                 <div className="w-full bg-secondary rounded-full h-2">
@@ -84,7 +84,7 @@ export const ToolModal = ({ open, onOpenChange, tool }: ToolModalProps) => {
 
             <div className="flex gap-2">
               <Button className="flex-1">
-                {t('tools.launch')}
+                {lang === 'fr' ? 'Lancer' : 'Launch'}
               </Button>
               <Button variant="outline">
                 <ExternalLink className="w-4 h-4" />

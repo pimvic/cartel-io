@@ -19,7 +19,7 @@ All internationalization (i18n) keys are being replaced with hard-coded French a
 
 ## Progress Status
 
-### ✅ Completed Components (10 files)
+### ✅ Completed Components (11 files)
 
 #### 1. src/components/dashboard/DashboardHeader.tsx
 **Status:** Complete  
@@ -61,7 +61,11 @@ All internationalization (i18n) keys are being replaced with hard-coded French a
 #### 10. src/components/dashboard/KBChat.tsx
 **Status:** Complete (from previous session)
 
-### 🔄 In Progress / Remaining Components (29+ files)
+#### 11. src/components/dashboard/PedagogicalTools.tsx
+**Status:** Complete  
+**Replaced Keys:** All tool names, descriptions, categories, statuses, breadcrumb, search placeholder, progress labels, section headings (Modules, Guides, Collaborative Activities, Resources, Templates, External Services)
+
+### 🔄 In Progress / Remaining Components (28+ files)
 
 The following components still need i18n replacement:
 
