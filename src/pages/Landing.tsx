@@ -7,11 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Footer } from "@/components/Footer";
-import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ContactForm = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -54,13 +53,13 @@ const ContactForm = () => {
     <div className="space-y-4">
       {submitted && (
         <div className="text-center text-success font-semibold text-lg mb-4">
-          {t('home.contact.form.success')}
+          {lang === 'fr' ? 'Merci pour votre message !' : 'Thank you for your message!'}
         </div>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="nom">{t('home.contact.form.lastName')} *</Label>
+            <Label htmlFor="nom">{lang === 'fr' ? 'Nom' : 'Last Name'} *</Label>
             <Input
               id="nom"
               required
@@ -69,7 +68,7 @@ const ContactForm = () => {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="prenom">{t('home.contact.form.firstName')} *</Label>
+            <Label htmlFor="prenom">{lang === 'fr' ? 'Prénom' : 'First Name'} *</Label>
             <Input
               id="prenom"
               required
@@ -79,7 +78,7 @@ const ContactForm = () => {
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="mobile">{t('home.contact.form.mobile')} *</Label>
+          <Label htmlFor="mobile">{lang === 'fr' ? 'Mobile' : 'Mobile'} *</Label>
           <Input
             id="mobile"
             type="tel"
@@ -89,7 +88,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">{t('home.contact.form.email')} *</Label>
+          <Label htmlFor="email">{lang === 'fr' ? 'Email' : 'Email'} *</Label>
           <Input
             id="email"
             type="email"
@@ -99,7 +98,7 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="commentaire">{t('home.contact.form.comment')}</Label>
+          <Label htmlFor="commentaire">{lang === 'fr' ? 'Commentaire' : 'Comment'}</Label>
           <Textarea
             id="commentaire"
             rows={4}
@@ -108,7 +107,7 @@ const ContactForm = () => {
           />
         </div>
         <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-          {t('home.contact.form.send')}
+          {lang === 'fr' ? 'Envoyer' : 'Send'}
         </Button>
       </form>
     </div>
@@ -116,16 +115,9 @@ const ContactForm = () => {
 };
 
 const Landing = () => {
-  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { lang } = useParams();
+  const { lang } = useParams<{ lang: string }>();
   const [videoLoaded, setVideoLoaded] = useState(false);
-
-  useEffect(() => {
-    if (lang && (lang === 'en' || lang === 'fr')) {
-      i18n.changeLanguage(lang);
-    }
-  }, [lang, i18n]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -149,28 +141,28 @@ const Landing = () => {
           </h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection("qui")} className="hover:text-accent transition-colors">
-              {t('nav.whoWeAre')}
+              {lang === 'fr' ? 'Qui sommes-nous' : 'Who We Are'}
             </button>
             <button onClick={() => scrollToSection("pourquoi")} className="hover:text-accent transition-colors">
-              {t('nav.whyKartel')}
+              {lang === 'fr' ? 'Pourquoi Kartel' : 'Why Kartel'}
             </button>
             <button onClick={() => scrollToSection("tarifs")} className="hover:text-accent transition-colors">
-              {t('nav.pricing')}
+              {lang === 'fr' ? 'Tarifs' : 'Pricing'}
             </button>
             <button onClick={() => scrollToSection("temoignages")} className="hover:text-accent transition-colors">
-              {t('nav.testimonials')}
+              {lang === 'fr' ? 'Témoignages' : 'Testimonials'}
             </button>
             <button onClick={() => scrollToSection("resultats")} className="hover:text-accent transition-colors">
-              {t('nav.results')}
+              {lang === 'fr' ? 'Résultats' : 'Results'}
             </button>
             <button onClick={() => scrollToSection("apropos")} className="hover:text-accent transition-colors">
-              {t('nav.about')}
+              {lang === 'fr' ? 'À propos' : 'About'}
             </button>
           </div>
           <div className="flex gap-2">
             <LanguageSwitcher />
             <Button onClick={() => navigate(`/${lang}/login`)} variant="outline">
-              {t('login.signIn')}
+              {lang === 'fr' ? 'Se connecter' : 'Sign In'}
             </Button>
           </div>
         </div>
@@ -180,11 +172,11 @@ const Landing = () => {
       <section className="relative pt-32 pb-12 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
-            {t('home.hero.title')}{" "}
-            <span className="text-black dark:text-white">{t('home.hero.titleHighlight')}</span>
+            {lang === 'fr' ? 'Réussir ensemble avec' : 'Succeed together with'}{" "}
+            <span className="text-black dark:text-white">{lang === 'fr' ? 'Kartels.io' : 'Kartels.io'}</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
-            {t('home.hero.subtitle')}
+            {lang === 'fr' ? 'La plateforme collaborative pour les groupes d\'apprentissage' : 'The collaborative platform for learning groups'}
           </p>
 
           {/* Video Preview */}
