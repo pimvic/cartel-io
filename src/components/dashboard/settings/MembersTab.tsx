@@ -28,7 +28,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { UserPlus, MoreVertical, Mail, Trash2 } from 'lucide-react';
 import {
@@ -48,7 +48,7 @@ interface Member {
 }
 
 export const MembersTab = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { toast } = useToast();
   const [inviteOpen, setInviteOpen] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');

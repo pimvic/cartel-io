@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Edit, Trash2, Archive, Star, BookOpen, Filter, Copy, Share2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { NoteEditor } from './notes/NoteEditor';
@@ -40,7 +40,7 @@ interface GlossaryTerm {
 }
 
 export const Notes = () => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { toast } = useToast();
   const [notes, setNotes] = useState<Note[]>([]);
   const [glossaryTerms, setGlossaryTerms] = useState<GlossaryTerm[]>([]);
@@ -378,7 +378,7 @@ export const Notes = () => {
   };
 
   const formatDate = (date: string) => {
-    const locale = i18n.language === 'fr' ? fr : enUS;
+    const locale = lang === 'fr' ? fr : enUS;
     return formatDistanceToNow(new Date(date), { addSuffix: true, locale });
   };
 

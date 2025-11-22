@@ -13,12 +13,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { AlertTriangle, Archive, Trash2 } from 'lucide-react';
 
 export const DangerZoneTab = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { toast } = useToast();
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);

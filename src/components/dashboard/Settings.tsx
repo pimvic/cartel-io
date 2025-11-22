@@ -9,7 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { Home, Settings2, Users, Palette, Bell, Plug, Zap, Shield, CreditCard, SlidersHorizontal, AlertTriangle, User } from 'lucide-react';
 import { GeneralTab } from './settings/GeneralTab';
 import { MembersTab } from './settings/MembersTab';
@@ -21,7 +21,7 @@ interface SettingsProps {
 }
 
 export const Settings = ({ onNavigate }: SettingsProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [activeTab, setActiveTab] = useState('general');
   const [scope, setScope] = useState<'personal' | 'workspace'>('workspace');
 
