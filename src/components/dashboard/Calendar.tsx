@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import { format as formatDate } from "date-fns";
 import { format } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import {
@@ -76,7 +76,7 @@ interface Membership {
 }
 
 export const Calendar = () => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   
@@ -98,7 +98,7 @@ export const Calendar = () => {
   const [page, setPage] = useState(1);
   const pageSize = 20;
 
-  const locale = i18n.language === 'fr' ? fr : enUS;
+  const locale = lang === 'fr' ? fr : enUS;
 
   // Fetch data
   useEffect(() => {

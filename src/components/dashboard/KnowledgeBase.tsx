@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -76,7 +76,7 @@ interface Resource {
 }
 
 export const KnowledgeBase = () => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { toast } = useToast();
   const [resources, setResources] = useState<Resource[]>([]);
   const [filteredResources, setFilteredResources] = useState<Resource[]>([]);
@@ -109,7 +109,7 @@ export const KnowledgeBase = () => {
   const [reportReason, setReportReason] = useState("");
   const [tagInput, setTagInput] = useState("");
 
-  const locale = i18n.language === "fr" ? fr : enUS;
+  const locale = lang === "fr" ? fr : enUS;
 
   useEffect(() => {
     fetchCurrentUser();

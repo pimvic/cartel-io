@@ -5,12 +5,12 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { Save } from 'lucide-react';
 
 export const GeneralTab = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { toast } = useToast();
   
   const [kartelName, setKartelName] = useState('Formation Psychanalyse - Promotion 2025');
