@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, BookOpen, Trophy, Star, Play } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { Footer } from "@/components/Footer";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -23,7 +22,6 @@ const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Create mailto link with form data
     const subject = encodeURIComponent("Contact depuis Kartels.io");
     const body = encodeURIComponent(
       `Nom: ${formData.nom}\n` +
@@ -35,7 +33,6 @@ const ContactForm = () => {
     
     window.location.href = `mailto:superteam@kartels.io?subject=${subject}&body=${body}`;
     
-    // Show confirmation and clear form
     setSubmitted(true);
     setFormData({
       nom: "",
@@ -45,7 +42,6 @@ const ContactForm = () => {
       commentaire: ""
     });
     
-    // Reset submitted state after 3 seconds
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -172,8 +168,8 @@ const Landing = () => {
       <section className="relative pt-32 pb-12 px-6">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
-            {lang === 'fr' ? 'Réussir ensemble avec' : 'Succeed together with'}{" "}
-            <span className="text-black dark:text-white">{lang === 'fr' ? 'Kartels.io' : 'Kartels.io'}</span>
+            {lang === 'fr' ? 'Réussir ensemble avec ' : 'Succeed together with '}
+            <span className="text-black dark:text-white">Kartels.io</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             {lang === 'fr' ? 'La plateforme collaborative pour les groupes d\'apprentissage' : 'The collaborative platform for learning groups'}
@@ -189,7 +185,7 @@ const Landing = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
-                    alt={t('home.hero.videoAlt')}
+                    alt={lang === 'fr' ? 'Vidéo de présentation Kartels' : 'Kartels presentation video'}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
@@ -206,7 +202,7 @@ const Landing = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   className="w-full h-full"
-                  title={t('home.hero.videoAlt')}
+                  title={lang === 'fr' ? 'Vidéo de présentation Kartels' : 'Kartels presentation video'}
                 />
               )}
             </div>
@@ -218,17 +214,17 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                alert(t('home.chatbot.alert'));
+                alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io pour une démo !' : 'Contact us at superteam@kartels.io for a demo!');
               }}
             >
-              {t('home.hero.demoRequest')}
+              {lang === 'fr' ? 'Demander une démo' : 'Request a demo'}
             </Button>
             <Button 
               size="lg" 
               className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => navigate(`/${lang}/login`)}
             >
-              {t('home.hero.cta')} <ArrowRight className="ml-2" />
+              {lang === 'fr' ? 'Commencer' : 'Get Started'} <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -237,27 +233,41 @@ const Landing = () => {
       {/* Qui Sommes nous */}
       <section id="qui" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">{t('home.whoWeAre.title')}</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">
+            {lang === 'fr' ? 'Qui sommes-nous ?' : 'Who are we?'}
+          </h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Users className="w-12 h-12 text-accent mb-4" />
-              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.collaboration.title')}</h4>
+              <h4 className="text-xl font-bold mb-3">
+                {lang === 'fr' ? 'Collaboration' : 'Collaboration'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whoWeAre.collaboration.description')}
+                {lang === 'fr' 
+                  ? 'Travaillez ensemble, partagez vos connaissances et progressez en groupe.' 
+                  : 'Work together, share your knowledge and progress as a group.'}
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-success/5 hover-lift">
               <BookOpen className="w-12 h-12 text-success mb-4" />
-              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.knowledge.title')}</h4>
+              <h4 className="text-xl font-bold mb-3">
+                {lang === 'fr' ? 'Base de connaissances' : 'Knowledge Base'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whoWeAre.knowledge.description')}
+                {lang === 'fr' 
+                  ? 'Centralisez tous vos documents et ressources pédagogiques.' 
+                  : 'Centralize all your documents and educational resources.'}
               </p>
             </div>
             <div className="p-8 rounded-2xl bg-accent/5 hover-lift">
               <Trophy className="w-12 h-12 text-accent mb-4" />
-              <h4 className="text-xl font-bold mb-3">{t('home.whoWeAre.progress.title')}</h4>
+              <h4 className="text-xl font-bold mb-3">
+                {lang === 'fr' ? 'Suivi de progression' : 'Progress Tracking'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whoWeAre.progress.description')}
+                {lang === 'fr' 
+                  ? 'Suivez vos objectifs et célébrez vos réussites.' 
+                  : 'Track your goals and celebrate your successes.'}
               </p>
             </div>
           </div>
@@ -267,24 +277,38 @@ const Landing = () => {
       {/* Pourquoi Kartel */}
       <section id="pourquoi" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl text-center">
-          <h3 className="text-4xl font-bold text-center mb-12">{t('home.whyKartel.title')}</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">
+            {lang === 'fr' ? 'Pourquoi Kartel ?' : 'Why Kartel?'}
+          </h3>
           <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point1.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Apprentissage collaboratif' : 'Collaborative Learning'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whyKartel.point1.description')}
+                {lang === 'fr' 
+                  ? 'Apprenez plus vite et mieux en partageant vos connaissances avec vos pairs.' 
+                  : 'Learn faster and better by sharing knowledge with your peers.'}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point2.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Outils intégrés' : 'Integrated Tools'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whyKartel.point2.description')}
+                {lang === 'fr' 
+                  ? 'Tout ce dont vous avez besoin au même endroit : notes, calendrier, visio, etc.' 
+                  : 'Everything you need in one place: notes, calendar, video, etc.'}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.whyKartel.point3.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Intelligence artificielle' : 'Artificial Intelligence'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.whyKartel.point3.description')}
+                {lang === 'fr' 
+                  ? 'Profitez de l\'IA pour créer du contenu, résumer et vous aider dans votre apprentissage.' 
+                  : 'Leverage AI to create content, summarize and help you learn.'}
               </p>
             </div>
           </div>
@@ -294,24 +318,38 @@ const Landing = () => {
       {/* Les Résultats sont là */}
       <section id="resultats" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-5xl text-center">
-          <h3 className="text-4xl font-bold text-center mb-12">{t('home.results.title')}</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">
+            {lang === 'fr' ? 'Les résultats sont là' : 'The results are here'}
+          </h3>
           <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.results.point1.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Taux de réussite élevé' : 'High Success Rate'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.results.point1.description')}
+                {lang === 'fr' 
+                  ? 'Nos utilisateurs affichent un taux de réussite supérieur de 30% à la moyenne.' 
+                  : 'Our users show a 30% higher success rate than average.'}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.results.point2.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Meilleure rétention' : 'Better Retention'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.results.point2.description')}
+                {lang === 'fr' 
+                  ? 'Les connaissances acquises en groupe sont mieux retenues sur le long terme.' 
+                  : 'Knowledge acquired in groups is better retained over time.'}
               </p>
             </div>
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
-              <h4 className="text-xl font-bold mb-2">{t('home.results.point3.title')}</h4>
+              <h4 className="text-xl font-bold mb-2">
+                {lang === 'fr' ? 'Engagement accru' : 'Increased Engagement'}
+              </h4>
               <p className="text-muted-foreground">
-                {t('home.results.point3.description')}
+                {lang === 'fr' 
+                  ? 'Les apprenants sont plus motivés et engagés dans leur formation.' 
+                  : 'Learners are more motivated and engaged in their training.'}
               </p>
             </div>
           </div>
@@ -321,97 +359,115 @@ const Landing = () => {
       {/* Tarifs */}
       <section id="tarifs" className="py-12 px-6 bg-background/50 backdrop-blur">
         <div className="container mx-auto max-w-6xl">
-          <h3 className="text-4xl font-bold text-center mb-12">{t('home.pricing.title')}</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">
+            {lang === 'fr' ? 'Nos tarifs' : 'Our Pricing'}
+          </h3>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
-              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.free.title')}</h4>
-              <p className="text-4xl font-bold mb-6">{t('home.pricing.free.price')}<span className="text-lg text-muted-foreground">{t('home.pricing.free.perMonth')}</span></p>
+              <h4 className="text-2xl font-bold mb-4">
+                {lang === 'fr' ? 'Gratuit' : 'Free'}
+              </h4>
+              <p className="text-4xl font-bold mb-6">
+                0€<span className="text-lg text-muted-foreground">{lang === 'fr' ? '/mois' : '/month'}</span>
+              </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.free.features.account')}</span>
+                  <span>{lang === 'fr' ? '1 compte' : '1 account'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.free.features.storage')}</span>
+                  <span>{lang === 'fr' ? '500 Mo de stockage' : '500 MB storage'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.free.features.ai')}</span>
+                  <span>{lang === 'fr' ? 'IA limitée' : 'Limited AI'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.free.features.tools')}</span>
+                  <span>{lang === 'fr' ? 'Outils de base' : 'Basic tools'}</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">{t('home.pricing.free.cta')}</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">
+                {lang === 'fr' ? 'Commencer gratuitement' : 'Start for free'}
+              </Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift relative">
               <div className="absolute top-4 right-4">
                 <Star className="w-6 h-6 fill-accent text-accent" />
               </div>
-              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.pro.title')}</h4>
-              <p className="text-4xl font-bold mb-6">{t('home.pricing.pro.price')}<span className="text-lg text-muted-foreground">{t('home.pricing.pro.perMonth')}</span></p>
+              <h4 className="text-2xl font-bold mb-4">
+                {lang === 'fr' ? 'Pro' : 'Pro'}
+              </h4>
+              <p className="text-4xl font-bold mb-6">
+                19€<span className="text-lg text-muted-foreground">{lang === 'fr' ? '/mois' : '/month'}</span>
+              </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.pro.features.account')}</span>
+                  <span>{lang === 'fr' ? '1 compte premium' : '1 premium account'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.pro.features.kartels')}</span>
+                  <span>{lang === 'fr' ? '5 Kartels' : '5 Kartels'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.pro.features.storage')}</span>
+                  <span>{lang === 'fr' ? '10 Go de stockage' : '10 GB storage'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.pro.features.ai')}</span>
+                  <span>{lang === 'fr' ? 'IA illimitée' : 'Unlimited AI'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.pro.features.tools')}</span>
+                  <span>{lang === 'fr' ? 'Tous les outils' : 'All tools'}</span>
                 </li>
               </ul>
               <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">
-                {t('home.pricing.pro.cta')}
+                {lang === 'fr' ? 'Passer à Pro' : 'Upgrade to Pro'}
               </Button>
             </div>
             <div className="p-8 rounded-2xl bg-card border border-border hover-lift">
-              <h4 className="text-2xl font-bold mb-4">{t('home.pricing.team.title')}</h4>
-              <p className="text-4xl font-bold mb-6">{t('home.pricing.team.price')}</p>
+              <h4 className="text-2xl font-bold mb-4">
+                {lang === 'fr' ? 'Équipe' : 'Team'}
+              </h4>
+              <p className="text-4xl font-bold mb-6">
+                {lang === 'fr' ? 'Sur mesure' : 'Custom'}
+              </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.unlimitedAccounts')}</span>
+                  <span>{lang === 'fr' ? 'Comptes illimités' : 'Unlimited accounts'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.multiManagement')}</span>
+                  <span>{lang === 'fr' ? 'Gestion multi-Kartels' : 'Multi-Kartel management'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.corporate')}</span>
+                  <span>{lang === 'fr' ? 'Entreprises' : 'Corporate'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.businessSchools')}</span>
+                  <span>{lang === 'fr' ? 'Écoles de commerce' : 'Business Schools'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.universities')}</span>
+                  <span>{lang === 'fr' ? 'Universités' : 'Universities'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.dedicatedTrainer')}</span>
+                  <span>{lang === 'fr' ? 'Formateur dédié' : 'Dedicated trainer'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{t('home.pricing.team.features.support')}</span>
+                  <span>{lang === 'fr' ? 'Support prioritaire' : 'Priority support'}</span>
                 </li>
               </ul>
-              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">{t('home.pricing.team.cta')}</Button>
+              <Button className="w-full bg-accent/30 hover:bg-accent/40 text-foreground border border-accent">
+                {lang === 'fr' ? 'Nous contacter' : 'Contact us'}
+              </Button>
             </div>
           </div>
         </div>
@@ -420,25 +476,33 @@ const Landing = () => {
       {/* Témoignages */}
       <section id="temoignages" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl">
-          <h3 className="text-4xl font-bold text-center mb-12">{t('home.testimonials.title')}</h3>
+          <h3 className="text-4xl font-bold text-center mb-12">
+            {lang === 'fr' ? 'Témoignages' : 'Testimonials'}
+          </h3>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                name: t('home.testimonials.testimonial1.author'),
-                role: t('home.testimonials.testimonial1.role'),
-                text: t('home.testimonials.testimonial1.text'),
+                name: lang === 'fr' ? 'Marie Dupont' : 'Marie Dupont',
+                role: lang === 'fr' ? 'Étudiante en Master' : 'Master Student',
+                text: lang === 'fr' 
+                  ? 'Kartels a révolutionné ma façon d\'apprendre. Je ne peux plus m\'en passer !' 
+                  : 'Kartels revolutionized the way I learn. I can\'t live without it anymore!',
                 rating: 5
               },
               {
-                name: t('home.testimonials.testimonial2.author'),
-                role: t('home.testimonials.testimonial2.role'),
-                text: t('home.testimonials.testimonial2.text'),
+                name: lang === 'fr' ? 'Thomas Martin' : 'Thomas Martin',
+                role: lang === 'fr' ? 'Coordinateur pédagogique' : 'Educational Coordinator',
+                text: lang === 'fr' 
+                  ? 'Un outil indispensable pour gérer nos groupes d\'apprentissage efficacement.' 
+                  : 'An essential tool for managing our learning groups effectively.',
                 rating: 5
               },
               {
-                name: t('home.testimonials.testimonial3.author'),
-                role: t('home.testimonials.testimonial3.role'),
-                text: t('home.testimonials.testimonial3.text'),
+                name: lang === 'fr' ? 'Sophie Bernard' : 'Sophie Bernard',
+                role: lang === 'fr' ? 'Formatrice professionnelle' : 'Professional Trainer',
+                text: lang === 'fr' 
+                  ? 'Mes apprenants sont plus engagés et obtiennent de meilleurs résultats.' 
+                  : 'My learners are more engaged and achieve better results.',
                 rating: 5
               }
             ].map((testimonial, i) => (
@@ -463,17 +527,17 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                alert(t('home.chatbot.alert'));
+                alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io pour une démo !' : 'Contact us at superteam@kartels.io for a demo!');
               }}
             >
-              {t('home.hero.demoRequest')}
+              {lang === 'fr' ? 'Demander une démo' : 'Request a demo'}
             </Button>
             <Button 
               size="lg" 
               className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => navigate(`/${lang}/login`)}
             >
-              {t('home.hero.cta')} <ArrowRight className="ml-2" />
+              {lang === 'fr' ? 'Commencer' : 'Get Started'} <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -482,16 +546,20 @@ const Landing = () => {
       {/* À propos */}
       <section id="apropos" className="py-12 px-6">
         <div className="container mx-auto max-w-3xl text-center">
-          <h3 className="text-4xl font-bold mb-6">{t('home.about.title')}</h3>
+          <h3 className="text-4xl font-bold mb-6">
+            {lang === 'fr' ? 'À propos de Kartels' : 'About Kartels'}
+          </h3>
           <p className="text-lg text-muted-foreground mb-8">
-            {t('home.about.description')}
+            {lang === 'fr' 
+              ? 'Kartels est né de la conviction que l\'apprentissage en groupe est plus efficace et plus motivant. Notre mission est de fournir les meilleurs outils pour faciliter la collaboration et la réussite collective.' 
+              : 'Kartels was born from the belief that group learning is more effective and motivating. Our mission is to provide the best tools to facilitate collaboration and collective success.'}
           </p>
           <Button 
             size="lg" 
             className="bg-accent hover:bg-accent/90 text-accent-foreground"
             onClick={() => navigate(`/${lang}/login`)}
           >
-            {t('home.about.cta')}
+            {lang === 'fr' ? 'Rejoignez-nous' : 'Join us'}
           </Button>
         </div>
       </section>
@@ -499,7 +567,9 @@ const Landing = () => {
       {/* Contact Form Section */}
       <section className="py-12 px-6 border-t border-border">
         <div className="container mx-auto max-w-2xl">
-          <h3 className="text-2xl font-bold text-center mb-8">{t('home.contactSection.title')}</h3>
+          <h3 className="text-2xl font-bold text-center mb-8">
+            {lang === 'fr' ? 'Nous contacter' : 'Contact us'}
+          </h3>
           <ContactForm />
         </div>
       </section>
@@ -513,7 +583,7 @@ const Landing = () => {
           size="lg"
           className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant"
           onClick={() => {
-            alert(t('home.chatbot.alert'));
+            alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io !' : 'Contact us at superteam@kartels.io!');
           }}
         >
           💬
