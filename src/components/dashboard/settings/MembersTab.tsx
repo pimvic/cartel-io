@@ -91,23 +91,23 @@ export const MembersTab = () => {
 
   const handleInvite = () => {
     toast({
-      title: t('settings.members.inviteSent'),
-      description: t('settings.members.inviteSentDescription', { email: inviteEmail }),
+      title: lang === 'fr' ? 'Invitation envoyée' : 'Invite sent',
+      description: lang === 'fr' ? `Une invitation a été envoyée à ${inviteEmail}` : `An invitation has been sent to ${inviteEmail}`,
     });
     setInviteOpen(false);
     setInviteEmail('');
   };
 
   const getRoleBadge = (role: string) => {
-    if (role === 'coordinator') return <Badge>{t('settings.members.roles.coordinator')}</Badge>;
-    if (role === 'admin') return <Badge variant="destructive">{t('settings.members.roles.admin')}</Badge>;
-    return <Badge variant="outline">{t('settings.members.roles.member')}</Badge>;
+    if (role === 'coordinator') return <Badge>{lang === 'fr' ? 'Coordinateur' : 'Coordinator'}</Badge>;
+    if (role === 'admin') return <Badge variant="destructive">{lang === 'fr' ? 'Administrateur' : 'Administrator'}</Badge>;
+    return <Badge variant="outline">{lang === 'fr' ? 'Membre' : 'Member'}</Badge>;
   };
 
   const getStatusBadge = (status: string) => {
-    if (status === 'active') return <Badge variant="secondary">{t('settings.members.status.active')}</Badge>;
-    if (status === 'invited') return <Badge variant="outline">{t('settings.members.status.invited')}</Badge>;
-    return <Badge variant="outline">{t('settings.members.status.inactive')}</Badge>;
+    if (status === 'active') return <Badge variant="secondary">{lang === 'fr' ? 'Actif' : 'Active'}</Badge>;
+    if (status === 'invited') return <Badge variant="outline">{lang === 'fr' ? 'Invité' : 'Invited'}</Badge>;
+    return <Badge variant="outline">{lang === 'fr' ? 'Inactif' : 'Inactive'}</Badge>;
   };
 
   return (
@@ -116,12 +116,12 @@ export const MembersTab = () => {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>{t('settings.members.title')}</CardTitle>
-              <CardDescription>{t('settings.members.description')}</CardDescription>
+              <CardTitle>{lang === 'fr' ? 'Membres' : 'Members'}</CardTitle>
+              <CardDescription>{lang === 'fr' ? 'Gérez les membres du kartel' : 'Manage kartel members'}</CardDescription>
             </div>
             <Button onClick={() => setInviteOpen(true)}>
               <UserPlus className="w-4 h-4 mr-2" />
-              {t('settings.members.invite')}
+              {lang === 'fr' ? 'Inviter' : 'Invite'}
             </Button>
           </div>
         </CardHeader>
@@ -129,10 +129,10 @@ export const MembersTab = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>{t('settings.members.columns.member')}</TableHead>
-                <TableHead>{t('settings.members.columns.role')}</TableHead>
-                <TableHead>{t('settings.members.columns.status')}</TableHead>
-                <TableHead>{t('settings.members.columns.lastSeen')}</TableHead>
+                <TableHead>{lang === 'fr' ? 'Membre' : 'Member'}</TableHead>
+                <TableHead>{lang === 'fr' ? 'Rôle' : 'Role'}</TableHead>
+                <TableHead>{lang === 'fr' ? 'Statut' : 'Status'}</TableHead>
+                <TableHead>{lang === 'fr' ? 'Dernière connexion' : 'Last seen'}</TableHead>
                 <TableHead className="w-[50px]"></TableHead>
               </TableRow>
             </TableHeader>
@@ -167,14 +167,14 @@ export const MembersTab = () => {
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem>
                           <Mail className="w-4 h-4 mr-2" />
-                          {t('settings.members.actions.resendInvite')}
+                          {lang === 'fr' ? 'Renvoyer l\'invitation' : 'Resend invite'}
                         </DropdownMenuItem>
                         <DropdownMenuItem>
-                          {t('settings.members.actions.changeRole')}
+                          {lang === 'fr' ? 'Changer le rôle' : 'Change role'}
                         </DropdownMenuItem>
                         <DropdownMenuItem className="text-destructive">
                           <Trash2 className="w-4 h-4 mr-2" />
-                          {t('settings.members.actions.remove')}
+                          {lang === 'fr' ? 'Retirer' : 'Remove'}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -189,14 +189,14 @@ export const MembersTab = () => {
       <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t('settings.members.inviteDialog.title')}</DialogTitle>
+            <DialogTitle>{lang === 'fr' ? 'Inviter un membre' : 'Invite member'}</DialogTitle>
             <DialogDescription>
-              {t('settings.members.inviteDialog.description')}
+              {lang === 'fr' ? 'Envoyez une invitation' : 'Send an invitation'}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">{t('settings.members.inviteDialog.email')}</Label>
+              <Label htmlFor="email">{lang === 'fr' ? 'Email' : 'Email'}</Label>
               <Input
                 id="email"
                 type="email"
@@ -206,24 +206,24 @@ export const MembersTab = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="role">{t('settings.members.inviteDialog.role')}</Label>
+              <Label htmlFor="role">{lang === 'fr' ? 'Rôle' : 'Role'}</Label>
               <Select value={inviteRole} onValueChange={(v: 'member' | 'coordinator') => setInviteRole(v)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="member">{t('settings.members.roles.member')}</SelectItem>
-                  <SelectItem value="coordinator">{t('settings.members.roles.coordinator')}</SelectItem>
+                  <SelectItem value="member">{lang === 'fr' ? 'Membre' : 'Member'}</SelectItem>
+                  <SelectItem value="coordinator">{lang === 'fr' ? 'Coordinateur' : 'Coordinator'}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setInviteOpen(false)}>
-              {t('common.cancel')}
+              {lang === 'fr' ? 'Annuler' : 'Cancel'}
             </Button>
             <Button onClick={handleInvite} disabled={!inviteEmail}>
-              {t('settings.members.inviteDialog.send')}
+              {lang === 'fr' ? 'Envoyer' : 'Send'}
             </Button>
           </DialogFooter>
         </DialogContent>
