@@ -268,7 +268,7 @@ export const KnowledgeBase = () => {
 
       const formattedResources = resourcesData?.map((resource: any) => ({
         ...resource,
-        uploader_name: resource.uploader?.name || t("knowledgeBase.unknownUser"),
+        uploader_name: resource.uploader?.name || getKBText("knowledgeBase.unknownUser", lang),
         is_favorite: resource.favorites?.some((f: any) => f.user_id === userData.id) || false,
         report_count: resource.reports?.length || 0,
       })) || [];
@@ -276,7 +276,7 @@ export const KnowledgeBase = () => {
       setResources(formattedResources);
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -343,7 +343,7 @@ export const KnowledgeBase = () => {
     try {
       if (!formData.title || (!formData.resource_url && !formData.file)) {
         toast({
-          title: t("knowledgeBase.validation.missingFields"),
+          title: getKBText("knowledgeBase.validation.missingFields", lang),
           variant: "destructive",
         });
         return;
@@ -352,7 +352,7 @@ export const KnowledgeBase = () => {
       // BR-002: Each resource must belong to at least one category
       if (!formData.category) {
         toast({
-          title: t("knowledgeBase.validation.categoryRequired"),
+          title: getKBText("knowledgeBase.validation.categoryRequired", lang),
           variant: "destructive",
         });
         return;
@@ -367,7 +367,7 @@ export const KnowledgeBase = () => {
         // BR-005: Files larger than 20 MB are rejected
         if (formData.file.size > 20 * 1024 * 1024) {
           toast({
-            title: t("knowledgeBase.validation.fileTooLarge"),
+            title: getKBText("knowledgeBase.validation.fileTooLarge", lang),
             variant: "destructive",
           });
           setUploading(false);
@@ -395,7 +395,7 @@ export const KnowledgeBase = () => {
           const response = await fetch(resourceUrl, { method: "HEAD" });
           if (response.status !== 200) {
             toast({
-              title: t("knowledgeBase.validation.invalidUrl"),
+              title: getKBText("knowledgeBase.validation.invalidUrl", lang),
               variant: "destructive",
             });
             setUploading(false);
@@ -403,7 +403,7 @@ export const KnowledgeBase = () => {
           }
         } catch (error) {
           toast({
-            title: t("knowledgeBase.validation.urlNotReachable"),
+            title: getKBText("knowledgeBase.validation.urlNotReachable", lang),
             variant: "destructive",
           });
           setUploading(false);
@@ -429,7 +429,7 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceAdded"),
+        title: getKBText("knowledgeBase.success.resourceAdded", lang),
       });
 
       setIsAddDialogOpen(false);
@@ -437,7 +437,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -465,7 +465,7 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceUpdated"),
+        title: getKBText("knowledgeBase.success.resourceUpdated", lang),
       });
 
       setIsEditDialogOpen(false);
@@ -474,7 +474,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -485,8 +485,8 @@ export const KnowledgeBase = () => {
     // BR-001: Only +1 and Administrator roles may delete
     if (userRole !== "admin" && userRole !== "coordinator") {
       toast({
-        title: t("knowledgeBase.error"),
-        description: t("knowledgeBase.validation.noPermission"),
+        title: getKBText("knowledgeBase.error", lang),
+        description: getKBText("knowledgeBase.validation.noPermission", lang),
         variant: "destructive",
       });
       return;
@@ -501,13 +501,13 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceDeleted"),
+        title: getKBText("knowledgeBase.success.resourceDeleted", lang),
       });
 
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -541,7 +541,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -551,7 +551,7 @@ export const KnowledgeBase = () => {
   const handleReportResource = async () => {
     if (!selectedResource || !reportReason) {
       toast({
-        title: t("knowledgeBase.validation.reportReasonRequired"),
+        title: getKBText("knowledgeBase.validation.reportReasonRequired", lang),
         variant: "destructive",
       });
       return;
@@ -570,7 +570,7 @@ export const KnowledgeBase = () => {
 
       // AC-005: Report triggers notification for +1
       toast({
-        title: t("knowledgeBase.success.reportSubmitted"),
+        title: getKBText("knowledgeBase.success.reportSubmitted", lang),
       });
 
       setIsReportDialogOpen(false);
@@ -579,7 +579,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -624,11 +624,11 @@ export const KnowledgeBase = () => {
       }
 
       toast({
-        title: t("knowledgeBase.success.exported"),
+        title: getKBText("knowledgeBase.success.exported", lang),
       });
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: getKBText("knowledgeBase.error", lang),
         description: error.message,
         variant: "destructive",
       });
@@ -726,9 +726,9 @@ export const KnowledgeBase = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-foreground">
-            {t("knowledgeBase.title")}
+            {getKBText("knowledgeBase.title", lang)}
           </h2>
-          <p className="text-muted-foreground">{t("knowledgeBase.subtitle")}</p>
+          <p className="text-muted-foreground">{getKBText("knowledgeBase.subtitle", lang)}</p>
         </div>
         <div className="flex gap-2">
           {userRole === "admin" && (
@@ -736,15 +736,15 @@ export const KnowledgeBase = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
                   <Download className="w-4 h-4 mr-2" />
-                  {t("knowledgeBase.export")}
+                  {getKBText("knowledgeBase.export", lang)}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => handleExport("csv")}>
-                  {t("knowledgeBase.exportCSV")}
+                  {getKBText("knowledgeBase.exportCSV", lang)}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport("json")}>
-                  {t("knowledgeBase.exportJSON")}
+                  {getKBText("knowledgeBase.exportJSON", lang)}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -753,42 +753,42 @@ export const KnowledgeBase = () => {
             <DialogTrigger asChild>
               <Button onClick={() => resetForm()}>
                 <Plus className="w-4 h-4 mr-2" />
-                {t("knowledgeBase.addResource")}
+                {getKBText("knowledgeBase.addResource", lang)}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{t("knowledgeBase.addResourceTitle")}</DialogTitle>
+                <DialogTitle>{getKBText("knowledgeBase.addResourceTitle", lang)}</DialogTitle>
                 <DialogDescription>
-                  {t("knowledgeBase.addResourceDescription")}
+                  {getKBText("knowledgeBase.addResourceDescription", lang)}
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="title">{t("knowledgeBase.form.title")} *</Label>
+                  <Label htmlFor="title">{getKBText("knowledgeBase.form.title", lang)} *</Label>
                   <Input
                     id="title"
                     value={formData.title}
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.titlePlaceholder")}
+                    placeholder={getKBText("knowledgeBase.form.titlePlaceholder", lang)}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">{t("knowledgeBase.form.description")}</Label>
+                  <Label htmlFor="description">{getKBText("knowledgeBase.form.description", lang)}</Label>
                   <Textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) =>
                       setFormData({ ...formData, description: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.descriptionPlaceholder")}
+                    placeholder={getKBText("knowledgeBase.form.descriptionPlaceholder", lang)}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="type">{t("knowledgeBase.form.type")} *</Label>
+                    <Label htmlFor="type">{getKBText("knowledgeBase.form.type", lang)} *</Label>
                     <Select
                       value={formData.type}
                       onValueChange={(value: ResourceType) =>
@@ -800,25 +800,25 @@ export const KnowledgeBase = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="document">
-                          {t("knowledgeBase.types.document")}
+                          {getKBText("knowledgeBase.types.document", lang)}
                         </SelectItem>
                         <SelectItem value="video">
-                          {t("knowledgeBase.types.video")}
+                          {getKBText("knowledgeBase.types.video", lang)}
                         </SelectItem>
                         <SelectItem value="summary">
-                          {t("knowledgeBase.types.summary")}
+                          {getKBText("knowledgeBase.types.summary", lang)}
                         </SelectItem>
                         <SelectItem value="tool">
-                          {t("knowledgeBase.types.tool")}
+                          {getKBText("knowledgeBase.types.tool", lang)}
                         </SelectItem>
                         <SelectItem value="link">
-                          {t("knowledgeBase.types.link")}
+                          {getKBText("knowledgeBase.types.link", lang)}
                         </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="category">{t("knowledgeBase.form.category")} *</Label>
+                    <Label htmlFor="category">{getKBText("knowledgeBase.form.category", lang)} *</Label>
                     <Select
                       value={formData.category}
                       onValueChange={(value: ResourceCategory) =>
@@ -830,36 +830,36 @@ export const KnowledgeBase = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="documents">
-                          {t("knowledgeBase.categories.documents")}
+                          {getKBText("knowledgeBase.categories.documents", lang)}
                         </SelectItem>
                         <SelectItem value="videos">
-                          {t("knowledgeBase.categories.videos")}
+                          {getKBText("knowledgeBase.categories.videos", lang)}
                         </SelectItem>
                         <SelectItem value="summaries">
-                          {t("knowledgeBase.categories.summaries")}
+                          {getKBText("knowledgeBase.categories.summaries", lang)}
                         </SelectItem>
                         <SelectItem value="tools">
-                          {t("knowledgeBase.categories.tools")}
+                          {getKBText("knowledgeBase.categories.tools", lang)}
                         </SelectItem>
                         <SelectItem value="other">
-                          {t("knowledgeBase.categories.other")}
+                          {getKBText("knowledgeBase.categories.other", lang)}
                         </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="tags">{t("knowledgeBase.form.tags")}</Label>
+                  <Label htmlFor="tags">{getKBText("knowledgeBase.form.tags", lang)}</Label>
                   <div className="flex gap-2">
                     <Input
                       id="tags"
                       value={tagInput}
                       onChange={(e) => setTagInput(e.target.value)}
                       onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
-                      placeholder={t("knowledgeBase.form.tagsPlaceholder")}
+                      placeholder={getKBText("knowledgeBase.form.tagsPlaceholder", lang)}
                     />
                     <Button type="button" onClick={addTag} variant="outline">
-                      {t("knowledgeBase.form.addTag")}
+                      {getKBText("knowledgeBase.form.addTag", lang)}
                     </Button>
                   </div>
                   {formData.tags.length > 0 && (
@@ -878,7 +878,7 @@ export const KnowledgeBase = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="file">{t("knowledgeBase.form.file")}</Label>
+                  <Label htmlFor="file">{getKBText("knowledgeBase.form.file", lang)}</Label>
                   <Input
                     id="file"
                     type="file"
@@ -890,7 +890,7 @@ export const KnowledgeBase = () => {
                     }
                   />
                   <p className="text-sm text-muted-foreground mt-1">
-                    {t("knowledgeBase.form.maxFileSize")}
+                    {getKBText("knowledgeBase.form.maxFileSize", lang)}
                   </p>
                   {uploadProgress > 0 && uploadProgress < 100 && (
                     <div className="mt-2">
@@ -904,14 +904,14 @@ export const KnowledgeBase = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="url">{t("knowledgeBase.form.url")}</Label>
+                  <Label htmlFor="url">{getKBText("knowledgeBase.form.url", lang)}</Label>
                   <Input
                     id="url"
                     value={formData.resource_url}
                     onChange={(e) =>
                       setFormData({ ...formData, resource_url: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.urlPlaceholder")}
+                    placeholder={getKBText("knowledgeBase.form.urlPlaceholder", lang)}
                   />
                 </div>
                 <div className="flex justify-end gap-2">
@@ -919,16 +919,16 @@ export const KnowledgeBase = () => {
                     variant="outline"
                     onClick={() => setIsAddDialogOpen(false)}
                   >
-                    {t("common.cancel")}
+                    {getKBText("common.cancel", lang)}
                   </Button>
                   <Button onClick={handleAddResource} disabled={uploading}>
                     {uploading ? (
                       <>
                         <Upload className="w-4 h-4 mr-2 animate-spin" />
-                        {t("knowledgeBase.uploading")}
+                        {getKBText("knowledgeBase.uploading", lang)}
                       </>
                     ) : (
-                      t("knowledgeBase.add")
+                      getKBText("knowledgeBase.add", lang)
                     )}
                   </Button>
                 </div>
@@ -945,14 +945,14 @@ export const KnowledgeBase = () => {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
-                placeholder={t("knowledgeBase.searchPlaceholder")}
+                placeholder={getKBText("knowledgeBase.searchPlaceholder", lang)}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
               />
               {searchQuery.length > 0 && searchQuery.length < 3 && (
                 <p className="text-xs text-muted-foreground mt-1">
-                  {t("knowledgeBase.searchMinChars")}
+                  {getKBText("knowledgeBase.searchMinChars", lang)}
                 </p>
               )}
             </div>
