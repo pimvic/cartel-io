@@ -961,42 +961,42 @@ export const KnowledgeBase = () => {
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full md:w-48">
                 <Filter className="w-4 h-4 mr-2" />
-                <SelectValue placeholder={t("knowledgeBase.filterByCategory")} />
+                <SelectValue placeholder={getKBText("knowledgeBase.filterByCategory", lang)} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("knowledgeBase.allCategories")}</SelectItem>
+                <SelectItem value="all">{getKBText("knowledgeBase.allCategories", lang)}</SelectItem>
                 <SelectItem value="documents">
-                  {t("knowledgeBase.categories.documents")}
+                  {getKBText("knowledgeBase.categories.documents", lang)}
                 </SelectItem>
                 <SelectItem value="videos">
-                  {t("knowledgeBase.categories.videos")}
+                  {getKBText("knowledgeBase.categories.videos", lang)}
                 </SelectItem>
                 <SelectItem value="summaries">
-                  {t("knowledgeBase.categories.summaries")}
+                  {getKBText("knowledgeBase.categories.summaries", lang)}
                 </SelectItem>
                 <SelectItem value="tools">
-                  {t("knowledgeBase.categories.tools")}
+                  {getKBText("knowledgeBase.categories.tools", lang)}
                 </SelectItem>
                 <SelectItem value="other">
-                  {t("knowledgeBase.categories.other")}
+                  {getKBText("knowledgeBase.categories.other", lang)}
                 </SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedType} onValueChange={setSelectedType}>
               <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder={t("knowledgeBase.filterByType")} />
+                <SelectValue placeholder={getKBText("knowledgeBase.filterByType", lang)} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("knowledgeBase.allTypes")}</SelectItem>
+                <SelectItem value="all">{getKBText("knowledgeBase.allTypes", lang)}</SelectItem>
                 <SelectItem value="document">
-                  {t("knowledgeBase.types.document")}
+                  {getKBText("knowledgeBase.types.document", lang)}
                 </SelectItem>
-                <SelectItem value="video">{t("knowledgeBase.types.video")}</SelectItem>
+                <SelectItem value="video">{getKBText("knowledgeBase.types.video", lang)}</SelectItem>
                 <SelectItem value="summary">
-                  {t("knowledgeBase.types.summary")}
+                  {getKBText("knowledgeBase.types.summary", lang)}
                 </SelectItem>
-                <SelectItem value="tool">{t("knowledgeBase.types.tool")}</SelectItem>
-                <SelectItem value="link">{t("knowledgeBase.types.link")}</SelectItem>
+                <SelectItem value="tool">{getKBText("knowledgeBase.types.tool", lang)}</SelectItem>
+                <SelectItem value="link">{getKBText("knowledgeBase.types.link", lang)}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -1006,22 +1006,22 @@ export const KnowledgeBase = () => {
       {/* Resources List */}
       <Tabs defaultValue="all" className="w-full">
         <TabsList>
-          <TabsTrigger value="all">{t("knowledgeBase.allResources")}</TabsTrigger>
+          <TabsTrigger value="all">{getKBText("knowledgeBase.allResources", lang)}</TabsTrigger>
           <TabsTrigger value="favorites">
             <Star className="w-4 h-4 mr-2" />
-            {t("knowledgeBase.favorites")}
+            {getKBText("knowledgeBase.favorites", lang)}
           </TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="space-y-4">
           {loading ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">{t("knowledgeBase.loading")}</p>
+              <p className="text-muted-foreground">{getKBText("knowledgeBase.loading", lang)}</p>
             </div>
           ) : filteredResources.length === 0 ? (
             <Card>
               <CardContent className="py-8">
                 <p className="text-center text-muted-foreground">
-                  {t("knowledgeBase.noResources")}
+                  {getKBText("knowledgeBase.noResources", lang)}
                 </p>
               </CardContent>
             </Card>
@@ -1128,13 +1128,13 @@ export const KnowledgeBase = () => {
         <TabsContent value="favorites" className="space-y-4">
           {loading ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">{t("knowledgeBase.loading")}</p>
+              <p className="text-muted-foreground">{getKBText("knowledgeBase.loading", lang)}</p>
             </div>
           ) : filteredResources.filter((r) => r.is_favorite).length === 0 ? (
             <Card>
               <CardContent className="py-8">
                 <p className="text-center text-muted-foreground">
-                  {t("knowledgeBase.noFavorites")}
+                  {getKBText("knowledgeBase.noFavorites", lang)}
                 </p>
               </CardContent>
             </Card>
@@ -1268,25 +1268,25 @@ export const KnowledgeBase = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="document">
-                      {t("knowledgeBase.types.document")}
+                      {getKBText("knowledgeBase.types.document", lang)}
                     </SelectItem>
                     <SelectItem value="video">
-                      {t("knowledgeBase.types.video")}
+                      {getKBText("knowledgeBase.types.video", lang)}
                     </SelectItem>
                     <SelectItem value="summary">
-                      {t("knowledgeBase.types.summary")}
+                      {getKBText("knowledgeBase.types.summary", lang)}
                     </SelectItem>
                     <SelectItem value="tool">
-                      {t("knowledgeBase.types.tool")}
+                      {getKBText("knowledgeBase.types.tool", lang)}
                     </SelectItem>
                     <SelectItem value="link">
-                      {t("knowledgeBase.types.link")}
+                      {getKBText("knowledgeBase.types.link", lang)}
                     </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="edit-category">{t("knowledgeBase.form.category")} *</Label>
+                <Label htmlFor="edit-category">{getKBText("knowledgeBase.form.category", lang)} *</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value: ResourceCategory) =>
@@ -1298,36 +1298,36 @@ export const KnowledgeBase = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="documents">
-                      {t("knowledgeBase.categories.documents")}
+                      {getKBText("knowledgeBase.categories.documents", lang)}
                     </SelectItem>
                     <SelectItem value="videos">
-                      {t("knowledgeBase.categories.videos")}
+                      {getKBText("knowledgeBase.categories.videos", lang)}
                     </SelectItem>
                     <SelectItem value="summaries">
-                      {t("knowledgeBase.categories.summaries")}
+                      {getKBText("knowledgeBase.categories.summaries", lang)}
                     </SelectItem>
                     <SelectItem value="tools">
-                      {t("knowledgeBase.categories.tools")}
+                      {getKBText("knowledgeBase.categories.tools", lang)}
                     </SelectItem>
                     <SelectItem value="other">
-                      {t("knowledgeBase.categories.other")}
+                      {getKBText("knowledgeBase.categories.other", lang)}
                     </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div>
-              <Label htmlFor="edit-tags">{t("knowledgeBase.form.tags")}</Label>
+              <Label htmlFor="edit-tags">{getKBText("knowledgeBase.form.tags", lang)}</Label>
               <div className="flex gap-2">
                 <Input
                   id="edit-tags"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
-                  placeholder={t("knowledgeBase.form.tagsPlaceholder")}
+                  placeholder={getKBText("knowledgeBase.form.tagsPlaceholder", lang)}
                 />
                 <Button type="button" onClick={addTag} variant="outline">
-                  {t("knowledgeBase.form.addTag")}
+                  {getKBText("knowledgeBase.form.addTag", lang)}
                 </Button>
               </div>
               {formData.tags.length > 0 && (
@@ -1354,10 +1354,10 @@ export const KnowledgeBase = () => {
                   resetForm();
                 }}
               >
-                {t("common.cancel")}
+                {getKBText("common.cancel", lang)}
               </Button>
               <Button onClick={handleEditResource}>
-                {t("knowledgeBase.save")}
+                {getKBText("knowledgeBase.save", lang)}
               </Button>
             </div>
           </div>
@@ -1390,7 +1390,7 @@ export const KnowledgeBase = () => {
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  {t("knowledgeBase.openResource")}
+                  {getKBText("knowledgeBase.openResource", lang)}
                 </a>
               </div>
             )}
@@ -1402,19 +1402,19 @@ export const KnowledgeBase = () => {
       <Dialog open={isReportDialogOpen} onOpenChange={setIsReportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t("knowledgeBase.reportResourceTitle")}</DialogTitle>
+            <DialogTitle>{getKBText("knowledgeBase.reportResourceTitle", lang)}</DialogTitle>
             <DialogDescription>
-              {t("knowledgeBase.reportResourceDescription")}
+              {getKBText("knowledgeBase.reportResourceDescription", lang)}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="report-reason">{t("knowledgeBase.reportReason")} *</Label>
+              <Label htmlFor="report-reason">{getKBText("knowledgeBase.reportReason", lang)} *</Label>
               <Textarea
                 id="report-reason"
                 value={reportReason}
                 onChange={(e) => setReportReason(e.target.value)}
-                placeholder={t("knowledgeBase.reportReasonPlaceholder")}
+                placeholder={getKBText("knowledgeBase.reportReasonPlaceholder", lang)}
               />
             </div>
             <div className="flex justify-end gap-2">
@@ -1426,10 +1426,10 @@ export const KnowledgeBase = () => {
                   setReportReason("");
                 }}
               >
-                {t("common.cancel")}
+                {getKBText("common.cancel", lang)}
               </Button>
               <Button onClick={handleReportResource} variant="destructive">
-                {t("knowledgeBase.submit")}
+                {getKBText("knowledgeBase.submit", lang)}
               </Button>
             </div>
           </div>
