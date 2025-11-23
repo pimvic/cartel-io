@@ -156,7 +156,7 @@ export const Calendar = () => {
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error(t("calendar.errors.loadFailed"));
+      toast.error(lang === 'fr' ? "Échec du chargement" : "Failed to load");
     } finally {
       setLoading(false);
     }
@@ -285,11 +285,11 @@ export const Calendar = () => {
         .eq("id", milestone.id);
 
       if (error) throw error;
-      toast.success(t("calendar.success.completed"));
+      toast.success(lang === 'fr' ? "Jalon terminé" : "Milestone completed");
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.updateFailed"));
+      toast.error(lang === 'fr' ? "Échec de la mise à jour" : "Update failed");
     }
   };
 
@@ -311,11 +311,11 @@ export const Calendar = () => {
         .eq("id", milestone.id);
 
       if (error) throw error;
-      toast.success(t("calendar.success.reopened"));
+      toast.success(lang === 'fr' ? "Jalon réouvert" : "Milestone reopened");
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.updateFailed"));
+      toast.error(lang === 'fr' ? "Échec de la mise à jour" : "Update failed");
     }
   };
 
@@ -345,12 +345,12 @@ export const Calendar = () => {
         .eq("id", editForm.id);
 
       if (error) throw error;
-      toast.success(t("calendar.success.updated"));
+      toast.success(lang === 'fr' ? "Jalon mis à jour" : "Milestone updated");
       setIsEditOpen(false);
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.updateFailed"));
+      toast.error(lang === 'fr' ? "Échec de la mise à jour" : "Update failed");
     }
   };
 
@@ -380,20 +380,20 @@ export const Calendar = () => {
         .insert(newMilestone);
 
       if (error) throw error;
-      toast.success(t("calendar.success.created"));
+      toast.success(lang === 'fr' ? "Jalon créé" : "Milestone created");
       setIsCreateOpen(false);
       setEditForm({});
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.createFailed"));
+      toast.error(lang === 'fr' ? "Échec de la création" : "Creation failed");
     }
   };
 
   const handleDelete = async (milestone: Milestone) => {
     if (!canDelete) return;
     
-    if (!confirm(t("calendar.confirmDelete"))) return;
+    if (!confirm(lang === 'fr' ? "Supprimer ce jalon ?" : "Delete this milestone?")) return;
 
     try {
       const { error } = await supabase
@@ -402,12 +402,12 @@ export const Calendar = () => {
         .eq("id", milestone.id);
 
       if (error) throw error;
-      toast.success(t("calendar.success.deleted"));
+      toast.success(lang === 'fr' ? "Jalon supprimé" : "Milestone deleted");
       setIsDetailOpen(false);
       fetchData();
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.deleteFailed"));
+      toast.error(lang === 'fr' ? "Échec de la suppression" : "Deletion failed");
     }
   };
 
@@ -424,12 +424,12 @@ export const Calendar = () => {
         });
 
       if (error) throw error;
-      toast.success(t("calendar.success.reminderSet"));
+      toast.success(lang === 'fr' ? "Rappel défini" : "Reminder set");
       setIsReminderOpen(false);
       setReminderDate("");
     } catch (error) {
       console.error(error);
-      toast.error(t("calendar.errors.reminderFailed"));
+      toast.error(lang === 'fr' ? "Échec du rappel" : "Reminder failed");
     }
   };
 
@@ -442,7 +442,7 @@ export const Calendar = () => {
 
     return (
       <Badge className={`${variants[status]} border-0`}>
-        {t(`calendar.status.${status}`)}
+        {status === 'a_venir' ? (lang === 'fr' ? 'À venir' : 'Upcoming') : status === 'en_cours' ? (lang === 'fr' ? 'En cours' : 'In progress') : (lang === 'fr' ? 'Terminé' : 'Completed')}
       </Badge>
     );
   };
@@ -460,12 +460,12 @@ export const Calendar = () => {
     return (
       <div className="space-y-6">
         <div className="pt-2">
-          <p className="text-muted-foreground text-[110%]">{t("calendar.subtitle")}</p>
+          <p className="text-muted-foreground text-[110%]">{lang === 'fr' ? "Gérez vos jalons et échéances" : "Manage your milestones and deadlines"}</p>
         </div>
         <Card>
           <CardContent className="p-8 text-center">
-            <h3 className="text-lg font-semibold mb-2">{t("calendar.noCartel")}</h3>
-            <p className="text-muted-foreground">{t("calendar.noCartelDescription")}</p>
+            <h3 className="text-lg font-semibold mb-2">{lang === 'fr' ? "Aucun kartel" : "No kartel"}</h3>
+            <p className="text-muted-foreground">{lang === 'fr' ? "Vous devez rejoindre un kartel pour accéder au calendrier" : "You must join a kartel to access the calendar"}</p>
           </CardContent>
         </Card>
       </div>
@@ -475,7 +475,7 @@ export const Calendar = () => {
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">{t("calendar.subtitle")}</p>
+        <p className="text-muted-foreground text-[110%]">{lang === 'fr' ? "Gérez vos jalons et échéances" : "Manage your milestones and deadlines"}</p>
       </div>
 
       {/* Filters and Search */}
@@ -483,7 +483,7 @@ export const Calendar = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder={t("calendar.searchPlaceholder")}
+            placeholder={lang === 'fr' ? "Rechercher des jalons..." : "Search milestones..."}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -496,10 +496,10 @@ export const Calendar = () => {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t("calendar.filters.allStatus")}</SelectItem>
-            <SelectItem value="a_venir">{t("calendar.status.a_venir")}</SelectItem>
-            <SelectItem value="en_cours">{t("calendar.status.en_cours")}</SelectItem>
-            <SelectItem value="termine">{t("calendar.status.termine")}</SelectItem>
+            <SelectItem value="all">{lang === 'fr' ? "Tous les statuts" : "All statuses"}</SelectItem>
+            <SelectItem value="a_venir">{lang === 'fr' ? "À venir" : "Upcoming"}</SelectItem>
+            <SelectItem value="en_cours">{lang === 'fr' ? "En cours" : "In progress"}</SelectItem>
+            <SelectItem value="termine">{lang === 'fr' ? "Terminé" : "Completed"}</SelectItem>
           </SelectContent>
         </Select>
 
@@ -508,15 +508,15 @@ export const Calendar = () => {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t("calendar.filters.allImportance")}</SelectItem>
-            <SelectItem value="important">{t("calendar.filters.importantOnly")}</SelectItem>
+            <SelectItem value="all">{lang === 'fr' ? "Toutes les importances" : "All importance"}</SelectItem>
+            <SelectItem value="important">{lang === 'fr' ? "Important uniquement" : "Important only"}</SelectItem>
           </SelectContent>
         </Select>
 
         {canEdit && (
           <Button onClick={() => { setEditForm({}); setIsCreateOpen(true); }}>
             <Plus className="h-4 w-4 mr-2" />
-            {t("calendar.create")}
+            {lang === 'fr' ? "Créer un jalon" : "Create milestone"}
           </Button>
         )}
       </div>
@@ -565,7 +565,7 @@ export const Calendar = () => {
                       }}
                     >
                       <RotateCcw className="h-4 w-4 mr-1" />
-                      {t("calendar.actions.reopen")}
+                      {lang === 'fr' ? "Réouvrir" : "Reopen"}
                     </Button>
                   )}
                   {milestone.status !== "termine" && (
@@ -578,7 +578,7 @@ export const Calendar = () => {
                       }}
                     >
                       <Check className="h-4 w-4 mr-1" />
-                      {t("calendar.actions.complete")}
+                      {lang === 'fr' ? "Marquer terminé" : "Mark complete"}
                     </Button>
                   )}
                 </div>
@@ -590,7 +590,7 @@ export const Calendar = () => {
         {filteredMilestones.length === 0 && (
           <Card>
             <CardContent className="p-8 text-center text-muted-foreground">
-              {t("calendar.noResults")}
+              {lang === 'fr' ? "Aucun résultat" : "No results"}
             </CardContent>
           </Card>
         )}
@@ -605,10 +605,10 @@ export const Calendar = () => {
             disabled={page === 1}
             onClick={() => setPage(p => p - 1)}
           >
-            {t("calendar.pagination.previous")}
+            {lang === 'fr' ? "Précédent" : "Previous"}
           </Button>
           <span className="flex items-center px-4 text-sm">
-            {t("calendar.pagination.page", { current: page, total: totalPages })}
+            {lang === 'fr' ? `Page ${page} sur ${totalPages}` : `Page ${page} of ${totalPages}`}
           </span>
           <Button
             variant="outline"
@@ -616,7 +616,7 @@ export const Calendar = () => {
             disabled={page === totalPages}
             onClick={() => setPage(p => p + 1)}
           >
-            {t("calendar.pagination.next")}
+            {lang === 'fr' ? "Suivant" : "Next"}
           </Button>
         </div>
       )}
@@ -640,20 +640,20 @@ export const Calendar = () => {
 
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">{t("calendar.detail.status")}</h4>
+                  <h4 className="font-semibold mb-2">{lang === 'fr' ? "Statut" : "Status"}</h4>
                   {getStatusBadge(selectedMilestone.status)}
                 </div>
 
                 {selectedMilestone.description && (
                   <div>
-                    <h4 className="font-semibold mb-2">{t("calendar.detail.description")}</h4>
+                    <h4 className="font-semibold mb-2">{lang === 'fr' ? "Description" : "Description"}</h4>
                     <p className="text-sm text-muted-foreground">{selectedMilestone.description}</p>
                   </div>
                 )}
 
                 {selectedMilestone.completed_at && (
                   <div>
-                    <h4 className="font-semibold mb-2">{t("calendar.detail.completedAt")}</h4>
+                    <h4 className="font-semibold mb-2">{lang === 'fr' ? "Terminé le" : "Completed on"}</h4>
                     <p className="text-sm text-muted-foreground">
                       {format(new Date(selectedMilestone.completed_at), "PPpp", { locale })}
                     </p>
@@ -662,13 +662,13 @@ export const Calendar = () => {
 
                 {selectedMilestone.audit_log && selectedMilestone.audit_log.length > 0 && (
                   <div>
-                    <h4 className="font-semibold mb-2">{t("calendar.detail.auditLog")}</h4>
+                    <h4 className="font-semibold mb-2">{lang === 'fr' ? "Historique" : "Audit log"}</h4>
                     <div className="space-y-2 text-sm">
                       {selectedMilestone.audit_log.map((entry: any, idx: number) => (
                         <div key={idx} className="border-l-2 border-muted pl-3 py-1">
                           <p className="font-medium">{entry.action}</p>
                           <p className="text-muted-foreground text-xs">
-                            {t("calendar.detail.by")} {entry.by} - {format(new Date(entry.timestamp), "PPpp", { locale })}
+                            {lang === 'fr' ? 'par' : 'by'} {entry.by} - {format(new Date(entry.timestamp), "PPpp", { locale })}
                           </p>
                         </div>
                       ))}
@@ -686,18 +686,18 @@ export const Calendar = () => {
                   }}
                 >
                   <Bell className="h-4 w-4 mr-2" />
-                  {t("calendar.actions.setReminder")}
+                  {lang === 'fr' ? "Définir un rappel" : "Set reminder"}
                 </Button>
                 {canEdit && (
                   <Button variant="outline" onClick={() => handleEdit(selectedMilestone)}>
                     <Edit className="h-4 w-4 mr-2" />
-                    {t("calendar.actions.edit")}
+                    {lang === 'fr' ? "Modifier" : "Edit"}
                   </Button>
                 )}
                 {canDelete && (
                   <Button variant="destructive" onClick={() => handleDelete(selectedMilestone)}>
                     <Trash2 className="h-4 w-4 mr-2" />
-                    {t("calendar.actions.delete")}
+                    {lang === 'fr' ? "Supprimer" : "Delete"}
                   </Button>
                 )}
               </DialogFooter>
@@ -711,13 +711,13 @@ export const Calendar = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {isCreateOpen ? t("calendar.create") : t("calendar.edit")}
+              {isCreateOpen ? (lang === 'fr' ? "Créer un jalon" : "Create milestone") : (lang === 'fr' ? "Modifier le jalon" : "Edit milestone")}
             </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
             <div>
-              <Label>{t("calendar.form.title")}</Label>
+              <Label>{lang === 'fr' ? "Titre" : "Title"}</Label>
               <Input
                 value={editForm.title || ""}
                 onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
@@ -725,7 +725,7 @@ export const Calendar = () => {
             </div>
 
             <div>
-              <Label>{t("calendar.form.description")}</Label>
+              <Label>{lang === 'fr' ? "Description" : "Description"}</Label>
               <Textarea
                 value={editForm.description || ""}
                 onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
@@ -734,7 +734,7 @@ export const Calendar = () => {
             </div>
 
             <div>
-              <Label>{t("calendar.form.dueDate")}</Label>
+              <Label>{lang === 'fr' ? "Date d'échéance" : "Due date"}</Label>
               <Input
                 type="datetime-local"
                 value={editForm.due_date ? format(new Date(editForm.due_date), "yyyy-MM-dd'T'HH:mm") : ""}
@@ -749,16 +749,16 @@ export const Calendar = () => {
                 checked={editForm.importance || false}
                 onChange={(e) => setEditForm({ ...editForm, importance: e.target.checked })}
               />
-              <Label htmlFor="importance">{t("calendar.form.importance")}</Label>
+              <Label htmlFor="importance">{lang === 'fr' ? "Important" : "Important"}</Label>
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => { setIsEditOpen(false); setIsCreateOpen(false); }}>
-              {t("calendar.form.cancel")}
+              {lang === 'fr' ? "Annuler" : "Cancel"}
             </Button>
             <Button onClick={isCreateOpen ? handleCreate : handleSaveEdit}>
-              {t("calendar.form.save")}
+              {lang === 'fr' ? "Enregistrer" : "Save"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -768,12 +768,12 @@ export const Calendar = () => {
       <Dialog open={isReminderOpen} onOpenChange={setIsReminderOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t("calendar.reminder.title")}</DialogTitle>
+            <DialogTitle>{lang === 'fr' ? "Définir un rappel" : "Set reminder"}</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
             <div>
-              <Label>{t("calendar.reminder.selectDate")}</Label>
+              <Label>{lang === 'fr' ? "Sélectionner la date" : "Select date"}</Label>
               <Input
                 type="datetime-local"
                 value={reminderDate}
@@ -791,7 +791,7 @@ export const Calendar = () => {
                   setReminderDate(format(date, "yyyy-MM-dd'T'HH:mm"));
                 }}
               >
-                1 {t("calendar.reminder.dayBefore")}
+                1 {lang === 'fr' ? "jour avant" : "day before"}
               </Button>
               <Button
                 size="sm"
@@ -802,7 +802,7 @@ export const Calendar = () => {
                   setReminderDate(format(date, "yyyy-MM-dd'T'HH:mm"));
                 }}
               >
-                3 {t("calendar.reminder.daysBefore")}
+                3 {lang === 'fr' ? "jours avant" : "days before"}
               </Button>
               <Button
                 size="sm"
@@ -813,17 +813,17 @@ export const Calendar = () => {
                   setReminderDate(format(date, "yyyy-MM-dd'T'HH:mm"));
                 }}
               >
-                1 {t("calendar.reminder.weekBefore")}
+                1 {lang === 'fr' ? "semaine avant" : "week before"}
               </Button>
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsReminderOpen(false)}>
-              {t("calendar.form.cancel")}
+              {lang === 'fr' ? "Annuler" : "Cancel"}
             </Button>
             <Button onClick={handleSetReminder}>
-              {t("calendar.reminder.set")}
+              {lang === 'fr' ? "Définir" : "Set"}
             </Button>
           </DialogFooter>
         </DialogContent>
