@@ -27,8 +27,8 @@ export const DangerZoneTab = () => {
 
   const handleArchive = () => {
     toast({
-      title: t('settings.dangerZone.archived'),
-      description: t('settings.dangerZone.archivedDescription'),
+      title: lang === 'fr' ? 'Kartel archivé' : 'Kartel Archived',
+      description: lang === 'fr' ? 'Votre kartel a été archivé avec succès' : 'Your kartel has been archived successfully',
     });
     setArchiveOpen(false);
   };
@@ -36,8 +36,8 @@ export const DangerZoneTab = () => {
   const handleDelete = () => {
     if (deleteConfirmation === kartelName) {
       toast({
-        title: t('settings.dangerZone.deleted'),
-        description: t('settings.dangerZone.deletedDescription'),
+        title: lang === 'fr' ? 'Kartel supprimé' : 'Kartel Deleted',
+        description: lang === 'fr' ? 'Votre kartel a été définitivement supprimé' : 'Your kartel has been permanently deleted',
         variant: 'destructive',
       });
       setDeleteOpen(false);
@@ -50,17 +50,23 @@ export const DangerZoneTab = () => {
         <CardHeader>
           <div className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-destructive" />
-            <CardTitle className="text-destructive">{t('settings.dangerZone.title')}</CardTitle>
+            <CardTitle className="text-destructive">
+              {lang === 'fr' ? 'Zone de danger' : 'Danger Zone'}
+            </CardTitle>
           </div>
-          <CardDescription>{t('settings.dangerZone.description')}</CardDescription>
+          <CardDescription>
+            {lang === 'fr' ? 'Actions irréversibles sur votre kartel' : 'Irreversible actions on your kartel'}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-3 p-4 border rounded-lg">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <h4 className="font-medium">{t('settings.dangerZone.archive.title')}</h4>
+                <h4 className="font-medium">
+                  {lang === 'fr' ? 'Archiver le kartel' : 'Archive Kartel'}
+                </h4>
                 <p className="text-sm text-muted-foreground">
-                  {t('settings.dangerZone.archive.description')}
+                  {lang === 'fr' ? 'Archivez votre kartel pour le mettre en lecture seule' : 'Archive your kartel to make it read-only'}
                 </p>
               </div>
               <Button
@@ -68,7 +74,7 @@ export const DangerZoneTab = () => {
                 onClick={() => setArchiveOpen(true)}
               >
                 <Archive className="w-4 h-4 mr-2" />
-                {t('settings.dangerZone.archive.button')}
+                {lang === 'fr' ? 'Archiver' : 'Archive'}
               </Button>
             </div>
           </div>
@@ -76,15 +82,17 @@ export const DangerZoneTab = () => {
           <div className="space-y-3 p-4 border border-destructive rounded-lg bg-destructive/5">
             <div className="flex items-start justify-between">
               <div className="space-y-1">
-                <h4 className="font-medium text-destructive">{t('settings.dangerZone.delete.title')}</h4>
+                <h4 className="font-medium text-destructive">
+                  {lang === 'fr' ? 'Supprimer le kartel' : 'Delete Kartel'}
+                </h4>
                 <p className="text-sm text-muted-foreground">
-                  {t('settings.dangerZone.delete.description')}
+                  {lang === 'fr' ? 'Supprimez définitivement votre kartel et toutes ses données' : 'Permanently delete your kartel and all its data'}
                 </p>
                 <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1 mt-2">
-                  <li>{t('settings.dangerZone.delete.consequence1')}</li>
-                  <li>{t('settings.dangerZone.delete.consequence2')}</li>
-                  <li>{t('settings.dangerZone.delete.consequence3')}</li>
-                  <li>{t('settings.dangerZone.delete.consequence4')}</li>
+                  <li>{lang === 'fr' ? 'Toutes les notes seront supprimées' : 'All notes will be deleted'}</li>
+                  <li>{lang === 'fr' ? 'Tous les membres seront retirés' : 'All members will be removed'}</li>
+                  <li>{lang === 'fr' ? 'Tous les événements seront perdus' : 'All events will be lost'}</li>
+                  <li>{lang === 'fr' ? 'Cette action est irréversible' : 'This action is irreversible'}</li>
                 </ul>
               </div>
               <Button
@@ -92,7 +100,7 @@ export const DangerZoneTab = () => {
                 onClick={() => setDeleteOpen(true)}
               >
                 <Trash2 className="w-4 h-4 mr-2" />
-                {t('settings.dangerZone.delete.button')}
+                {lang === 'fr' ? 'Supprimer' : 'Delete'}
               </Button>
             </div>
           </div>
@@ -102,15 +110,20 @@ export const DangerZoneTab = () => {
       <AlertDialog open={archiveOpen} onOpenChange={setArchiveOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('settings.dangerZone.archive.confirmTitle')}</AlertDialogTitle>
+            <AlertDialogTitle>
+              {lang === 'fr' ? 'Confirmer l\'archivage' : 'Confirm Archive'}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              {t('settings.dangerZone.archive.confirmDescription')}
+              {lang === 'fr' 
+                ? 'Êtes-vous sûr de vouloir archiver ce kartel ? Il sera mis en lecture seule.'
+                : 'Are you sure you want to archive this kartel? It will be made read-only.'
+              }
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogCancel>{lang === 'fr' ? 'Annuler' : 'Cancel'}</AlertDialogCancel>
             <AlertDialogAction onClick={handleArchive}>
-              {t('settings.dangerZone.archive.confirm')}
+              {lang === 'fr' ? 'Archiver' : 'Archive'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -120,15 +133,21 @@ export const DangerZoneTab = () => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle className="text-destructive">
-              {t('settings.dangerZone.delete.confirmTitle')}
+              {lang === 'fr' ? 'Confirmer la suppression' : 'Confirm Deletion'}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              {t('settings.dangerZone.delete.confirmDescription')}
+              {lang === 'fr'
+                ? 'Cette action est irréversible. Tapez le nom du kartel pour confirmer.'
+                : 'This action is irreversible. Type the kartel name to confirm.'
+              }
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="space-y-2">
             <Label htmlFor="confirm-name">
-              {t('settings.dangerZone.delete.confirmLabel', { name: kartelName })}
+              {lang === 'fr' 
+                ? `Tapez "${kartelName}" pour confirmer`
+                : `Type "${kartelName}" to confirm`
+              }
             </Label>
             <Input
               id="confirm-name"
@@ -139,14 +158,14 @@ export const DangerZoneTab = () => {
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={() => setDeleteConfirmation('')}>
-              {t('common.cancel')}
+              {lang === 'fr' ? 'Annuler' : 'Cancel'}
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               disabled={deleteConfirmation !== kartelName}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {t('settings.dangerZone.delete.confirm')}
+              {lang === 'fr' ? 'Supprimer définitivement' : 'Delete Permanently'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
