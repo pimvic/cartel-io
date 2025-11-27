@@ -187,7 +187,7 @@ export const KnowledgeBase = () => {
 
       const formattedResources = resourcesData?.map((resource: any) => ({
         ...resource,
-        uploader_name: resource.uploader?.name || t("knowledgeBase.unknownUser"),
+        uploader_name: resource.uploader?.name || (lang === "fr" ? "Utilisateur inconnu" : "Unknown User"),
         is_favorite: resource.favorites?.some((f: any) => f.user_id === userData.id) || false,
         report_count: resource.reports?.length || 0,
       })) || [];
@@ -195,7 +195,7 @@ export const KnowledgeBase = () => {
       setResources(formattedResources);
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -262,7 +262,7 @@ export const KnowledgeBase = () => {
     try {
       if (!formData.title || (!formData.resource_url && !formData.file)) {
         toast({
-          title: t("knowledgeBase.validation.missingFields"),
+          title: lang === "fr" ? "Champs manquants" : "Missing fields",
           variant: "destructive",
         });
         return;
@@ -271,7 +271,7 @@ export const KnowledgeBase = () => {
       // BR-002: Each resource must belong to at least one category
       if (!formData.category) {
         toast({
-          title: t("knowledgeBase.validation.categoryRequired"),
+          title: lang === "fr" ? "Catégorie requise" : "Category required",
           variant: "destructive",
         });
         return;
@@ -286,7 +286,7 @@ export const KnowledgeBase = () => {
         // BR-005: Files larger than 20 MB are rejected
         if (formData.file.size > 20 * 1024 * 1024) {
           toast({
-            title: t("knowledgeBase.validation.fileTooLarge"),
+            title: lang === "fr" ? "Fichier trop volumineux (max 20 Mo)" : "File too large (max 20 MB)",
             variant: "destructive",
           });
           setUploading(false);
@@ -314,7 +314,7 @@ export const KnowledgeBase = () => {
           const response = await fetch(resourceUrl, { method: "HEAD" });
           if (response.status !== 200) {
             toast({
-              title: t("knowledgeBase.validation.invalidUrl"),
+              title: lang === "fr" ? "URL invalide" : "Invalid URL",
               variant: "destructive",
             });
             setUploading(false);
@@ -322,7 +322,7 @@ export const KnowledgeBase = () => {
           }
         } catch (error) {
           toast({
-            title: t("knowledgeBase.validation.urlNotReachable"),
+            title: lang === "fr" ? "URL inaccessible" : "URL not reachable",
             variant: "destructive",
           });
           setUploading(false);
@@ -348,7 +348,7 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceAdded"),
+        title: lang === "fr" ? "Ressource ajoutée avec succès" : "Resource added successfully",
       });
 
       setIsAddDialogOpen(false);
@@ -356,7 +356,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -384,7 +384,7 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceUpdated"),
+        title: lang === "fr" ? "Ressource mise à jour avec succès" : "Resource updated successfully",
       });
 
       setIsEditDialogOpen(false);
@@ -393,7 +393,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -404,8 +404,8 @@ export const KnowledgeBase = () => {
     // BR-001: Only +1 and Administrator roles may delete
     if (userRole !== "admin" && userRole !== "coordinator") {
       toast({
-        title: t("knowledgeBase.error"),
-        description: t("knowledgeBase.validation.noPermission"),
+        title: lang === "fr" ? "Erreur" : "Error",
+        description: lang === "fr" ? "Vous n'avez pas la permission" : "You don't have permission",
         variant: "destructive",
       });
       return;
@@ -420,13 +420,13 @@ export const KnowledgeBase = () => {
       if (error) throw error;
 
       toast({
-        title: t("knowledgeBase.success.resourceDeleted"),
+        title: lang === "fr" ? "Ressource supprimée avec succès" : "Resource deleted successfully",
       });
 
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -460,7 +460,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -470,7 +470,7 @@ export const KnowledgeBase = () => {
   const handleReportResource = async () => {
     if (!selectedResource || !reportReason) {
       toast({
-        title: t("knowledgeBase.validation.reportReasonRequired"),
+        title: lang === "fr" ? "Motif de signalement requis" : "Report reason required",
         variant: "destructive",
       });
       return;
@@ -489,7 +489,7 @@ export const KnowledgeBase = () => {
 
       // AC-005: Report triggers notification for +1
       toast({
-        title: t("knowledgeBase.success.reportSubmitted"),
+        title: lang === "fr" ? "Signalement soumis avec succès" : "Report submitted successfully",
       });
 
       setIsReportDialogOpen(false);
@@ -498,7 +498,7 @@ export const KnowledgeBase = () => {
       fetchResources();
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -543,11 +543,11 @@ export const KnowledgeBase = () => {
       }
 
       toast({
-        title: t("knowledgeBase.success.exported"),
+        title: lang === "fr" ? "Exporté avec succès" : "Exported successfully",
       });
     } catch (error: any) {
       toast({
-        title: t("knowledgeBase.error"),
+        title: lang === "fr" ? "Erreur" : "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -640,14 +640,38 @@ export const KnowledgeBase = () => {
     return colors[category] || colors.other;
   };
 
+  const getCategoryName = (category: ResourceCategory) => {
+    const names = {
+      documents: lang === "fr" ? "Documents" : "Documents",
+      videos: lang === "fr" ? "Vidéos" : "Videos",
+      summaries: lang === "fr" ? "Résumés" : "Summaries",
+      tools: lang === "fr" ? "Outils" : "Tools",
+      other: lang === "fr" ? "Autre" : "Other",
+    };
+    return names[category];
+  };
+
+  const getTypeName = (type: ResourceType) => {
+    const names = {
+      document: lang === "fr" ? "Document" : "Document",
+      video: lang === "fr" ? "Vidéo" : "Video",
+      summary: lang === "fr" ? "Résumé" : "Summary",
+      tool: lang === "fr" ? "Outil" : "Tool",
+      link: lang === "fr" ? "Lien" : "Link",
+    };
+    return names[type];
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold text-foreground">
-            {t("knowledgeBase.title")}
+            {lang === "fr" ? "Base de Connaissances" : "Knowledge Base"}
           </h2>
-          <p className="text-muted-foreground">{t("knowledgeBase.subtitle")}</p>
+          <p className="text-muted-foreground">
+            {lang === "fr" ? "Partagez et découvrez des ressources" : "Share and discover resources"}
+          </p>
         </div>
         <div className="flex gap-2">
           {userRole === "admin" && (
@@ -655,15 +679,15 @@ export const KnowledgeBase = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
                   <Download className="w-4 h-4 mr-2" />
-                  {t("knowledgeBase.export")}
+                  {lang === "fr" ? "Exporter" : "Export"}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => handleExport("csv")}>
-                  {t("knowledgeBase.exportCSV")}
+                  {lang === "fr" ? "Exporter CSV" : "Export CSV"}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleExport("json")}>
-                  {t("knowledgeBase.exportJSON")}
+                  {lang === "fr" ? "Exporter JSON" : "Export JSON"}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -672,42 +696,50 @@ export const KnowledgeBase = () => {
             <DialogTrigger asChild>
               <Button onClick={() => resetForm()}>
                 <Plus className="w-4 h-4 mr-2" />
-                {t("knowledgeBase.addResource")}
+                {lang === "fr" ? "Ajouter une ressource" : "Add Resource"}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{t("knowledgeBase.addResourceTitle")}</DialogTitle>
+                <DialogTitle>
+                  {lang === "fr" ? "Ajouter une ressource" : "Add Resource"}
+                </DialogTitle>
                 <DialogDescription>
-                  {t("knowledgeBase.addResourceDescription")}
+                  {lang === "fr" ? "Partagez une nouvelle ressource avec votre kartel" : "Share a new resource with your kartel"}
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="title">{t("knowledgeBase.form.title")} *</Label>
+                  <Label htmlFor="title">
+                    {lang === "fr" ? "Titre" : "Title"} *
+                  </Label>
                   <Input
                     id="title"
                     value={formData.title}
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.titlePlaceholder")}
+                    placeholder={lang === "fr" ? "Titre de la ressource" : "Resource title"}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="description">{t("knowledgeBase.form.description")}</Label>
+                  <Label htmlFor="description">
+                    {lang === "fr" ? "Description" : "Description"}
+                  </Label>
                   <Textarea
                     id="description"
                     value={formData.description}
                     onChange={(e) =>
                       setFormData({ ...formData, description: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.descriptionPlaceholder")}
+                    placeholder={lang === "fr" ? "Décrivez la ressource" : "Describe the resource"}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="type">{t("knowledgeBase.form.type")} *</Label>
+                    <Label htmlFor="type">
+                      {lang === "fr" ? "Type" : "Type"} *
+                    </Label>
                     <Select
                       value={formData.type}
                       onValueChange={(value: ResourceType) =>
@@ -719,25 +751,27 @@ export const KnowledgeBase = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="document">
-                          {t("knowledgeBase.types.document")}
+                          {lang === "fr" ? "Document" : "Document"}
                         </SelectItem>
                         <SelectItem value="video">
-                          {t("knowledgeBase.types.video")}
+                          {lang === "fr" ? "Vidéo" : "Video"}
                         </SelectItem>
                         <SelectItem value="summary">
-                          {t("knowledgeBase.types.summary")}
+                          {lang === "fr" ? "Résumé" : "Summary"}
                         </SelectItem>
                         <SelectItem value="tool">
-                          {t("knowledgeBase.types.tool")}
+                          {lang === "fr" ? "Outil" : "Tool"}
                         </SelectItem>
                         <SelectItem value="link">
-                          {t("knowledgeBase.types.link")}
+                          {lang === "fr" ? "Lien" : "Link"}
                         </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="category">{t("knowledgeBase.form.category")} *</Label>
+                    <Label htmlFor="category">
+                      {lang === "fr" ? "Catégorie" : "Category"} *
+                    </Label>
                     <Select
                       value={formData.category}
                       onValueChange={(value: ResourceCategory) =>
@@ -749,36 +783,38 @@ export const KnowledgeBase = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="documents">
-                          {t("knowledgeBase.categories.documents")}
+                          {lang === "fr" ? "Documents" : "Documents"}
                         </SelectItem>
                         <SelectItem value="videos">
-                          {t("knowledgeBase.categories.videos")}
+                          {lang === "fr" ? "Vidéos" : "Videos"}
                         </SelectItem>
                         <SelectItem value="summaries">
-                          {t("knowledgeBase.categories.summaries")}
+                          {lang === "fr" ? "Résumés" : "Summaries"}
                         </SelectItem>
                         <SelectItem value="tools">
-                          {t("knowledgeBase.categories.tools")}
+                          {lang === "fr" ? "Outils" : "Tools"}
                         </SelectItem>
                         <SelectItem value="other">
-                          {t("knowledgeBase.categories.other")}
+                          {lang === "fr" ? "Autre" : "Other"}
                         </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="tags">{t("knowledgeBase.form.tags")}</Label>
+                  <Label htmlFor="tags">
+                    {lang === "fr" ? "Tags" : "Tags"}
+                  </Label>
                   <div className="flex gap-2">
                     <Input
                       id="tags"
                       value={tagInput}
                       onChange={(e) => setTagInput(e.target.value)}
                       onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
-                      placeholder={t("knowledgeBase.form.tagsPlaceholder")}
+                      placeholder={lang === "fr" ? "Ajouter un tag" : "Add a tag"}
                     />
                     <Button type="button" onClick={addTag} variant="outline">
-                      {t("knowledgeBase.form.addTag")}
+                      {lang === "fr" ? "Ajouter" : "Add"}
                     </Button>
                   </div>
                   {formData.tags.length > 0 && (
@@ -797,7 +833,9 @@ export const KnowledgeBase = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="file">{t("knowledgeBase.form.file")}</Label>
+                  <Label htmlFor="file">
+                    {lang === "fr" ? "Fichier" : "File"}
+                  </Label>
                   <Input
                     id="file"
                     type="file"
@@ -809,7 +847,7 @@ export const KnowledgeBase = () => {
                     }
                   />
                   <p className="text-sm text-muted-foreground mt-1">
-                    {t("knowledgeBase.form.maxFileSize")}
+                    {lang === "fr" ? "Taille maximale : 20 Mo" : "Maximum size: 20 MB"}
                   </p>
                   {uploadProgress > 0 && uploadProgress < 100 && (
                     <div className="mt-2">
@@ -823,14 +861,16 @@ export const KnowledgeBase = () => {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="url">{t("knowledgeBase.form.url")}</Label>
+                  <Label htmlFor="url">
+                    {lang === "fr" ? "URL" : "URL"}
+                  </Label>
                   <Input
                     id="url"
                     value={formData.resource_url}
                     onChange={(e) =>
                       setFormData({ ...formData, resource_url: e.target.value })
                     }
-                    placeholder={t("knowledgeBase.form.urlPlaceholder")}
+                    placeholder={lang === "fr" ? "https://exemple.com/ressource" : "https://example.com/resource"}
                   />
                 </div>
                 <div className="flex justify-end gap-2">
@@ -838,16 +878,16 @@ export const KnowledgeBase = () => {
                     variant="outline"
                     onClick={() => setIsAddDialogOpen(false)}
                   >
-                    {t("common.cancel")}
+                    {lang === "fr" ? "Annuler" : "Cancel"}
                   </Button>
                   <Button onClick={handleAddResource} disabled={uploading}>
                     {uploading ? (
                       <>
                         <Upload className="w-4 h-4 mr-2 animate-spin" />
-                        {t("knowledgeBase.uploading")}
+                        {lang === "fr" ? "Téléchargement..." : "Uploading..."}
                       </>
                     ) : (
-                      t("knowledgeBase.add")
+                      lang === "fr" ? "Ajouter" : "Add"
                     )}
                   </Button>
                 </div>
@@ -864,56 +904,66 @@ export const KnowledgeBase = () => {
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
-                placeholder={t("knowledgeBase.searchPlaceholder")}
+                placeholder={lang === "fr" ? "Rechercher des ressources..." : "Search resources..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
               />
               {searchQuery.length > 0 && searchQuery.length < 3 && (
                 <p className="text-xs text-muted-foreground mt-1">
-                  {t("knowledgeBase.searchMinChars")}
+                  {lang === "fr" ? "Saisissez au moins 3 caractères" : "Enter at least 3 characters"}
                 </p>
               )}
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full md:w-48">
                 <Filter className="w-4 h-4 mr-2" />
-                <SelectValue placeholder={t("knowledgeBase.filterByCategory")} />
+                <SelectValue placeholder={lang === "fr" ? "Filtrer par catégorie" : "Filter by category"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("knowledgeBase.allCategories")}</SelectItem>
+                <SelectItem value="all">
+                  {lang === "fr" ? "Toutes les catégories" : "All categories"}
+                </SelectItem>
                 <SelectItem value="documents">
-                  {t("knowledgeBase.categories.documents")}
+                  {lang === "fr" ? "Documents" : "Documents"}
                 </SelectItem>
                 <SelectItem value="videos">
-                  {t("knowledgeBase.categories.videos")}
+                  {lang === "fr" ? "Vidéos" : "Videos"}
                 </SelectItem>
                 <SelectItem value="summaries">
-                  {t("knowledgeBase.categories.summaries")}
+                  {lang === "fr" ? "Résumés" : "Summaries"}
                 </SelectItem>
                 <SelectItem value="tools">
-                  {t("knowledgeBase.categories.tools")}
+                  {lang === "fr" ? "Outils" : "Tools"}
                 </SelectItem>
                 <SelectItem value="other">
-                  {t("knowledgeBase.categories.other")}
+                  {lang === "fr" ? "Autre" : "Other"}
                 </SelectItem>
               </SelectContent>
             </Select>
             <Select value={selectedType} onValueChange={setSelectedType}>
               <SelectTrigger className="w-full md:w-48">
-                <SelectValue placeholder={t("knowledgeBase.filterByType")} />
+                <SelectValue placeholder={lang === "fr" ? "Filtrer par type" : "Filter by type"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{t("knowledgeBase.allTypes")}</SelectItem>
+                <SelectItem value="all">
+                  {lang === "fr" ? "Tous les types" : "All types"}
+                </SelectItem>
                 <SelectItem value="document">
-                  {t("knowledgeBase.types.document")}
+                  {lang === "fr" ? "Document" : "Document"}
                 </SelectItem>
-                <SelectItem value="video">{t("knowledgeBase.types.video")}</SelectItem>
+                <SelectItem value="video">
+                  {lang === "fr" ? "Vidéo" : "Video"}
+                </SelectItem>
                 <SelectItem value="summary">
-                  {t("knowledgeBase.types.summary")}
+                  {lang === "fr" ? "Résumé" : "Summary"}
                 </SelectItem>
-                <SelectItem value="tool">{t("knowledgeBase.types.tool")}</SelectItem>
-                <SelectItem value="link">{t("knowledgeBase.types.link")}</SelectItem>
+                <SelectItem value="tool">
+                  {lang === "fr" ? "Outil" : "Tool"}
+                </SelectItem>
+                <SelectItem value="link">
+                  {lang === "fr" ? "Lien" : "Link"}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -923,22 +973,26 @@ export const KnowledgeBase = () => {
       {/* Resources List */}
       <Tabs defaultValue="all" className="w-full">
         <TabsList>
-          <TabsTrigger value="all">{t("knowledgeBase.allResources")}</TabsTrigger>
+          <TabsTrigger value="all">
+            {lang === "fr" ? "Toutes les ressources" : "All Resources"}
+          </TabsTrigger>
           <TabsTrigger value="favorites">
             <Star className="w-4 h-4 mr-2" />
-            {t("knowledgeBase.favorites")}
+            {lang === "fr" ? "Favoris" : "Favorites"}
           </TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="space-y-4">
           {loading ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">{t("knowledgeBase.loading")}</p>
+              <p className="text-muted-foreground">
+                {lang === "fr" ? "Chargement..." : "Loading..."}
+              </p>
             </div>
           ) : filteredResources.length === 0 ? (
             <Card>
               <CardContent className="py-8">
                 <p className="text-center text-muted-foreground">
-                  {t("knowledgeBase.noResources")}
+                  {lang === "fr" ? "Aucune ressource trouvée" : "No resources found"}
                 </p>
               </CardContent>
             </Card>
@@ -975,26 +1029,26 @@ export const KnowledgeBase = () => {
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem onClick={() => openPreview(resource)}>
                               <Eye className="w-4 h-4 mr-2" />
-                              {t("knowledgeBase.preview")}
+                              {lang === "fr" ? "Aperçu" : "Preview"}
                             </DropdownMenuItem>
                             {canEditOrDelete(resource) && (
                               <>
                                 <DropdownMenuItem onClick={() => openEditDialog(resource)}>
                                   <Edit className="w-4 h-4 mr-2" />
-                                  {t("knowledgeBase.edit")}
+                                  {lang === "fr" ? "Modifier" : "Edit"}
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                   onClick={() => handleDeleteResource(resource.id)}
                                   className="text-destructive"
                                 >
                                   <Trash className="w-4 h-4 mr-2" />
-                                  {t("knowledgeBase.delete")}
+                                  {lang === "fr" ? "Supprimer" : "Delete"}
                                 </DropdownMenuItem>
                               </>
                             )}
                             <DropdownMenuItem onClick={() => openReportDialog(resource)}>
                               <Flag className="w-4 h-4 mr-2" />
-                              {t("knowledgeBase.report")}
+                              {lang === "fr" ? "Signaler" : "Report"}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -1008,7 +1062,7 @@ export const KnowledgeBase = () => {
                     <div className="space-y-2">
                       <div className="flex flex-wrap gap-2">
                         <Badge className={getCategoryColor(resource.category)}>
-                          {t(`knowledgeBase.categories.${resource.category}`)}
+                          {getCategoryName(resource.category)}
                         </Badge>
                         {resource.tags.map((tag) => (
                           <Badge key={tag} variant="outline">
@@ -1018,20 +1072,20 @@ export const KnowledgeBase = () => {
                       </div>
                       <div className="text-sm text-muted-foreground">
                         <p>
-                          {t("knowledgeBase.uploadedBy")} {resource.uploader_name}
+                          {lang === "fr" ? "Ajouté par" : "Uploaded by"} {resource.uploader_name}
                         </p>
                         <p>
                           {format(new Date(resource.uploaded_at), "PPp", { locale })}
                         </p>
                         {resource.file_size && (
                           <p>
-                            {t("knowledgeBase.fileSize")}:{" "}
+                            {lang === "fr" ? "Taille" : "Size"}:{" "}
                             {(resource.file_size / 1024 / 1024).toFixed(2)} MB
                           </p>
                         )}
                         {resource.report_count && resource.report_count > 0 && (
                           <Badge variant="destructive" className="mt-2">
-                            {resource.report_count} {t("knowledgeBase.reports")}
+                            {resource.report_count} {lang === "fr" ? "signalements" : "reports"}
                           </Badge>
                         )}
                       </div>
@@ -1045,13 +1099,15 @@ export const KnowledgeBase = () => {
         <TabsContent value="favorites" className="space-y-4">
           {loading ? (
             <div className="text-center py-8">
-              <p className="text-muted-foreground">{t("knowledgeBase.loading")}</p>
+              <p className="text-muted-foreground">
+                {lang === "fr" ? "Chargement..." : "Loading..."}
+              </p>
             </div>
           ) : filteredResources.filter((r) => r.is_favorite).length === 0 ? (
             <Card>
               <CardContent className="py-8">
                 <p className="text-center text-muted-foreground">
-                  {t("knowledgeBase.noFavorites")}
+                  {lang === "fr" ? "Aucun favori" : "No favorites"}
                 </p>
               </CardContent>
             </Card>
@@ -1086,26 +1142,26 @@ export const KnowledgeBase = () => {
                             <DropdownMenuContent align="end">
                               <DropdownMenuItem onClick={() => openPreview(resource)}>
                                 <Eye className="w-4 h-4 mr-2" />
-                                {t("knowledgeBase.preview")}
+                                {lang === "fr" ? "Aperçu" : "Preview"}
                               </DropdownMenuItem>
                               {canEditOrDelete(resource) && (
                                 <>
                                   <DropdownMenuItem onClick={() => openEditDialog(resource)}>
                                     <Edit className="w-4 h-4 mr-2" />
-                                    {t("knowledgeBase.edit")}
+                                    {lang === "fr" ? "Modifier" : "Edit"}
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     onClick={() => handleDeleteResource(resource.id)}
                                     className="text-destructive"
                                   >
                                     <Trash className="w-4 h-4 mr-2" />
-                                    {t("knowledgeBase.delete")}
+                                    {lang === "fr" ? "Supprimer" : "Delete"}
                                   </DropdownMenuItem>
                                 </>
                               )}
                               <DropdownMenuItem onClick={() => openReportDialog(resource)}>
                                 <Flag className="w-4 h-4 mr-2" />
-                                {t("knowledgeBase.report")}
+                                {lang === "fr" ? "Signaler" : "Report"}
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -1119,7 +1175,7 @@ export const KnowledgeBase = () => {
                       <div className="space-y-2">
                         <div className="flex flex-wrap gap-2">
                           <Badge className={getCategoryColor(resource.category)}>
-                            {t(`knowledgeBase.categories.${resource.category}`)}
+                            {getCategoryName(resource.category)}
                           </Badge>
                           {resource.tags.map((tag) => (
                             <Badge key={tag} variant="outline">
@@ -1129,7 +1185,7 @@ export const KnowledgeBase = () => {
                         </div>
                         <div className="text-sm text-muted-foreground">
                           <p>
-                            {t("knowledgeBase.uploadedBy")} {resource.uploader_name}
+                            {lang === "fr" ? "Ajouté par" : "Uploaded by"} {resource.uploader_name}
                           </p>
                           <p>
                             {format(new Date(resource.uploaded_at), "PPp", { locale })}
@@ -1148,11 +1204,15 @@ export const KnowledgeBase = () => {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{t("knowledgeBase.editResourceTitle")}</DialogTitle>
+            <DialogTitle>
+              {lang === "fr" ? "Modifier la ressource" : "Edit Resource"}
+            </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="edit-title">{t("knowledgeBase.form.title")} *</Label>
+              <Label htmlFor="edit-title">
+                {lang === "fr" ? "Titre" : "Title"} *
+              </Label>
               <Input
                 id="edit-title"
                 value={formData.title}
@@ -1162,7 +1222,9 @@ export const KnowledgeBase = () => {
               />
             </div>
             <div>
-              <Label htmlFor="edit-description">{t("knowledgeBase.form.description")}</Label>
+              <Label htmlFor="edit-description">
+                {lang === "fr" ? "Description" : "Description"}
+              </Label>
               <Textarea
                 id="edit-description"
                 value={formData.description}
@@ -1173,7 +1235,9 @@ export const KnowledgeBase = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="edit-type">{t("knowledgeBase.form.type")} *</Label>
+                <Label htmlFor="edit-type">
+                  {lang === "fr" ? "Type" : "Type"} *
+                </Label>
                 <Select
                   value={formData.type}
                   onValueChange={(value: ResourceType) =>
@@ -1185,25 +1249,27 @@ export const KnowledgeBase = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="document">
-                      {t("knowledgeBase.types.document")}
+                      {lang === "fr" ? "Document" : "Document"}
                     </SelectItem>
                     <SelectItem value="video">
-                      {t("knowledgeBase.types.video")}
+                      {lang === "fr" ? "Vidéo" : "Video"}
                     </SelectItem>
                     <SelectItem value="summary">
-                      {t("knowledgeBase.types.summary")}
+                      {lang === "fr" ? "Résumé" : "Summary"}
                     </SelectItem>
                     <SelectItem value="tool">
-                      {t("knowledgeBase.types.tool")}
+                      {lang === "fr" ? "Outil" : "Tool"}
                     </SelectItem>
                     <SelectItem value="link">
-                      {t("knowledgeBase.types.link")}
+                      {lang === "fr" ? "Lien" : "Link"}
                     </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="edit-category">{t("knowledgeBase.form.category")} *</Label>
+                <Label htmlFor="edit-category">
+                  {lang === "fr" ? "Catégorie" : "Category"} *
+                </Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value: ResourceCategory) =>
@@ -1215,36 +1281,38 @@ export const KnowledgeBase = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="documents">
-                      {t("knowledgeBase.categories.documents")}
+                      {lang === "fr" ? "Documents" : "Documents"}
                     </SelectItem>
                     <SelectItem value="videos">
-                      {t("knowledgeBase.categories.videos")}
+                      {lang === "fr" ? "Vidéos" : "Videos"}
                     </SelectItem>
                     <SelectItem value="summaries">
-                      {t("knowledgeBase.categories.summaries")}
+                      {lang === "fr" ? "Résumés" : "Summaries"}
                     </SelectItem>
                     <SelectItem value="tools">
-                      {t("knowledgeBase.categories.tools")}
+                      {lang === "fr" ? "Outils" : "Tools"}
                     </SelectItem>
                     <SelectItem value="other">
-                      {t("knowledgeBase.categories.other")}
+                      {lang === "fr" ? "Autre" : "Other"}
                     </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
             </div>
             <div>
-              <Label htmlFor="edit-tags">{t("knowledgeBase.form.tags")}</Label>
+              <Label htmlFor="edit-tags">
+                {lang === "fr" ? "Tags" : "Tags"}
+              </Label>
               <div className="flex gap-2">
                 <Input
                   id="edit-tags"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
-                  placeholder={t("knowledgeBase.form.tagsPlaceholder")}
+                  placeholder={lang === "fr" ? "Ajouter un tag" : "Add a tag"}
                 />
                 <Button type="button" onClick={addTag} variant="outline">
-                  {t("knowledgeBase.form.addTag")}
+                  {lang === "fr" ? "Ajouter" : "Add"}
                 </Button>
               </div>
               {formData.tags.length > 0 && (
@@ -1271,10 +1339,10 @@ export const KnowledgeBase = () => {
                   resetForm();
                 }}
               >
-                {t("common.cancel")}
+                {lang === "fr" ? "Annuler" : "Cancel"}
               </Button>
               <Button onClick={handleEditResource}>
-                {t("knowledgeBase.save")}
+                {lang === "fr" ? "Enregistrer" : "Save"}
               </Button>
             </div>
           </div>
@@ -1307,7 +1375,7 @@ export const KnowledgeBase = () => {
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  {t("knowledgeBase.openResource")}
+                  {lang === "fr" ? "Ouvrir la ressource" : "Open Resource"}
                 </a>
               </div>
             )}
@@ -1319,19 +1387,23 @@ export const KnowledgeBase = () => {
       <Dialog open={isReportDialogOpen} onOpenChange={setIsReportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t("knowledgeBase.reportResourceTitle")}</DialogTitle>
+            <DialogTitle>
+              {lang === "fr" ? "Signaler une ressource" : "Report Resource"}
+            </DialogTitle>
             <DialogDescription>
-              {t("knowledgeBase.reportResourceDescription")}
+              {lang === "fr" ? "Indiquez la raison de votre signalement" : "Indicate the reason for your report"}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="report-reason">{t("knowledgeBase.reportReason")} *</Label>
+              <Label htmlFor="report-reason">
+                {lang === "fr" ? "Motif" : "Reason"} *
+              </Label>
               <Textarea
                 id="report-reason"
                 value={reportReason}
                 onChange={(e) => setReportReason(e.target.value)}
-                placeholder={t("knowledgeBase.reportReasonPlaceholder")}
+                placeholder={lang === "fr" ? "Pourquoi signalez-vous cette ressource ?" : "Why are you reporting this resource?"}
               />
             </div>
             <div className="flex justify-end gap-2">
@@ -1343,10 +1415,10 @@ export const KnowledgeBase = () => {
                   setReportReason("");
                 }}
               >
-                {t("common.cancel")}
+                {lang === "fr" ? "Annuler" : "Cancel"}
               </Button>
               <Button onClick={handleReportResource} variant="destructive">
-                {t("knowledgeBase.submit")}
+                {lang === "fr" ? "Soumettre" : "Submit"}
               </Button>
             </div>
           </div>

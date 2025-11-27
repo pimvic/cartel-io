@@ -47,67 +47,67 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
   const tabs = [
     {
       value: 'general',
-      label: t('settings.tabs.general'),
+      label: lang === 'fr' ? 'Général' : 'General',
       icon: Settings2,
       scope: 'workspace',
     },
     {
       value: 'members',
-      label: t('settings.tabs.members'),
+      label: lang === 'fr' ? 'Membres' : 'Members',
       icon: Users,
       scope: 'workspace',
     },
     {
       value: 'display',
-      label: t('settings.tabs.display'),
+      label: lang === 'fr' ? 'Affichage' : 'Display',
       icon: Palette,
       scope: 'workspace',
     },
     {
       value: 'notifications',
-      label: t('settings.tabs.notifications'),
+      label: lang === 'fr' ? 'Notifications' : 'Notifications',
       icon: Bell,
       scope: 'workspace',
     },
     {
       value: 'integrations',
-      label: t('settings.tabs.integrations'),
+      label: lang === 'fr' ? 'Intégrations' : 'Integrations',
       icon: Plug,
       scope: 'workspace',
     },
     {
       value: 'automations',
-      label: t('settings.tabs.automations'),
+      label: lang === 'fr' ? 'Automatisations' : 'Automations',
       icon: Zap,
       scope: 'workspace',
     },
     {
       value: 'privacy',
-      label: t('settings.tabs.privacy'),
+      label: lang === 'fr' ? 'Confidentialité' : 'Privacy',
       icon: Shield,
       scope: 'workspace',
     },
     {
       value: 'billing',
-      label: t('settings.tabs.billing'),
+      label: lang === 'fr' ? 'Facturation' : 'Billing',
       icon: CreditCard,
       scope: 'workspace',
     },
     {
       value: 'advanced',
-      label: t('settings.tabs.advanced'),
+      label: lang === 'fr' ? 'Avancé' : 'Advanced',
       icon: SlidersHorizontal,
       scope: 'workspace',
     },
     {
       value: 'danger',
-      label: t('settings.tabs.danger'),
+      label: lang === 'fr' ? 'Zone de danger' : 'Danger Zone',
       icon: AlertTriangle,
       scope: 'workspace',
     },
     {
       value: 'account',
-      label: t('settings.tabs.account'),
+      label: lang === 'fr' ? 'Compte' : 'Account',
       icon: User,
       scope: 'personal',
     },
@@ -124,12 +124,12 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
               className="cursor-pointer flex items-center gap-1"
             >
               <Home className="w-4 h-4" />
-              {t('settings.breadcrumb.dashboard')}
+              {lang === 'fr' ? 'Tableau de bord' : 'Dashboard'}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{t('settings.breadcrumb.settings')}</BreadcrumbPage>
+            <BreadcrumbPage>{lang === 'fr' ? 'Paramètres' : 'Settings'}</BreadcrumbPage>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -143,11 +143,16 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
       {/* Header with scope badge */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold mb-2">{t('settings.title')}</h1>
-          <p className="text-muted-foreground text-lg">{t('settings.subtitle')}</p>
+          <h1 className="text-3xl font-bold mb-2">{lang === 'fr' ? 'Paramètres' : 'Settings'}</h1>
+          <p className="text-muted-foreground text-lg">
+            {lang === 'fr' ? 'Gérez les préférences de votre kartel' : 'Manage your kartel preferences'}
+          </p>
         </div>
         <Badge variant={scope === 'workspace' ? 'default' : 'secondary'} className="text-sm px-3 py-1">
-          {scope === 'workspace' ? t('settings.scope.workspace') : t('settings.scope.personal')}
+          {scope === 'workspace' 
+            ? (lang === 'fr' ? 'Espace de travail' : 'Workspace')
+            : (lang === 'fr' ? 'Personnel' : 'Personal')
+          }
         </Badge>
       </div>
 
@@ -177,57 +182,57 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
 
           <TabsContent value="display">
             <PlaceholderTab
-              title={t('settings.tabs.display')}
-              description={t('settings.display.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Affichage' : 'Display'}
+              description={lang === 'fr' ? 'Personnalisez l\'apparence de votre espace' : 'Customize your workspace appearance'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="notifications">
             <PlaceholderTab
-              title={t('settings.tabs.notifications')}
-              description={t('settings.notifications.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Notifications' : 'Notifications'}
+              description={lang === 'fr' ? 'Gérez vos préférences de notification' : 'Manage your notification preferences'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="integrations">
             <PlaceholderTab
-              title={t('settings.tabs.integrations')}
-              description={t('settings.integrations.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Intégrations' : 'Integrations'}
+              description={lang === 'fr' ? 'Connectez des services externes' : 'Connect external services'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="automations">
             <PlaceholderTab
-              title={t('settings.tabs.automations')}
-              description={t('settings.automations.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Automatisations' : 'Automations'}
+              description={lang === 'fr' ? 'Automatisez vos flux de travail' : 'Automate your workflows'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="privacy">
             <PlaceholderTab
-              title={t('settings.tabs.privacy')}
-              description={t('settings.privacy.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Confidentialité' : 'Privacy'}
+              description={lang === 'fr' ? 'Contrôlez vos données et votre confidentialité' : 'Control your data and privacy'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="billing">
             <PlaceholderTab
-              title={t('settings.tabs.billing')}
-              description={t('settings.billing.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Facturation' : 'Billing'}
+              description={lang === 'fr' ? 'Gérez votre abonnement et vos paiements' : 'Manage your subscription and payments'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
           <TabsContent value="advanced">
             <PlaceholderTab
-              title={t('settings.tabs.advanced')}
-              description={t('settings.advanced.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Avancé' : 'Advanced'}
+              description={lang === 'fr' ? 'Paramètres avancés' : 'Advanced settings'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
 
@@ -237,9 +242,9 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
 
           <TabsContent value="account">
             <PlaceholderTab
-              title={t('settings.tabs.account')}
-              description={t('settings.account.description')}
-              comingSoonMessage={t('settings.comingSoon')}
+              title={lang === 'fr' ? 'Compte' : 'Account'}
+              description={lang === 'fr' ? 'Gérez vos informations personnelles' : 'Manage your personal information'}
+              comingSoonMessage={lang === 'fr' ? 'Bientôt disponible' : 'Coming soon'}
             />
           </TabsContent>
         </div>

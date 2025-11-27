@@ -188,11 +188,15 @@ export const Notes = () => {
         .eq('id', editingNote.id);
 
       if (error) {
-        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        toast({ 
+          title: lang === 'fr' ? 'Erreur' : 'Error', 
+          description: error.message, 
+          variant: 'destructive' 
+        });
         return;
       }
 
-      toast({ title: t('notes.updated') });
+      toast({ title: lang === 'fr' ? 'Note mise à jour' : 'Note updated' });
     } else {
       const { error } = await supabase
         .from('notes')
@@ -204,11 +208,15 @@ export const Notes = () => {
         });
 
       if (error) {
-        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        toast({ 
+          title: lang === 'fr' ? 'Erreur' : 'Error', 
+          description: error.message, 
+          variant: 'destructive' 
+        });
         return;
       }
 
-      toast({ title: t('notes.created') });
+      toast({ title: lang === 'fr' ? 'Note créée' : 'Note created' });
     }
 
     setEditorOpen(false);
@@ -217,16 +225,20 @@ export const Notes = () => {
   };
 
   const handleDeleteNote = async (id: string) => {
-    if (!confirm(t('notes.confirmDelete'))) return;
+    if (!confirm(lang === 'fr' ? 'Êtes-vous sûr de vouloir supprimer cette note ?' : 'Are you sure you want to delete this note?')) return;
 
     const { error } = await supabase.from('notes').delete().eq('id', id);
 
     if (error) {
-      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      toast({ 
+        title: lang === 'fr' ? 'Erreur' : 'Error', 
+        description: error.message, 
+        variant: 'destructive' 
+      });
       return;
     }
 
-    toast({ title: t('notes.deleted') });
+    toast({ title: lang === 'fr' ? 'Note supprimée' : 'Note deleted' });
     fetchNotes();
   };
 
@@ -242,7 +254,11 @@ export const Notes = () => {
       .eq('id', note.id);
 
     if (error) {
-      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      toast({ 
+        title: lang === 'fr' ? 'Erreur' : 'Error', 
+        description: error.message, 
+        variant: 'destructive' 
+      });
       return;
     }
 
@@ -256,11 +272,19 @@ export const Notes = () => {
       .eq('id', note.id);
 
     if (error) {
-      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      toast({ 
+        title: lang === 'fr' ? 'Erreur' : 'Error', 
+        description: error.message, 
+        variant: 'destructive' 
+      });
       return;
     }
 
-    toast({ title: note.archived ? t('notes.unarchived') : t('notes.archived') });
+    toast({ 
+      title: note.archived 
+        ? (lang === 'fr' ? 'Note désarchivée' : 'Note unarchived')
+        : (lang === 'fr' ? 'Note archivée' : 'Note archived')
+    });
     fetchNotes();
   };
 
@@ -276,11 +300,15 @@ export const Notes = () => {
     });
 
     if (error) {
-      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      toast({ 
+        title: lang === 'fr' ? 'Erreur' : 'Error', 
+        description: error.message, 
+        variant: 'destructive' 
+      });
       return;
     }
 
-    toast({ title: t('notes.duplicated') });
+    toast({ title: lang === 'fr' ? 'Note dupliquée' : 'Note duplicated' });
     fetchNotes();
   };
 
@@ -296,11 +324,15 @@ export const Notes = () => {
         .eq('id', editingTerm.id);
 
       if (error) {
-        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        toast({ 
+          title: lang === 'fr' ? 'Erreur' : 'Error', 
+          description: error.message, 
+          variant: 'destructive' 
+        });
         return;
       }
 
-      toast({ title: t('notes.glossary.updated') });
+      toast({ title: lang === 'fr' ? 'Terme mis à jour' : 'Term updated' });
     } else {
       const { error } = await supabase
         .from('glossary_terms')
@@ -311,11 +343,15 @@ export const Notes = () => {
         });
 
       if (error) {
-        toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+        toast({ 
+          title: lang === 'fr' ? 'Erreur' : 'Error', 
+          description: error.message, 
+          variant: 'destructive' 
+        });
         return;
       }
 
-      toast({ title: t('notes.glossary.created') });
+      toast({ title: lang === 'fr' ? 'Terme créé' : 'Term created' });
     }
 
     setGlossaryEditorOpen(false);
@@ -324,16 +360,20 @@ export const Notes = () => {
   };
 
   const handleDeleteGlossaryTerm = async (id: string) => {
-    if (!confirm(t('notes.glossary.confirmDelete'))) return;
+    if (!confirm(lang === 'fr' ? 'Êtes-vous sûr de vouloir supprimer ce terme ?' : 'Are you sure you want to delete this term?')) return;
 
     const { error } = await supabase.from('glossary_terms').delete().eq('id', id);
 
     if (error) {
-      toast({ title: t('common.error'), description: error.message, variant: 'destructive' });
+      toast({ 
+        title: lang === 'fr' ? 'Erreur' : 'Error', 
+        description: error.message, 
+        variant: 'destructive' 
+      });
       return;
     }
 
-    toast({ title: t('notes.glossary.deleted') });
+    toast({ title: lang === 'fr' ? 'Terme supprimé' : 'Term deleted' });
     fetchGlossaryTerms();
   };
 
@@ -392,13 +432,13 @@ export const Notes = () => {
             <span className="flex-1">{note.title}</span>
             <div className="flex gap-1 flex-wrap">
               {note.visibility === 'kartel' && (
-                <Badge variant="secondary">{t('notes.badges.shared')}</Badge>
+                <Badge variant="secondary">{lang === 'fr' ? 'Partagé' : 'Shared'}</Badge>
               )}
               {isFavorited && (
-                <Badge variant="default">{t('notes.badges.favorite')}</Badge>
+                <Badge variant="default">{lang === 'fr' ? 'Favori' : 'Favorite'}</Badge>
               )}
               {note.archived && (
-                <Badge variant="outline">{t('notes.badges.archived')}</Badge>
+                <Badge variant="outline">{lang === 'fr' ? 'Archivé' : 'Archived'}</Badge>
               )}
             </div>
           </CardTitle>
@@ -422,7 +462,7 @@ export const Notes = () => {
               <Button
                 size="sm"
                 variant={isFavorited ? 'default' : 'ghost'}
-                title={t('notes.actions.favorite')}
+                title={lang === 'fr' ? 'Favori' : 'Favorite'}
                 onClick={() => handleToggleFavorite(note)}
               >
                 <Star className="w-4 h-4" />
@@ -430,7 +470,7 @@ export const Notes = () => {
               <Button
                 size="sm"
                 variant="ghost"
-                title={t('notes.actions.duplicate')}
+                title={lang === 'fr' ? 'Dupliquer' : 'Duplicate'}
                 onClick={() => handleDuplicateNote(note)}
               >
                 <Copy className="w-4 h-4" />
@@ -438,7 +478,7 @@ export const Notes = () => {
               <Button
                 size="sm"
                 variant="ghost"
-                title={t('notes.actions.edit')}
+                title={lang === 'fr' ? 'Modifier' : 'Edit'}
                 onClick={() => {
                   setEditingNote(note);
                   setEditorOpen(true);
@@ -449,7 +489,10 @@ export const Notes = () => {
               <Button
                 size="sm"
                 variant="ghost"
-                title={note.archived ? t('notes.actions.unarchive') : t('notes.actions.archive')}
+                title={note.archived 
+                  ? (lang === 'fr' ? 'Désarchiver' : 'Unarchive')
+                  : (lang === 'fr' ? 'Archiver' : 'Archive')
+                }
                 onClick={() => handleArchiveNote(note)}
               >
                 <Archive className="w-4 h-4" />
@@ -457,7 +500,7 @@ export const Notes = () => {
               <Button
                 size="sm"
                 variant="ghost"
-                title={t('notes.actions.delete')}
+                title={lang === 'fr' ? 'Supprimer' : 'Delete'}
                 onClick={() => handleDeleteNote(note.id)}
               >
                 <Trash2 className="w-4 h-4" />
@@ -476,20 +519,22 @@ export const Notes = () => {
   return (
     <div className="space-y-6">
       <div className="pt-2">
-        <p className="text-muted-foreground text-[110%]">{t('dashboard.notes.subtitle')}</p>
+        <p className="text-muted-foreground text-[110%]">
+          {lang === 'fr' ? 'Gérez vos notes personnelles et partagées' : 'Manage your personal and shared notes'}
+        </p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="personal">
-            {t('notes.tabs.personal')} ({personalNotes.length})
+            {lang === 'fr' ? 'Personnel' : 'Personal'} ({personalNotes.length})
           </TabsTrigger>
           <TabsTrigger value="kartel">
-            {t('notes.tabs.kartel')} ({kartelNotes.length})
+            {lang === 'fr' ? 'Kartel' : 'Kartel'} ({kartelNotes.length})
           </TabsTrigger>
           <TabsTrigger value="glossary">
             <BookOpen className="w-4 h-4 mr-2" />
-            {t('notes.tabs.glossary')}
+            {lang === 'fr' ? 'Glossaire' : 'Glossary'}
           </TabsTrigger>
         </TabsList>
 
@@ -499,7 +544,7 @@ export const Notes = () => {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder={t('notes.search.placeholder')}
+                  placeholder={lang === 'fr' ? 'Rechercher des notes...' : 'Search notes...'}
                   className="pl-10"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -507,7 +552,7 @@ export const Notes = () => {
               </div>
               <Button variant="outline" onClick={() => setFilterOpen(true)}>
                 <Filter className="w-4 h-4 mr-2" />
-                {t('notes.filter.button')}
+                {lang === 'fr' ? 'Filtrer' : 'Filter'}
               </Button>
             </div>
             <Button
@@ -518,14 +563,16 @@ export const Notes = () => {
               }}
             >
               <Plus className="w-4 h-4" />
-              {t('notes.actions.new')}
+              {lang === 'fr' ? 'Nouvelle note' : 'New Note'}
             </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {personalNotes.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <p className="text-muted-foreground">{t('notes.empty.personal')}</p>
+                <p className="text-muted-foreground">
+                  {lang === 'fr' ? 'Aucune note personnelle' : 'No personal notes'}
+                </p>
               </div>
             ) : (
               personalNotes.map(renderNoteCard)
@@ -539,7 +586,7 @@ export const Notes = () => {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder={t('notes.search.placeholder')}
+                  placeholder={lang === 'fr' ? 'Rechercher des notes...' : 'Search notes...'}
                   className="pl-10"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -547,7 +594,7 @@ export const Notes = () => {
               </div>
               <Button variant="outline" onClick={() => setFilterOpen(true)}>
                 <Filter className="w-4 h-4 mr-2" />
-                {t('notes.filter.button')}
+                {lang === 'fr' ? 'Filtrer' : 'Filter'}
               </Button>
             </div>
             <Button
@@ -558,14 +605,16 @@ export const Notes = () => {
               }}
             >
               <Plus className="w-4 h-4" />
-              {t('notes.actions.newShared')}
+              {lang === 'fr' ? 'Nouvelle note partagée' : 'New Shared Note'}
             </Button>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {kartelNotes.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <p className="text-muted-foreground">{t('notes.empty.kartel')}</p>
+                <p className="text-muted-foreground">
+                  {lang === 'fr' ? 'Aucune note partagée' : 'No shared notes'}
+                </p>
               </div>
             ) : (
               kartelNotes.map(renderNoteCard)
@@ -578,7 +627,7 @@ export const Notes = () => {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
-                placeholder={t('notes.glossary.searchPlaceholder')}
+                placeholder={lang === 'fr' ? 'Rechercher un terme...' : 'Search term...'}
                 className="pl-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -592,14 +641,16 @@ export const Notes = () => {
               }}
             >
               <Plus className="w-4 h-4" />
-              {t('notes.glossary.addNew')}
+              {lang === 'fr' ? 'Ajouter un terme' : 'Add Term'}
             </Button>
           </div>
 
           <div className="space-y-4">
             {filteredGlossary.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-muted-foreground">{t('notes.glossary.empty')}</p>
+                <p className="text-muted-foreground">
+                  {lang === 'fr' ? 'Aucun terme dans le glossaire' : 'No terms in glossary'}
+                </p>
               </div>
             ) : (
               filteredGlossary.map((term) => (
@@ -614,7 +665,7 @@ export const Notes = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          title={t('notes.actions.edit')}
+                          title={lang === 'fr' ? 'Modifier' : 'Edit'}
                           onClick={() => {
                             setEditingTerm(term);
                             setGlossaryEditorOpen(true);
@@ -625,7 +676,7 @@ export const Notes = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          title={t('notes.actions.delete')}
+                          title={lang === 'fr' ? 'Supprimer' : 'Delete'}
                           onClick={() => handleDeleteGlossaryTerm(term.id)}
                         >
                           <Trash2 className="w-4 h-4" />

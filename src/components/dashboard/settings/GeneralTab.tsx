@@ -27,8 +27,8 @@ export const GeneralTab = () => {
     await new Promise(resolve => setTimeout(resolve, 500));
     
     toast({
-      title: t('settings.general.saved'),
-      description: t('settings.general.savedDescription'),
+      title: lang === 'fr' ? 'Paramètres enregistrés' : 'Settings saved',
+      description: lang === 'fr' ? 'Vos modifications ont été enregistrées avec succès' : 'Your changes have been saved successfully',
     });
     
     setSaving(false);
@@ -38,36 +38,42 @@ export const GeneralTab = () => {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>{t('settings.general.title')}</CardTitle>
-          <CardDescription>{t('settings.general.description')}</CardDescription>
+          <CardTitle>{lang === 'fr' ? 'Paramètres généraux' : 'General Settings'}</CardTitle>
+          <CardDescription>
+            {lang === 'fr' ? 'Configurez les informations de base de votre kartel' : 'Configure your kartel\'s basic information'}
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="kartel-name">
-              {t('settings.general.kartelName')} *
+              {lang === 'fr' ? 'Nom du kartel' : 'Kartel Name'} *
             </Label>
             <Input
               id="kartel-name"
               value={kartelName}
               onChange={(e) => setKartelName(e.target.value)}
-              placeholder={t('settings.general.kartelNamePlaceholder')}
+              placeholder={lang === 'fr' ? 'Nom de votre kartel' : 'Your kartel name'}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="objective">{t('settings.general.objective')}</Label>
+            <Label htmlFor="objective">
+              {lang === 'fr' ? 'Objectif' : 'Objective'}
+            </Label>
             <Textarea
               id="objective"
               value={objective}
               onChange={(e) => setObjective(e.target.value)}
-              placeholder={t('settings.general.objectivePlaceholder')}
+              placeholder={lang === 'fr' ? 'Décrivez l\'objectif de votre kartel' : 'Describe your kartel\'s objective'}
               rows={3}
             />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="deadline">{t('settings.general.deadline')}</Label>
+              <Label htmlFor="deadline">
+                {lang === 'fr' ? 'Échéance' : 'Deadline'}
+              </Label>
               <Input
                 id="deadline"
                 type="date"
@@ -77,7 +83,9 @@ export const GeneralTab = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="timezone">{t('settings.general.timezone')}</Label>
+              <Label htmlFor="timezone">
+                {lang === 'fr' ? 'Fuseau horaire' : 'Timezone'}
+              </Label>
               <Select value={timezone} onValueChange={setTimezone}>
                 <SelectTrigger>
                   <SelectValue />
@@ -93,7 +101,9 @@ export const GeneralTab = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="language">{t('settings.general.defaultLanguage')}</Label>
+            <Label htmlFor="language">
+              {lang === 'fr' ? 'Langue par défaut' : 'Default Language'}
+            </Label>
             <Select value={defaultLanguage} onValueChange={setDefaultLanguage}>
               <SelectTrigger>
                 <SelectValue />
@@ -108,7 +118,10 @@ export const GeneralTab = () => {
           <div className="flex justify-end pt-4">
             <Button onClick={handleSave} disabled={saving}>
               <Save className="w-4 h-4 mr-2" />
-              {saving ? t('common.saving') : t('common.save')}
+              {saving 
+                ? (lang === 'fr' ? 'Enregistrement...' : 'Saving...')
+                : (lang === 'fr' ? 'Enregistrer' : 'Save')
+              }
             </Button>
           </div>
         </CardContent>
