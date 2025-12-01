@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,7 +28,7 @@ const TAGS = [
 ];
 
 export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -49,14 +49,14 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
     const files = Array.from(e.target.files || []);
     const validFiles = files.filter(f => {
       if (f.size > 25 * 1024 * 1024) {
-        toast.error(t('plusOne.form.errors.fileTooLarge', { name: f.name }));
+        toast.error(lang === 'fr' ? `Fichier trop volumineux: ${f.name}` : `File too large: ${f.name}`);
         return false;
       }
       return true;
     });
     
     if (attachments.length + validFiles.length > 10) {
-      toast.error(t('plusOne.form.errors.tooManyFiles'));
+      toast.error(lang === 'fr' ? 'Trop de fichiers (max 10)' : 'Too many files (max 10)');
       return;
     }
     
@@ -71,28 +71,19 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
     e.preventDefault();
     
     if (selectedTags.length === 0) {
-      toast.error(t('plusOne.form.errors.noTags'));
+      toast.error(lang === 'fr' ? 'Veuillez sélectionner au moins un tag' : 'Please select at least one tag');
       return;
     }
 
     setLoading(true);
     
     try {
-      // Upload attachments if any
       const attachmentUrls = await Promise.all(
-        attachments.map(async (file) => {
-          const fileExt = file.name.split('.').pop();
-          const fileName = `${Math.random()}.${fileExt}`;
-          const filePath = `${cartelId}/${fileName}`;
-          
-          // Note: Storage bucket would need to be created
-          // For now, we'll store file metadata
-          return {
-            name: file.name,
-            size: file.size,
-            type: file.type
-          };
-        })
+        attachments.map(async (file) => ({
+          name: file.name,
+          size: file.size,
+          type: file.type
+        }))
       );
 
       const { error } = await supabase
@@ -110,7 +101,7 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
 
       if (error) throw error;
 
-      toast.success(t('plusOne.form.success'));
+      toast.success(lang === 'fr' ? 'Demande créée avec succès' : 'Request created successfully');
       setTitle("");
       setBody("");
       setSelectedTags([]);
@@ -120,39 +111,50 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
       onSuccess();
     } catch (error) {
       console.error('Error creating request:', error);
-      toast.error(t('plusOne.form.errors.submit'));
+      toast.error(lang === 'fr' ? 'Erreur lors de la création' : 'Error creating request');
     } finally {
       setLoading(false);
     }
   };
 
+  const getTagLabel = (tag: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      methodo: { fr: 'Méthodo', en: 'Method' },
+      ressource: { fr: 'Ressource', en: 'Resource' },
+      blocage: { fr: 'Blocage', en: 'Blocker' },
+      motivation: { fr: 'Motivation', en: 'Motivation' },
+      organisation: { fr: 'Organisation', en: 'Organization' }
+    };
+    return lang === 'fr' ? labels[tag]?.fr : labels[tag]?.en;
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-card p-6 rounded-lg border">
       <div className="space-y-2">
-        <Label htmlFor="title">{t('plusOne.form.title')} *</Label>
+        <Label htmlFor="title">{lang === 'fr' ? 'Titre' : 'Title'} *</Label>
         <Input
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
-          placeholder={t('plusOne.form.titlePlaceholder')}
+          placeholder={lang === 'fr' ? 'Titre de votre demande' : 'Title of your request'}
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="body">{t('plusOne.form.body')} *</Label>
+        <Label htmlFor="body">{lang === 'fr' ? 'Description' : 'Description'} *</Label>
         <Textarea
           id="body"
           value={body}
           onChange={(e) => setBody(e.target.value)}
           required
           rows={6}
-          placeholder={t('plusOne.form.bodyPlaceholder')}
+          placeholder={lang === 'fr' ? 'Décrivez votre demande en détail' : 'Describe your request in detail'}
         />
       </div>
 
       <div className="space-y-2">
-        <Label>{t('plusOne.form.tags')} *</Label>
+        <Label>{lang === 'fr' ? 'Tags' : 'Tags'} *</Label>
         <div className="flex flex-wrap gap-2">
           {TAGS.map(tag => (
             <Button
@@ -162,14 +164,14 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
               size="sm"
               onClick={() => handleTagToggle(tag)}
             >
-              {t(`plusOne.tags.${tag}`)}
+              {getTagLabel(tag)}
             </Button>
           ))}
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label>{t('plusOne.form.dueDate')}</Label>
+        <Label>{lang === 'fr' ? 'Date d\'échéance' : 'Due Date'}</Label>
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -180,7 +182,7 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {dueDate ? format(dueDate, "PPP") : t('plusOne.form.selectDate')}
+              {dueDate ? format(dueDate, "PPP") : (lang === 'fr' ? 'Sélectionner une date' : 'Select a date')}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
@@ -195,7 +197,7 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
       </div>
 
       <div className="space-y-2">
-        <Label>{t('plusOne.form.attachments')}</Label>
+        <Label>{lang === 'fr' ? 'Pièces jointes' : 'Attachments'}</Label>
         <div className="space-y-2">
           <Input
             type="file"
@@ -222,7 +224,7 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
             </div>
           )}
           <p className="text-xs text-muted-foreground">
-            {t('plusOne.form.attachmentLimits')}
+            {lang === 'fr' ? 'Max 10 fichiers, 25 Mo chacun' : 'Max 10 files, 25MB each'}
           </p>
         </div>
       </div>
@@ -234,12 +236,12 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
           onCheckedChange={setIsPrivate}
         />
         <Label htmlFor="private" className="cursor-pointer">
-          {t('plusOne.form.privateRequest')}
+          {lang === 'fr' ? 'Demande privée (visible uniquement par le +1)' : 'Private request (visible only by +1)'}
         </Label>
       </div>
 
       <Button type="submit" disabled={loading} className="w-full">
-        {loading ? t('common.loading') : t('plusOne.form.submit')}
+        {loading ? (lang === 'fr' ? 'Chargement...' : 'Loading...') : (lang === 'fr' ? 'Envoyer la demande' : 'Submit Request')}
       </Button>
     </form>
   );

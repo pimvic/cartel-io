@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +31,7 @@ interface RequestListProps {
 }
 
 export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }: RequestListProps) => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [requests, setRequests] = useState<Request[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -40,7 +40,6 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
   useEffect(() => {
     loadRequests();
     
-    // Real-time subscription
     const channel = supabase
       .channel(`requests-${cartelId}`)
       .on(
@@ -92,7 +91,29 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
     req.body.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const locale = i18n.language === 'fr' ? fr : enUS;
+  const locale = lang === 'fr' ? fr : enUS;
+
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      ouvert: { fr: 'Ouvert', en: 'Open' },
+      en_cours: { fr: 'En cours', en: 'In Progress' },
+      en_attente_infos: { fr: 'En attente d\'infos', en: 'Waiting for Info' },
+      resolu: { fr: 'Résolu', en: 'Resolved' },
+      ferme: { fr: 'Fermé', en: 'Closed' }
+    };
+    return lang === 'fr' ? labels[status]?.fr : labels[status]?.en;
+  };
+
+  const getTagLabel = (tag: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      methodo: { fr: 'Méthodo', en: 'Method' },
+      ressource: { fr: 'Ressource', en: 'Resource' },
+      blocage: { fr: 'Blocage', en: 'Blocker' },
+      motivation: { fr: 'Motivation', en: 'Motivation' },
+      organisation: { fr: 'Organisation', en: 'Organization' }
+    };
+    return lang === 'fr' ? labels[tag]?.fr : labels[tag]?.en;
+  };
 
   return (
     <div className="space-y-4">
@@ -102,7 +123,7 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t('plusOne.requests.search')}
+            placeholder={lang === 'fr' ? 'Rechercher...' : 'Search...'}
             className="pl-10"
           />
         </div>
@@ -112,23 +133,23 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
           onChange={(e) => setStatusFilter(e.target.value)}
           className="px-3 py-2 rounded-md border bg-background"
         >
-          <option value="all">{t('plusOne.requests.allStatus')}</option>
-          <option value="ouvert">{t('plusOne.status.ouvert')}</option>
-          <option value="en_cours">{t('plusOne.status.en_cours')}</option>
-          <option value="en_attente_infos">{t('plusOne.status.en_attente_infos')}</option>
-          <option value="resolu">{t('plusOne.status.resolu')}</option>
-          <option value="ferme">{t('plusOne.status.ferme')}</option>
+          <option value="all">{lang === 'fr' ? 'Tous les statuts' : 'All Statuses'}</option>
+          <option value="ouvert">{getStatusLabel('ouvert')}</option>
+          <option value="en_cours">{getStatusLabel('en_cours')}</option>
+          <option value="en_attente_infos">{getStatusLabel('en_attente_infos')}</option>
+          <option value="resolu">{getStatusLabel('resolu')}</option>
+          <option value="ferme">{getStatusLabel('ferme')}</option>
         </select>
       </div>
 
       {loading ? (
         <div className="text-center py-8 text-muted-foreground">
-          {t('common.loading')}
+          {lang === 'fr' ? 'Chargement...' : 'Loading...'}
         </div>
       ) : filteredRequests.length === 0 ? (
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
-            {t('plusOne.requests.empty')}
+            {lang === 'fr' ? 'Aucune demande trouvée' : 'No requests found'}
           </CardContent>
         </Card>
       ) : (
@@ -148,7 +169,7 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
                         ? 'secondary' 
                         : 'default'
                     }>
-                      {t(`plusOne.status.${request.status}`)}
+                      {getStatusLabel(request.status)}
                     </Badge>
                   </div>
                   
@@ -159,12 +180,12 @@ export const RequestList = ({ cartelId, userId, isCoordinator, onSelectRequest }
                   <div className="flex flex-wrap gap-2">
                     {request.tags.map(tag => (
                       <Badge key={tag} variant="outline" className="text-xs">
-                        {t(`plusOne.tags.${tag}`)}
+                        {getTagLabel(tag)}
                       </Badge>
                     ))}
                     {request.visibility === 'prive' && (
                       <Badge variant="outline" className="text-xs">
-                        {t('plusOne.visibility.private')}
+                        {lang === 'fr' ? 'Privé' : 'Private'}
                       </Badge>
                     )}
                   </div>

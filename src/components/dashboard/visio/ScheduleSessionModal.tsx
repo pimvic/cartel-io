@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
@@ -35,7 +35,7 @@ export const ScheduleSessionModal = ({
   userId,
   onSuccess 
 }: ScheduleSessionModalProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState<Date>();
@@ -52,7 +52,7 @@ export const ScheduleSessionModal = ({
 
   const handleSchedule = async () => {
     if (!startDate) {
-      toast.error(t('visio.errors.selectDate'));
+      toast.error(lang === 'fr' ? 'Veuillez sélectionner une date' : 'Please select a date');
       return;
     }
 
@@ -65,12 +65,14 @@ export const ScheduleSessionModal = ({
       const end = new Date(start.getTime() + duration * 60 * 1000);
       const roomCode = generateRoomCode();
       
+      const defaultTitle = lang === 'fr' ? 'Session planifiée' : 'Scheduled Session';
+      
       const { data: session, error: sessionError } = await supabase
         .from('visio_sessions')
         .insert({
           cartel_id: cartelId,
           host_id: userId,
-          title: title || `${t('visio.scheduledSession')} – ${format(start, 'yyyy-MM-dd HH:mm')}`,
+          title: title || `${defaultTitle} – ${format(start, 'yyyy-MM-dd HH:mm')}`,
           description,
           start_at: start.toISOString(),
           end_at: end.toISOString(),
@@ -87,13 +89,13 @@ export const ScheduleSessionModal = ({
 
       if (sessionError) throw sessionError;
 
-      // Create calendar event
+      const linkLabel = lang === 'fr' ? 'Lien de connexion' : 'Join link';
       const { error: eventError } = await supabase
         .from('events')
         .insert({
           cartel_id: cartelId,
           title: session.title,
-          description: `${description}\n\n${t('visio.joinLink')}: ${session.join_url}`,
+          description: `${description}\n\n${linkLabel}: ${session.join_url}`,
           event_type: 'visio',
           event_date: start.toISOString(),
           visio_link: session.join_url
@@ -101,9 +103,8 @@ export const ScheduleSessionModal = ({
 
       if (eventError) console.error('Error creating calendar event:', eventError);
 
-      toast.success(t('visio.sessionScheduled'));
+      toast.success(lang === 'fr' ? 'Session planifiée avec succès' : 'Session scheduled successfully');
       
-      // Reset form
       setTitle("");
       setDescription("");
       setStartDate(undefined);
@@ -116,7 +117,7 @@ export const ScheduleSessionModal = ({
       onOpenChange(false);
     } catch (error) {
       console.error('Error scheduling session:', error);
-      toast.error(t('visio.errors.scheduleSession'));
+      toast.error(lang === 'fr' ? 'Erreur lors de la planification' : 'Error scheduling session');
     } finally {
       setLoading(false);
     }
@@ -126,37 +127,37 @@ export const ScheduleSessionModal = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{t('visio.scheduleSession')}</DialogTitle>
+          <DialogTitle>{lang === 'fr' ? 'Planifier une session' : 'Schedule Session'}</DialogTitle>
           <DialogDescription>
-            {t('visio.scheduleSessionDescription')}
+            {lang === 'fr' ? 'Créez une session vidéo planifiée' : 'Create a scheduled video session'}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="title">{t('visio.form.title')}</Label>
+            <Label htmlFor="title">{lang === 'fr' ? 'Titre' : 'Title'}</Label>
             <Input
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder={t('visio.form.titlePlaceholder')}
+              placeholder={lang === 'fr' ? 'Titre de la session' : 'Session title'}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">{t('visio.form.description')}</Label>
+            <Label htmlFor="description">{lang === 'fr' ? 'Description' : 'Description'}</Label>
             <Textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder={t('visio.form.descriptionPlaceholder')}
+              placeholder={lang === 'fr' ? 'Description de la session' : 'Session description'}
               rows={3}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>{t('visio.form.date')}</Label>
+              <Label>{lang === 'fr' ? 'Date' : 'Date'}</Label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
@@ -167,7 +168,7 @@ export const ScheduleSessionModal = ({
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {startDate ? format(startDate, "PPP") : t('visio.form.selectDate')}
+                    {startDate ? format(startDate, "PPP") : (lang === 'fr' ? 'Sélectionner une date' : 'Select a date')}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
@@ -183,7 +184,7 @@ export const ScheduleSessionModal = ({
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="time">{t('visio.form.time')}</Label>
+              <Label htmlFor="time">{lang === 'fr' ? 'Heure' : 'Time'}</Label>
               <Input
                 id="time"
                 type="time"
@@ -194,24 +195,24 @@ export const ScheduleSessionModal = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="duration">{t('visio.form.duration')}</Label>
+            <Label htmlFor="duration">{lang === 'fr' ? 'Durée' : 'Duration'}</Label>
             <select
               id="duration"
               value={duration}
               onChange={(e) => setDuration(Number(e.target.value))}
               className="w-full px-3 py-2 rounded-md border bg-background"
             >
-              <option value={30}>30 {t('visio.form.minutes')}</option>
-              <option value={60}>1 {t('visio.form.hour')}</option>
-              <option value={90}>1.5 {t('visio.form.hours')}</option>
-              <option value={120}>2 {t('visio.form.hours')}</option>
-              <option value={180}>3 {t('visio.form.hours')}</option>
+              <option value={30}>30 {lang === 'fr' ? 'minutes' : 'minutes'}</option>
+              <option value={60}>1 {lang === 'fr' ? 'heure' : 'hour'}</option>
+              <option value={90}>1.5 {lang === 'fr' ? 'heures' : 'hours'}</option>
+              <option value={120}>2 {lang === 'fr' ? 'heures' : 'hours'}</option>
+              <option value={180}>3 {lang === 'fr' ? 'heures' : 'hours'}</option>
             </select>
           </div>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <Label htmlFor="recording">{t('visio.form.recording')}</Label>
+              <Label htmlFor="recording">{lang === 'fr' ? 'Enregistrement' : 'Recording'}</Label>
               <Switch
                 id="recording"
                 checked={recordingEnabled}
@@ -220,7 +221,7 @@ export const ScheduleSessionModal = ({
             </div>
 
             <div className="flex items-center justify-between">
-              <Label htmlFor="transcription">{t('visio.form.transcription')}</Label>
+              <Label htmlFor="transcription">{lang === 'fr' ? 'Transcription' : 'Transcription'}</Label>
               <Switch
                 id="transcription"
                 checked={transcriptionEnabled}
@@ -231,10 +232,10 @@ export const ScheduleSessionModal = ({
 
           <div className="flex gap-2 pt-4">
             <Button onClick={handleSchedule} disabled={loading} className="flex-1">
-              {loading ? t('common.loading') : t('visio.schedule')}
+              {loading ? (lang === 'fr' ? 'Planification...' : 'Scheduling...') : (lang === 'fr' ? 'Planifier' : 'Schedule')}
             </Button>
             <Button onClick={() => onOpenChange(false)} variant="outline">
-              {t('common.cancel')}
+              {lang === 'fr' ? 'Annuler' : 'Cancel'}
             </Button>
           </div>
         </div>

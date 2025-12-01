@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -28,8 +28,8 @@ interface SessionCardProps {
 }
 
 export const SessionCard = ({ session, onJoin, showJoinButton = true }: SessionCardProps) => {
-  const { t, i18n } = useTranslation();
-  const locale = i18n.language === 'fr' ? fr : enUS;
+  const { lang } = useParams<{ lang: string }>();
+  const locale = lang === 'fr' ? fr : enUS;
 
   const getStatusBadge = (status: string) => {
     const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
@@ -39,9 +39,16 @@ export const SessionCard = ({ session, onJoin, showJoinButton = true }: SessionC
       cancelled: "destructive"
     };
     
+    const labels: Record<string, { fr: string; en: string }> = {
+      scheduled: { fr: 'Planifiée', en: 'Scheduled' },
+      active: { fr: 'Active', en: 'Active' },
+      ended: { fr: 'Terminée', en: 'Ended' },
+      cancelled: { fr: 'Annulée', en: 'Cancelled' }
+    };
+    
     return (
       <Badge variant={variants[status] || "outline"}>
-        {t(`visio.status.${status}`)}
+        {lang === 'fr' ? labels[status]?.fr : labels[status]?.en}
       </Badge>
     );
   };
@@ -57,7 +64,7 @@ export const SessionCard = ({ session, onJoin, showJoinButton = true }: SessionC
           <div className="flex-1">
             <h4 className="font-semibold mb-1">{session.title}</h4>
             <p className="text-sm text-muted-foreground">
-              {session.host?.name || t('visio.unknownHost')}
+              {session.host?.name || (lang === 'fr' ? 'Hôte inconnu' : 'Unknown Host')}
             </p>
           </div>
           {getStatusBadge(session.status)}
@@ -81,13 +88,13 @@ export const SessionCard = ({ session, onJoin, showJoinButton = true }: SessionC
             {session.recording_url && (
               <Badge variant="outline" className="gap-1">
                 <Video className="h-3 w-3" />
-                {t('visio.recorded')}
+                {lang === 'fr' ? 'Enregistré' : 'Recorded'}
               </Badge>
             )}
             {session.transcription_enabled && (
               <Badge variant="outline" className="gap-1">
                 <Mic className="h-3 w-3" />
-                {t('visio.transcribed')}
+                {lang === 'fr' ? 'Transcrit' : 'Transcribed'}
               </Badge>
             )}
           </div>
@@ -100,7 +107,7 @@ export const SessionCard = ({ session, onJoin, showJoinButton = true }: SessionC
             size="sm"
           >
             <Video className="mr-2 h-4 w-4" />
-            {t('visio.join')}
+            {lang === 'fr' ? 'Rejoindre' : 'Join'}
           </Button>
         )}
       </CardContent>

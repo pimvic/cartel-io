@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,7 +13,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { ChevronRight, Plus } from "lucide-react";
 
 export const VotrePlusUn = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { user } = useAuth();
   const [cartelId, setCartelId] = useState<string>("");
   const [currentUserId, setCurrentUserId] = useState<string>("");
@@ -58,7 +58,7 @@ export const VotrePlusUn = () => {
   if (!cartelId || !currentUserId) {
     return (
       <div className="flex justify-center items-center h-96">
-        <p className="text-muted-foreground">{t('common.loading')}</p>
+        <p className="text-muted-foreground">{lang === 'fr' ? 'Chargement...' : 'Loading...'}</p>
       </div>
     );
   }
@@ -79,49 +79,57 @@ export const VotrePlusUn = () => {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">{t('dashboard.menu.dashboard')}</BreadcrumbLink>
+            <BreadcrumbLink href="#">{lang === 'fr' ? 'Tableau de bord' : 'Dashboard'}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <ChevronRight className="h-4 w-4" />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbPage>{t('dashboard.menu.plusOne')}</BreadcrumbPage>
+            <BreadcrumbPage>{lang === 'fr' ? 'Votre +1' : 'Your +1'}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">{t('plusOne.title')}</h1>
-          <p className="text-muted-foreground mt-1">{t('plusOne.subtitle')}</p>
+          <h1 className="text-3xl font-bold">{lang === 'fr' ? 'Votre +1' : 'Your +1'}</h1>
+          <p className="text-muted-foreground mt-1">
+            {lang === 'fr' ? 'Demandez de l\'aide et des ressources à votre coordinateur' : 'Request help and resources from your coordinator'}
+          </p>
         </div>
       </div>
 
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
-          <TabsTrigger value="overview">{t('plusOne.tabs.overview')}</TabsTrigger>
-          <TabsTrigger value="requests">{t('plusOne.tabs.requests')}</TabsTrigger>
-          <TabsTrigger value="new-request">{t('plusOne.tabs.newRequest')}</TabsTrigger>
+          <TabsTrigger value="overview">{lang === 'fr' ? 'Aperçu' : 'Overview'}</TabsTrigger>
+          <TabsTrigger value="requests">{lang === 'fr' ? 'Demandes' : 'Requests'}</TabsTrigger>
+          <TabsTrigger value="new-request">{lang === 'fr' ? 'Nouvelle demande' : 'New Request'}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>{t('plusOne.about.title')}</CardTitle>
+                <CardTitle>{lang === 'fr' ? 'À propos du +1' : 'About +1'}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">{t('plusOne.about.whoTitle')}</h4>
-                  <p className="text-sm text-muted-foreground">{t('plusOne.about.whoContent')}</p>
+                  <h4 className="font-semibold mb-2">{lang === 'fr' ? 'Qui est le +1 ?' : 'Who is +1?'}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {lang === 'fr' ? 'Le +1 est votre coordinateur de cartel, votre point de contact principal pour toute demande d\'aide ou de ressources.' : 'The +1 is your cartel coordinator, your main point of contact for any help or resource requests.'}
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">{t('plusOne.about.roleTitle')}</h4>
-                  <p className="text-sm text-muted-foreground">{t('plusOne.about.roleContent')}</p>
+                  <h4 className="font-semibold mb-2">{lang === 'fr' ? 'Quel est son rôle ?' : 'What is their role?'}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {lang === 'fr' ? 'Le +1 facilite votre travail en groupe, répond à vos questions et vous oriente vers les bonnes ressources.' : 'The +1 facilitates your group work, answers your questions and guides you to the right resources.'}
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">{t('plusOne.about.whenTitle')}</h4>
-                  <p className="text-sm text-muted-foreground">{t('plusOne.about.whenContent')}</p>
+                  <h4 className="font-semibold mb-2">{lang === 'fr' ? 'Quand le contacter ?' : 'When to contact them?'}</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {lang === 'fr' ? 'Contactez votre +1 pour toute difficulté méthodologique, organisationnelle ou motivationnelle.' : 'Contact your +1 for any methodological, organizational or motivational difficulty.'}
+                  </p>
                 </div>
               </CardContent>
             </Card>

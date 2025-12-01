@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +27,7 @@ interface FeedListProps {
 const ITEMS_PER_PAGE = 10;
 
 export const FeedList = ({ cartelId }: FeedListProps) => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -36,7 +36,6 @@ export const FeedList = ({ cartelId }: FeedListProps) => {
   useEffect(() => {
     loadFeed();
     
-    // Real-time subscription for new feed items
     const channel = supabase
       .channel(`feed-${cartelId}`)
       .on(
@@ -97,20 +96,31 @@ export const FeedList = ({ cartelId }: FeedListProps) => {
     }
   };
 
-  const locale = i18n.language === 'fr' ? fr : enUS;
+  const getActionLabel = (actionType: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      message: { fr: 'Message', en: 'Message' },
+      resource: { fr: 'Ressource', en: 'Resource' },
+      note: { fr: 'Note', en: 'Note' },
+      lien: { fr: 'Lien', en: 'Link' },
+      status_change: { fr: 'Changement de statut', en: 'Status Change' }
+    };
+    return lang === 'fr' ? labels[actionType]?.fr : labels[actionType]?.en;
+  };
+
+  const locale = lang === 'fr' ? fr : enUS;
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">{t('plusOne.feed.title')}</h3>
+      <h3 className="text-lg font-semibold">{lang === 'fr' ? 'Fil d\'activité' : 'Activity Feed'}</h3>
       
       {loading && feedItems.length === 0 ? (
         <div className="text-center py-8 text-muted-foreground">
-          {t('common.loading')}
+          {lang === 'fr' ? 'Chargement...' : 'Loading...'}
         </div>
       ) : feedItems.length === 0 ? (
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
-            {t('plusOne.feed.empty')}
+            {lang === 'fr' ? 'Aucune activité récente' : 'No recent activity'}
           </CardContent>
         </Card>
       ) : (
@@ -132,10 +142,10 @@ export const FeedList = ({ cartelId }: FeedListProps) => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge variant="secondary">
-                          {t(`plusOne.feed.actionTypes.${item.action_type}`)}
+                          {getActionLabel(item.action_type)}
                         </Badge>
                         <span className="text-sm text-muted-foreground">
-                          {item.metadata?.title || t(`plusOne.feed.targetTypes.${item.target_type}`)}
+                          {item.metadata?.title || item.target_type}
                         </span>
                       </div>
                     </div>
@@ -153,7 +163,7 @@ export const FeedList = ({ cartelId }: FeedListProps) => {
               disabled={loading}
               className="w-full"
             >
-              {loading ? t('common.loading') : t('plusOne.feed.loadMore')}
+              {loading ? (lang === 'fr' ? 'Chargement...' : 'Loading...') : (lang === 'fr' ? 'Charger plus' : 'Load More')}
             </Button>
           )}
         </>
