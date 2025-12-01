@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Video, Copy, Check } from "lucide-react";
 import { format } from "date-fns";
@@ -31,7 +29,7 @@ export const CreateSessionModal = ({
   userId,
   onSuccess 
 }: CreateSessionModalProps) => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [loading, setLoading] = useState(false);
   const [createdUrl, setCreatedUrl] = useState<string>("");
   const [copied, setCopied] = useState(false);
@@ -46,14 +44,16 @@ export const CreateSessionModal = ({
     try {
       const roomCode = generateRoomCode();
       const now = new Date();
-      const endTime = new Date(now.getTime() + 60 * 60 * 1000); // 1 hour
+      const endTime = new Date(now.getTime() + 60 * 60 * 1000);
+      
+      const defaultTitle = lang === 'fr' ? 'Session instantanée' : 'Instant Session';
       
       const { data, error } = await supabase
         .from('visio_sessions')
         .insert({
           cartel_id: cartelId,
           host_id: userId,
-          title: `${t('visio.defaultTitle')} – ${format(now, 'yyyy-MM-dd HH:mm')}`,
+          title: `${defaultTitle} – ${format(now, 'yyyy-MM-dd HH:mm')}`,
           start_at: now.toISOString(),
           end_at: endTime.toISOString(),
           duration_minutes: 60,
@@ -69,20 +69,18 @@ export const CreateSessionModal = ({
 
       setCreatedUrl(data.join_url);
       
-      // Auto-copy to clipboard
       await navigator.clipboard.writeText(data.join_url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
       
-      toast.success(t('visio.sessionCreated'));
+      toast.success(lang === 'fr' ? 'Session créée avec succès' : 'Session created successfully');
       
-      // Open in new tab
       window.open(`/visio/room/${roomCode}`, '_blank');
       
       onSuccess();
     } catch (error) {
       console.error('Error creating session:', error);
-      toast.error(t('visio.errors.createSession'));
+      toast.error(lang === 'fr' ? 'Erreur lors de la création' : 'Error creating session');
     } finally {
       setLoading(false);
     }
@@ -93,7 +91,7 @@ export const CreateSessionModal = ({
       await navigator.clipboard.writeText(createdUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-      toast.success(t('common.copied'));
+      toast.success(lang === 'fr' ? 'Lien copié' : 'Link copied');
     }
   };
 
@@ -107,32 +105,32 @@ export const CreateSessionModal = ({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t('visio.createSession')}</DialogTitle>
+          <DialogTitle>{lang === 'fr' ? 'Créer une session' : 'Create Session'}</DialogTitle>
           <DialogDescription>
-            {t('visio.createSessionDescription')}
+            {lang === 'fr' ? 'Démarrez une session vidéo instantanée' : 'Start an instant video session'}
           </DialogDescription>
         </DialogHeader>
 
         {!createdUrl ? (
           <div className="space-y-4">
             <div className="bg-muted p-4 rounded-lg space-y-2">
-              <p className="text-sm font-medium">{t('visio.quickStart')}</p>
+              <p className="text-sm font-medium">{lang === 'fr' ? 'Démarrage rapide' : 'Quick Start'}</p>
               <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-                <li>{t('visio.quickStartFeature1')}</li>
-                <li>{t('visio.quickStartFeature2')}</li>
-                <li>{t('visio.quickStartFeature3')}</li>
+                <li>{lang === 'fr' ? 'Session ouverte à tous les membres du cartel' : 'Session open to all cartel members'}</li>
+                <li>{lang === 'fr' ? 'Durée par défaut: 1 heure' : 'Default duration: 1 hour'}</li>
+                <li>{lang === 'fr' ? 'Lien partageable généré automatiquement' : 'Shareable link generated automatically'}</li>
               </ul>
             </div>
 
             <Button onClick={handleCreate} disabled={loading} className="w-full" size="lg">
               <Video className="mr-2 h-5 w-5" />
-              {loading ? t('common.loading') : t('visio.startSession')}
+              {loading ? (lang === 'fr' ? 'Création...' : 'Creating...') : (lang === 'fr' ? 'Démarrer la session' : 'Start Session')}
             </Button>
           </div>
         ) : (
           <div className="space-y-4">
             <div className="bg-success/10 border border-success/20 p-4 rounded-lg space-y-3">
-              <p className="font-medium text-success">{t('visio.sessionReady')}</p>
+              <p className="font-medium text-success">{lang === 'fr' ? 'Session prête !' : 'Session Ready!'}</p>
               <div className="flex gap-2">
                 <Input 
                   value={createdUrl} 
@@ -144,12 +142,12 @@ export const CreateSessionModal = ({
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                {t('visio.urlCopied')}
+                {lang === 'fr' ? 'Le lien a été copié et la session s\'ouvre dans un nouvel onglet' : 'The link has been copied and the session opens in a new tab'}
               </p>
             </div>
 
             <Button onClick={handleClose} variant="outline" className="w-full">
-              {t('common.close')}
+              {lang === 'fr' ? 'Fermer' : 'Close'}
             </Button>
           </div>
         )}

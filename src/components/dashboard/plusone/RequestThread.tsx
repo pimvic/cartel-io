@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,7 +45,7 @@ interface RequestThreadProps {
 const STATUS_OPTIONS = ['ouvert', 'en_cours', 'en_attente_infos', 'resolu', 'ferme'];
 
 export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: RequestThreadProps) => {
-  const { t, i18n } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const [request, setRequest] = useState<Request | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
@@ -55,7 +55,6 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
     loadRequest();
     loadMessages();
     
-    // Real-time subscription for new messages
     const channel = supabase
       .channel(`request-${requestId}`)
       .on(
@@ -127,7 +126,7 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
       loadMessages();
     } catch (error) {
       console.error('Error sending message:', error);
-      toast.error(t('plusOne.thread.errors.sendMessage'));
+      toast.error(lang === 'fr' ? 'Erreur lors de l\'envoi' : 'Error sending message');
     } finally {
       setLoading(false);
     }
@@ -150,25 +149,47 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
 
       if (error) throw error;
 
-      toast.success(t('plusOne.thread.statusUpdated'));
+      toast.success(lang === 'fr' ? 'Statut mis à jour' : 'Status updated');
       loadRequest();
     } catch (error) {
       console.error('Error updating status:', error);
-      toast.error(t('plusOne.thread.errors.updateStatus'));
+      toast.error(lang === 'fr' ? 'Erreur lors de la mise à jour' : 'Error updating status');
     }
   };
 
   if (!request) {
-    return <div className="flex justify-center p-8">{t('common.loading')}</div>;
+    return <div className="flex justify-center p-8">{lang === 'fr' ? 'Chargement...' : 'Loading...'}</div>;
   }
 
-  const locale = i18n.language === 'fr' ? fr : enUS;
+  const locale = lang === 'fr' ? fr : enUS;
+
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      ouvert: { fr: 'Ouvert', en: 'Open' },
+      en_cours: { fr: 'En cours', en: 'In Progress' },
+      en_attente_infos: { fr: 'En attente d\'infos', en: 'Waiting for Info' },
+      resolu: { fr: 'Résolu', en: 'Resolved' },
+      ferme: { fr: 'Fermé', en: 'Closed' }
+    };
+    return lang === 'fr' ? labels[status]?.fr : labels[status]?.en;
+  };
+
+  const getTagLabel = (tag: string) => {
+    const labels: Record<string, { fr: string; en: string }> = {
+      methodo: { fr: 'Méthodo', en: 'Method' },
+      ressource: { fr: 'Ressource', en: 'Resource' },
+      blocage: { fr: 'Blocage', en: 'Blocker' },
+      motivation: { fr: 'Motivation', en: 'Motivation' },
+      organisation: { fr: 'Organisation', en: 'Organization' }
+    };
+    return lang === 'fr' ? labels[tag]?.fr : labels[tag]?.en;
+  };
 
   return (
     <div className="space-y-6">
       <Button variant="ghost" onClick={onBack} className="mb-4">
         <ArrowLeft className="mr-2 h-4 w-4" />
-        {t('common.back')}
+        {lang === 'fr' ? 'Retour' : 'Back'}
       </Button>
 
       <div className="bg-card p-6 rounded-lg border space-y-4">
@@ -178,11 +199,11 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
             <div className="flex flex-wrap gap-2">
               {request.tags.map(tag => (
                 <Badge key={tag} variant="secondary">
-                  {t(`plusOne.tags.${tag}`)}
+                  {getTagLabel(tag)}
                 </Badge>
               ))}
               {request.visibility === 'prive' && (
-                <Badge variant="outline">{t('plusOne.visibility.private')}</Badge>
+                <Badge variant="outline">{lang === 'fr' ? 'Privé' : 'Private'}</Badge>
               )}
             </div>
           </div>
@@ -196,7 +217,7 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
               >
                 {STATUS_OPTIONS.map(status => (
                   <option key={status} value={status}>
-                    {t(`plusOne.status.${status}`)}
+                    {getStatusLabel(status)}
                   </option>
                 ))}
               </select>
@@ -208,17 +229,17 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
         
         {request.due_date && (
           <p className="text-sm text-muted-foreground">
-            {t('plusOne.thread.dueDate')}: {format(new Date(request.due_date), 'PPP', { locale })}
+            {lang === 'fr' ? 'Échéance' : 'Due Date'}: {format(new Date(request.due_date), 'PPP', { locale })}
           </p>
         )}
 
         <p className="text-xs text-muted-foreground">
-          {t('plusOne.thread.created')}: {format(new Date(request.created_at), 'PPP', { locale })}
+          {lang === 'fr' ? 'Créé le' : 'Created'}: {format(new Date(request.created_at), 'PPP', { locale })}
         </p>
       </div>
 
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">{t('plusOne.thread.messages')}</h3>
+        <h3 className="text-lg font-semibold">{lang === 'fr' ? 'Messages' : 'Messages'}</h3>
         
         <div className="space-y-3">
           {messages.map((message) => (
@@ -247,7 +268,7 @@ export const RequestThread = ({ requestId, userId, isCoordinator, onBack }: Requ
           <Textarea
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder={t('plusOne.thread.messagePlaceholder')}
+            placeholder={lang === 'fr' ? 'Tapez votre message...' : 'Type your message...'}
             rows={3}
             className="flex-1"
             onKeyDown={(e) => {

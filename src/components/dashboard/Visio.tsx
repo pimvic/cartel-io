@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +12,7 @@ import { ChevronRight, Plus, Calendar as CalendarIcon, History } from "lucide-re
 import { toast } from "sonner";
 
 export const Visio = () => {
-  const { t } = useTranslation();
+  const { lang } = useParams<{ lang: string }>();
   const { user } = useAuth();
   const [cartelId, setCartelId] = useState<string>("");
   const [currentUserId, setCurrentUserId] = useState<string>("");
@@ -96,7 +96,7 @@ export const Visio = () => {
   if (!cartelId || !currentUserId) {
     return (
       <div className="flex justify-center items-center h-96">
-        <p className="text-muted-foreground">{t('common.loading')}</p>
+        <p className="text-muted-foreground">{lang === 'fr' ? 'Chargement...' : 'Loading...'}</p>
       </div>
     );
   }
@@ -106,21 +106,23 @@ export const Visio = () => {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink href="#">{t('dashboard.menu.dashboard')}</BreadcrumbLink>
+            <BreadcrumbLink href="#">{lang === 'fr' ? 'Tableau de bord' : 'Dashboard'}</BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator>
             <ChevronRight className="h-4 w-4" />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbPage>{t('dashboard.menu.visio')}</BreadcrumbPage>
+            <BreadcrumbPage>{lang === 'fr' ? 'Visio' : 'Video'}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">{t('visio.title')}</h1>
-          <p className="text-muted-foreground mt-1">{t('visio.subtitle')}</p>
+          <h1 className="text-3xl font-bold">{lang === 'fr' ? 'Visioconférence' : 'Video Conferencing'}</h1>
+          <p className="text-muted-foreground mt-1">
+            {lang === 'fr' ? 'Créez et rejoignez des sessions vidéo avec votre cartel' : 'Create and join video sessions with your cartel'}
+          </p>
         </div>
       </div>
 
@@ -128,20 +130,20 @@ export const Visio = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="h-5 w-5" />
-            {t('visio.startSession')}
+            {lang === 'fr' ? 'Démarrer une session' : 'Start a Session'}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <p className="text-sm text-muted-foreground">
-            {t('visio.startSessionDescription')}
+            {lang === 'fr' ? 'Créez une session immédiate ou planifiez une réunion' : 'Create an instant session or schedule a meeting'}
           </p>
           <div className="flex gap-2">
             <Button onClick={() => setCreateModalOpen(true)} size="lg" className="flex-1">
-              {t('visio.createSession')}
+              {lang === 'fr' ? 'Créer une session' : 'Create Session'}
             </Button>
             <Button onClick={() => setScheduleModalOpen(true)} variant="outline" size="lg" className="flex-1">
               <CalendarIcon className="mr-2 h-5 w-5" />
-              {t('visio.scheduleSession')}
+              {lang === 'fr' ? 'Planifier' : 'Schedule'}
             </Button>
           </div>
         </CardContent>
@@ -150,17 +152,17 @@ export const Visio = () => {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold flex items-center gap-2">
           <CalendarIcon className="h-5 w-5" />
-          {t('visio.scheduledSessions')}
+          {lang === 'fr' ? 'Sessions planifiées' : 'Scheduled Sessions'}
         </h2>
         
         {loading ? (
           <div className="text-center py-8 text-muted-foreground">
-            {t('common.loading')}
+            {lang === 'fr' ? 'Chargement...' : 'Loading...'}
           </div>
         ) : scheduledSessions.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center text-muted-foreground">
-              {t('visio.noScheduledSessions')}
+              {lang === 'fr' ? 'Aucune session planifiée' : 'No scheduled sessions'}
             </CardContent>
           </Card>
         ) : (
@@ -179,17 +181,17 @@ export const Visio = () => {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold flex items-center gap-2">
           <History className="h-5 w-5" />
-          {t('visio.sessionHistory')}
+          {lang === 'fr' ? 'Historique' : 'History'}
         </h2>
         
         {loading ? (
           <div className="text-center py-8 text-muted-foreground">
-            {t('common.loading')}
+            {lang === 'fr' ? 'Chargement...' : 'Loading...'}
           </div>
         ) : historySessions.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center text-muted-foreground">
-              {t('visio.noHistory')}
+              {lang === 'fr' ? 'Aucun historique' : 'No history'}
             </CardContent>
           </Card>
         ) : (
