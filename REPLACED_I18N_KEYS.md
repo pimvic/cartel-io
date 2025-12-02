@@ -65,24 +65,71 @@ All internationalization (i18n) keys are being replaced with hard-coded French a
 **Status:** Complete  
 **Replaced Keys:** All tool names, descriptions, categories, statuses, breadcrumb, search placeholder, progress labels, section headings (Modules, Guides, Collaborative Activities, Resources, Templates, External Services)
 
-### 🔄 In Progress / Remaining Components (28+ files)
+#### 12. src/components/dashboard/Calendar.tsx
+**Status:** Complete (rewritten as monthly calendar view)  
+**Replaced Keys:**
+- `calendar.title` → "Calendrier" / "Calendar"
+- `calendar.subtitle` → "Gérez vos événements et rendez-vous" / "Manage your events and appointments"
+- `calendar.addEvent` → "Ajouter un événement" / "Add Event"
+- `calendar.editEvent` → "Modifier l'événement" / "Edit Event"
+- `calendar.deleteEvent` → "Supprimer l'événement" / "Delete Event"
+- `calendar.eventTitle` → "Titre de l'événement" / "Event Title"
+- `calendar.description` → "Description" / "Description"
+- `calendar.startDateTime` → "Date et heure de début" / "Start Date & Time"
+- `calendar.duration` → "Durée" / "Duration"
+- `calendar.location` → "Lieu" / "Location"
+- `calendar.save` → "Enregistrer" / "Save"
+- `calendar.cancel` → "Annuler" / "Cancel"
+- `calendar.today` → "Aujourd'hui" / "Today"
+- `calendar.noEvents` → "Aucun événement pour ce jour" / "No events for this day"
+- Duration options and weekday labels hard-coded in FR/EN
+
+#### 13. src/components/dashboard/KnowledgeBase.tsx
+**Status:** Complete  
+**Replaced Keys:** All search, filter, resource type labels, action buttons, empty states
+
+#### 14. src/components/dashboard/Notes.tsx
+**Status:** Complete  
+**Replaced Keys:** All tab labels, search, filter, action buttons, editor labels, empty states
+
+#### 15. src/components/dashboard/Settings.tsx
+**Status:** Complete  
+**Replaced Keys:** Tab labels, section headings
+
+#### 16. src/components/dashboard/settings/GeneralTab.tsx
+**Status:** Complete  
+**Replaced Keys:** All form labels, descriptions, buttons
+
+#### 17. src/components/dashboard/settings/DangerZoneTab.tsx
+**Status:** Complete  
+**Replaced Keys:** All warning labels, button text, confirmation dialogs
+
+#### 18. src/components/dashboard/VotrePlusUn.tsx
+**Status:** Complete  
+**Replaced Keys:** Title, subtitle, tab labels, action buttons
+
+#### 19. src/components/dashboard/Visio.tsx
+**Status:** Complete  
+**Replaced Keys:** Title, subtitle, session labels, action buttons
+
+#### 20-24. Plus One Sub-components
+**Status:** Complete (RequestForm, RequestList, RequestThread, FeedList)  
+**Replaced Keys:** All form labels, status badges, action buttons, empty states
+
+#### 25-27. Visio Sub-components  
+**Status:** Complete (CreateSessionModal, ScheduleSessionModal, SessionCard)  
+**Replaced Keys:** All form labels, status indicators, action buttons
+
+### 🔄 In Progress / Remaining Components
 
 The following components still need i18n replacement:
 
-#### Dashboard Components (15 files)
+#### Dashboard Components (remaining)
 - **ActuKartel.tsx** - News/events display (large file, ~326 lines)
-- **Calendar.tsx** - Milestone management (large file, ~504 lines)
 - **Feedback.tsx** - Feedback form and admin view (~290 lines)
-- **KnowledgeBase.tsx** - Resource management (very large, ~1357 lines)
 - **MessagerieNewsEvents.tsx** - Messaging/news/events (large, ~751 lines)
-- **Notes.tsx** - Notes management (large, ~670 lines)
-- **PedagogicalTools.tsx** - Tool catalog (~478 lines)
 - **Rules.tsx** - Kartel spirit tips (~377 lines)
-- **Settings.tsx** - Settings tabs (~251 lines)
-- **Visio.tsx** - Video sessions (~228 lines)
-- **VotrePlusUn.tsx** - +1 requests (~154 lines)
 - **BugReport.tsx** - Bug reporting widget
-- Sub-components in `notes/`, `plusone/`, `settings/`, `tools/`, `visio/` directories
 
 #### Public Pages (3 files)
 - **Landing.tsx** - Homepage with hero, features, contact (~406 lines)
