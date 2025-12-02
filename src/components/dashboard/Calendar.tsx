@@ -13,6 +13,7 @@ import {
   isSameDay,
   isToday,
   parseISO,
+  addHours,
 } from "date-fns";
 import { fr, enUS } from "date-fns/locale";
 import {
@@ -21,9 +22,9 @@ import {
   Plus,
   Edit,
   Trash2,
-  X,
   Clock,
   MapPin,
+  CalendarDays,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,7 +34,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -76,8 +76,8 @@ const labels = {
     errorCreate: "Échec de la création",
     errorUpdate: "Échec de la mise à jour",
     errorDelete: "Échec de la suppression",
-    noKartel: "Aucun kartel",
-    noKartelDesc: "Vous devez rejoindre un kartel pour accéder au calendrier",
+    demoMode: "Mode démo",
+    demoModeDesc: "Rejoignez un kartel pour synchroniser vos événements",
     durationOptions: {
       "15": "15 minutes",
       "30": "30 minutes",
@@ -114,8 +114,8 @@ const labels = {
     errorCreate: "Creation failed",
     errorUpdate: "Update failed",
     errorDelete: "Deletion failed",
-    noKartel: "No kartel",
-    noKartelDesc: "You must join a kartel to access the calendar",
+    demoMode: "Demo mode",
+    demoModeDesc: "Join a kartel to sync your events",
     durationOptions: {
       "15": "15 minutes",
       "30": "30 minutes",
@@ -137,10 +137,10 @@ interface CalendarEvent {
   event_date: string;
   event_type: string;
   location: string | null;
-  visio_link: string | null;
-  capacity: number | null;
-  cartel_id: string;
-  tags: string[] | null;
+  visio_link?: string | null;
+  capacity?: number | null;
+  cartel_id?: string;
+  tags?: string[] | null;
 }
 
 interface EventFormData {
@@ -163,6 +163,73 @@ interface Membership {
   cartel_id: string;
 }
 
+// Generate demo events relative to current date
+const generateDemoEvents = (lang: string): CalendarEvent[] => {
+  const now = new Date();
+  const currentMonth = startOfMonth(now);
+  
+  const demoEventsFr: Omit<CalendarEvent, 'id' | 'event_date'>[] = [
+    { title: "Réunion d'équipe", description: "Discussion hebdomadaire", event_type: "meeting", location: "Salle A" },
+    { title: "Présentation projet", description: "Revue des avancées", event_type: "presentation", location: "Auditorium" },
+    { title: "Atelier collaboratif", description: "Brainstorming créatif", event_type: "workshop", location: "Espace créatif" },
+    { title: "Point individuel", description: "Suivi personnalisé", event_type: "meeting", location: "Bureau 12" },
+    { title: "Formation continue", description: "Module avancé", event_type: "training", location: "Salle de formation" },
+    { title: "Deadline rapport", description: "Remise du rapport final", event_type: "deadline", location: null },
+    { title: "Séance de révision", description: "Préparation examen", event_type: "study", location: "Bibliothèque" },
+    { title: "Webinaire externe", description: "Conférencier invité", event_type: "webinar", location: "En ligne" },
+  ];
+
+  const demoEventsEn: Omit<CalendarEvent, 'id' | 'event_date'>[] = [
+    { title: "Team Meeting", description: "Weekly discussion", event_type: "meeting", location: "Room A" },
+    { title: "Project Presentation", description: "Progress review", event_type: "presentation", location: "Auditorium" },
+    { title: "Collaborative Workshop", description: "Creative brainstorming", event_type: "workshop", location: "Creative space" },
+    { title: "One-on-One", description: "Personal follow-up", event_type: "meeting", location: "Office 12" },
+    { title: "Continued Training", description: "Advanced module", event_type: "training", location: "Training room" },
+    { title: "Report Deadline", description: "Final report submission", event_type: "deadline", location: null },
+    { title: "Study Session", description: "Exam preparation", event_type: "study", location: "Library" },
+    { title: "External Webinar", description: "Guest speaker", event_type: "webinar", location: "Online" },
+  ];
+
+  const baseEvents = lang === 'fr' ? demoEventsFr : demoEventsEn;
+  
+  // Distribute events across the current month
+  const events: CalendarEvent[] = [];
+  const daysInMonth = endOfMonth(currentMonth).getDate();
+  
+  baseEvents.forEach((event, index) => {
+    // Spread events across different days
+    const dayOffset = Math.floor((index * daysInMonth) / baseEvents.length) + 1;
+    const eventDate = new Date(currentMonth);
+    eventDate.setDate(Math.min(dayOffset + 2, daysInMonth));
+    eventDate.setHours(9 + (index % 8), (index % 2) * 30, 0, 0);
+    
+    events.push({
+      ...event,
+      id: `demo-${index}`,
+      event_date: eventDate.toISOString(),
+    });
+  });
+
+  // Add an event for today
+  const todayEvent: CalendarEvent = {
+    id: 'demo-today',
+    title: lang === 'fr' ? "Événement du jour" : "Today's Event",
+    description: lang === 'fr' ? "Un événement prévu aujourd'hui" : "An event scheduled for today",
+    event_date: addHours(new Date().setHours(14, 0, 0, 0), 0).toString(),
+    event_type: "meeting",
+    location: lang === 'fr' ? "Salle principale" : "Main room",
+  };
+  
+  // Fix today's event date
+  const todayDate = new Date();
+  todayDate.setHours(14, 0, 0, 0);
+  todayEvent.event_date = todayDate.toISOString();
+  
+  events.push(todayEvent);
+
+  return events;
+};
+
 export const Calendar = () => {
   const { lang } = useParams<{ lang: string }>();
   const { user } = useAuth();
@@ -175,6 +242,7 @@ export const Calendar = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [userMembership, setUserMembership] = useState<Membership | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDemo, setIsDemo] = useState(false);
 
   // Modal states
   const [isDayModalOpen, setIsDayModalOpen] = useState(false);
@@ -195,13 +263,19 @@ export const Calendar = () => {
   // Fetch data on mount
   useEffect(() => {
     fetchData();
-  }, [user, currentMonth]);
+  }, [user, currentMonth, lang]);
 
   const fetchData = async () => {
-    if (!user) return;
-
     setLoading(true);
     try {
+      if (!user) {
+        // No user logged in - show demo
+        setIsDemo(true);
+        setEvents(generateDemoEvents(lang || 'en'));
+        setLoading(false);
+        return;
+      }
+
       // Fetch current user
       const { data: userData } = await supabase
         .from("users")
@@ -221,8 +295,9 @@ export const Calendar = () => {
 
         setUserMembership(membershipData);
 
-        // Fetch events for the current month
+        // Fetch events for the current month if user has cartel
         if (membershipData?.cartel_id) {
+          setIsDemo(false);
           const monthStart = startOfMonth(currentMonth);
           const monthEnd = endOfMonth(currentMonth);
 
@@ -236,19 +311,29 @@ export const Calendar = () => {
 
           if (error) throw error;
           setEvents((eventsData as CalendarEvent[]) || []);
+        } else {
+          // User exists but no kartel - show demo
+          setIsDemo(true);
+          setEvents(generateDemoEvents(lang || 'en'));
         }
+      } else {
+        // No user data - show demo
+        setIsDemo(true);
+        setEvents(generateDemoEvents(lang || 'en'));
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      toast.error(t.errorLoad);
+      // On error, show demo data
+      setIsDemo(true);
+      setEvents(generateDemoEvents(lang || 'en'));
     } finally {
       setLoading(false);
     }
   };
 
-  // Setup realtime subscription
+  // Setup realtime subscription (only for non-demo mode)
   useEffect(() => {
-    if (!userMembership?.cartel_id) return;
+    if (!userMembership?.cartel_id || isDemo) return;
 
     const channel = supabase
       .channel("events-changes")
@@ -269,13 +354,13 @@ export const Calendar = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [userMembership?.cartel_id]);
+  }, [userMembership?.cartel_id, isDemo]);
 
   // Generate calendar grid
   const calendarDays = useMemo(() => {
     const monthStart = startOfMonth(currentMonth);
     const monthEnd = endOfMonth(currentMonth);
-    const startDate = startOfWeek(monthStart, { weekStartsOn: 1 }); // Monday start
+    const startDate = startOfWeek(monthStart, { weekStartsOn: 1 });
     const endDate = endOfWeek(monthEnd, { weekStartsOn: 1 });
 
     const days: Date[] = [];
@@ -291,7 +376,13 @@ export const Calendar = () => {
 
   // Get events for a specific day
   const getEventsForDay = (day: Date) => {
-    return events.filter((event) => isSameDay(parseISO(event.event_date), day));
+    return events.filter((event) => {
+      try {
+        return isSameDay(parseISO(event.event_date), day);
+      } catch {
+        return false;
+      }
+    });
   };
 
   // Get events for selected date
@@ -345,11 +436,28 @@ export const Calendar = () => {
     setIsDayModalOpen(false);
   };
 
-  // Create event
+  // Create event (demo mode: local only)
   const handleCreate = async () => {
-    if (!formData.title || !formData.event_date || !userMembership || !currentUser) {
+    if (!formData.title || !formData.event_date) return;
+
+    if (isDemo) {
+      // Demo mode: add to local state
+      const newEvent: CalendarEvent = {
+        id: `demo-new-${Date.now()}`,
+        title: formData.title,
+        description: formData.description || null,
+        event_date: new Date(formData.event_date).toISOString(),
+        event_type: formData.event_type,
+        location: formData.location || null,
+      };
+      setEvents((prev) => [...prev, newEvent]);
+      toast.success(t.createSuccess);
+      setIsCreateModalOpen(false);
       return;
     }
+
+    // Real mode: save to database
+    if (!userMembership || !currentUser) return;
 
     try {
       const { error } = await supabase.from("events").insert({
@@ -375,6 +483,29 @@ export const Calendar = () => {
   const handleUpdate = async () => {
     if (!selectedEvent || !formData.title || !formData.event_date) return;
 
+    if (isDemo) {
+      // Demo mode: update local state
+      setEvents((prev) =>
+        prev.map((e) =>
+          e.id === selectedEvent.id
+            ? {
+                ...e,
+                title: formData.title,
+                description: formData.description || null,
+                event_date: new Date(formData.event_date).toISOString(),
+                event_type: formData.event_type,
+                location: formData.location || null,
+              }
+            : e
+        )
+      );
+      toast.success(t.updateSuccess);
+      setIsEditModalOpen(false);
+      setSelectedEvent(null);
+      return;
+    }
+
+    // Real mode: update in database
     try {
       const { error } = await supabase
         .from("events")
@@ -402,6 +533,15 @@ export const Calendar = () => {
   const handleDelete = async (event: CalendarEvent) => {
     if (!confirm(t.deleteConfirm)) return;
 
+    if (isDemo) {
+      // Demo mode: remove from local state
+      setEvents((prev) => prev.filter((e) => e.id !== event.id));
+      toast.success(t.deleteSuccess);
+      setIsDayModalOpen(false);
+      return;
+    }
+
+    // Real mode: delete from database
     try {
       const { error } = await supabase.from("events").delete().eq("id", event.id);
 
@@ -424,31 +564,22 @@ export const Calendar = () => {
     );
   }
 
-  // No kartel membership
-  if (!userMembership) {
-    return (
-      <div className="space-y-6">
-        <div className="pt-2">
-          <h1 className="text-2xl font-bold">{t.title}</h1>
-          <p className="text-muted-foreground">{t.subtitle}</p>
-        </div>
-        <Card>
-          <CardContent className="p-8 text-center">
-            <h3 className="text-lg font-semibold mb-2">{t.noKartel}</h3>
-            <p className="text-muted-foreground">{t.noKartelDesc}</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{t.title}</h1>
-          <p className="text-muted-foreground">{t.subtitle}</p>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{t.title}</h1>
+            {isDemo && (
+              <Badge variant="secondary" className="text-xs">
+                {t.demoMode}
+              </Badge>
+            )}
+          </div>
+          <p className="text-muted-foreground">
+            {isDemo ? t.demoModeDesc : t.subtitle}
+          </p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={goToToday}>
@@ -465,13 +596,13 @@ export const Calendar = () => {
       <Card>
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <Button variant="ghost" size="icon" onClick={goToPreviousMonth}>
+            <Button variant="ghost" size="icon" onClick={goToPreviousMonth} aria-label="Previous month">
               <ChevronLeft className="h-5 w-5" />
             </Button>
             <CardTitle className="text-xl font-semibold capitalize">
               {format(currentMonth, "MMMM yyyy", { locale })}
             </CardTitle>
-            <Button variant="ghost" size="icon" onClick={goToNextMonth}>
+            <Button variant="ghost" size="icon" onClick={goToNextMonth} aria-label="Next month">
               <ChevronRight className="h-5 w-5" />
             </Button>
           </div>
@@ -502,7 +633,7 @@ export const Calendar = () => {
                   key={idx}
                   onClick={() => handleDayClick(day)}
                   className={`
-                    relative min-h-[80px] sm:min-h-[100px] p-1 sm:p-2 border rounded-md text-left transition-colors
+                    relative min-h-[70px] sm:min-h-[90px] p-1 sm:p-2 border rounded-md text-left transition-colors
                     focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
                     ${isCurrentMonth ? "bg-background hover:bg-muted/50" : "bg-muted/30 text-muted-foreground"}
                     ${isCurrentDay ? "ring-2 ring-primary" : ""}
@@ -512,8 +643,8 @@ export const Calendar = () => {
                 >
                   <span
                     className={`
-                      text-sm font-medium
-                      ${isCurrentDay ? "bg-primary text-primary-foreground rounded-full w-7 h-7 flex items-center justify-center" : ""}
+                      text-sm font-medium inline-flex items-center justify-center
+                      ${isCurrentDay ? "bg-primary text-primary-foreground rounded-full w-6 h-6 sm:w-7 sm:h-7" : ""}
                     `}
                   >
                     {format(day, "d")}
@@ -521,21 +652,21 @@ export const Calendar = () => {
 
                   {/* Events indicators */}
                   <div className="mt-1 space-y-0.5 overflow-hidden">
-                    {dayEvents.slice(0, 3).map((event) => (
+                    {dayEvents.slice(0, 2).map((event) => (
                       <div
                         key={event.id}
-                        className="text-xs truncate px-1 py-0.5 rounded bg-primary/20 text-primary-foreground"
+                        className="text-xs truncate px-1 py-0.5 rounded bg-primary/20 text-foreground"
                         title={event.title}
                       >
                         <span className="hidden sm:inline">
                           {format(parseISO(event.event_date), "HH:mm")} -{" "}
                         </span>
-                        {event.title}
+                        <span className="truncate">{event.title}</span>
                       </div>
                     ))}
-                    {dayEvents.length > 3 && (
+                    {dayEvents.length > 2 && (
                       <div className="text-xs text-muted-foreground px-1">
-                        +{dayEvents.length - 3}
+                        +{dayEvents.length - 2}
                       </div>
                     )}
                   </div>
@@ -550,7 +681,8 @@ export const Calendar = () => {
       <Dialog open={isDayModalOpen} onOpenChange={setIsDayModalOpen}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
+              <CalendarDays className="h-5 w-5" />
               {t.eventsForDay}{" "}
               {selectedDate && format(selectedDate, "d MMMM yyyy", { locale })}
             </DialogTitle>
@@ -566,13 +698,13 @@ export const Calendar = () => {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold">{event.title}</h4>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                        <Clock className="h-3 w-3" />
+                        <Clock className="h-3 w-3 flex-shrink-0" />
                         {format(parseISO(event.event_date), "HH:mm", { locale })}
                       </div>
                       {event.location && (
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                          <MapPin className="h-3 w-3" />
-                          {event.location}
+                          <MapPin className="h-3 w-3 flex-shrink-0" />
+                          <span className="truncate">{event.location}</span>
                         </div>
                       )}
                       {event.description && (
@@ -581,7 +713,7 @@ export const Calendar = () => {
                         </p>
                       )}
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 flex-shrink-0">
                       <Button
                         variant="ghost"
                         size="icon"
