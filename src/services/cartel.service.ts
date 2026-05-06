@@ -169,9 +169,10 @@ export async function updateCartel(
   cartelId: string,
   updates: Partial<Omit<Cartel, 'id' | 'created_at'>>
 ): Promise<Cartel | null> {
+  const { description, settings, ...dbUpdates } = updates as any;
   const { data, error } = await supabase
     .from('cartels')
-    .update(updates)
+    .update(dbUpdates)
     .eq('id', cartelId)
     .select()
     .single();
