@@ -36,7 +36,7 @@ export const Sidebar = ({ activeSection, onSectionChange, collapsed, onToggleCol
     { id: "outils-pedagogiques", label: lang === 'fr' ? 'Outils pédagogiques' : 'Pedagogical Tools', icon: Wrench },
     { id: "calendrier", label: lang === 'fr' ? 'Calendrier' : 'Calendar', icon: Calendar },
     { id: "votre-plus-un", label: lang === 'fr' ? 'Votre +1' : 'Your +1', icon: Users },
-    { id: "rules", label: lang === 'fr' ? 'L\'esprit du Kartel' : 'Kartel Spirit', icon: ScrollText },
+    { id: "rules", label: lang === 'fr' ? 'L\'esprit du AGORA' : 'AGORA Spirit', icon: ScrollText },
     { id: "notes", label: lang === 'fr' ? 'Notes' : 'Notes', icon: FileText },
     { id: "visio", label: lang === 'fr' ? 'Visio' : 'Video', icon: Video },
     { id: "parametres", label: lang === 'fr' ? 'Paramètres' : 'Settings', icon: SettingsIcon },

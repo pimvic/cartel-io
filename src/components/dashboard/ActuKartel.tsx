@@ -54,7 +54,7 @@ export const ActuKartel = () => {
 
   const fetchData = async () => {
     try {
-      // Get current user's cartel
+      // Get current user's agora
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 

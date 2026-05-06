@@ -94,7 +94,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
     
     setLoading(true);
     try {
-      // Get user's cartel
+      // Get user's agora
       const { data: membership } = await supabase
         .from("memberships")
         .select("cartel_id, cartels(deadline)")
@@ -103,7 +103,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
 
       if (membership) {
         setCartelId(membership.cartel_id);
-        const deadline = membership.cartels?.deadline;
+        const deadline = membership.agoras?.deadline;
         if (deadline) {
           const examDateObj = new Date(deadline);
           setExamDate(examDateObj);

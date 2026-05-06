@@ -116,7 +116,7 @@ export const CreateSessionModal = ({
             <div className="bg-muted p-4 rounded-lg space-y-2">
               <p className="text-sm font-medium">{lang === 'fr' ? 'Démarrage rapide' : 'Quick Start'}</p>
               <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
-                <li>{lang === 'fr' ? 'Session ouverte à tous les membres du cartel' : 'Session open to all cartel members'}</li>
+                <li>{lang === 'fr' ? 'Session ouverte à tous les membres du agora' : 'Session open to all agora members'}</li>
                 <li>{lang === 'fr' ? 'Durée par défaut: 1 heure' : 'Default duration: 1 hour'}</li>
                 <li>{lang === 'fr' ? 'Lien partageable généré automatiquement' : 'Shareable link generated automatically'}</li>
               </ul>

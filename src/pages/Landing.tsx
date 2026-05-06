@@ -22,7 +22,7 @@ const ContactForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const subject = encodeURIComponent("Contact depuis Kartels.io");
+    const subject = encodeURIComponent("Contact depuis AGORA");
     const body = encodeURIComponent(
       `Nom: ${formData.nom}\n` +
       `Prénom: ${formData.prenom}\n` +
@@ -31,7 +31,7 @@ const ContactForm = () => {
       `Message:\n${formData.commentaire}`
     );
     
-    window.location.href = `mailto:superteam@kartels.io?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:superteam@agoras.io?subject=${subject}&body=${body}`;
     
     setSubmitted(true);
     setFormData({
@@ -133,14 +133,14 @@ const Landing = () => {
       <nav className="fixed top-0 w-full bg-accent backdrop-blur-lg border-b border-border z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Kartels.io
+            AGORA
           </h1>
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection("qui")} className="hover:text-accent transition-colors">
               {lang === 'fr' ? 'Qui sommes-nous' : 'Who We Are'}
             </button>
             <button onClick={() => scrollToSection("pourquoi")} className="hover:text-accent transition-colors">
-              {lang === 'fr' ? 'Pourquoi Kartel' : 'Why Kartel'}
+              {lang === 'fr' ? 'Pourquoi AGORA' : 'Why AGORA'}
             </button>
             <button onClick={() => scrollToSection("tarifs")} className="hover:text-accent transition-colors">
               {lang === 'fr' ? 'Tarifs' : 'Pricing'}
@@ -169,7 +169,7 @@ const Landing = () => {
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-foreground">
             {lang === 'fr' ? 'Réussir ensemble avec ' : 'Succeed together with '}
-            <span className="text-black dark:text-white">Kartels.io</span>
+            <span className="text-black dark:text-white">AGORA</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-12">
             {lang === 'fr' ? 'La plateforme collaborative pour les groupes d\'apprentissage' : 'The collaborative platform for learning groups'}
@@ -185,7 +185,7 @@ const Landing = () => {
                 >
                   <img 
                     src="https://img.youtube.com/vi/M4NIu4aXsJ0/hqdefault.jpg"
-                    alt={lang === 'fr' ? 'Vidéo de présentation Kartels' : 'Kartels presentation video'}
+                    alt={lang === 'fr' ? 'Vidéo de présentation AGORA' : 'AGORA presentation video'}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center transition-colors group-hover:bg-black/40">
@@ -202,7 +202,7 @@ const Landing = () => {
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   className="w-full h-full"
-                  title={lang === 'fr' ? 'Vidéo de présentation Kartels' : 'Kartels presentation video'}
+                  title={lang === 'fr' ? 'Vidéo de présentation AGORA' : 'AGORA presentation video'}
                 />
               )}
             </div>
@@ -214,7 +214,7 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io pour une démo !' : 'Contact us at superteam@kartels.io for a demo!');
+                alert(lang === 'fr' ? 'Contactez-nous à superteam@agoras.io pour une démo !' : 'Contact us at superteam@agoras.io for a demo!');
               }}
             >
               {lang === 'fr' ? 'Demander une démo' : 'Request a demo'}
@@ -274,11 +274,11 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Pourquoi Kartel */}
+      {/* Pourquoi AGORA */}
       <section id="pourquoi" className="py-12 px-6">
         <div className="container mx-auto max-w-5xl text-center">
           <h3 className="text-4xl font-bold text-center mb-12">
-            {lang === 'fr' ? 'Pourquoi Kartel ?' : 'Why Kartel?'}
+            {lang === 'fr' ? 'Pourquoi AGORA ?' : 'Why AGORA?'}
           </h3>
           <div className="space-y-6 text-left">
             <div className="p-6 rounded-xl bg-card border border-border hover-lift">
@@ -409,7 +409,7 @@ const Landing = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{lang === 'fr' ? '5 Kartels' : '5 Kartels'}</span>
+                  <span>{lang === 'fr' ? '5 AGORA' : '5 AGORA'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
@@ -442,7 +442,7 @@ const Landing = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
-                  <span>{lang === 'fr' ? 'Gestion multi-Kartels' : 'Multi-Kartel management'}</span>
+                  <span>{lang === 'fr' ? 'Gestion multi-AGORA' : 'Multi-AGORA management'}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-success mt-1">✓</span>
@@ -485,8 +485,8 @@ const Landing = () => {
                 name: lang === 'fr' ? 'Marie Dupont' : 'Marie Dupont',
                 role: lang === 'fr' ? 'Étudiante en Master' : 'Master Student',
                 text: lang === 'fr' 
-                  ? 'Kartels a révolutionné ma façon d\'apprendre. Je ne peux plus m\'en passer !' 
-                  : 'Kartels revolutionized the way I learn. I can\'t live without it anymore!',
+                  ? 'AGORA a révolutionné ma façon d\'apprendre. Je ne peux plus m\'en passer !' 
+                  : 'AGORA revolutionized the way I learn. I can\'t live without it anymore!',
                 rating: 5
               },
               {
@@ -527,7 +527,7 @@ const Landing = () => {
               size="lg" 
               className="bg-accent/30 hover:bg-accent/40 text-foreground border border-accent shadow-elegant text-lg px-8 py-6 h-auto"
               onClick={() => {
-                alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io pour une démo !' : 'Contact us at superteam@kartels.io for a demo!');
+                alert(lang === 'fr' ? 'Contactez-nous à superteam@agoras.io pour une démo !' : 'Contact us at superteam@agoras.io for a demo!');
               }}
             >
               {lang === 'fr' ? 'Demander une démo' : 'Request a demo'}
@@ -547,12 +547,12 @@ const Landing = () => {
       <section id="apropos" className="py-12 px-6">
         <div className="container mx-auto max-w-3xl text-center">
           <h3 className="text-4xl font-bold mb-6">
-            {lang === 'fr' ? 'À propos de Kartels' : 'About Kartels'}
+            {lang === 'fr' ? 'À propos de AGORA' : 'About AGORA'}
           </h3>
           <p className="text-lg text-muted-foreground mb-8">
             {lang === 'fr' 
-              ? 'Kartels est né de la conviction que l\'apprentissage en groupe est plus efficace et plus motivant. Notre mission est de fournir les meilleurs outils pour faciliter la collaboration et la réussite collective.' 
-              : 'Kartels was born from the belief that group learning is more effective and motivating. Our mission is to provide the best tools to facilitate collaboration and collective success.'}
+              ? 'AGORA est né de la conviction que l\'apprentissage en groupe est plus efficace et plus motivant. Notre mission est de fournir les meilleurs outils pour faciliter la collaboration et la réussite collective.' 
+              : 'AGORA was born from the belief that group learning is more effective and motivating. Our mission is to provide the best tools to facilitate collaboration and collective success.'}
           </p>
           <Button 
             size="lg" 
@@ -583,7 +583,7 @@ const Landing = () => {
           size="lg"
           className="rounded-full w-16 h-16 bg-accent hover:bg-accent/90 text-accent-foreground shadow-elegant"
           onClick={() => {
-            alert(lang === 'fr' ? 'Contactez-nous à superteam@kartels.io !' : 'Contact us at superteam@kartels.io!');
+            alert(lang === 'fr' ? 'Contactez-nous à superteam@agoras.io !' : 'Contact us at superteam@agoras.io!');
           }}
         >
           💬

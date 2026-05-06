@@ -5,7 +5,7 @@
     "testimonials": "Testimonials",
     "contact": "Contact",
     "whoWeAre": "Who Are We?",
-    "whyKartel": "Kartel: The Best Way to Learn?",
+    "whyKartel": "AGORA: The Best Way to Learn?",
     "pricing": "Pricing",
     "results": "The Results Are Here!",
     "about": "About"
@@ -17,7 +17,7 @@
       "subtitle": "Study in small, motivated, and supportive groups, help each other and achieve your learning goals more quickly and effectively",
       "cta": "Get Started Now!",
       "demoRequest": "Request a Demo",
-      "videoAlt": "Discover Kartels.io in video"
+      "videoAlt": "Discover AGORA in video"
     },
     "whoWeAre": {
       "title": "Study together in small, motivated groups",
@@ -35,7 +35,7 @@
       }
     },
     "whyKartel": {
-      "title": "Kartel: the best way to learn?",
+      "title": "AGORA: the best way to learn?",
       "point1": {
         "title": "🎯 Active learning keeps engagement high",
         "description": "Daily online sessions, group chats, peer messages, shared notes, and learning tips."
@@ -46,18 +46,18 @@
       },
       "point3": {
         "title": "⚡ Smart tools for better learning together",
-        "description": "Kartel provides a complete AI toolbox... 🧠 Adaptive quizzes, 📝 Collaborative MCQs, 🃏 Automatic flashcards, 🗺 Dynamic mindmaps, 🎭 Video role-playing, 📊 Shared progress dashboards, 💬 Educational AI chat, 🎯 Team challenges, 📚 Automatic summaries, 🔁 Review sheets..."
+        "description": "AGORA provides a complete AI toolbox... 🧠 Adaptive quizzes, 📝 Collaborative MCQs, 🃏 Automatic flashcards, 🗺 Dynamic mindmaps, 🎭 Video role-playing, 📊 Shared progress dashboards, 💬 Educational AI chat, 🎯 Team challenges, 📚 Automatic summaries, 🔁 Review sheets..."
       }
     },
     "results": {
       "title": "🚀 The Results Speak for Themselves",
       "point1": {
         "title": "🎯 Visible, measurable progress",
-        "description": "Thanks to group dynamics and Kartel's AI tools... +45% higher success rate in small group courses."
+        "description": "Thanks to group dynamics and AGORA's AI tools... +45% higher success rate in small group courses."
       },
       "point2": {
         "title": "🤝 Motivation that lasts",
-        "description": "Small group learning creates real engagement... 9 out of 10 users feel more motivated with Kartel than with traditional LMS."
+        "description": "Small group learning creates real engagement... 9 out of 10 users feel more motivated with AGORA than with traditional LMS."
       },
       "point3": {
         "title": "🧩 Stronger, validated skills",
@@ -93,7 +93,7 @@
       }
     },
     "benefits": {
-      "title": "Why choose Kartels?",
+      "title": "Why choose AGORA?",
       "subtitle": "The advantages that make the difference",
       "benefit1": {
         "title": "Collaborative learning",
@@ -112,7 +112,7 @@
       "title": "What our users say",
       "subtitle": "Discover feedback from our community",
       "testimonial1": {
-        "text": "Kartel helped me progress 2x faster thanks to my group's support!",
+        "text": "AGORA helped me progress 2x faster thanks to my group's support!",
         "author": "Marie L.",
         "role": "Student"
       },
@@ -122,7 +122,7 @@
         "role": "Trainer"
       },
       "testimonial3": {
-        "text": "I finally passed my certification thanks to my kartel's mutual support. Thank you!",
+        "text": "I finally passed my certification thanks to my agora's mutual support. Thank you!",
         "author": "Sophie M.",
         "role": "Professional"
       }
@@ -160,7 +160,7 @@
         "perMonth": "/month",
         "features": {
           "account": "1 Personal account",
-          "kartels": "2 Kartel access",
+          "agoras": "2 AGORA access",
           "storage": "Knowledge base (max 20GB)",
           "ai": "Advanced AI",
           "tools": "8 educational tools"
@@ -172,8 +172,8 @@
         "price": "Contact us",
         "perMonth": "",
         "features": {
-          "unlimitedAccounts": "Unlimited accounts & Kartels",
-          "multiManagement": "Multi-account / Multi-Kartel management",
+          "unlimitedAccounts": "Unlimited accounts & AGORA",
+          "multiManagement": "Multi-account / Multi-AGORA management",
           "corporate": "Corporate offers",
           "businessSchools": "Business school offers",
           "universities": "University offers",
@@ -184,8 +184,8 @@
       }
     },
     "about": {
-      "title": "About Kartel",
-      "description": "Kartel was born from a simple conviction: we learn better together. Rather than facing the challenges of online training alone, Kartel brings together small groups of motivated learners, called 'kartels', who help each other achieve their educational goals. Our platform combines collective intelligence and artificial intelligence to create lively, interactive, and deeply human learning experiences. Each member progresses at their own pace, supports and is supported by others, shares resources, exchanges ideas, and benefits from mutual benevolence. Kartel is e-learning reinvented: human, collaborative, and AI-powered.",
+      "title": "About AGORA",
+      "description": "AGORA was born from a simple conviction: we learn better together. Rather than facing the challenges of online training alone, AGORA brings together small groups of motivated learners, called 'agoras', who help each other achieve their educational goals. Our platform combines collective intelligence and artificial intelligence to create lively, interactive, and deeply human learning experiences. Each member progresses at their own pace, supports and is supported by others, shares resources, exchanges ideas, and benefits from mutual benevolence. AGORA is e-learning reinvented: human, collaborative, and AI-powered.",
       "cta": "Join Us"
     },
     "contactSection": {
@@ -202,7 +202,7 @@
     "partners": "PARTNERS",
     "items": {
       "accounts": "Accounts",
-      "kartelEdu": "Kartel Edu",
+      "kartelEdu": "AGORA Edu",
       "onboardingServices": "Onboarding Services",
       "mentoring": "Mentoring",
       "tutoring": "Tutoring",
@@ -211,19 +211,19 @@
       "philosophy": "Philosophy",
       "opportunities": "Opportunities",
       "contact": "Contact",
-      "aboutKartels": "About Kartels",
+      "aboutKartels": "About AGORA",
       "workInGroups": "How to Work Effectively in Groups",
       "infographics": "Infographics",
       "documentation": "Knowledge Documents",
       "toolsDownloads": "Tools & Downloads",
-      "learnersCommunity": "Kartel Learners Community",
+      "learnersCommunity": "AGORA Learners Community",
       "trainersCommunity": "Trainers Community",
       "plusOneCommunity": "\"+1\" Community",
       "institutionalPartners": "Institutional Partners",
       "businessPartners": "Business Partners"
     },
     "legal": {
-      "copyright": "© 2025 Kartels S.A. All rights reserved.",
+      "copyright": "© 2025 AGORA S.A. All rights reserved.",
       "terms": "Terms & Conditions",
       "privacy": "Privacy Policy",
       "gdpr": "GDPR",
@@ -232,7 +232,7 @@
   },
   "login": {
     "title": "Login",
-    "subtitle": "Sign in to your Kartels account",
+    "subtitle": "Sign in to your AGORA account",
     "email": "Email",
     "password": "Password",
     "signIn": "Login",
@@ -248,21 +248,21 @@
   },
   "dashboard": {
     "header": {
-      "title": "Kartels - Demo",
-      "course": "Kartels Organization - Educational demo",
+      "title": "AGORA - Demo",
+      "course": "AGORA Organization - Educational demo",
       "deadline": "April 15, 2026, in 170 days",
       "members": "Team members",
       "coordinator": "Coordinator"
     },
     "menu": {
       "dashboard": "Dashboard",
-      "actuKartel": "Kartel News",
+      "actuKartel": "AGORA News",
       "messagerie": "Communications",
       "knowledgeBase": "AI Knowledge Base",
       "tools": "Learning Tools",
       "calendar": "Agenda",
       "plusOne": "Your +1",
-      "rules": "The Kartel Spirit",
+      "rules": "The AGORA Spirit",
       "overview": "Overview",
       "notes": "Notes",
       "visio": "Video",
@@ -270,7 +270,7 @@
       "feedback": "Feedback"
     },
     "actuKartel": {
-      "title": "Kartel News",
+      "title": "AGORA News",
       "subtitle": "Your group's activity, collaboration, and engagement updates",
       "latestMessages": {
         "title": "Latest Messages"
@@ -318,10 +318,10 @@
         "away": "Away"
       },
       "membersCarousel": {
-        "title": "Kartel Members"
+        "title": "AGORA Members"
       },
       "progress": {
-        "title": "Kartel Progress",
+        "title": "AGORA Progress",
         "overall": "Overall Progress",
         "deadline": "Final Deadline",
         "formula": "Formula: Tasks 40% + QCM 25% + Quiz 15% + Flashcards 20%"
@@ -344,7 +344,7 @@
     },
     "tools": {
       "title": "Learning Tools",
-      "subtitle": "Centralized access to all tools, modules, and learning resources for your Kartel.",
+      "subtitle": "Centralized access to all tools, modules, and learning resources for your AGORA.",
       "breadcrumb": {
         "dashboard": "Dashboard",
         "tools": "Learning Tools"
@@ -530,8 +530,8 @@
     "messagerie": {
       "title": "Communications",
       "subtitle": "Manage your messages, check news and events, and stay up to date.",
-      "noCartel": "No Cartel",
-      "noCartelDescription": "You must be a member of a cartel to access communications.",
+      "noCartel": "No AGORA",
+      "noCartelDescription": "You must be a member of a agora to access communications.",
       "tabs": {
         "messages": "Messages",
         "news": "News",
@@ -550,7 +550,7 @@
         "sent": "Message sent"
       },
       "news": {
-        "title": "Kartel News",
+        "title": "AGORA News",
         "recentNews": "Recent News",
         "archive": "Archive",
         "create": "Create News",
@@ -617,7 +617,7 @@
     },
     "knowledgeBase": {
       "title": "AI Knowledge Base",
-      "subtitle": "Feed your shared knowledge base and chat with your Kartel AI about your documents, deadlines, and goals.",
+      "subtitle": "Feed your shared knowledge base and chat with your AGORA AI about your documents, deadlines, and goals.",
       "tabs": {
         "documents": "📚 Documents",
         "chat": "💬 AI Chat"
@@ -659,9 +659,9 @@
     },
   "calendar": {
     "title": "Calendar",
-    "noCartel": "No Cartel",
-    "noCartelDescription": "You must be a member of a cartel to access the calendar.",
-      "subtitle": "Milestones and deadlines for your Kartel",
+    "noCartel": "No AGORA",
+    "noCartelDescription": "You must be a member of a agora to access the calendar.",
+      "subtitle": "Milestones and deadlines for your AGORA",
       "searchPlaceholder": "Search for a milestone...",
       "create": "Create Milestone",
       "edit": "Edit",
@@ -752,10 +752,10 @@
       "away": "Away"
     },
     "membersCarousel": {
-      "title": "Kartel Members"
+      "title": "AGORA Members"
     },
     "progress": {
-      "title": "Kartel Progress",
+      "title": "AGORA Progress",
       "overall": "Overall Progress",
       "deadline": "Final Deadline",
       "formula": "Formula: Tasks 40% + QCM 25% + Quiz 15% + Flashcards 20%"
@@ -805,12 +805,12 @@
         },
         "workingWith": {
           "title": "Working effectively with your \"+1\"",
-          "text": "Before each meeting, come with a specific question and a draft artifact, even if incomplete. During the session, focus on the essential, show your work, and accept that usefulness matters more than perfection. After the session, publish your deliverable, check off the corresponding task, and if something remains unclear, open a short follow-up request. This simple rhythm — read, produce, share, refine — supported by your \"+1,\" is what makes the difference on Kartel."
+          "text": "Before each meeting, come with a specific question and a draft artifact, even if incomplete. During the session, focus on the essential, show your work, and accept that usefulness matters more than perfection. After the session, publish your deliverable, check off the corresponding task, and if something remains unclear, open a short follow-up request. This simple rhythm — read, produce, share, refine — supported by your \"+1,\" is what makes the difference on AGORA."
         }
       }
     },
     "kartelSpirit": {
-      "title": "🤝 The Kartel Spirit",
+      "title": "🤝 The AGORA Spirit",
       "subtitle": "Principles and tips for living together well",
       "tipOfWeek": "Tip of the week",
       "spotlightBadge": "Highlighted",
@@ -825,13 +825,13 @@
       "spotlightUpdated": "Featured tip updated",
       "spotlightUpdatedDesc": "The featured tip has been changed.",
       "intro": {
-        "p1": "Learning in a Kartel means choosing to grow together — with trust and curiosity.",
+        "p1": "Learning in a AGORA means choosing to grow together — with trust and curiosity.",
         "p2": "Each member brings their own perspective, experience, and energy.",
         "p3": "Collective intelligence is born from dialogue, kindness, and the joy of learning together.",
         "p4": "These guidelines are not obligations — they are signposts to help us grow together."
       },
       "tips": {
-        "title": "🌿 Tips for a thriving Kartel",
+        "title": "🌿 Tips for a thriving AGORA",
         "tip1": {
           "title": "💬 Dare to speak and listen:",
           "text": "Every voice matters. Speaking up or asking a question helps everyone learn."
@@ -874,7 +874,7 @@
         }
       },
       "rules": {
-        "title": "📜 The 10 Gentle Rules of a Successful Kartel",
+        "title": "📜 The 10 Gentle Rules of a Successful AGORA",
         "rule1": {
           "title": "Respect people and ideas.",
           "text": "Exchange and debate — always with kindness."
@@ -885,7 +885,7 @@
         },
         "rule3": {
           "title": "Support rather than compare.",
-          "text": "A Kartel is not a competition — we move forward hand in hand."
+          "text": "A AGORA is not a competition — we move forward hand in hand."
         },
         "rule4": {
           "title": "Express your needs clearly.",
@@ -893,7 +893,7 @@
         },
         "rule5": {
           "title": "Build trust.",
-          "text": "What's said in the Kartel stays in the Kartel."
+          "text": "What's said in the AGORA stays in the AGORA."
         },
         "rule6": {
           "title": "Cultivate curiosity.",
@@ -909,7 +909,7 @@
         },
         "rule9": {
           "title": "Reflect regularly.",
-          "text": "The Kartel adjusts its methods to stay flexible and effective."
+          "text": "The AGORA adjusts its methods to stay flexible and effective."
         },
         "rule10": {
           "title": "Celebrate together.",
@@ -918,7 +918,7 @@
       },
       "summary": {
         "title": "💡 Summary",
-        "intro": "A caring Kartel is built on three core strengths:",
+        "intro": "A caring AGORA is built on three core strengths:",
         "clarity": {
           "title": "• Clarity:",
           "text": "a simple framework and shared rules"
@@ -935,7 +935,7 @@
       }
     },
     "overview": {
-      "subtitle": "Your Kartel in numbers: track your progress and be proud of your team!",
+      "subtitle": "Your AGORA in numbers: track your progress and be proud of your team!",
       "stats": {
         "activeMembers": "Active members",
         "studyHours": "Study hours",
@@ -943,7 +943,7 @@
         "progress": "Progress"
       },
       "members": {
-        "title": "Kartel Members",
+        "title": "AGORA Members",
         "lastActivity": "Last activity:",
         "online": "Online",
         "offline": "Offline",
@@ -964,7 +964,7 @@
         "flashcards": "Flashcards"
       },
       "kartelProgress": {
-        "title": "Kartel Progress",
+        "title": "AGORA Progress",
         "tasksLabel": "Tasks",
         "finalDeadline": "Final deadline:",
         "daysRemaining": "Days remaining:",
@@ -982,12 +982,12 @@
       "subtitle": "Your personal or group notes — all in one place so you never forget anything!",
       "tabs": {
         "personal": "Personal Notes",
-        "kartel": "Kartel Notes",
+        "agora": "AGORA Notes",
         "glossary": "Glossary"
       },
       "search": {
         "personal": "Search in my notes...",
-        "kartel": "Search in Kartel notes...",
+        "agora": "Search in AGORA notes...",
         "glossary": "Search for a term..."
       },
       "buttons": {
@@ -1041,7 +1041,7 @@
         }
       },
       "glossary": {
-        "title": "Shared Kartel Glossary",
+        "title": "Shared AGORA Glossary",
         "term1": {
           "term": "Pedagogical Scenario",
           "definition": "Structured set of learning activities aimed at specific objectives.",
@@ -1057,7 +1057,7 @@
           "date": "5 days ago"
         },
         "term3": {
-          "term": "Kartel",
+          "term": "AGORA",
           "definition": "Small group of learners (3-5 people) working together on a collaborative platform.",
           "category": "Methodology",
           "author": "Sophie M.",
@@ -1130,7 +1130,7 @@
       "unarchived": "Note restored",
       "empty": {
         "personal": "No personal notes. Create your first note!",
-        "kartel": "No shared notes in the Kartel."
+        "agora": "No shared notes in the AGORA."
       }
     },
     "visio": {
@@ -1175,7 +1175,7 @@
       }
     },
     "plusOne": {
-      "title": "Your +1: an external mentor who supports your Kartel with care",
+      "title": "Your +1: an external mentor who supports your AGORA with care",
       "sections": {
         "intro": {
           "title": "What is the +1?",
@@ -1209,7 +1209,7 @@
     },
     "settings": {
       "title": "Settings",
-      "subtitle": "Configure your Kartel and personal preferences",
+      "subtitle": "Configure your AGORA and personal preferences",
       "breadcrumb": {
         "dashboard": "Dashboard",
         "settings": "Settings"
@@ -1234,11 +1234,11 @@
       },
       "general": {
         "title": "General Information",
-        "description": "Configure the basic information of your Kartel",
+        "description": "Configure the basic information of your AGORA",
         "kartelName": "Kartel Name",
         "kartelNamePlaceholder": "E.g.: Psychoanalysis Training 2025",
         "objective": "Objective",
-        "objectivePlaceholder": "Describe the main objective of your Kartel",
+        "objectivePlaceholder": "Describe the main objective of your AGORA",
         "deadline": "Deadline",
         "timezone": "Time Zone",
         "defaultLanguage": "Default Language",
@@ -1247,7 +1247,7 @@
       },
       "members": {
         "title": "Members & Roles",
-        "description": "Manage your Kartel members and their permissions",
+        "description": "Manage your AGORA members and their permissions",
         "invite": "Invite Member",
         "columns": {
           "member": "Member",
@@ -1268,11 +1268,11 @@
         "actions": {
           "resendInvite": "Resend Invitation",
           "changeRole": "Change Role",
-          "remove": "Remove from Kartel"
+          "remove": "Remove from AGORA"
         },
         "inviteDialog": {
           "title": "Invite New Member",
-          "description": "Send an invitation to join your Kartel",
+          "description": "Send an invitation to join your AGORA",
           "email": "Email Address",
           "role": "Role",
           "send": "Send Invitation"
@@ -1281,22 +1281,22 @@
         "inviteSentDescription": "An invitation has been sent to {{email}}"
       },
       "display": {
-        "description": "Customize the appearance and visual experience of your Kartel"
+        "description": "Customize the appearance and visual experience of your AGORA"
       },
       "notifications": {
-        "description": "Configure notification preferences for your Kartel"
+        "description": "Configure notification preferences for your AGORA"
       },
       "integrations": {
-        "description": "Connect external services to your Kartel"
+        "description": "Connect external services to your AGORA"
       },
       "automations": {
-        "description": "Create automations to simplify Kartel management"
+        "description": "Create automations to simplify AGORA management"
       },
       "privacy": {
-        "description": "Manage data and privacy for your Kartel"
+        "description": "Manage data and privacy for your AGORA"
       },
       "billing": {
-        "description": "Manage billing and subscriptions for your Kartel"
+        "description": "Manage billing and subscriptions for your AGORA"
       },
       "advanced": {
         "description": "Advanced settings and system configuration"
@@ -1308,30 +1308,30 @@
         "title": "Danger Zone",
         "description": "Irreversible actions - proceed with caution",
         "archive": {
-          "title": "Archive Kartel",
-          "description": "Temporarily deactivate the Kartel. You can restore it later.",
+          "title": "Archive AGORA",
+          "description": "Temporarily deactivate the AGORA. You can restore it later.",
           "button": "Archive",
           "confirmTitle": "Confirm Archive",
-          "confirmDescription": "Are you sure you want to archive this Kartel? Members will temporarily lose access.",
-          "confirm": "Archive Kartel"
+          "confirmDescription": "Are you sure you want to archive this AGORA? Members will temporarily lose access.",
+          "confirm": "Archive AGORA"
         },
         "delete": {
-          "title": "Delete Kartel",
-          "description": "Permanently delete the Kartel and all its data. This action is irreversible.",
+          "title": "Delete AGORA",
+          "description": "Permanently delete the AGORA and all its data. This action is irreversible.",
           "button": "Delete",
           "consequence1": "All members will lose access",
           "consequence2": "All data will be permanently deleted",
           "consequence3": "Messages, notes, and resources will be lost",
           "consequence4": "This action cannot be undone",
-          "confirmTitle": "Permanently Delete Kartel",
+          "confirmTitle": "Permanently Delete AGORA",
           "confirmDescription": "This action is irreversible. All data will be permanently deleted.",
-          "confirmLabel": "To confirm, type the exact Kartel name: {{name}}",
+          "confirmLabel": "To confirm, type the exact AGORA name: {{name}}",
           "confirm": "Delete Permanently"
         },
-        "archived": "Kartel Archived",
-        "archivedDescription": "The Kartel has been successfully archived",
-        "deleted": "Kartel Deleted",
-        "deletedDescription": "The Kartel and all its data have been permanently deleted"
+        "archived": "AGORA Archived",
+        "archivedDescription": "The AGORA has been successfully archived",
+        "deleted": "AGORA Deleted",
+        "deletedDescription": "The AGORA and all its data have been permanently deleted"
       }
     },
     "feedback": {
@@ -1366,7 +1366,7 @@
     },
     "groupDiscussion": {
       "title": "Messaging",
-      "subtitle": "Exchange with members of your Kartel",
+      "subtitle": "Exchange with members of your AGORA",
       "activeMembers": "{{count}} active member",
       "activeMembers_plural": "{{count}} active members",
       "messagePlaceholder": "Write a message...",
@@ -1378,7 +1378,7 @@
     },
     "sharedNotes": {
       "title": "Shared Notes",
-      "subtitle": "Share your notes with Kartel members",
+      "subtitle": "Share your notes with AGORA members",
       "newNote": "New Note",
       "createNote": "Create shared note",
       "noteCreated": "Note created successfully",
@@ -1436,7 +1436,7 @@
     "about": {
       "title": "About the +1",
       "whoTitle": "Who is the +1?",
-      "whoContent": "The +1 is your dedicated facilitator who supports your kartel's progress and resolves blockers.",
+      "whoContent": "The +1 is your dedicated facilitator who supports your agora's progress and resolves blockers.",
       "roleTitle": "Role of the +1",
       "roleContent": "The +1 answers questions, shares resources, helps with methodology, and facilitates collaboration.",
       "whenTitle": "When to contact the +1?",
@@ -1495,7 +1495,7 @@
     },
     "visibility": {
       "private": "Privé avec +1",
-      "kartel": "Visible by kartel"
+      "agora": "Visible by agora"
     },
     "requests": {
       "search": "Search requests...",
@@ -1516,7 +1516,7 @@
   },
   "visio": {
     "title": "Video",
-    "subtitle": "Start and schedule video sessions with your kartel",
+    "subtitle": "Start and schedule video sessions with your agora",
     "defaultTitle": "Group session",
     "scheduledSession": "Scheduled session",
     "unknownHost": "Unknown host",
@@ -1525,7 +1525,7 @@
     "scheduleSession": "Schedule Session",
     "startSession": "Start Session",
     "startSessionDescription": "Launch an instant session or schedule a future meeting",
-    "createSessionDescription": "Create an instant video session for your kartel",
+    "createSessionDescription": "Create an instant video session for your agora",
     "scheduleSessionDescription": "Schedule a video session for a specific date and time",
     "quickStart": "Quick Start",
     "quickStartFeature1": "Instant 60-minute session",

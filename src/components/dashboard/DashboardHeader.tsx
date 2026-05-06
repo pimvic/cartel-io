@@ -44,7 +44,7 @@ export const DashboardHeader = () => {
               className="text-xl font-bold text-black dark:text-white cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => navigate(`/${lang || 'fr'}`)}
             >
-              Kartel
+              AGORA
             </h1>
             <p className="text-xs text-muted-foreground text-center">27 octobre 2025</p>
           </div>

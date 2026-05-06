@@ -145,7 +145,7 @@ export const Settings = ({ onNavigate }: SettingsProps) => {
         <div>
           <h1 className="text-3xl font-bold mb-2">{lang === 'fr' ? 'Paramètres' : 'Settings'}</h1>
           <p className="text-muted-foreground text-lg">
-            {lang === 'fr' ? 'Gérez les préférences de votre kartel' : 'Manage your kartel preferences'}
+            {lang === 'fr' ? 'Gérez les préférences de votre agora' : 'Manage your agora preferences'}
           </p>
         </div>
         <Badge variant={scope === 'workspace' ? 'default' : 'secondary'} className="text-sm px-3 py-1">
