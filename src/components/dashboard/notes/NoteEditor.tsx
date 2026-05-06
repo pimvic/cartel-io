@@ -16,13 +16,13 @@ interface NoteEditorProps {
     id: string;
     title: string;
     content: string;
-    visibility: 'personal' | 'agora';
+    visibility: 'personal' | 'kartel';
     tags: string[];
   };
   onSave: (note: {
     title: string;
     content: string;
-    visibility: 'personal' | 'agora';
+    visibility: 'personal' | 'kartel';
     tags: string[];
   }) => Promise<void>;
 }
@@ -31,7 +31,7 @@ export const NoteEditor = ({ open, onOpenChange, note, onSave }: NoteEditorProps
   const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [visibility, setVisibility] = useState<'personal' | 'agora'>('personal');
+  const [visibility, setVisibility] = useState<'personal' | 'kartel'>('personal');
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
   const [saving, setSaving] = useState(false);
@@ -124,7 +124,7 @@ export const NoteEditor = ({ open, onOpenChange, note, onSave }: NoteEditorProps
 
           <div>
             <Label htmlFor="visibility">{t('notes.editor.visibilityLabel')}</Label>
-            <Select value={visibility} onValueChange={(v: 'personal' | 'agora') => setVisibility(v)}>
+            <Select value={visibility} onValueChange={(v: 'personal' | 'kartel') => setVisibility(v)}>
               <SelectTrigger className="mt-1">
                 <SelectValue />
               </SelectTrigger>
