@@ -530,7 +530,7 @@ export const Notes = () => {
             {lang === 'fr' ? 'Personnel' : 'Personal'} ({personalNotes.length})
           </TabsTrigger>
           <TabsTrigger value="kartel">
-            {lang === 'fr' ? 'Kartel' : 'Kartel'} ({kartelNotes.length})
+            AGORA ({kartelNotes.length})
           </TabsTrigger>
           <TabsTrigger value="glossary">
             <BookOpen className="w-4 h-4 mr-2" />
