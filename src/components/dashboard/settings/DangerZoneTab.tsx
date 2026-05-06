@@ -27,8 +27,8 @@ export const DangerZoneTab = () => {
 
   const handleArchive = () => {
     toast({
-      title: lang === 'fr' ? 'Kartel archivé' : 'Kartel Archived',
-      description: lang === 'fr' ? 'Votre kartel a été archivé avec succès' : 'Your kartel has been archived successfully',
+      title: lang === 'fr' ? 'AGORA archivé' : 'AGORA Archived',
+      description: lang === 'fr' ? 'Votre agora a été archivé avec succès' : 'Your agora has been archived successfully',
     });
     setArchiveOpen(false);
   };
@@ -36,8 +36,8 @@ export const DangerZoneTab = () => {
   const handleDelete = () => {
     if (deleteConfirmation === kartelName) {
       toast({
-        title: lang === 'fr' ? 'Kartel supprimé' : 'Kartel Deleted',
-        description: lang === 'fr' ? 'Votre kartel a été définitivement supprimé' : 'Your kartel has been permanently deleted',
+        title: lang === 'fr' ? 'AGORA supprimé' : 'AGORA Deleted',
+        description: lang === 'fr' ? 'Votre agora a été définitivement supprimé' : 'Your agora has been permanently deleted',
         variant: 'destructive',
       });
       setDeleteOpen(false);
@@ -55,7 +55,7 @@ export const DangerZoneTab = () => {
             </CardTitle>
           </div>
           <CardDescription>
-            {lang === 'fr' ? 'Actions irréversibles sur votre kartel' : 'Irreversible actions on your kartel'}
+            {lang === 'fr' ? 'Actions irréversibles sur votre agora' : 'Irreversible actions on your agora'}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -63,10 +63,10 @@ export const DangerZoneTab = () => {
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <h4 className="font-medium">
-                  {lang === 'fr' ? 'Archiver le kartel' : 'Archive Kartel'}
+                  {lang === 'fr' ? 'Archiver le agora' : 'Archive AGORA'}
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  {lang === 'fr' ? 'Archivez votre kartel pour le mettre en lecture seule' : 'Archive your kartel to make it read-only'}
+                  {lang === 'fr' ? 'Archivez votre agora pour le mettre en lecture seule' : 'Archive your agora to make it read-only'}
                 </p>
               </div>
               <Button
@@ -83,10 +83,10 @@ export const DangerZoneTab = () => {
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <h4 className="font-medium text-destructive">
-                  {lang === 'fr' ? 'Supprimer le kartel' : 'Delete Kartel'}
+                  {lang === 'fr' ? 'Supprimer le agora' : 'Delete AGORA'}
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  {lang === 'fr' ? 'Supprimez définitivement votre kartel et toutes ses données' : 'Permanently delete your kartel and all its data'}
+                  {lang === 'fr' ? 'Supprimez définitivement votre agora et toutes ses données' : 'Permanently delete your agora and all its data'}
                 </p>
                 <ul className="text-sm text-muted-foreground list-disc list-inside space-y-1 mt-2">
                   <li>{lang === 'fr' ? 'Toutes les notes seront supprimées' : 'All notes will be deleted'}</li>
@@ -115,8 +115,8 @@ export const DangerZoneTab = () => {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {lang === 'fr' 
-                ? 'Êtes-vous sûr de vouloir archiver ce kartel ? Il sera mis en lecture seule.'
-                : 'Are you sure you want to archive this kartel? It will be made read-only.'
+                ? 'Êtes-vous sûr de vouloir archiver ce agora ? Il sera mis en lecture seule.'
+                : 'Are you sure you want to archive this agora? It will be made read-only.'
               }
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -137,8 +137,8 @@ export const DangerZoneTab = () => {
             </AlertDialogTitle>
             <AlertDialogDescription>
               {lang === 'fr'
-                ? 'Cette action est irréversible. Tapez le nom du kartel pour confirmer.'
-                : 'This action is irreversible. Type the kartel name to confirm.'
+                ? 'Cette action est irréversible. Tapez le nom du agora pour confirmer.'
+                : 'This action is irreversible. Type the agora name to confirm.'
               }
             </AlertDialogDescription>
           </AlertDialogHeader>

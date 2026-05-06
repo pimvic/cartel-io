@@ -20,7 +20,7 @@ export const Footer = () => {
             <h3 className="font-semibold text-lg mb-4">{lang === 'fr' ? 'Solutions' : 'Solutions'}</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Comptes' : 'Accounts'}</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Kartel Édu' : 'Kartel Edu'}</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'AGORA Édu' : 'AGORA Edu'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Services d\'onboarding' : 'Onboarding Services'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Mentorat' : 'Mentoring'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Tutorat' : 'Tutoring'}</a></li>
@@ -43,7 +43,7 @@ export const Footer = () => {
           <div>
             <h3 className="font-semibold text-lg mb-4">{lang === 'fr' ? 'Ressources' : 'Resources'}</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'À propos des Kartels' : 'About Kartels'}</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'À propos des AGORA' : 'About AGORA'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Travailler en groupe' : 'Work in Groups'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Infographies' : 'Infographics'}</a></li>
               <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">{lang === 'fr' ? 'Documentation' : 'Documentation'}</a></li>
@@ -68,7 +68,7 @@ export const Footer = () => {
         <div className="border-t border-border pt-6">
           <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4">
             <p className="text-sm text-muted-foreground text-center">
-              © 2024 Kartels.io. {lang === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}
+              © 2024 AGORA. {lang === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'}
             </p>
             <span className="hidden md:inline text-muted-foreground">|</span>
             <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">

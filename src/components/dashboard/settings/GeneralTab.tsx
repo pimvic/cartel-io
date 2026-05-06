@@ -40,19 +40,19 @@ export const GeneralTab = () => {
         <CardHeader>
           <CardTitle>{lang === 'fr' ? 'Paramètres généraux' : 'General Settings'}</CardTitle>
           <CardDescription>
-            {lang === 'fr' ? 'Configurez les informations de base de votre kartel' : 'Configure your kartel\'s basic information'}
+            {lang === 'fr' ? 'Configurez les informations de base de votre agora' : 'Configure your agora\'s basic information'}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="kartel-name">
-              {lang === 'fr' ? 'Nom du kartel' : 'Kartel Name'} *
+            <Label htmlFor="agora-name">
+              {lang === 'fr' ? 'Nom du agora' : 'AGORA Name'} *
             </Label>
             <Input
-              id="kartel-name"
+              id="agora-name"
               value={kartelName}
               onChange={(e) => setKartelName(e.target.value)}
-              placeholder={lang === 'fr' ? 'Nom de votre kartel' : 'Your kartel name'}
+              placeholder={lang === 'fr' ? 'Nom de votre agora' : 'Your agora name'}
             />
           </div>
 
@@ -64,7 +64,7 @@ export const GeneralTab = () => {
               id="objective"
               value={objective}
               onChange={(e) => setObjective(e.target.value)}
-              placeholder={lang === 'fr' ? 'Décrivez l\'objectif de votre kartel' : 'Describe your kartel\'s objective'}
+              placeholder={lang === 'fr' ? 'Décrivez l\'objectif de votre agora' : 'Describe your agora\'s objective'}
               rows={3}
             />
           </div>

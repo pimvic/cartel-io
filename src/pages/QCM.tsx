@@ -75,7 +75,7 @@ const QCM = () => {
       number: parseInt(quantity),
       subject: subject,
       user: "Jean-Stéphane B.",
-      cartel: "Cartel · Démo",
+      agora: "AGORA · Démo",
       timestamp: new Date().toISOString(),
     };
 

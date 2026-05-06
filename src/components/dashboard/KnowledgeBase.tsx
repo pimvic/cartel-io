@@ -134,7 +134,7 @@ export const KnowledgeBase = () => {
         setCurrentUserId(userData.id);
         setUserRole(userData.role);
 
-        // Fetch user's cartel
+        // Fetch user's agora
         const { data: membership } = await supabase
           .from("memberships")
           .select("cartel_id")
@@ -154,7 +154,7 @@ export const KnowledgeBase = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      // Get user's cartel
+      // Get user's agora
       const { data: userData } = await supabase
         .from("users")
         .select("id")
@@ -705,7 +705,7 @@ export const KnowledgeBase = () => {
                   {lang === "fr" ? "Ajouter une ressource" : "Add Resource"}
                 </DialogTitle>
                 <DialogDescription>
-                  {lang === "fr" ? "Partagez une nouvelle ressource avec votre kartel" : "Share a new resource with your kartel"}
+                  {lang === "fr" ? "Partagez une nouvelle ressource avec votre agora" : "Share a new resource with your agora"}
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4">

@@ -94,7 +94,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
     
     setLoading(true);
     try {
-      // Get user's cartel
+      // Get user's agora
       const { data: membership } = await supabase
         .from("memberships")
         .select("cartel_id, cartels(deadline)")

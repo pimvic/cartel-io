@@ -77,7 +77,7 @@ const labels = {
     errorUpdate: "Échec de la mise à jour",
     errorDelete: "Échec de la suppression",
     demoMode: "Mode démo",
-    demoModeDesc: "Rejoignez un kartel pour synchroniser vos événements",
+    demoModeDesc: "Rejoignez un agora pour synchroniser vos événements",
     durationOptions: {
       "15": "15 minutes",
       "30": "30 minutes",
@@ -115,7 +115,7 @@ const labels = {
     errorUpdate: "Update failed",
     errorDelete: "Deletion failed",
     demoMode: "Demo mode",
-    demoModeDesc: "Join a kartel to sync your events",
+    demoModeDesc: "Join a agora to sync your events",
     durationOptions: {
       "15": "15 minutes",
       "30": "30 minutes",
@@ -285,7 +285,7 @@ export const Calendar = () => {
 
       setCurrentUser(userData);
 
-      // Fetch user's cartel membership
+      // Fetch user's agora membership
       if (userData) {
         const { data: membershipData } = await supabase
           .from("memberships")
@@ -295,7 +295,7 @@ export const Calendar = () => {
 
         setUserMembership(membershipData);
 
-        // Fetch events for the current month if user has cartel
+        // Fetch events for the current month if user has agora
         if (membershipData?.cartel_id) {
           setIsDemo(false);
           const monthStart = startOfMonth(currentMonth);
@@ -312,7 +312,7 @@ export const Calendar = () => {
           if (error) throw error;
           setEvents((eventsData as CalendarEvent[]) || []);
         } else {
-          // User exists but no kartel - show demo
+          // User exists but no agora - show demo
           setIsDemo(true);
           setEvents(generateDemoEvents(lang || 'en'));
         }

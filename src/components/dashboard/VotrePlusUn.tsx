@@ -39,7 +39,7 @@ export const VotrePlusUn = () => {
       if (userError) throw userError;
       setCurrentUserId(userData.id);
 
-      // Get user's cartel and role
+      // Get user's agora and role
       const { data: membership, error: membershipError } = await supabase
         .from('memberships')
         .select('cartel_id, role')
@@ -116,7 +116,7 @@ export const VotrePlusUn = () => {
                 <div>
                   <h4 className="font-semibold mb-2">{lang === 'fr' ? 'Qui est le +1 ?' : 'Who is +1?'}</h4>
                   <p className="text-sm text-muted-foreground">
-                    {lang === 'fr' ? 'Le +1 est votre coordinateur de cartel, votre point de contact principal pour toute demande d\'aide ou de ressources.' : 'The +1 is your cartel coordinator, your main point of contact for any help or resource requests.'}
+                    {lang === 'fr' ? 'Le +1 est votre coordinateur de agora, votre point de contact principal pour toute demande d\'aide ou de ressources.' : 'The +1 is your agora coordinator, your main point of contact for any help or resource requests.'}
                   </p>
                 </div>
                 <div>

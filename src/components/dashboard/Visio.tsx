@@ -121,7 +121,7 @@ export const Visio = () => {
         <div>
           <h1 className="text-3xl font-bold">{lang === 'fr' ? 'Visioconférence' : 'Video Conferencing'}</h1>
           <p className="text-muted-foreground mt-1">
-            {lang === 'fr' ? 'Créez et rejoignez des sessions vidéo avec votre cartel' : 'Create and join video sessions with your cartel'}
+            {lang === 'fr' ? 'Créez et rejoignez des sessions vidéo avec votre agora' : 'Create and join video sessions with your agora'}
           </p>
         </div>
       </div>

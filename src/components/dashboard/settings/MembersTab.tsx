@@ -117,7 +117,7 @@ export const MembersTab = () => {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle>{lang === 'fr' ? 'Membres' : 'Members'}</CardTitle>
-              <CardDescription>{lang === 'fr' ? 'Gérez les membres du kartel' : 'Manage kartel members'}</CardDescription>
+              <CardDescription>{lang === 'fr' ? 'Gérez les membres du agora' : 'Manage agora members'}</CardDescription>
             </div>
             <Button onClick={() => setInviteOpen(true)}>
               <UserPlus className="w-4 h-4 mr-2" />
