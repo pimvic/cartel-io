@@ -1747,6 +1747,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      current_user_id: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1754,6 +1755,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_cartel_coordinator: { Args: { _cartel_id: string }; Returns: boolean }
+      is_cartel_member: { Args: { _cartel_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
