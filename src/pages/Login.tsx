@@ -82,19 +82,48 @@ const Login = () => {
         // Auto login after signup
         navigate(`/${lang || 'fr'}/dashboard`);
       } else {
-        // Sign in flow
-        const { data, error } = await supabase.auth.signInWithPassword({
+        // Sign in flow - if user doesn't exist, auto-create the account so any email/password works
+        const effectivePassword = password || 'demo-password-123';
+        let { error } = await supabase.auth.signInWithPassword({
           email,
-          password: password || 'demo-password',
+          password: effectivePassword,
         });
 
-        if (error) throw error;
+        if (error) {
+          // Auto-create account on failed login (open access mode)
+          const { error: signUpError } = await supabase.auth.signUp({
+            email,
+            password: effectivePassword,
+            options: {
+              data: {
+                first_name: email.split('@')[0],
+                last_name: '',
+                provider: 'email',
+                preferred_locale: lang || 'fr',
+                is_demo: false,
+                role: 'member',
+              },
+              emailRedirectTo: `${window.location.origin}/${lang || 'fr'}/dashboard`,
+            },
+          });
+
+          if (signUpError && !signUpError.message.toLowerCase().includes('registered')) {
+            throw signUpError;
+          }
+
+          // Try login again after signup
+          const retry = await supabase.auth.signInWithPassword({
+            email,
+            password: effectivePassword,
+          });
+          if (retry.error) throw retry.error;
+        }
 
         toast({
           title: t('common.success'),
           description: t('auth.loginSuccess'),
         });
-        
+
         navigate(`/${lang || 'fr'}/dashboard`);
       }
     } catch (error: any) {
