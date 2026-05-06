@@ -94,7 +94,7 @@ export const RequestForm = ({ cartelId, userId, onSuccess }: RequestFormProps) =
           title,
           body,
           tags: selectedTags,
-          visibility: isPrivate ? 'prive' : 'agora',
+          visibility: isPrivate ? 'prive' : 'kartel',
           due_date: dueDate?.toISOString(),
           attachments: attachmentUrls
         });

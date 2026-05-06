@@ -103,7 +103,7 @@ export const Overview = ({ onNavigate }: OverviewProps) => {
 
       if (membership) {
         setCartelId(membership.cartel_id);
-        const deadline = membership.agoras?.deadline;
+        const deadline = membership.cartels?.deadline;
         if (deadline) {
           const examDateObj = new Date(deadline);
           setExamDate(examDateObj);

@@ -19,7 +19,7 @@ interface Note {
   title: string;
   content: string;
   excerpt: string;
-  visibility: 'personal' | 'agora';
+  visibility: 'personal' | 'kartel';
   tags: string[];
   favorited_by: string[];
   archived: boolean;
@@ -172,7 +172,7 @@ export const Notes = () => {
   const handleSaveNote = async (noteData: {
     title: string;
     content: string;
-    visibility: 'personal' | 'agora';
+    visibility: 'personal' | 'kartel';
     tags: string[];
   }) => {
     const excerpt = noteData.content.slice(0, 150);
@@ -377,13 +377,13 @@ export const Notes = () => {
     fetchGlossaryTerms();
   };
 
-  const filterNotes = (notesList: Note[], visibility: 'personal' | 'agora') => {
+  const filterNotes = (notesList: Note[], visibility: 'personal' | 'kartel') => {
     return notesList.filter((note) => {
       if (note.visibility !== visibility) return false;
       if (!filters.archived && note.archived) return false;
       if (filters.archived && !note.archived) return false;
       if (filters.favorites && !note.favorited_by.includes(currentUser?.id)) return false;
-      if (filters.shared && visibility !== 'agora') return false;
+      if (filters.shared && visibility !== 'kartel') return false;
       if (filters.tags.length > 0 && !filters.tags.some(tag => note.tags.includes(tag))) return false;
       
       if (searchQuery) {
@@ -431,7 +431,7 @@ export const Notes = () => {
           <CardTitle className="text-lg flex items-start justify-between gap-2">
             <span className="flex-1">{note.title}</span>
             <div className="flex gap-1 flex-wrap">
-              {note.visibility === 'agora' && (
+              {note.visibility === 'kartel' && (
                 <Badge variant="secondary">{lang === 'fr' ? 'Partagé' : 'Shared'}</Badge>
               )}
               {isFavorited && (
