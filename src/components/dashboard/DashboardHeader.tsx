@@ -46,14 +46,12 @@ export const DashboardHeader = () => {
             >
               AGORA
             </h1>
-            <p className="text-xs text-muted-foreground text-center">27 octobre 2025</p>
+            <p className="text-xs text-muted-foreground text-center">{lang === 'fr' ? '6 mai 2026' : 'May 6, 2026'}</p>
           </div>
           <div className="ml-6">
-            <p className="font-bold text-lg">{lang === 'fr' ? 'Votre Formation' : 'Your Training'}</p>
+            <p className="font-bold text-lg">AGORA</p>
             <p className="text-sm text-muted-foreground">
-              {lang === 'fr' 
-                ? 'Diplôme donnant lieu à un Titre Professionnel d\'État'
-                : 'State Professional Degree Program'}
+              Agentic Goal-Oriented Reflective Adaptive academy
             </p>
           </div>
         </div>
